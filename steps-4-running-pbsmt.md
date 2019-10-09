@@ -116,14 +116,15 @@ lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/data/small-cor
 ထိုမချေ   တစ်ယောက်လေ့  မ မှတ်မိပါယာ ။
 ```
 
-####################
+-----
 
-# I don't want to keep small-corpus/ folder as a backup
-# and thus, I copied that folder for running PBSMT
+I don't want to keep small-corpus/ folder as a backup and thus, I copied that folder for running PBSMT
 
+```
 lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data$ cp ../../data/small-corpus/* .
 lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data$ ls
 dev.my  dev.rk  test.my  test.rk  train.my  train.rk
+```
 
 -----
 
@@ -147,11 +148,14 @@ lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt$ ls
 data  generate_configs.pl  run-baseline.pl  run-pbsmt.sh
 ```
 
+Use your favorite text editor such as vi, emacs, gedit for updating paths:  
+
 ```
 vi ./generate_configs.pl
 vi ./run-baseline.pl
 
 ```
+
 ### Run 1st time PBSMT Experiment with Myanmar-Rakhine small corpus
 
 ```
