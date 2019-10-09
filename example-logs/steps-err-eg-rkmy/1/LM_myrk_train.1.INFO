@@ -1,0 +1,4 @@
+lm-training = /home/lar/tool/moses//scripts/ems/support/lmplz-wrapper.perl -bin /home/lar/tool/moses//bin/lmplz [1494508199]
+order = 5
+INPUT = USED /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//train.my
+settings = --prune '0 0 1' -T /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/lm -S 20% --discount_fallback

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PATH="/home/lar/anaconda3/bin:/home/lar/bin:/home/lar/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/lar/tool/kenlm/build/bin:/home/lar/tool/srilm/bin/i686-m64/:/home/lar/anaconda3/bin/:/home/lar/experiment/gMT/source/translate-shell:/home/lar/experiment/my-hw/collect-hw/ref-source/lipi-toolkit4.0.0-linux-x64/lipiDesigner/bin:/home/lar/tool/mteval/build/bin:/home/lar/tool/srilm/bin/i686-m64/:/home/lar/experiment/audio-image-classification/tool/sndpeek-1.4/src/sndpeek/:/media/lar/Transcend/img-match/src-ref/imageclipper/build/bin/:/media/lar/Transcend/proposal/parsing/RE-flex/bin:/home/lar/tool/fast_align/build:/home/lar/tool/hfst-ospell-0.5.1:/home/lar/tool/SCTK/bin:/media/lar/Transcend/tool/sndfile-waveform/sndfile-tools/bin"
+cd /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my
+echo 'starting at '`date`' on '`hostname`
+mkdir -p /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/lm
+
+mkdir -p /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/lm
+/home/lar/tool/moses//bin/build_binary /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/lm/myrk.lm.1 /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/lm/myrk.binlm.1
+
+
+echo 'finished at '`date`
+touch /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/steps/1/LM_myrk_binarize.1.DONE

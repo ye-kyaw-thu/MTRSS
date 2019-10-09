@@ -1,0 +1,3 @@
+clean-corpus.perl: processing /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//train.rk & .my to /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/corpus/myrk.clean.1, cutoff 1-80, ratio 9
+
+Input sentences: 5000  Output sentences:  4998

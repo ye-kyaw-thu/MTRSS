@@ -1,0 +1,22 @@
+Using SCRIPTS_ROOTDIR: /home/lar/tool/moses/scripts
+Using single-thread GIZA
+using pigz 
+(1) preparing corpus @ Wed Oct  9 20:57:27 JST 2019
+Executing: mkdir -p /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1
+(1.0) selecting factors @ Wed Oct  9 20:57:27 JST 2019
+(1.1) running mkcls  @ Wed Oct  9 20:57:27 JST 2019
+/home/lar/tool/giza-pp-master/GIZA++-v2/mkcls -c50 -n2 -p/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/corpus.1.my -V/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1/my.vcb.classes opt
+(1.2) creating vcb file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1/rk.vcb @ Wed Oct  9 20:57:27 JST 2019
+(1.1) running mkcls  @ Wed Oct  9 20:57:27 JST 2019
+/home/lar/tool/giza-pp-master/GIZA++-v2/mkcls -c50 -n2 -p/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/corpus.1.rk -V/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1/rk.vcb.classes opt
+Executing: /home/lar/tool/giza-pp-master/GIZA++-v2/mkcls -c50 -n2 -p/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/corpus.1.my -V/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1/my.vcb.classes opt
+Executing: /home/lar/tool/giza-pp-master/GIZA++-v2/mkcls -c50 -n2 -p/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/corpus.1.rk -V/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1/rk.vcb.classes opt
+Can't exec "/home/lar/tool/giza-pp-master/GIZA++-v2/mkcls": No such file or directory at /home/lar/tool/moses//scripts/training/train-model.perl line 2435.
+Can't exec "/home/lar/tool/giza-pp-master/GIZA++-v2/mkcls": No such file or directory at /home/lar/tool/moses//scripts/training/train-model.perl line 2435.
+ERROR: Failed to execute: /home/lar/tool/giza-pp-master/GIZA++-v2/mkcls -c50 -n2 -p/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/corpus.1.rk -V/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1/rk.vcb.classes opt
+  No such file or directory
+ERROR: Failed to execute: /home/lar/tool/giza-pp-master/GIZA++-v2/mkcls -c50 -n2 -p/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/corpus.1.my -V/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1/my.vcb.classes opt
+  No such file or directory
+(1.2) creating vcb file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1/my.vcb @ Wed Oct  9 20:57:27 JST 2019
+(1.3) numberizing corpus /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1/rk-my-int-train.snt @ Wed Oct  9 20:57:27 JST 2019
+(1.3) numberizing corpus /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/prepared.1/my-rk-int-train.snt @ Wed Oct  9 20:57:27 JST 2019

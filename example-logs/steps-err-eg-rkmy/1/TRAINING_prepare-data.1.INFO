@@ -1,0 +1,2 @@
+INPUT = USED /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/baseline/rk-my/training/corpus.1
+script = /home/lar/tool/moses//scripts/training/train-model.perl [1494512032]
