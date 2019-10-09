@@ -75,7 +75,11 @@ lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/data$ ls
 dev.my  dev.rk  make-small-corpus.sh  small-corpus  test.my  test.rk  tmp  train.my  train.rk
 ```
 
-### Check the output files
+## Check the output files
+
+We plan to use following small size Myanmar-Rakhine parallel corpus:  
+
+Corpus size info:  
 
 ```
 lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/data/small-corpus$ wc *
@@ -88,32 +92,39 @@ lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/data/small-cor
   11200   75328 1252321 total
 ```
 
-```
-lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/data/small-corpus$ head -2 ./*.my
+Check top 3 lines of all Myanmar and Rakhine files:
 
+```
+lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/data/small-corpus$ head -n 3 ./*.my
 ==> ./dev.my <==
 ကျွန်တော် မနက်ဖြန် ကား အသစ် တွေ သွား ကြည့် မလို့ ။
 မင်း ဘာ တွေ သတင်းပေး မှာလဲ ။
+အကြံဉာဏ် ကောင်းတွေ လိုချင် လား ။
 
 ==> ./test.my <==
 သူ အမှန်အတိုင်း မ ကျိန်ဆို ရဲ ဘူးလား ။
 ကျွန်တော်သာဆို ပြန်ပေး လိုက်မှာ ။
+ဆူပြီးတဲ့ ရေကို သောက် သင့်တယ် ။
 
 ==> ./train.my <==
 မင်း အဲ့ဒါ ကို အခြား တစ်ခုနဲ့ မ ချိတ် ဘူးလား ။
 သူမ ဘယ်သူ့ကိုမှ မ မှတ်မိတော့ဘူး ။
-lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/data/small-corpus$ head -2 ./*.rk
+အဲ့ဒါ ကျွန်တော်တို့ အတွက် ခက်ခဲတယ် ။
+lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/data/small-corpus$ head -n 3 ./*.rk
 ==> ./dev.rk <==
 ကျွန်တော် နက်ဖန် ကား အသစ် တိ လား ကြည့် ဖို့လို့ ။
 မင်း ဇာ တိ သတင်းပီး ဖို့လေး။
+အကြံဉာဏ် ကောင်းတိ လိုချင် လား ။
 
 ==> ./test.rk <==
 သူ အမှန်အတိုင်း မ ကျိန်ဆို ရဲ  ပါလား။
 ကျွန်တော်ဆိုကေ ပြန်ပီး လိုက်ဖို့ ။
+ဆူပြီး ရီကို သောက် သင့်ရေ။
 
 ==> ./train.rk <==
 မင်း ယင်းချင့် ကို အခြား တစ်ခုနန့်  မ ချိတ် ပါလား ။
 ထိုမချေ   တစ်ယောက်လေ့  မ မှတ်မိပါယာ ။
+ယင်းချင့် ကျွန်တော်  ရို့ အတွက် ခက်ခ ရေ ။
 ```
 
 -----
