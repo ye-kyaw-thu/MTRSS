@@ -1,0 +1,20 @@
+Unescaped left brace in regex is deprecated, passed through in regex; marked by <-- HERE in m/^\[([^:]+):{ <-- HERE (\S+)}:(\S+)\]$/ at /home/lar/tool/moses/scripts/ems/experiment.perl line 626.
+STARTING UP AS PROCESS 27140 ON lar-air AT Wed Oct  9 17:59:42 JST 2019
+LOAD CONFIG...
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.src.sgm*’: No such file or directory
+EVALUATION:test:input-sgm: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.src.sgm does not exist!
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.ref.sgm*’: No such file or directory
+EVALUATION:test:reference-sgm: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.ref.sgm does not exist!
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.src.sgm*’: No such file or directory
+EVALUATION:test:wrapping-frame: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.src.sgm does not exist!
+Died at /home/lar/tool/moses/scripts/ems/experiment.perl line 437.
+Unescaped left brace in regex is deprecated, passed through in regex; marked by <-- HERE in m/^\[([^:]+):{ <-- HERE (\S+)}:(\S+)\]$/ at /home/lar/tool/moses/scripts/ems/experiment.perl line 626.
+STARTING UP AS PROCESS 27158 ON lar-air AT Wed Oct  9 17:59:42 JST 2019
+LOAD CONFIG...
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.ref.sgm*’: No such file or directory
+EVALUATION:test:reference-sgm: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.ref.sgm does not exist!
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.src.sgm*’: No such file or directory
+EVALUATION:test:input-sgm: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.src.sgm does not exist!
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.src.sgm*’: No such file or directory
+EVALUATION:test:wrapping-frame: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.src.sgm does not exist!
+Died at /home/lar/tool/moses/scripts/ems/experiment.perl line 437.
