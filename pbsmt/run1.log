@@ -1,0 +1,65 @@
+Unescaped left brace in regex is deprecated, passed through in regex; marked by <-- HERE in m/^\[([^:]+):{ <-- HERE (\S+)}:(\S+)\]$/ at /home/lar/tool/moses/scripts/ems/experiment.perl line 626.
+STARTING UP AS PROCESS 27140 ON lar-air AT Wed Oct  9 17:59:42 JST 2019
+LOAD CONFIG...
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.src.sgm*’: No such file or directory
+EVALUATION:test:input-sgm: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.src.sgm does not exist!
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.ref.sgm*’: No such file or directory
+EVALUATION:test:reference-sgm: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.ref.sgm does not exist!
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.src.sgm*’: No such file or directory
+EVALUATION:test:wrapping-frame: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.src.sgm does not exist!
+Died at /home/lar/tool/moses/scripts/ems/experiment.perl line 437.
+Unescaped left brace in regex is deprecated, passed through in regex; marked by <-- HERE in m/^\[([^:]+):{ <-- HERE (\S+)}:(\S+)\]$/ at /home/lar/tool/moses/scripts/ems/experiment.perl line 626.
+STARTING UP AS PROCESS 27158 ON lar-air AT Wed Oct  9 17:59:42 JST 2019
+LOAD CONFIG...
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.ref.sgm*’: No such file or directory
+EVALUATION:test:reference-sgm: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.my.ref.sgm does not exist!
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.src.sgm*’: No such file or directory
+EVALUATION:test:input-sgm: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.src.sgm does not exist!
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.src.sgm*’: No such file or directory
+EVALUATION:test:wrapping-frame: file /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/data//test-sgm/test.rk.src.sgm does not exist!
+Died at /home/lar/tool/moses/scripts/ems/experiment.perl line 437.
+Unescaped left brace in regex is deprecated, passed through in regex; marked by <-- HERE in m/^\[([^:]+):{ <-- HERE (\S+)}:(\S+)\]$/ at /home/lar/tool/moses/scripts/ems/experiment.perl line 626.
+STARTING UP AS PROCESS 27518 ON lar-air AT Wed Oct  9 18:06:04 JST 2019
+LOAD CONFIG...
+working directory is /media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/baseline/my-rk
+find: ‘/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/pbsmt/baseline/my-rk/steps’: No such file or directory
+running experimental run number 1
+
+ESTABLISH WHICH STEPS NEED TO BE RUN
+
+FIND DEPENDENCIES BETWEEN STEPS
+
+CHECKING IF OLD STEPS ARE RE-USABLE
+
+STEP SUMMARY:
+81 EVALUATION:test:input-from-sgm ->	run
+75 CORPUS:myrk:clean ->	run
+58 LM:myrk:train ->	run
+55 LM:myrk:binarize ->	run
+54 TRAINING:consolidate ->	run
+53 TRAINING:prepare-data ->	run
+52 TRAINING:run-giza ->	run
+51 TRAINING:run-giza-inverse ->	run
+50 TRAINING:symmetrize-giza ->	run
+49 TRAINING:build-lex-trans ->	run
+46 TRAINING:extract-phrases ->	run
+45 TRAINING:build-reordering ->	run
+44 TRAINING:build-ttable ->	run
+41 TRAINING:create-config ->	run
+26 TUNING:filter ->	run
+25 TUNING:apply-filter ->	run
+24 TUNING:tune ->	run
+23 TUNING:apply-weights ->	run
+17 EVALUATION:test:filter ->	run
+16 EVALUATION:test:apply-filter ->	run
+15 EVALUATION:test:decode ->	run
+14 EVALUATION:test:remove-markup ->	run
+10 EVALUATION:test:wrap ->	run
+9 EVALUATION:test:reference-from-sgm ->	run
+4 EVALUATION:test:nist-bleu ->	run
+3 EVALUATION:test:nist-bleu-c ->	run
+2 EVALUATION:test:analysis-coverage ->	run
+1 EVALUATION:test:analysis-precision ->	run
+0 REPORTING:report ->	run
+
+EXECUTE STEPS
