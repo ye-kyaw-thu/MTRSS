@@ -14,6 +14,70 @@ lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt/ba
 test: 56.40 (1.001) BLEU-c ; 56.40 (1.001) BLEU
 ```
 
+## Evaluation with BLEU
+
+BLEU: Bilingual Evaluation Understudy
+Several scripts for calculating BLEU scores such as NIST-BLEU, IBM-BLEU, Multi-BLEU ...
+
+```
+lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ ls /home/lar/tool/moses/scripts/generic/mteval-v1
+mteval-v11b.pl  mteval-v12.pl   mteval-v13a.pl  mteval-v14.pl
+```
+
+Help option:
+```
+lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ perl /home/lar/tool/moses/scripts/generic/mteval-v13a.pl
+MT evaluation scorer began on 2019 Oct 10 at 10:39:47
+command line:  /home/lar/tool/moses/scripts/generic/mteval-v13a.pl 
+Error in command line:  ref_file not defined
+
+Usage: /home/lar/tool/moses/scripts/generic/mteval-v13a.pl -r <ref_file> -s <src_file> -t <tst_file>
+
+Description:  This Perl script evaluates MT system performance.
+
+Required arguments:
+  -r <ref_file> is a file containing the reference translations for
+      the documents to be evaluated.
+  -s <src_file> is a file containing the source documents for which
+      translations are to be evaluated
+  -t <tst_file> is a file containing the translations to be evaluated
+
+Optional arguments:
+  -h prints this help message to STDOUT
+  -c preserves upper-case alphabetic characters
+  -b generate BLEU scores only
+  -n generate NIST scores only
+  -d detailed output flag:
+         0 (default) for system-level score only
+         1 to include document-level scores
+         2 to include segment-level scores
+         3 to include ngram-level scores
+  -e enclose non-ASCII characters between spaces
+  --brevity-penalty ( closest | shortest )
+         closest (default) : acts as IBM BLEU (takes the closest reference translation length)
+         shortest : acts as previous versions of the script (takes the shortest reference translation length)
+  --international-tokenization
+         when specified, uses Unicode-based (only) tokenization rules
+         when not specified (default), uses default tokenization (some language-dependant rules)
+  --metricsMATR : create three files for both BLEU scores and NIST scores:
+         BLEU-seg.scr and NIST-seg.scr : segment-level scores
+         BLEU-doc.scr and NIST-doc.scr : document-level scores
+         BLEU-sys.scr and NIST-sys.scr : system-level scores
+  --no-smoothing : disable smoothing on BLEU scores
+```
+
+## Note relating to mteval-v13a.pl
+
+Input: SGM XML Format
+Word Segmentation: NIST Tokenizer
+N-gram Order: Minimum 4-gram
+Option: Support NIST Score
+Smoothing: NIST Geometric SCoring
+
+Ref: [https://stackoverflow.com/questions/46084574/what-is-the-difference-between-mteval-v13a-pl-and-nltk-bleu](https://stackoverflow.com/questions/46084574/what-is-the-difference-between-mteval-v13a-pl-and-nltk-bleu)
+
+-----
+
 ## Evaluation with RIBES Score
 
 RIBES: Rank-based Intuitive Bilingual Evaluation Score
