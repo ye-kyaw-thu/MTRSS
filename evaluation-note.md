@@ -16,8 +16,8 @@ test: 56.40 (1.001) BLEU-c ; 56.40 (1.001) BLEU
 
 ## Evaluation with BLEU
 
-BLEU: Bilingual Evaluation Understudy
-Several scripts for calculating BLEU scores such as NIST-BLEU, IBM-BLEU, Multi-BLEU ...
+BLEU: Bilingual Evaluation Understudy  
+Several scripts for calculating BLEU scores such as NIST-BLEU, IBM-BLEU, Multi-BLEU ...  
 
 ```
 lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ ls /home/lar/tool/moses/scripts/generic/mteval-v1
@@ -68,11 +68,11 @@ Optional arguments:
 
 ## Note relating to mteval-v13a.pl
 
-Input: SGM XML Format
-Word Segmentation: NIST Tokenizer
-N-gram Order: Minimum 4-gram
-Option: Support NIST Score
-Smoothing: NIST Geometric SCoring
+Input: SGM XML Format  
+Word Segmentation: NIST Tokenizer  
+N-gram Order: Minimum 4-gram  
+Option: Support NIST Score  
+Smoothing: NIST Geometric SCoring  
 
 Ref: [https://stackoverflow.com/questions/46084574/what-is-the-difference-between-mteval-v13a-pl-and-nltk-bleu](https://stackoverflow.com/questions/46084574/what-is-the-difference-between-mteval-v13a-pl-and-nltk-bleu)
 
@@ -80,9 +80,9 @@ Ref: [https://stackoverflow.com/questions/46084574/what-is-the-difference-betwee
 
 ## Evaluation with RIBES Score
 
-RIBES: Rank-based Intuitive Bilingual Evaluation Score
+RIBES: Rank-based Intuitive Bilingual Evaluation Score  
 
-Download link is as follows:
+Download link is as follows:  
 [http://www.kecl.ntt.co.jp/icl/lirg/ribes/](http://www.kecl.ntt.co.jp/icl/lirg/ribes/)
 
 After you downloaded, untar the .tar.gz file:
@@ -147,3 +147,11 @@ lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ h
 မိုး |0-0| ချက်ချင်း |1-1| ရွာတဲ့အခါ |2-2| သူရို့ဘာတွေ |3-3| လုပ် |4-4| နီစွာလေး |5-5| ။ |6-6| 
 မင်း |0-0| တောင်တွေကို |1-1| တက်နေ |2-2| ကျလား |3-3| ။ |4-4| 
 ```
+
+-----------
+
+## Evaluation with chrF
+
+chrF: a tool for calcualting character n-gram F score
+
+Download link:  
