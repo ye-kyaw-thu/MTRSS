@@ -181,21 +181,16 @@ end_time:	1570675534
 
 ### Refernce for calculation of chrF
 
-```
-Maja Popovic:
-chrF: character n-gram F-score for automatic MT evaluation. WMT@EMNLP 2015: 392-395
-```
+
+Maja Popovic:  
+chrF: character n-gram F-score for automatic MT evaluation. WMT@EMNLP 2015: 392-395  
 [https://www.aclweb.org/anthology/W15-3049.pdf](https://www.aclweb.org/anthology/W15-3049.pdf)  
 
-```
-Maja Popovic:
-chrF deconstructed: beta parameters and n-gram weights. WMT 2016: 499-504
-```
+Maja Popovic:  
+chrF deconstructed: beta parameters and n-gram weights. WMT 2016: 499-504  
 [https://www.aclweb.org/anthology/W16-2341.pdf](https://www.aclweb.org/anthology/W16-2341.pdf)  
 
-```
-Maja Popovic:
-chrF++: words helping character n-grams. WMT 2017: 612-618
-```
+Maja Popovic:  
+chrF++: words helping character n-grams. WMT 2017: 612-618  
 [https://www.aclweb.org/anthology/W17-4770.pdf](https://www.aclweb.org/anthology/W17-4770.pdf)  
 
