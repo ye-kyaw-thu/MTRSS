@@ -1,4 +1,4 @@
-# Note for Evaluations
+# Note for Evaluations with BLEU, RIBES and charF
 
 ## Checking Report File of Moses
 
