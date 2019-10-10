@@ -149,6 +149,13 @@ lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ h
 မင်း |0-0| တောင်တွေကို |1-1| တက်နေ |2-2| ကျလား |3-3| ။ |4-4| 
 ```
 
+## Reference
+
+Hideki Isozaki, Tsutomu Hirao, Kevin Duh, Katsuhito Sudoh, Hajime Tsukada  
+Automatic Evaluation of Translation Quality for Distant Language Pairs  
+Conference on Empirical Methods on Natural Language Processing (EMNLP), Oct. 2010.  
+[https://www.aclweb.org/anthology/D10-1092.pdf](https://www.aclweb.org/anthology/D10-1092.pdf)  
+
 -----------
 
 ## Evaluation with chrF
