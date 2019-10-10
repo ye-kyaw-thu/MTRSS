@@ -104,7 +104,7 @@ $ python RIBES.py -r REFERENCE_TRANSLATION EVALUATING_TRANSLATION
 $ python RIBES.py -h
 ```
 
-## RIBES Score Calculation for my-rk PBSMT
+## RIBES Score Calculation for Myanmar-Rakhine PBSMT
 
 ```
 lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ python /home/lar/tool/RIBES-1.03.1/RIBES.py -r ./data/test.rk ./baseline/my-rk/evaluation/test.cleaned.1
@@ -113,7 +113,7 @@ lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ p
 # RIBES evaluation done at 2019-10-10 10:12:26.846261
 ```
 
-## RIBES Score Calculation for rk-my PBSMT
+## RIBES Score Calculation for Rakhine-Myanmar PBSMT
 
 ```
 lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ python /home/lar/tool/RIBES-1.03.1/RIBES.py -r ./data/test.my ./baseline/rk-my/evaluation/test.cleaned.1
@@ -160,3 +160,21 @@ Download link:
 
 How to run:  
 chrF++.py -R example.ref.en -H example.hyp.en  
+
+### chrF Evaluation for Myanmar-Rakhine PBSMT
+```
+lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ python /home/lar/tool/chrF/chrF++.py -R ./data/test.rk -H ./baseline/my-rk/evaluation/test.cleaned.1 
+start_time:	1570675516
+c6+w2-F2	80.2834
+c6+w2-avgF2	81.3348
+end_time:	1570675516
+```
+
+### chrF Evaluation for Rakhine-Myanmar PBSMT
+```
+lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ python /home/lar/tool/chrF/chrF++.py -R ./data/test.my -H ./baseline/rk-my/evaluation/test.cleaned.1 
+start_time:	1570675534
+c6+w2-F2	77.9372
+c6+w2-avgF2	78.4115
+end_time:	1570675534
+```
