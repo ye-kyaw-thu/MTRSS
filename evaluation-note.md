@@ -76,6 +76,11 @@ Smoothing: NIST Geometric SCoring
 
 Ref: [https://stackoverflow.com/questions/46084574/what-is-the-difference-between-mteval-v13a-pl-and-nltk-bleu](https://stackoverflow.com/questions/46084574/what-is-the-difference-between-mteval-v13a-pl-and-nltk-bleu)
 
+## Reference
+
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. 2002. BLEU: a method for automatic evaluation of machine translation. In Proceedings of the 40th Annual Meeting on Association for Computational Linguistics (ACL '02). Association for Computational Linguistics, Stroudsburg, PA, USA, 311-318.  
+[https://www.aclweb.org/anthology/P02-1040.pdf](https://www.aclweb.org/anthology/P02-1040.pdf)  
+
 -----
 
 ## Evaluation with RIBES Score
