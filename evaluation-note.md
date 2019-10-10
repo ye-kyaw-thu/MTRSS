@@ -30,6 +30,16 @@ RIBES-1.03.1/RIBES.py
 RIBES-1.03.1/LICENSE
 ```
 
+### How to run  
+```
+$ python RIBES.py -r REFERENCE_TRANSLATION EVALUATING_TRANSLATION
+```
+
+### for help
+```
+$ python RIBES.py -h
+```
+
 ## RIBES Score Calculation for my-rk PBSMT
 
 ```
