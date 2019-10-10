@@ -136,7 +136,8 @@ In PBSMT, test.output.1 is not the file that we need for evaluation!
 
 ```
 lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ head ./baseline/my-rk/evaluation/test.output.1
-သူ |0-0| အမှန်အတိုင်း |1-1| မ |2-2| ကျိန်ဆို |3-3| ရဲ |4-4| ပါလား |5-5| ။ |6-6| 
+သူ |0-0| အမှန်အတိုင်း |1-1| မ |2-2| ကျိန်ဆို |3-3| ရဲ |4-4| ပါလား |5-
+5| ။ |6-6| 
 ကျွန်တော်သာဆို |0-0| ပြန် ပီး |1-1| လိုက်မှာ |2-2| ။ |3-3| 
 ဆူပြီးတဲ့ |0-0| ရေကို |1-1| သောက် |2-2| သင့်ရေ |3-3| ။ |4-4| 
 မင်း |0-0| မေးစရာ |1-1| မ |2-2| လို |3-3| ပါ။ |4-5| 
@@ -152,6 +153,10 @@ lar@lar-air:/media/lar/Transcend/student/lecture/mtrss/pbsmt-demo/MTRSS/pbsmt$ h
 
 ## Evaluation with chrF
 
-chrF: a tool for calcualting character n-gram F score
+chrF: a tool for calcualting character n-gram F score  
 
 Download link:  
+[https://github.com/m-popovic/chrF](https://github.com/m-popovic/chrF)  
+
+How to run:  
+chrF++.py -R example.ref.en -H example.hyp.en  
