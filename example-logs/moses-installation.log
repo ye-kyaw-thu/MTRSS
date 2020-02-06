@@ -1,0 +1,1218 @@
+ykt@lst-gpu-1:~/tool/mosesdecoder$ ./bjam -j12
+Failed to run bash -c "g++  -dM -x c++ -E /dev/null -include boost/version.hpp 2>/dev/null |grep '#define BOOST_'"
+Boost does not seem to be installed or g++ is confused.
+ykt@lst-gpu-1:~/tool/mosesdecoder$ 
+
+===========
+
+You need to install boost!
+
+wget https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz
+   tar zxvf boost_1_64_0.tar.gz 
+   cd boost_1_64_0/
+   ./bootstrap.sh 
+   ./b2 -j4 --prefix=$PWD --libdir=$PWD/lib64 --layout=system link=static install || echo FAILURE
+
+===========
+
+ykt@lst-gpu-1:~/tool/mosesdecoder$ ./bjam -j12 --with-boost=/home/ykt/tool/boost_1_64_0
+
+
+Got following errors:
+
+...
+...
+mert/VocabularyTest.cpp:31:3:   required from here
+/home/ykt/tool/boost_1_64_0/include/boost/test/tools/old/impl.hpp:107:17: warning: comparison of integer expressions of different signedness: ‘const int’ and ‘const long unsigned int’ [-Wsign-compare]
+     return left == right;
+            ~~~~~^~~~~~~~
+...skipped <pmert/bin/gcc-8/release/link-static/threading-multi>vocabulary_test for lack of <pmert/bin/gcc-8/release/link-static/threading-multi>libmert_lib.a...
+...skipped <pmert/bin/gcc-8/release/link-static/threading-multi>vocabulary_test.passed for lack of <pmert/bin/gcc-8/release/link-static/threading-multi>vocabulary_test...
+gcc.compile.c++ mert/bin/gcc-8/release/link-static/threading-multi/ReferenceTest.o
+In file included from /home/ykt/tool/boost_1_64_0/include/boost/mpl/aux_/na_assert.hpp:23,
+                 from /home/ykt/tool/boost_1_64_0/include/boost/mpl/arg.hpp:25,
+                 from /home/ykt/tool/boost_1_64_0/include/boost/mpl/placeholders.hpp:24,
+                 from /home/ykt/tool/boost_1_64_0/include/boost/iterator/iterator_categories.hpp:17,
+                 from /home/ykt/tool/boost_1_64_0/include/boost/unordered/detail/implementation.hpp:19,
+                 from /home/ykt/tool/boost_1_64_0/include/boost/unordered/detail/map.hpp:6,
+                 from /home/ykt/tool/boost_1_64_0/include/boost/unordered/unordered_map.hpp:20,
+                 from /home/ykt/tool/boost_1_64_0/include/boost/unordered_map.hpp:17,
+                 from mert/Ngram.h:6,
+                 from mert/Reference.h:8,
+                 from mert/ReferenceTest.cpp:1:
+/home/ykt/tool/boost_1_64_0/include/boost/mpl/assert.hpp:188:21: warning: unnecessary parentheses in declaration of ‘assert_arg’ [-Wparentheses]
+ failed ************ (Pred::************
+                     ^
+/home/ykt/tool/boost_1_64_0/include/boost/mpl/assert.hpp:193:21: warning: unnecessary parentheses in declaration of ‘assert_not_arg’ [-Wparentheses]
+ failed ************ (boost::mpl::not_<Pred>::************
+                     ^
+In file included from /home/ykt/tool/boost_1_64_0/include/boost/test/test_tools.hpp:46,
+                 from /home/ykt/tool/boost_1_64_0/include/boost/test/unit_test.hpp:18,
+                 from mert/ReferenceTest.cpp:4:
+/home/ykt/tool/boost_1_64_0/include/boost/test/tools/old/impl.hpp: In instantiation of ‘boost::test_tools::assertion_result boost::test_tools::tt_detail::equal_impl(const Left&, const Right&) [with Left = long unsigned int; Right = int]’:
+/home/ykt/tool/boost_1_64_0/include/boost/test/tools/old/impl.hpp:130:26:   required from ‘boost::test_tools::assertion_result boost::test_tools::tt_detail::equal_impl_frwd::call_impl(const Left&, const Right&, mpl_::false_) const [with Left = long unsigned int; Right = int; mpl_::false_ = mpl_::bool_<false>]’
+/home/ykt/tool/boost_1_64_0/include/boost/test/tools/old/impl.hpp:145:56:   required from ‘boost::test_tools::assertion_result boost::test_tools::tt_detail::equal_impl_frwd::operator()(const Left&, const Right&) const [with Left = long unsigned int; Right = int]’
+/home/ykt/tool/boost_1_64_0/include/boost/test/tools/old/impl.hpp:92:1:   required from ‘bool boost::test_tools::tt_detail::check_frwd(Pred, const boost::unit_test::lazy_ostream&, boost::unit_test::const_string, std::size_t, boost::test_tools::tt_detail::tool_level, boost::test_tools::tt_detail::check_type, const Arg0&, const char*, const Arg1&, const char*) [with Pred = boost::test_tools::tt_detail::equal_impl_frwd; Arg0 = long unsigned int; Arg1 = int; boost::unit_test::const_string = boost::unit_test::basic_cstring<const char>; std::size_t = long unsigned int]’
+mert/ReferenceTest.cpp:22:3:   required from here
+/home/ykt/tool/boost_1_64_0/include/boost/test/tools/old/impl.hpp:107:17: warning: comparison of integer expressions of different signedness: ‘const long unsigned int’ and ‘const int’ [-Wsign-compare]
+     return left == right;
+            ~~~~~^~~~~~~~
+...skipped <pmert/bin/gcc-8/release/link-static/threading-multi>reference_test for lack of <pmert/bin/gcc-8/release/link-static/threading-multi>libmert_lib.a...
+...skipped <pmert/bin/gcc-8/release/link-static/threading-multi>reference_test.passed for lack of <pmert/bin/gcc-8/release/link-static/threading-multi>reference_test...
+...failed updating 12 targets...
+...skipped 206 targets...
+...updated 820 targets...
+The build failed.  If you need support, run:
+  ./jam-files/bjam -j12 --with-boost=/home/ykt/tool/boost_1_64_0 --debug-configuration -d2 |gzip >build.log.gz
+then attach build.log.gz to your e-mail.
+You MUST do 3 things before sending to the mailing list:
+   1. Subscribe to the mailing list at http://mailman.mit.edu/mailman/listinfo/moses-support
+   2. Attach build.log.gz to your e-mail
+   3. Say what is the EXACT command you executed when you got the error
+ERROR
+
+=============
+
+ykt@lst-gpu-1:~/tool/mosesdecoder$ sudo apt-get install g++ git subversion automake libtool zlib1g-dev libicu-dev libboost-all-dev libbz2-dev liblzma-dev python-dev graphviz imagemagick make cmake libgoogle-perftools-dev autoconf doxygen
+
+Setting up mpi-default-bin (1.13) ...
+Setting up libboost-graph-parallel1.67-dev (1.67.0-13) ...
+Setting up libcoarrays-openmpi-dev:amd64 (2.4.0-2) ...
+Setting up libboost-graph-parallel-dev (1.67.0.1) ...
+Setting up libopenmpi-dev:amd64 (3.1.3-11) ...
+update-alternatives: using /usr/lib/x86_64-linux-gnu/openmpi/include to provide /usr/include/x86_64-linux-gnu/mpi (mpi-x86_64-linux-gnu) in auto mode
+Setting up libboost-mpi-python1.67.0 (1.67.0-13) ...
+Setting up mpi-default-dev (1.13) ...
+Setting up libboost-mpi1.67-dev (1.67.0-13) ...
+Setting up libboost-mpi-dev (1.67.0.1) ...
+Setting up libboost-mpi-python1.67-dev (1.67.0-13) ...
+Setting up libboost-mpi-python-dev (1.67.0.1) ...
+Setting up libboost-all-dev (1.67.0.1) ...
+Processing triggers for libc-bin (2.28-10) ...
+Processing triggers for systemd (241-7~deb10u2) ...
+Processing triggers for man-db (2.8.5-2) ...
+Processing triggers for mime-support (3.62) ...
+ykt@lst-gpu-1:~/tool$
+
+==========
+
+ykt@lst-gpu-1:~/tool/mosesdecoder$ ./bjam -j12 --with-boost=/home/ykt/tool/boost_1_64_0
+
+...
+...
+" "moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/Base.o" "moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/BilingualLM.o" "moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/Implementation.o" "moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/InMemoryPerSentenceOnDemandLM.o" "moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/Ken.o" "moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/MultiFactor.o" "moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/Remote.o" "moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/SingleFactor.o" "moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/ExampleLM.o" "moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a" "probingpt/bin/gcc-8.3.0/release/link-static/threading-multi/libprobingpt.a"  -Wl,-Bstatic -lbz2 -llzma -lboost_unit_test_framework -lboost_thread -lboost_system -lz -lboost_program_options -lboost_iostreams -lboost_filesystem -lboost_serialization -ltcmalloc_minimal -Wl,-Bdynamic -lrt -lSegFault -Wl,--end-group -pthread 
+
+...failed gcc.link moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/BackwardTest...
+...skipped <pmoses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi>BackwardTest.run for lack of <pmoses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi>BackwardTest...
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/forest_rescore_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/forest_rescore_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/singleton_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/singleton_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/timer_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/timer_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/ngram_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/ngram_test.passed
+Running 3 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/point_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/point_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/optimizer_factory_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/optimizer_factory_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/util_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/util_test.passed
+Running 3 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/vocabulary_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/vocabulary_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/reference_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/reference_test.passed
+Running 5 test cases...
+
+*** No errors detected
+testing.capture-output lm/bin/model_test.test/gcc-8.3.0/release/link-static/threading-multi/model_test.run
+**passed** lm/bin/model_test.test/gcc-8.3.0/release/link-static/threading-multi/model_test.test
+...failed updating 57 targets...
+...skipped 5 targets...
+...updated 935 targets...
+The build failed.  If you need support, run:
+  /usr/bin/bjam -j12 --with-boost=/home/ykt/tool/boost_1_64_0 --debug-configuration -d2 |gzip >build.log.gz
+then attach build.log.gz to your e-mail.
+You MUST do 3 things before sending to the mailing list:
+   1. Subscribe to the mailing list at http://mailman.mit.edu/mailman/listinfo/moses-support
+   2. Attach build.log.gz to your e-mail
+   3. Say what is the EXACT command you executed when you got the error
+ERROR
+ykt@lst-gpu-1:~/tool/mosesdecoder$
+
+==========
+
+ykt@lst-gpu-1:~/tool/mosesdecoder$ ./bjam --clean
+warning: No toolsets are configured.
+warning: Configuring default toolset "gcc".
+warning: If the default is wrong, your build may not work correctly.
+warning: Use the "toolset=xxxxx" option to override our guess.
+warning: For more configuration options, please consult
+warning: http://boost.org/boost-build2/doc/html/bbv2/advanced/configuration.html
+NOT BUILDING MOSES SERVER!
+Performing configuration checks
+
+    - Shared Boost             : no  (cached)
+    - Static Boost             : yes (cached)
+Not building Moses2
+...found 1 target...
+...updating 1 target...
+common.Clean clean
+...updated 1 target...
+ykt@lst-gpu-1:~/tool/mosesdecoder$
+
+==========
+### scp SRILM:
+
+lar@lar-air:~/tool/srilm$ scp srilm-1.7.2.tar.gz ykt@10.222.41.27:~/tool/
+ykt@10.222.41.27's password: 
+srilm-1.7.2.tar.gz                                                    100%   63MB 843.7KB/s   01:16    
+lar@lar-air:~/tool/srilm$ 
+
+===========
+### Preparation:
+
+ykt@lst-gpu-1:~/tool$ ls
+boost_1_64_0  boost_1_64_0.tar.gz  mosesdecoder  srilm-1.7.2.tar.gz
+ykt@lst-gpu-1:~/tool$ mkdir srilm-1.7.2
+ykt@lst-gpu-1:~/tool$ mv srilm-1.7.2.tar.gz ./srilm-1.7.2/
+ykt@lst-gpu-1:~/tool$ cd srilm-1.7.2/
+ykt@lst-gpu-1:~/tool/srilm-1.7.2$ 
+
+============
+
+### SRILM Installation:
+
+ykt@lst-gpu-1:~/tool/srilm-1.7.2$ gunzip ./srilm-1.7.2.tar.gz 
+ykt@lst-gpu-1:~/tool/srilm-1.7.2$ ls
+srilm-1.7.2.tar
+ykt@lst-gpu-1:~/tool/srilm-1.7.2$ tar -xvf ./srilm-1.7.2.tar 
+
+ykt@lst-gpu-1:~/tool/srilm-1.7.2$ pwd
+/home/ykt/tool/srilm-1.7.2
+
+Open Makefile
+# SRILM = /home/speech/stolcke/project/srilm/devel
+SRILM = /home/ykt/tool/srilm-1.7.2
+
+/home/ykt/tool/srilm-1.7.2/sbin/decipher-install 0555 search-rover-combo ../../bin
+/home/ykt/tool/srilm-1.7.2/sbin/decipher-install 0555 rexport.gnumake ../../bin
+/home/ykt/tool/srilm-1.7.2/sbin/decipher-install 0555 align-with-tags ../../bin
+/home/ykt/tool/srilm-1.7.2/sbin/decipher-install 0555 compute-sclite ../../bin
+/home/ykt/tool/srilm-1.7.2/sbin/decipher-install 0555 compute-sclite-nbest ../../bin
+/home/ykt/tool/srilm-1.7.2/sbin/decipher-install 0555 compare-sclite ../../bin
+/home/ykt/tool/srilm-1.7.2/sbin/decipher-install 0555 cumbin ../../bin
+make[2]: Leaving directory '/home/ykt/tool/srilm-1.7.2/utils/src'
+make[2]: Entering directory '/home/ykt/tool/srilm-1.7.2/zlib/src'
+make[2]: Nothing to be done for 'release-scripts'.
+make[2]: Leaving directory '/home/ykt/tool/srilm-1.7.2/zlib/src'
+make[1]: Leaving directory '/home/ykt/tool/srilm-1.7.2'
+ykt@lst-gpu-1:~/tool/srilm-1.7.2$ 
+
+========
+
+Installation IRSTLM:
+
+ykt@lst-gpu-1:~/tool$ sudo apt-get install -y irstlm
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  libirstlm1
+The following NEW packages will be installed:
+  irstlm libirstlm1
+0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+Need to get 303 kB of archives.
+After this operation, 1,033 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 libirstlm1 amd64 6.00.05-2 [206 kB]
+Get:2 http://deb.debian.org/debian buster/main amd64 irstlm amd64 6.00.05-2 [97.5 kB]
+Fetched 303 kB in 1s (329 kB/s)
+Selecting previously unselected package libirstlm1:amd64.
+(Reading database ... 79473 files and directories currently installed.)
+Preparing to unpack .../libirstlm1_6.00.05-2_amd64.deb ...
+Unpacking libirstlm1:amd64 (6.00.05-2) ...
+Selecting previously unselected package irstlm.
+Preparing to unpack .../irstlm_6.00.05-2_amd64.deb ...
+Unpacking irstlm (6.00.05-2) ...
+Setting up libirstlm1:amd64 (6.00.05-2) ...
+Setting up irstlm (6.00.05-2) ...
+Processing triggers for man-db (2.8.5-2) ...
+Processing triggers for libc-bin (2.28-10) ...
+
+========== 
+
+IRISTM installation error:
+
+              ^~
+/home/ykt/tool/irstlm-master/src/cmd.c:705:14: note: did you mean to dereference the pointer?
+  if (!*s || (s=='\0' && cmd->Flag==0)){
+              ^
+[  3%] Building C object src/CMakeFiles/irstlm.dir/thpool.c.o
+[  5%] Building CXX object src/CMakeFiles/irstlm.dir/dictionary.cpp.o
+In file included from /usr/include/c++/8/ext/string_conversions.h:41,
+                 from /usr/include/c++/8/bits/basic_string.h:6400,
+                 from /usr/include/c++/8/string:52,
+                 from /usr/include/c++/8/bits/locale_classes.h:40,
+                 from /usr/include/c++/8/bits/ios_base.h:41,
+                 from /usr/include/c++/8/iomanip:40,
+                 from /home/ykt/tool/irstlm-master/src/dictionary.cpp:25:
+/usr/include/c++/8/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+               ^~~~~~~~~~
+compilation terminated.
+make[2]: *** [src/CMakeFiles/irstlm.dir/build.make:89: src/CMakeFiles/irstlm.dir/dictionary.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:339: src/CMakeFiles/irstlm.dir/all] Error 2
+make: *** [Makefile:130: all] Error 2
+ykt@lst-gpu-1:~/tool/irstlm-master$ 
+
+==========
+
+Installation moses again:
+
+./bjam -j12 --with-boost=/home/ykt/tool/boost_1_64_0 --with-irstlm=/home/ykt/tool/srilm-1.7.2
+
+Running 5 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/vocabulary_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/vocabulary_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/util_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/util_test.passed
+Running 3 test cases...
+
+*** No errors detected
+...failed updating 5 targets...
+...skipped 73 targets...
+...updated 772 targets...
+The build failed.  If you need support, run:
+  /usr/bin/bjam -j12 --with-boost=/home/ykt/tool/boost_1_64_0 --with-irstlm=/home/ykt/tool/srilm-1.7.2 --debug-configuration -d2 |gzip >build.log.gz
+then attach build.log.gz to your e-mail.
+You MUST do 3 things before sending to the mailing list:
+   1. Subscribe to the mailing list at http://mailman.mit.edu/mailman/listinfo/moses-support
+   2. Attach build.log.gz to your e-mail
+   3. Say what is the EXACT command you executed when you got the error
+ERROR
+ykt@lst-gpu-1:~/tool/mosesdecoder$ 
+
+============
+
+I did a crazy mistake above!!!
+
+ykt@lst-gpu-1:~/tool/mosesdecoder$ ./bjam --clean
+warning: No toolsets are configured.
+warning: Configuring default toolset "gcc".
+warning: If the default is wrong, your build may not work correctly.
+warning: Use the "toolset=xxxxx" option to override our guess.
+warning: For more configuration options, please consult
+warning: http://boost.org/boost-build2/doc/html/bbv2/advanced/configuration.html
+NOT BUILDING MOSES SERVER!
+Performing configuration checks
+
+    - Shared Boost             : no  (cached)
+    - Static Boost             : yes (cached)
+Not building Moses2
+...found 1 target...
+...updating 1 target...
+common.Clean clean
+...updated 1 target...
+
+./bjam -j12 --with-boost=/home/ykt/tool/boost_1_64_0 --with-srilm=/home/ykt/tool/srilm-1.7.2
+
+==========
+
+
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/mira_feature_vector_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/mert
+gcc.link mert/extractor
+gcc.link mert/evaluator
+gcc.link mert/pro
+gcc.link mert/kbmira
+gcc.link mert/sentence-bleu
+gcc.link mert/sentence-bleu-nbest
+gcc.link mert/hgdecode
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/hypergraph_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/hypergraph_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/forest_rescore_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/forest_rescore_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/timer_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/timer_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/ngram_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/ngram_test.passed
+Running 3 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/singleton_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/singleton_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/optimizer_factory_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/optimizer_factory_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/point_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/point_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/vocabulary_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/vocabulary_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/reference_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/reference_test.passed
+Running 5 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/util_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/util_test.passed
+Running 3 test cases...
+
+*** No errors detected
+testing.capture-output lm/bin/model_test.test/gcc-8.3.0/release/link-static/threading-multi/model_test.run
+**passed** lm/bin/model_test.test/gcc-8.3.0/release/link-static/threading-multi/model_test.test
+...failed updating 57 targets...
+...skipped 5 targets...
+...updated 784 targets...
+The build failed.  If you need support, run:
+  /usr/bin/bjam -j12 --with-boost=/home/ykt/tool/boost_1_64_0 --with-srilm=/home/ykt/tool/srilm-1.7.2 --debug-configuration -d2 |gzip >build.log.gz
+then attach build.log.gz to your e-mail.
+You MUST do 3 things before sending to the mailing list:
+   1. Subscribe to the mailing list at http://mailman.mit.edu/mailman/listinfo/moses-support
+   2. Attach build.log.gz to your e-mail
+   3. Say what is the EXACT command you executed when you got the error
+ERROR
+ykt@lst-gpu-1:~/tool/mosesdecoder$ 
+
+=========
+
+ykt@lst-gpu-1:~/tool/boost_1_64_0$ ./bjam clean
+ykt@lst-gpu-1:~/tool/boost_1_64_0$ ./bootstrap.sh
+ykt@lst-gpu-1:~/tool/boost_1_64_0$ ./b2 -j12
+
+
+./boost/mpl/assert.hpp:193:21: warning: unnecessary parentheses in declaration of ‘assert_not_arg’ [-Wparentheses]
+ failed ************ (boost::mpl::not_<Pred>::************
+                     ^
+gcc.link.dll bin.v2/libs/test/build/gcc-8/release/threading-multi/libboost_unit_test_framework.so.1.64.0
+common.copy stage/lib/libboost_unit_test_framework.so.1.64.0
+ln-UNIX stage/lib/libboost_unit_test_framework.so
+gcc.compile.c++ bin.v2/libs/wave/build/gcc-8/release/threading-multi/cpplexer/re2clex/cpp_re.o
+gcc.link.dll bin.v2/libs/wave/build/gcc-8/release/threading-multi/libboost_wave.so.1.64.0
+common.copy stage/lib/libboost_wave.so.1.64.0
+ln-UNIX stage/lib/libboost_wave.so
+...updated 998 targets...
+
+
+The Boost C++ Libraries were successfully built!
+
+The following directory should be added to compiler include paths:
+
+    /home/ykt/tool/boost_1_64_0
+
+The following directory should be added to linker library paths:
+
+    /home/ykt/tool/boost_1_64_0/stage/lib
+
+ykt@lst-gpu-1:~/tool/boost_1_64_0$ 
+
+=========
+
+Boostrap တော့ installation အောင်မြင်သွားပြီ။
+moses ကို ပြန် compile လုပ်မယ်။
+
+ykt@lst-gpu-1:~/tool/mosesdecoder$ ./bjam clean
+
+ykt@lst-gpu-1:~/tool/mosesdecoder$ ./bjam -j12 --with-boost=/home/ykt/tool/boost_1_64_0 --with-srilm=/home/ykt/tool/srilm-1.7.2
+
+...
+...
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/extract
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/extract-lex
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/consolidate-reverse
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/consolidate
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/consolidate-direct
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/score
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/lexical-reordering-score
+gcc.link /home/ykt/tool/mosesdecoder/bin/extract-ghkm
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/pcfg-extract
+gcc.link /home/ykt/tool/mosesdecoder/bin/pcfg-score
+gcc.link /home/ykt/tool/mosesdecoder/bin/extract-mixed-syntax
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/score-stsg
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link biconcor/bin/gcc-8.3.0/release/link-static/threading-multi/biconcor
+gcc.link /home/ykt/tool/mosesdecoder/bin/biconcor
+gcc.link biconcor/bin/gcc-8.3.0/release/link-static/threading-multi/phrase-lookup
+gcc.link /home/ykt/tool/mosesdecoder/bin/phrase-lookup
+gcc.link phrase-extract/filter-rule-table/bin/gcc-8.3.0/release/link-static/threading-multi/filter-rule-table
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/filter-rule-table
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/cat_compressed
+gcc.link phrase-extract/postprocess-egret-forests/bin/gcc-8.3.0/release/link-static/threading-multi/postprocess-egret-forests
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link /home/ykt/tool/mosesdecoder/bin/postprocess-egret-forests
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/probing_hash_table_benchmark
+gcc.link lm/bin/partial_test.test/gcc-8.3.0/release/link-static/threading-multi/partial_test
+testing.capture-output lm/bin/partial_test.test/gcc-8.3.0/release/link-static/threading-multi/partial_test.run
+**passed** lm/bin/partial_test.test/gcc-8.3.0/release/link-static/threading-multi/partial_test.test
+gcc.link contrib/expected-bleu-training/bin/gcc-8.3.0/release/link-static/threading-multi/prepare-expected-bleu-training
+gcc.link /home/ykt/tool/mosesdecoder/bin/prepare-expected-bleu-training
+gcc.link contrib/expected-bleu-training/bin/gcc-8.3.0/release/link-static/threading-multi/train-expected-bleu
+gcc.link /home/ykt/tool/mosesdecoder/bin/train-expected-bleu
+gcc.link util/bin/file_piece_test.test/gcc-8.3.0/release/link-static/threading-multi/file_piece_test
+testing.capture-output util/bin/file_piece_test.test/gcc-8.3.0/release/link-static/threading-multi/file_piece_test.run
+**passed** util/bin/file_piece_test.test/gcc-8.3.0/release/link-static/threading-multi/file_piece_test.test
+gcc.link probingpt/bin/gcc-8.3.0/release/link-static/threading-multi/CreateProbingPT
+gcc.link /home/ykt/tool/mosesdecoder/bin/CreateProbingPT
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/tokenize_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/tokenize_test.passed
+Running 8 test cases...
+
+*** No errors detected
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/sized_iterator_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/sized_iterator_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/tokenize_piece_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/tokenize_piece_test.passed
+Running 4 test cases...
+
+*** No errors detected
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/tempfile_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/tempfile_test.passed
+Running 12 test cases...
+
+*** No errors detected
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/string_stream_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/string_stream_test.passed
+Running 3 test cases...
+
+*** No errors detected
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/random_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/random_test.passed
+Running 15 test cases...
+
+*** No errors detected
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/probing_hash_table_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/probing_hash_table_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/pcqueue_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/pcqueue_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/multi_intersection_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/multi_intersection_test.passed
+Running 4 test cases...
+
+*** No errors detected
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/sorted_uniform_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/sorted_uniform_test.passed
+Running 7 test cases...
+
+*** No errors detected
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/joint_sort_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/joint_sort_test.passed
+Running 4 test cases...
+
+*** No errors detected
+gcc.link lm/bin/left_test.test/gcc-8.3.0/release/link-static/threading-multi/left_test
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/integer_to_string_test
+testing.capture-output lm/bin/left_test.test/gcc-8.3.0/release/link-static/threading-multi/left_test.run
+**passed** lm/bin/left_test.test/gcc-8.3.0/release/link-static/threading-multi/left_test.test
+gcc.link util/bin/gcc-8.3.0/release/link-static/threading-multi/bit_packing_test
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/bit_packing_test.passed
+Running 5 test cases...
+
+*** No errors detected
+testing.unit-test util/bin/gcc-8.3.0/release/link-static/threading-multi/integer_to_string_test.passed
+Running 4 test cases...
+
+*** No errors detected
+gcc.link /home/ykt/tool/mosesdecoder/util/stream/bin/gcc-8.3.0/release/link-static/threading-multi/io_test
+gcc.link /home/ykt/tool/mosesdecoder/util/stream/bin/gcc-8.3.0/release/link-static/threading-multi/stream_test
+testing.unit-test /home/ykt/tool/mosesdecoder/util/stream/bin/gcc-8.3.0/release/link-static/threading-multi/io_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link /home/ykt/tool/mosesdecoder/util/stream/bin/gcc-8.3.0/release/link-static/threading-multi/rewindable_stream_test
+gcc.link /home/ykt/tool/mosesdecoder/util/stream/bin/gcc-8.3.0/release/link-static/threading-multi/sort_test
+testing.unit-test /home/ykt/tool/mosesdecoder/util/stream/bin/gcc-8.3.0/release/link-static/threading-multi/stream_test.passed
+Running 1 test case...
+
+*** No errors detected
+testing.unit-test /home/ykt/tool/mosesdecoder/util/stream/bin/gcc-8.3.0/release/link-static/threading-multi/rewindable_stream_test.passed
+Running 1 test case...
+
+*** No errors detected
+testing.unit-test /home/ykt/tool/mosesdecoder/util/stream/bin/gcc-8.3.0/release/link-static/threading-multi/sort_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link lm/bin/model_test.test/gcc-8.3.0/release/link-static/threading-multi/model_test
+gcc.link moses/bin/gcc-8.3.0/release/link-static/threading-multi/moses_test
+/usr/bin/ld: moses/bin/gcc-8.3.0/release/link-static/threading-multi/libmoses.a(InMemoryPerSentenceOnDemandLM.o): in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+testing.unit-test moses/bin/gcc-8.3.0/release/link-static/threading-multi/moses_test.passed
+Running 21 test cases...
+Constructing a Sparse Reordering feature
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/feature_data_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/feature_data_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/hypergraph_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/hypergraph_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/bleu_scorer_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/bleu_scorer_test.passed
+Running 6 test cases...
+name: reflen value: average
+name: reflen value: shortest
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/mira_feature_vector_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/mira_feature_vector_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/data_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/data_test.passed
+Running 3 test cases...
+Data::m_score_type BLEU
+Data::Scorer type from Scorer: BLEU
+Data::m_score_type BLEU
+Data::Scorer type from Scorer: BLEU
+Data::m_score_type BLEU
+Data::Scorer type from Scorer: BLEU
+Data::m_score_type BLEU
+Data::Scorer type from Scorer: BLEU
+Data::m_score_type BLEU
+Data::Scorer type from Scorer: BLEU
+
+*** No errors detected
+gcc.link mert/mert
+gcc.link mert/extractor
+gcc.link mert/evaluator
+gcc.link mert/pro
+gcc.link mert/kbmira
+gcc.link mert/sentence-bleu
+gcc.link mert/sentence-bleu-nbest
+gcc.link mert/hgdecode
+gcc.link moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/BackwardTest
+/usr/bin/ld: moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/InMemoryPerSentenceOnDemandLM.o: in function `Moses::InMemoryPerSentenceOnDemandLM::InitializeForInput(boost::shared_ptr<Moses::TranslationTask> const&)':
+InMemoryPerSentenceOnDemandLM.cpp:(.text+0x896): warning: the use of `tmpnam' is dangerous, better use `mkstemp'
+testing.capture-output moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/BackwardTest.run
+**passed** moses/LM/bin/BackwardTest.test/gcc-8.3.0/release/link-static/threading-multi/BackwardTest.test
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/ngram_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/ngram_test.passed
+Running 3 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/optimizer_factory_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/optimizer_factory_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/singleton_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/singleton_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/forest_rescore_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/forest_rescore_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/timer_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/timer_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/point_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/point_test.passed
+Running 1 test case...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/vocabulary_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/vocabulary_test.passed
+Running 2 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/reference_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/reference_test.passed
+Running 5 test cases...
+
+*** No errors detected
+gcc.link mert/bin/gcc-8.3.0/release/link-static/threading-multi/util_test
+testing.unit-test mert/bin/gcc-8.3.0/release/link-static/threading-multi/util_test.passed
+Running 3 test cases...
+
+*** No errors detected
+testing.capture-output lm/bin/model_test.test/gcc-8.3.0/release/link-static/threading-multi/model_test.run
+**passed** lm/bin/model_test.test/gcc-8.3.0/release/link-static/threading-multi/model_test.test
+...updated 844 targets...
+SUCCESS
+ykt@lst-gpu-1:~/tool/mosesdecoder$ 
+
+========
+
+ykt@lst-gpu-1:~/tool/mosesdecoder/bin$ ./moses --help
+Moses - A beam search decoder for phrase-based statistical machine translation models
+Copyright (C) 2006 University of Edinburgh
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+***********************************************************************
+
+Built on Feb  6 2020 at 19:34:14
+
+WHO'S FAULT IS THIS GODDAM SOFTWARE:
+Brooke Cowan	   contact: brooke@csail.mit.edu   if you're going to san francisco, be sure to wear a flower in your hair
+Christine Moran	   contact: weird building at MIT
+Richard Zens	   contact: richard at aachen dot de   I'll answer question on: ambiguous source input, confusion networks, confusing source code
+Evan Herbst	   contact: Small college in upstate New York
+Chris Dyer	   contact: can't. i'll be out driving my mustang   driving my mustang
+Alexandra Constantin   eu sunt varza
+Nicola Bertoldi	   contact: 911   I'll answer question on: scripts & other stuff
+Chris Callison-Burch	   contact: anytime, anywhere   international playboy
+Marcello Federico	   contact: federico at itc at it   Researcher at ITC-irst, Trento, Italy   I'll answer question on: IRST language model
+Hieu Hoang	   contact: http://www.hoang.co.uk/hieu/   phd student at Edinburgh Uni. Original Moses developer   I'll answer question on: general queries/ flames on Moses.
+Philipp Koehn	   contact: only between 2 and 4am   I'll answer question on: Nothing fazes this dude
+Wade Shen	   contact: via morse code   buying another laptop
+Ondrej Bojar   czech this out!
+
+
+Usage:
+
+Main Options:
+  -f [ --config ]                       location of the configuration file
+  -i [ --input-file ]                   location of the input file to be 
+                                        translated
+  -v [ --verbose ]                      verbosity level of the logging
+  --version                             show version of Moses and libraries 
+                                        used
+  --show-weights                        print feature weights and exit
+  --time-out                            seconds after which is interrupted 
+                                        (-1=no time-out, default is -1)
+  --segment-time-out                    seconds for single segment after which 
+                                        is interrupted (-1=no time-out, default
+                                        is -1)
+
+Moses Server Options:
+  --server                              Run moses as a translation server.
+  --daemon                              Run moses as a translation server in 
+                                        the background.
+  --server-port                         Port for moses server
+  --server-log                          Log destination for moses server
+  --serial                              Run server in serial mode, processing 
+                                        only one request at a time.
+  --server-maxconn                      Max. No of simultaneous HTTP 
+                                        transactions allowed by the server.
+  --server-maxconn-backlog              Max. No. of requests the OS will queue 
+                                        if the server is busy.
+  --server-keepalive-maxconn            Max. No. of requests the server will 
+                                        accept on a single TCP connection.
+  --server-keepalive-timeout            Max. number of seconds the server will 
+                                        keep a persistent connection alive.
+  --server-timeout                      Max. number of seconds the server will 
+                                        wait for a client to submit a request 
+                                        once a connection has been established.
+  --session-timeout                     Timeout for sessions, e.g. '2h30m' or 
+                                        1d (=24h)
+  --session-cache-size                  Max. number of sessions cached.Least 
+                                        recently used session is dumped first.
+
+Input Format Options:
+  --input-factors                       list of factors in the input
+  --inputtype                           text (0), confusion network (1), word 
+                                        lattice (2), tree (3) (default = 0)
+  --xml-input                           allows markup of input with desired 
+                                        translations and probabilities. values 
+                                        can be 'pass-through' (default), 
+                                        'inclusive', 'exclusive', 'constraint',
+                                        'ignore'
+  --xml-brackets                        specify strings to be used as xml tags 
+                                        opening and closing, e.g. "{{ }}" 
+                                        (default "< >"). Avoid square brackets 
+                                        because of configuration file format. 
+                                        Valid only with text input mode
+  --start-translation-id                Id of 1st input. Default = 0
+  --alternate-weight-setting            alternate set of weights to used per 
+                                        xml specification
+
+Simulated Post-editing Options:
+  --spe-src                             Simulated post-editing. Source filename
+  --spe-trg                             Simulated post-editing. Target filename
+  --spe-aln                             Simulated post-editing. Alignment 
+                                        filename
+
+Search Options:
+  --search-algorithm                    Which search algorithm to use.
+                                        0=normal stack (default)
+                                        1=cube pruning
+                                        3=chart (with cube pruning)
+                                        4=stack with batched lm requests
+                                        5=chart (with incremental search)
+                                        6=string-to-tree
+                                        7=tree-to-string
+                                        8=tree-to-string (SCFG-based)
+                                        9=forest-to-string
+  -b [ --beam-threshold ]               threshold for threshold pruning
+  --early-discarding-threshold          threshold for constructing hypotheses 
+                                        based on estimate cost
+  -s [ --stack ]                        maximum stack size for histogram 
+                                        pruning. 0 = unlimited stack size
+  --stack-diversity                     minimum number of hypothesis of each 
+                                        coverage in stack (default 0)
+  --weight-file                         feature weights file. Do *not* put 
+                                        weights for 'core' features in here - 
+                                        they go in moses.ini
+  --weight                              weights for ALL models, 1 per line 
+                                        'WeightName value'. Weight names can be
+                                        repeated
+  --feature-overwrite                   Override arguments in a particular 
+                                        feature function with a particular key.
+                                        Format: -feature-overwrite "FeatureName
+                                        key=value"
+  --max-partial-trans-opt               maximum number of partial translation 
+                                        options per input span (during mapping 
+                                        steps)
+  --max-trans-opt-per-coverage          maximum number of translation options 
+                                        per input span (after applying mapping 
+                                        steps)
+  --max-phrase-length                   maximum phrase length (default 20)
+  --translation-option-threshold        threshold for translation options 
+                                        relative to best for input phrase
+  --disable-discarding                  disable hypothesis discarding
+  --phrase-drop-allowed                 if present, allow dropping of source 
+                                        words
+  --threads                             number of threads to use in decoding 
+                                        (defaults to single-threaded)
+
+Cube pruning options.:
+  --cube-pruning-pop-limit              How many hypotheses should be popped 
+                                        for each stack. (default = 1000)
+  --cube-pruning-diversity              How many hypotheses should be created 
+                                        for each coverage. (default = 0)
+  --cube-pruning-lazy-scoring           Don't fully score a hypothesis until it
+                                        is popped
+  --cube-pruning-deterministic-search   Break ties deterministically during 
+                                        search
+
+Minimum Bayes Risk (MBR), Lattice MBR, and Consensus decoding:
+  --minimum-bayes-risk                  use miminum Bayes risk to determine 
+                                        best translation
+  --mbr-size                            number of translation candidates 
+                                        considered in MBR decoding (default 
+                                        200)
+  --mbr-scale                           scaling factor to convert log linear 
+                                        score probability in MBR decoding 
+                                        (default 1.0)
+  --lminimum-bayes-risk                 use lattice miminum Bayes risk to 
+                                        determine best translation
+  --consensus-decoding                  use consensus decoding (De Nero et. al.
+                                        2009)
+  --lmbr-map-weight                     weight given to map solution when doing
+                                        lattice MBR (default 0)
+  --lmbr-pruning-factor                 average number of nodes/word wanted in 
+                                        pruned lattice
+  --lattice-hypo-set                    to use lattice as hypo set during 
+                                        lattice MBR
+
+Options specific to Lattic MBR:
+  --lmbr-p                              unigram precision value for lattice mbr
+  --lmbr-r                              ngram precision decay value for lattice
+                                        mbr
+  --lmbr-thetas                         theta(s) for lattice mbr calculation
+
+Distortion options:
+  --distortion-limit                    distortion (reordering) limit in 
+                                        maximum number of words (0 = monotone, 
+                                        -1 = unlimited)
+  --monotone-at-punctuation             do not reorder over punctuation
+  --early-distortion-cost               include estimate of distortion cost yet
+                                        to be incurred in the score [Moore & 
+                                        Quirk 2007]. Default is no
+  --distortion                          configurations for each 
+                                        factorized/lexicalized reordering 
+                                        model.
+
+Chart Decoding Options:
+  --max-chart-span                      maximum num. of source word chart rules
+                                        can consume (default 10)
+  --non-terminals                       list of non-term symbols, space 
+                                        separated
+  --rule-limit                          a little like table limit. But for 
+                                        chart decoding rules. Default is 
+                                        DEFAULT_MAX_TRANS_OPT_SIZE
+  --source-label-overlap                What happens if a span already has a 
+                                        label. 0=add more. 1=replace. 
+                                        2=discard. Default is 0
+  --unknown-lhs                         file containing target lhs of unknown 
+                                        words. 1 per line: LHS prob
+
+Output Options:
+  --report-all-factors                  report all factors in output, not just 
+                                        first
+  --output-factors                      list if factors in the output
+  --print-id                            prefix translations with id. Default if
+                                        false
+  --print-passthrough                   output the sgml tag <passthrough> 
+                                        without any computation on that. 
+                                        Default is false
+  --print-passthrough-in-n-best         output the sgml tag <passthrough> 
+                                        without any computation on that in each
+                                        entry of the n-best-list. Default is 
+                                        false
+  --output-factors                      list of factors in the output
+  --print-all-derivations               to print all derivations in search 
+                                        graph
+  -T [ --translation-details ]          for each best hypothesis, report 
+                                        translation details to the given file
+  --output-hypo-score                   Output the hypo score to stdout with 
+                                        the output string. For search error 
+                                        analysis. Default is false
+  --output-word-graph                   Output stack info as word graph. Takes 
+                                        filename, 0=only hypos in stack, 
+                                        1=stack + nbest hypos
+  --tree-translation-details            for each hypothesis, report translation
+                                        details with tree fragment info to 
+                                        given file
+  --print-alignment-info                Output word-to-word alignment to 
+                                        standard out, separated from 
+                                        translation by |||. Word-to-word 
+                                        alignments are takne from the phrase 
+                                        table if any. Default is false
+  --alignment-output-file               print output word alignments into given
+                                        file
+  --sort-word-alignment                 Sort word alignments for more 
+                                        consistent display. 0=no sort 
+                                        (default), 1=target order
+  -t [ --report-segmentation ]          report phrase segmentation in the 
+                                        output
+  --report-segmentation-enriched        report phrase segmentation in the 
+                                        output with additional information
+  --translation-all-details             for all hypotheses, report translation 
+                                        details to the given file
+  --include-lhs-in-search-graph         When outputting chart search graph, 
+                                        include the label of the LHS of the 
+                                        rule (useful when using syntax)
+
+N-best Options:
+  --n-best-list                         file and size of n-best-list to be 
+                                        generated; specify - as the file in 
+                                        order to write to STDOUT
+  --labeled-n-best-list                 print out labels for each weight type 
+                                        in n-best list. default is true
+  --n-best-trees                        Write n-best target-side trees to 
+                                        n-best-list
+  --n-best-factor                       factor to compute the maximum number of
+                                        contenders (=factor*nbest-size). value 
+                                        0 means infinity, i.e. no threshold. 
+                                        default is 0
+  --report-all-factors-in-n-best        Report all factors in n-best-lists. 
+                                        Default is false
+  --lattice-samples                     generate samples from lattice, in same 
+                                        format as nbest list. Uses the file and
+                                        size arguments, as in n-best-list
+  --include-segmentation-in-n-best      include phrasal segmentation in the 
+                                        n-best list. default is false
+  --print-alignment-info-in-n-best      Include word-to-word alignment in the 
+                                        n-best list. Word-to-word alignments 
+                                        are taken from the phrase table if any.
+                                        Default is false
+
+Options for outputting search graphs:
+  --output-search-graph                 Output connected hypotheses of search 
+                                        into specified filename
+  --output-search-graph-extended        Output connected hypotheses of search 
+                                        into specified filename, in extended 
+                                        format
+  --unpruned-search-graph               When outputting chart search graph, do 
+                                        not exclude dead ends. Note: stack 
+                                        pruning may have eliminated some 
+                                        hypotheses
+  --output-search-graph-slf             Output connected hypotheses of search 
+                                        into specified directory, one file per 
+                                        sentence, in HTK standard lattice 
+                                        format (SLF) - the flag should be 
+                                        followed by a directory name, which 
+                                        must exist
+  --output-search-graph-hypergraph      DEPRECATED! Output connected hypotheses
+                                        of search into specified directory, one
+                                        file per sentence, in a hypergraph 
+                                        format (see Kenneth Heafield's lazy 
+                                        hypergraph decoder). This flag is 
+                                        followed by 3 values: 'true (gz|txt|bz)
+                                        directory-name'
+
+OOV Handling Options:
+  --drop-unknown                        drop unknown words instead of copying 
+                                        them
+  --mark-unknown                        mark unknown words in output
+  --unknown-word-prefix                 prefix to unknwon word when marked 
+                                        (default: 'UNK')
+  --unknown-word-suffix                 suffix to unknwon word when marked 
+                                        (default: '')
+  --lmodel-oov-feature                  add language model oov feature, one per
+                                        model
+  --output-unknowns                     Output the unknown (OOV) words to the 
+                                        given file, one line per sentence
+  --always-create-direct-transopt       Always create a translation that 
+                                        translates the source word ad-verbatim
+
+General Factorization Options:
+  --factor-delimiter                    specify a different factor delimiter 
+                                        than the default
+  --mapping                             description of decoding steps
+  --placeholder-factor                  Which source factor to use to store the
+                                        original text for placeholders. The 
+                                        factor must not be used by a 
+                                        translation or gen model
+
+Options when using compact phrase and reordering tables.:
+  --minphr-memory                       Load phrase table in minphr format into
+                                        memory
+  --minlexr-memory                      Load lexical reordering table in 
+                                        minlexr format into memory
+
+IRSTLM Options:
+  --clean-lm-cache                      clean language model caches after N 
+                                        translations (default N=1)
+
+Options used in tuning.:
+  --weight-overwrite                    special parameter for mert. All on 1 
+                                        line. Overrides weights specified in 
+                                        'weights' argument
+  --feature-add                         Add a feature function on the command 
+                                        line. Used by mira to add BLEU feature
+  --weight-add                          Add weight for FF if it doesn't exist, 
+                                        i.e weights here are added 1st, and can
+                                        be override by the ini file or on the 
+                                        command line. Used to specify initial 
+                                        weights for FF that was also specified 
+                                        on the copmmand line
+
+Miscellaneous Options:
+  --mira                                do mira training
+  --description                         Source language, target language, 
+                                        description
+  --no-cache                            Disable all phrase-table caching. 
+                                        Default = false (ie. enable caching)
+  --default-non-term-for-empty-range-only 
+                                        Don't add [X] to all ranges, just 
+                                        ranges where there isn't a source 
+                                        non-term. Default = false (ie. add [X] 
+                                        everywhere)
+  --s2t-parsing-algorithm               Which S2T parsing algorithm to use. 
+                                        0=recursive CYK+, 1=scope-3 (default = 
+                                        0)
+  --decoding-graph-backoff              only use subsequent decoding paths for 
+                                        unknown spans of given length
+  --references                          Reference file(s) - used for bleu score
+                                        feature
+  -r [ --recover-input-path ]           (conf net/word lattice only) - recover 
+                                        input path corresponding to the best 
+                                        translation
+  --link-param-count                    Number of parameters on word links when
+                                        using confusion networks or lattices 
+                                        (default = 1)
+  --feature-name-overwrite              Override feature name (NOT arguments). 
+                                        Eg. SRILM-->KENLM, PhraseDictionaryMemo
+                                        ry-->PhraseDictionaryScope3
+  --feature                             All the feature functions should be 
+                                        here
+  --context-string                      A (tokenized) string containing context
+                                        words for context-sensitive 
+                                        translation.
+  --context-weights                     A key-value map for context-sensitive 
+                                        translation.
+  --context-window                      Context window (in words) for 
+                                        context-sensitive translation: 
+                                        {+|-|+-}<number>.
+
+Deprecated Options:
+  --link-param-count                    DEPRECATED. DO NOT USE. Number of 
+                                        parameters on word links when using 
+                                        confusion networks or lattices (default
+                                        = 1)
+  --weight-slm                          DEPRECATED. DO NOT USE. weight(s) for 
+                                        syntactic language model
+  --weight-bl                           DEPRECATED. DO NOT USE. weight for bleu
+                                        score feature
+  -d [ --weight-d ]                     DEPRECATED. DO NOT USE. weight(s) for 
+                                        distortion (reordering components)
+  --weight-dlm                          DEPRECATED. DO NOT USE. weight for 
+                                        discriminative LM feature function (on 
+                                        top of sparse weights)
+  --weight-lr                           DEPRECATED. DO NOT USE. weight(s) for 
+                                        lexicalized reordering, if not included
+                                        in weight-d
+  -g [ --weight-generation ]            DEPRECATED. DO NOT USE. weight(s) for 
+                                        generation components
+  -I [ --weight-i ]                     DEPRECATED. DO NOT USE. weight(s) for 
+                                        word insertion - used for parameters 
+                                        from confusion network and lattice 
+                                        input links
+  --weight-l                            DEPRECATED. DO NOT USE. weight(s) for 
+                                        language models
+  --weight-lex                          DEPRECATED. DO NOT USE. weight for 
+                                        global lexical model
+  --weight-glm                          DEPRECATED. DO NOT USE. weight for 
+                                        global lexical feature, sparse producer
+  --weight-wt                           DEPRECATED. DO NOT USE. weight for word
+                                        translation feature
+  --weight-pp                           DEPRECATED. DO NOT USE. weight for 
+                                        phrase pair feature
+  --weight-pb                           DEPRECATED. DO NOT USE. weight for 
+                                        phrase boundary feature
+  --weight-t                            DEPRECATED. DO NOT USE. weights for 
+                                        translation model components
+  -w [ --weight-p ]                     DEPRECATED. DO NOT USE. weight for 
+                                        phrase penalty
+  -w [ --weight-w ]                     DEPRECATED. DO NOT USE. weight for word
+                                        penalty
+  -u [ --weight-u ]                     DEPRECATED. DO NOT USE. weight for 
+                                        unknown word penalty
+  -e [ --weight-e ]                     DEPRECATED. DO NOT USE. weight for word
+                                        deletion
+  --text-type                           DEPRECATED. DO NOT USE. should be one 
+                                        of dev/devtest/test, used for domain 
+                                        adaptation features
+  --input-scores                        DEPRECATED. DO NOT USE. 2 numbers on 2 
+                                        lines - [1] of scores on each edge of a
+                                        confusion network or lattice input 
+                                        (default=1). [2] Number of 'real' word 
+                                        scores (0 or 1. default=0)
+  --dlm-model                           DEPRECATED. DO NOT USE. Order, factor 
+                                        and vocabulary file for discriminative 
+                                        LM. Use * for filename to indicate 
+                                        unlimited vocabulary.
+  --generation-file                     DEPRECATED. DO NOT USE. location and 
+                                        properties of the generation table
+  --global-lexical-file                 DEPRECATED. DO NOT USE. 
+                                        discriminatively trained global lexical
+                                        translation model file
+  --glm-feature                         DEPRECATED. DO NOT USE. 
+                                        discriminatively trained global lexical
+                                        translation feature, sparse producer
+  --lmodel-file                         DEPRECATED. DO NOT USE. location and 
+                                        properties of the language models
+  --lmodel-dub                          DEPRECATED. DO NOT USE. dictionary 
+                                        upper bounds of language models
+  --ttable-file                         DEPRECATED. DO NOT USE. location and 
+                                        properties of the translation tables
+  --phrase-pair-feature                 DEPRECATED. DO NOT USE. Source and 
+                                        target factors for phrase pair feature
+  --phrase-boundary-source-feature      DEPRECATED. DO NOT USE. Source factors 
+                                        for phrase boundary feature
+  --phrase-boundary-target-feature      DEPRECATED. DO NOT USE. Target factors 
+                                        for phrase boundary feature
+  --phrase-length-feature               DEPRECATED. DO NOT USE. Count features 
+                                        for source length, target length, both 
+                                        of each phrase
+  --target-word-insertion-feature       DEPRECATED. DO NOT USE. Count feature 
+                                        for each unaligned target word
+  --source-word-deletion-feature        DEPRECATED. DO NOT USE. Count feature 
+                                        for each unaligned source word
+  --word-translation-feature            DEPRECATED. DO NOT USE. Count feature 
+                                        for word translation according to word 
+                                        alignment
+
+Zombie Options:
+  --distortion-file                     source factors (0 if table independent 
+                                        of source), target factors, location of
+                                        the factorized/lexicalized reordering 
+                                        tables
+
+Available feature functions:
+BleuScoreFeature ConstrainedDecoding ControlRecombination CorrectionPattern CountNonTerms CoveredReferenceFeature DeleteRules DesegModel Distortion DynamicCacheBasedLanguageModel EditOps ExampleLM ExamplePT ExampleStatefulFF ExampleStatelessFF ExampleTranslationOptionListFeature Generation GlobalLexicalModel HyperParameterAsWeight InMemoryPerSentenceOnDemandLM InputFeature KENLM LexicalReordering MaxSpanFreeNonTermSource Model1Feature NieceTerminal OpSequenceModel PhraseBoundaryFeature PhraseDictionaryALSuffixArray PhraseDictionaryBinary PhraseDictionaryCache PhraseDictionaryDynamicCacheBased PhraseDictionaryFuzzyMatch PhraseDictionaryGroup PhraseDictionaryMemory PhraseDictionaryMemoryPerSentence PhraseDictionaryMemoryPerSentenceOnDemand PhraseDictionaryMultiModel PhraseDictionaryMultiModelCounts PhraseDictionaryOnDisk PhraseDictionaryScope3 PhraseDictionaryTransliteration PhraseDistanceFeature PhraseLengthFeature PhraseOrientationFeature PhrasePairFeature PhrasePenalty ProbingPT ReferenceComparison ReloadingLM RulePairUnlexicalizedSource RuleScope RuleTable SRILM SetSourcePhrase SoftMatchingFeature SoftSourceSyntacticConstraintsFeature SourceGHKMTreeInputMatchFeature SourceWordDeletionFeature SpanLength SparseHieroReorderingFeature SyntaxInputWeight SyntaxRHS TargetBigramFeature TargetConstituentAdjacencyFeature TargetNgramFeature TargetPreferencesFeature TargetWordInsertionFeature TreeStructureFeature UnalignedWordCountFeature UnknownWordPenalty WordPenalty WordTranslationFeature 
+
+No configuration file was specified.  Use -config or -f
+ykt@lst-gpu-1:~/tool/mosesdecoder/bin$ 
+
