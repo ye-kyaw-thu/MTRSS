@@ -12,42 +12,42 @@ NECTEC (National Electronics and Computer Technology Center, Thailand) ကို
 
 ## YCC-MT1 Team Members
 
-. Dr. Ye Kyaw Thu
-. Dr. Hnin Aye Thant
-. Hlaing Myat Nwe
-. Naing Linn Phyo
-. Nann Hwan Khun
-. Khaing Zar Mon
-. Nang Aeindray Kyaw
+1. Dr. Ye Kyaw Thu
+2. Dr. Hnin Aye Thant
+3. Hlaing Myat Nwe
+4. Naing Linn Phyo
+5. Nann Hwan Khun
+6. Khaing Zar Mon
+7. Nang Aeindray Kyaw
 
 
 ## YCC-MT2 Team Members
 
-. Dr. Ye Kyaw Thu
-. Dr. Hnin Aye Thant
-. Eithandar Phyu
-. Khaing Hsu Wai
-. Myo Mar Thinn
-. Hay Man Htun
+1. Dr. Ye Kyaw Thu
+2. Dr. Hnin Aye Thant
+3. Eithandar Phyu
+4. Khaing Hsu Wai
+5. Myo Mar Thinn
+6. Hay Man Htun
+
+## NECTEC Team Members
+
+1. Zar Zar Hlaing
+2. Mya Ei San
+3. Dr. Thepchai Supnithi
+4. Dr. Ponrudee Netisopakul
+5. Dr.Sasiporn Usanavasin
+6. Dr. Ye Kyaw Thu
 
 ## Part-Time Members of UTYCC
 
 The following members helps for manual word segmentation:  
-. Phyo Thu Htet
-. Amie Mie Lwin
-. Khine Thet Thet Zaw
-. Aye Min Than
-. Zin Min Thaw
-. Thiha Nyein
-
-## NECTEC Team Members
-
-. Zar Zar Hlaing
-. Mya Ei San
-. Dr. Thepchai Supnithi
-. Dr. Ponrudee Netisopakul
-. Dr.Sasiporn Usanavasin
-. Dr. Ye Kyaw Thu
+* Phyo Thu Htet
+* Amie Mie Lwin
+* Khine Thet Thet Zaw
+* Aye Min Than
+* Zin Min Thaw
+* Thiha Nyein
 
 ## System Description Papers
 
