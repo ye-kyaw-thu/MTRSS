@@ -1920,7 +1920,84 @@ Ronan O &amp; apos ; Gara	ရိုနမ် အို့ဂါရာ
 Ronan O &amp; apos ; Gara	ရိုအင် အိုဂါရာ (မငြိမ်ဘူး။ ရိုနမ် ရိုအင် အို့ အို)
 
 
+Transliteration Mistakes (took from nmt-exp notebook)
 
+Transliteration word တွေ ဆွဲထုတ်တဲ့အခါမှာ Test Data Set တစ်ခုတည်းမှာတင်တွေ့ရတဲ့ အမှားတွေ က အများကြီးပဲ တချို့ အမှား ဥပမာတွေက အောက်ပါအတိုင်း ...
+
+The fire burned down a Los Angeles County Sheriff Department communications tower, forcing Lancaster and Palmdale-based deputies to set up mobile operations bases and coordinate their efforts using cell phones and computers.	လန်ကပ်စတာ မြို့တော် နှင့် ပန်ဒဲလ် မြို့တော် အခြေစိုက် ဌာန များ အား ရွှေ့ ပြောင်း လုပ်ဆောင်ရေး အဖွဲ့ များ စီစဉ် ထား ရန် နှင့် သူ တို့ ၏ ဆဲလ်ဖုန်း များ နှင့် ကွန်ပျူတာ များ အသုံးပြု ၍ ကြိုးပမ်းချက် များ ကို ပူးပေါင်း လုပ်ဆောင် ရန် တိုက်တွန်း ပြီး ၊ လော့စ် အိန်ဂျလိစ် စီရင်စု အုပ်ချုပ် ရေး ဌာန ဆက်သွယ်ရေး တာဝါ ကို မီးလောင်းကျွမ်း ခဲ့ သည် ။
+spelling mistake: မီးလောင်းကျွမ်း
+
+Residents of Leona Valley, Lake Elizabeth, Ritter Ranch, Rancho Vista, Ana Verde and Palmdale received Reverse 911 telephone calls last night alerting them of mandatory evacuations.	လီယိုနား တောင်ကြား ၊ အဲလီဇဘက်ခ် ရေကန် ၊ ရစ်တာ မွေးမြူရေး ခြံ ၊ ရန်ချို ရှုမျှော်ခင်း ၊ အန်နာ ဘစ်ဒီ နှင့် ပန်ဒဲလ် မြို့တော် တွင် နေထိုင် သူ များ သည် ၎င်း တို့ ကို ဥပဒေ အရ ရွှေ့ပြောင်း ရန် သတိပေး နေ သော ၉၁၁ မှ ဖုန်း ပြည်လည် ခေါ် ဆို မှု ကို မနေ့ ည က လက်ခံ ရရှိ ခဲ့ ပါ သည် ။
+spelling mistake: ပြည်လည်
+
+Absent an announcement from the Chinese government, it's unclear what the conditions were that caused the site to be accessible from within China.	တရုတ် အစိုးရ ထံ မှ ကြော်ငြာ ချက် တစ် ရပ် ထုတ်ပြန် ရန် ပျက်ကွက် ခဲ့ မှု သည် ၊ ၎င်း က ဘယ် အခြေအနေ များ သည် တရုတ် နိုင်ငံ အတွင်း မှ ဖတ်ရှုခွင့် ရ ဆိုက် ဖြစ် စေ ခဲ့ သည် ဆိုတာ မ ရှင်းလင်း ပါ ။
+translation mistake?! announcement vs ကြော်ငြာ
+
+"Wikipedia is not a haven for dissidents but an encyclopedia."	“ ဝီကီပီးဒီးယားး သည် အတိုက်အခံ များ အတွက် စိတ်ချလုံခြုံ တဲ့ နေရာ မ ဟုတ် ပေမဲ့ စွယ်စုံကျမ်း တစ် ခု ပါ ။ ”
+"About 99.9 percent of Wikipedia has topics that are not of interest to the Chinese Government."	“ တရုတ် အစိုးရ ၏ စိတ်ဝင်စား မှု မ ရရှိ စေ သော အကြောင်းအရာ များ သည် ဝီကီပီးဒီးယားး ၏ ၉၉.၉ ရာခိုင်နှုန်း ခန့် ရှိ သည် ။ ”
+The third block of Wikipedia, which was implemented 19 October 2005, was issued without explanation or an expected length.	၂၀၀၅ အောက်တိုဘာ ၁၉ တွင် အကောင်အထည်ဖော် ခဲ့ သည့် ဝီကီပီးဒီးယားး ၏ တတိယ ပိတ်ဆို့ မှု ကို ရှင်းလင်း ချက် သို့မဟုတ် ရေရှည် မျှော်လင့် ချက် မ ရှိ ဘဲ ထုတ်ပြန် ခဲ့ သည် ။
+Wikipedia has been blocked twice before, the first from 2-21 June 2004, due to the 15th anniversary of the Tian'anmen Square Incident.	၂-၂၁ ဇွန် လ ၂၀၀၄ မှာ ပထမဆုံး ၊ တီယန် မင် ရင်ပြင် မတော်တဆ မှု ၁၅ နှစ် ပတ်ပတ်လည် ကြောင့် ၊ ဝီကီပီးဒီးယားး ကို ယခင် က နှစ် ကြိမ် ပိတ်ဆို့ ခဲ့ သည် ။
+spelling mistake: ဝီကီပီးဒီးယားး
+
+He told a government inquiry, "There are no powerful groups in society that can come along to governments or anybody and say 'we can do what we like when we like and there's nothing you should do about it'."	သူ သည် ၊ " အစိုးရ သို့မဟုတ် မည်သူ မျ နှင့်အတူ လိုက် ပါ ဆောင်ရွက် နိုင် သော လူ့ အဖွဲ့အစည်း တွင် အာဏာ အပြည့်အဝ ရှိ သော အဖွဲ့ များ တစ် ခု မျှ မ ရှိ ကြောင်း နှင့် ' ကျွန်ုပ် တို့ သည် ကျွန်တော် တို့ ကြိုက် သည့် အချိန် တွင် ကြိုက် သည့် အရာ ကို လုပ် နိုင် ပြီး ၎င်း အကြောင်းအရာ ကို သင် လုပ် သင့် သော မည်သည့် အရာ မှ မ ရှိ ဟု ပြော သည် ' " ကို အစိုးရ ထောက်လှမ်း ရေး ဌာန ကို ပြော ခဲ့ သည် ။
+spelling mistake: မည်သူ မျ နှင့်
+
+Finkelstein is also on the record as stating that self regulation by the industry through their own organization has failed.	ဖရန်ကလင်စတိန်း သည် သူ တို့ ၏ ကိုယ်ပိုင် အဖွဲ့အစည်း ကို ကျော် ကာ စက်ရုံ က ကိုယ်ပိုင် စည်းမျဉ်း သည် ကျရုံး ခဲ့ သည် ဟု ဖော်ပြ သကဲ့သို့ မှတ်တမ်း ထဲတွင် လည်း ဖြစ် သည် ။
+spelling mistake: ကျရုံး
+
+There are at least two big winners in Tuesday night's US$370 million Mega Millions lottery drawing which is held in 12 U.S. states.	အင်္ဂါ နေ့ ည က အမေရိကန် ပြည်နယ် ၁၂ ခု တွင် ကျင်းပ သော အမေရိကန် ဒေါ်လာ သန်း ၃၇၀ မီဂါမီလျှံ ထီ ဖွင့်ပွဲ တွင် အနည်းဆုံး ကံထူးရှင် ကြီး နှစ် ဦး ရှိ ကြ သည် ။
+spelling mistake: မီဂါမီလျှံ
+
+Their study of WASP-18b was published in the August 27 issue of the journal Nature.	သူ တို့ ရဲ့ WASP-18b လေ့လာ မှု ကို ဩဂုတ် လ ၂၇ ရက် နေ့ ထွက် သော သဘာဝ ဂျာနယ် မှာ ဖော်ပြ ခဲ့ တယ် ။
+တချို့ စာလုံးတွေမှာက ဗမာလို ပြန်ထားတာ မဟုတ်ပဲ တိုက်ရိုက်ယူသုံးထားတာမို့ XML markup က အဆင်မပြေပြန်ဘူး...
+
+Some Muslim news agencies are still reacting to last week's Newsweek article alleging Korans had been thrown into Guantanamo Bay toilets.	တချို့ မူဆလင် သတင်း ဌာန များ က ကိုရမ်ကျမ်းစာ များ ကို ဂွမ်တန်နိုမို ပင်လယ်အော် အိမ်သာ ထဲ ကို လွှတ်ပစ် ခဲ့ သည် ဟု ပြီး ခဲ့ သော သတင်းပတ် က ခေါင်းစဉ် တွင် အခိုင်အမာဖော်ပြ ၍ တုံ့ပြန် ခဲ့ သည် ။
+Transliteration error: Guantanamo ဂွမ်တန်နိုမို
+
+The new “price indexing” formula will reduce individual benefits and overall Social Security outlays because the inflation rate typically is much lower than the rise in wages.	ပုံမှန် အားဖြင့် ငွေကြေး ဖောင်းပွ မှု နုန်း သည် လုပ်အားခ များ မြှင့် တက် ခြင်း ထက် အ များ ကြီး နိမ့်ကျ သောကြောင့် “ ဈေးနှုန်း အညွှန်း ” စည်းမျဉ် အသစ် သည် ပုဂ္ဂလိက အကျိုးခံစားခွင့် များ နှင့် ယေဘုယျ လူမှုဖူလုံရေး သုံးစွဲ သည့် ငွေ များ လျှော့ချ နိုင် လိမ့်မည် ။
+spelling mistake: နုန်း, စည်းမျဉ်
+
+The Bush Administration proposal, which will be offered to Congress in February or March 2005, is part of an overall Social Security reform package that also would create “personal investment accounts” into which individual taxpayers could divert part of their payroll taxes.	ဖေဖော်ဝါရီ လ သို့မဟုတ် မတ် လ ၂၀၀၅ ခုနှစ် တွင် ဆွေးနွေး ညှိနှိုင်း ပွဲ သို့ တင်ပြ တော့ မည့် ၊ အသစ် ပြန်လည် ပြုပြင် ထား သော ယေဘုယျ အားဖြင့် လူမှုဖူလုံရေး ၏ တစ်စိတ်တစ်ပိုင်း ဖြစ် သော ၊ ဘုရ် အုပ်ချုပ် ရေး အဆို ပြု ချက် သည် ပုဂ္ဂလိက အခွန်ထမ်းဆောင် သူ တို့ မှ သူ တို့ ပေးဆောင် ရ မည့် အခွန် များ မှ တချို့ ကို လွှဲဖယ် နိုင် သည့် “ ကိုယ်ပိုင် ရင်းနှီးမြှုပ်နှံ မှု အကောင့် ” အဖြစ် ကို လည်း ဖန်တီး နိုင် သည် ။
+transliteration mistake: Bush ==> ဘုရ်
+
+Under the Bush proposal, rather than adjusting benefits on the basis of earnings growth, the calculation would be based on the increase in the consumer price index over those years.	ဘုရ်ဝှ် အဆို ပြု ချက် ကို အခြေခံ ၍ ၊ အကျိုးခံစားခွင့် များ ကို အခြေခံ ဝင်ငွေ ၏ တိုးတက် မှု ပေါ်တွင် ညှိယူ ခြင်း ထက် ၊ ထို နှစ် များ အတွင်း စားသုံး သူ ဈေးနှုန်း အညွှန်းကိန်း တိုးမြှင့်လာ မှု အပေါ် တွင် အခြေခံ ၍ တွက်ချက် ပါ လိမ့်မည် ။
+transliteration inconsistance: ဘုရ်ဝှ်
+
+However, Rother says that price indexing has to be linked to Bush’s private investment accounts as income from the accounts give retirees the chance to make up the shortfalls.	သို့သော် ၊ ဘုရှ် ) ရဲ့ ကိုယ်ပိုင် ရင်းနှီးမြှုပ်နှံ မှု ငွေ စာရင်း ဝင်ငွေ မှ အငြိမ်းစားယူ သူ များ ၏ ငွေကြေး မ လုံလောက် မှု များ ဖြေရှင်း ရန် အခွင့်အလမ်း ရရှိ စေ သောကြောင့် ထို ငွေ စာရင်း ကို ဈေးနှုန်း အညွှန်း နှင့် ချိတ်ဆက် ဖွယ် ရှိ သည် ဟု ရော်သာ က ပြော သည် ။
+extra punctuation mark: ဘုရှ် )
+
+Future Heathrow believe that Heathrow airport is crucial to prosperity of the Thames Valley region, and are in favour of building a third runway at the airport.	အနာဂတ် ဟက်ထရို လေကြောင်း လိုင်း က ဟက်ထရို လေဆိပ် သည် တိမ်းစ် တောင်ကြား ဒေသ ၏ အလားအလာ အဖြစ် ဆုံးဖြတ် ချက် ကို ယုံကြည် ကြောင်း ၊ နှင့် လေဆိပ် ၌ တတိယ အကြိမ် မြောက် လေယာဉ် ပြေးလမ်း ကို တည်ဆောက် ရန် ဆန္ဒ ရှိ သည် ။
+transliteration/pronunciation error: Heathrow ==> ဟက်ထရို
+
+Clothes and furniture are scattered around the wrecked houses and pieces of trees are scattered about.	ပျက်ဆီး နေ သော အိမ် များ ပတ်ပတ်လည် တွင် အဝတ်အစား နှင့် ပရိဘောဂ များ ပြန့်ကျဲ နေ ခဲ့ ပြီး သစ်ပင် အပိုင်းအစ များ က အနီးတဝိုက် တွင် ပြန့်ကျဲ နေ ခဲ့ သည် ။
+spelling error: ပျက်ဆီး (ပျက်စီး ဖြစ်ရမယ်)
+
+He said: "The Charity Commission guidance is quite clear that trustees must invest for the best possible financial return, while taking a level of risk appropriate for money in their care.	" ပရဟိတ အဖွဲ့ ကော်မရှင် လမ်းညွှန် မှု ဟာ အတော် ရှင်းလင်း သောကြောင့် ၎င်း တို့ ၏ စောင့်ရှောက် မှု ဖြင့် ငွေကြေး အတွက် သင့်လျော် သော စွန့်စား မှု အဆင့် တစ် ခု ကို ပြုလုပ် စဉ် ၊ ယုံကြည် စွာ အပ်နှံ သူ များ သည် အ ကောင်း ဆုံး ဖြစ် နိုင် သော စီးပွားရေး အမြတ်အစွန်း အတွက် ရင်းနှီးမြှုပ်နှံ ရ မည် ဟု : သူ က ပြော ခဲ့ ပါ သည် ။
+we don't use colon in Burmese! ရင်းနှီးမြှုပ်နှံ ရ မည် ဟု : သူ က
+
+Thomas	သော မတ်
+Thomas	သော မတ်စ်
+Blois	ဘ လွိင်း
+
+Good example of alignment required within a transliteration word:
+Mount Redoubt	ရက် ဒေါ့ တောင်
+
+Symbols/Punctuation characters also contained:
+icesave.nl	အိုက်စ် ဆေ့ဗ် ၊ အန် အယ်လ်
+WASP-18b	ဒယ် ဘ လူ အေ အက်စ် ပီ - ၈ ဘီ
+James "Duke" Aiona	ဂျိမ်းစ် " ဒုတ်ခ် " အေ ရို န
+Vancouver, B.C..	ဗန် ကို ဗာ ၊ ဘီ 
+
+Removed Punctuation characters:
+Camille Saint-Saens	ကင် မီ လီ စိ န့် ဆ ရန်
+Spain's	စ ပိန် ၏
+Peter Bennett-Jones	ပီ တာ ဘန်း နတ် ဂျွန်းစ်
+Ban Ki-moon	ဘန် ကီ မွန်း
+
+long word/name example:
+Abdelbaset Ali Mohmed Al-Megrahi	အယ် ဘ ဒါ ဘား ဆက် အ လီ မို ဟာ မက် အေ အိုင် - မက် ဂ ရက် 
+
+=====================================
 
 
 Very good example of why we built NER and Transliteration Dictionary:
