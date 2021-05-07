@@ -1365,7 +1365,7 @@ my-en
    2:   32  ->  the ==> ,
    3:   29  ->  quot ==> apos
    
-   တွေကို ရှင်းပြီး BLEU score ကို တက်အောင် လုပ်နိုင်မယ်လို့ ထင်တ်။
+   တွေကို ရှင်းပြီး BLEU score ကို တက်အောင် လုပ်နိုင်မယ်လို့ ထင်တယ်။
   နောက်တစ်ခု word unit WER ကိုလည်း ကြည့်ရမယ်။
   
   *** written vs spoken Myanmar languages?! တယ်-သည်၊ နောက် polite form, casual form?
