@@ -43,7 +43,8 @@ NECTEC (National Electronics and Computer Technology Center, Thailand) ကို
 
 ## Part-Time Members of UTYCC
 
-The following members helps for manual word segmentation:  
+The following members helped for manual word segmentation (i.e. some sentences of WAT2021, UCSY corpus data):  
+
 * Phyo Thu Htet
 * Amie Mie Lwin
 * Khine Thet Thet Zaw
