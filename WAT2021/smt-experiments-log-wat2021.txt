@@ -2,6 +2,8 @@
 ### experiment 1 ###
 ####################
 
+PBSMT config ဖိုင်ရဲ့ setting တချို့ကို အောက်ပါအတိုငင်း ပြောင်းခဲ့...  
+
 max-sentence-length = 80
 #max-sentence-length = 200
 
@@ -20,6 +22,12 @@ BLEU = 16.79, 50.0/24.1/11.6/5.9 (BP=0.992, ratio=0.992, hyp_len=58185, ref_len=
 Evaluation on my-en SMT...
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/exp-syl/baseline/my-en/evaluation$ perl /home/ye/exp/smt/scripts/moses-script/multi-bleu.perl ./test.reference.txt.1 < ./test.cleaned.1
 BLEU = 2.49, 28.0/5.7/1.1/0.2 (BP=1.000, ratio=1.337, hyp_len=30670, ref_len=22937)
+
+my-en ရလဒ်က တော်တော်ကို နည်းတယ်။  
+လက်တွေ့ ရှင်းရမယ့် ပြဿနာက အများကြီးပဲ....
+- စာကြောင်းတွေက ရှည်တာတွေများတယ် (sentence length problem)  
+- အင်္ဂလိပ်စာကြောင်းတွေကို ဘာသာပြန်ထားတာမှာ တလွဲတွေ ပြန်ထားတာတွေလည်း အများကြီးပဲ... မြန်မာလူမျိုး တစ်ယောက်အနေနဲ့ ကြည့်ရင် ဖတ်ကြည့်လည်း တစ်ခေါက် ဖတ်ပြီး နားမလည်တာမျိုး၊ သဘာဝ မကျတဲ့ ဗမာစာကြောင်းတွေ လည်း ပါနေတာမျိုး... (e.g. containing not natural Myanmar sentences)  
+- စာလုံးပေါင်းမှားတာတွေလည်း ရှိတယ် (corpus တစ်ခုဆောက်တဲ့အခါမှာ ခက်ခဲတဲ့ အပိုင်းတွေပါ...)  
 
 ####################
 ### experiment 2 ###
