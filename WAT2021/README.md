@@ -64,7 +64,7 @@ The following members helped for manual word segmentation (i.e. some sentences o
 
 ## System/Framework
 
-NMT အတွက်က framework သုံးမျိုးလောက် test run လုပ်ခဲ့ပါသေးတယ်။ GPU နှစ်လုံးထဲနဲ့ limited memory မှာ deadline အချိန်မှီအောင် ပြင်ဆင်ခဲ့ရတာမို့ တကယ် experiment တွေလုပ်ဖြစ်သွားတာက Marian NMT Framework တစ်ခုတည်းပါပဲ။   
+NMT အတွက်က framework သုံးမျိုးလောက် test run လုပ်ခဲ့ပါသေးတယ်။ GPU နှစ်လုံးထဲနဲ့ limited memory မှာ deadline အချိန်မှီအောင် ပြင်ဆင်ခဲ့ရတာမို့ တကယ် experiment တွေလုပ်ဖြစ်သွားတာက Marian NMT Framework တစ်ခုတည်းပေါ်မှာပါပဲ။   
 
 * Moses: [http://www.statmt.org/moses/](http://www.statmt.org/moses/)  
 * Marian: [https://github.com/marian-nmt/marian](https://github.com/marian-nmt/marian)
