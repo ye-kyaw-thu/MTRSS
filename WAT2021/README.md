@@ -1,6 +1,6 @@
 # Some Notes/Logs of WAT2021 Participation
 
-NICT, Japan က ကြီးမှုးကျင်းပတဲ့ WAT2021 ရဲ့ English-Myanmar, Myanmar-English Machine Translation Share Task မှာ   
+NICT, Japan က ကြီးမှုးကျင်းပတဲ့ [WAT2021](https://lotus.kuee.kyoto-u.ac.jp/WAT/WAT2021/index.html) ရဲ့ English-Myanmar, Myanmar-English Machine Translation Share Task မှာ   
 University of Technology (Yatanarpon Cyber City) ကို ကိုယ်စားပြုပြီး Team နှစ်ခု (YCC-MT1, YCC-MT2) နဲ့  
 NECTEC (National Electronics and Computer Technology Center, Thailand) ကို ကိုယ်စားပြုပြီး (NECTEC) Team တစ်ခု၊ စုစုပေါင်း အဖွဲ့သုံးဖွဲ့ ဝင်ရောက်ပြီး contribuion လုပ်ခဲ့ပါတယ်။  
 အဲဒီတုန်းက run ထားတာတဲ့ experiment တွေနဲ့ ပတ်သက်တဲ့ log/script ဖိုင်တချို့ကို share လိုက်ပါမယ်။   
