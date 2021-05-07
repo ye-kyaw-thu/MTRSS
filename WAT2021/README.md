@@ -12,32 +12,34 @@ NECTEC (National Electronics and Computer Technology Center, Thailand) ကို
 
 ## YCC-MT1 Team Members
 
-1. Dr. Ye Kyaw Thu
-2. Dr. Hnin Aye Thant
-3. Hlaing Myat Nwe
-4. Naing Linn Phyo
-5. Nann Hwan Khun
-6. Khaing Zar Mon
-7. Nang Aeindray Kyaw
+1. Dr. Ye Kyaw Thu (UTYCC and LST Lab., Myanmar)
+2. Dr. Hnin Aye Thant (UTYCC, Myanmar)
+3. Hlaing Myat Nwe (UTYCC, Myanmar)
+4. Naing Linn Phyo (UTYCC, Myanmar)
+5. Nann Hwan Khun (UTYCC, Myanmar)
+6. Khaing Zar Mon (UTYCC, Myanmar)
+7. Nang Aeindray Kyaw (UTYCC, Myanmar)
+8. Thazin Myint Oo (LST Lab., Myanmar)
 
 
 ## YCC-MT2 Team Members
 
-1. Dr. Ye Kyaw Thu
-2. Dr. Hnin Aye Thant
-3. Eithandar Phyu
-4. Khaing Hsu Wai
-5. Myo Mar Thinn
-6. Hay Man Htun
+1. Dr. Ye Kyaw Thu (UTYCC and LST Lab. Myanmar)
+2. Dr. Hnin Aye Thant (UTYCC, Myanmar)
+3. Eithandar Phyu (UTYCC, Myanmar)
+4. Khaing Hsu Wai (UTYCC, Myanmar)
+5. Myo Mar Thinn (UTYCC, Myanmar)
+6. Hay Man Htun (UTYCC, Myanmar)
 
 ## NECTEC Team Members
 
-1. Zar Zar Hlaing
-2. Mya Ei San
-3. Dr. Thepchai Supnithi
-4. Dr. Ponrudee Netisopakul
-5. Dr.Sasiporn Usanavasin
-6. Dr. Ye Kyaw Thu
+1. Zar Zar Hlaing (KMITL, Thailand)
+2. Mya Ei San (SIIT, Thailand)
+3. Dr. Thepchai Supnithi (NECTEC, Thailand)
+4. Dr. Ponrudee Netisopakul (KMITL, Thailand)
+5. Dr.Sasiporn Usanavasin (SIIT, Thailand)
+6. Dr. Ye Kyaw Thu (NECTEC, Thailand)
+7. Thazin Myint Oo (LST Lab., Myanmar)
 
 ## Part-Time Members of UTYCC
 
