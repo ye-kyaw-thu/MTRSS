@@ -7,4 +7,14 @@ UTYCC ကို ကိုယ်စားပြုပြီး Team နှစ်�
 ရဲကျော်သူ  
 7 May 2021  
 
+အချိန်ရတဲ့အခါမှာ README ဖိုင်ကို ဆက် update လုပ်သွားပါမယ်...  
+
+## YCC-MT1 Team Members
+
+## YCC-MT2 Team Members
+
+## NECTEC Team Members
+
+## System Description Papers
+
 
