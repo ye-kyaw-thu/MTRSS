@@ -95,7 +95,7 @@ Ensemble: s2s+Transformer; (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --
 System-1: s2s; word2word  
 System-2: Transformer; word2word  
 Ensemble: s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5, --weights 06 04)  
-Here, we used our in-house myWord word segmenter for Myanmar language.  
+Here, we used our in-house *myWord* word segmenter for Myanmar language.  
 
 ### Multi-source Neural Machine Translation (NECTEC Team)
    We used two encoders for multi-source neural machine translation experiments. Here, we used parsed tree and POS tagged data as one more source language together with the original string source. 
