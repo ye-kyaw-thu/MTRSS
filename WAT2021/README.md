@@ -66,6 +66,7 @@ The following members helped for manual word segmentation (i.e. some sentences o
 
 ### Hybrid Translation with XML Markup 
    Sometimes we have external knowledge that we want to bring to the SMT decoder. We plug in XML markup based translations for transliterated words to the decoder without changing the PBSMT, HPBSMT and OSM model.  
+   
    WAT2021 English-Myanmar share task ရဲ့ test data ကို ကြည့်တဲ့အခါမှာ အင်္ဂလိပ်စကားလုံးတွေကို တိုက်ရိုက် ဗမာလိုအသံထွက်အတိုင်းချရေးထားတဲ့ စာလုံးတွေ (transliterated word) အများကြီးတွေ့ရလို့ corpus တစ်ခုလုံး (i.e.UCSY+ALT) ထဲက နေ transliterated word တွေကို ဆွဲထုတ်ဖို့ မလွယ်ကူပေမဲ့ ALT corpus (စာကြောင်းရေ နှစ်သောင်းကျော်) ထဲက transliterated word တွေအားလုံးကို manually ဆွဲထုတ်ပြီး dictionary ဆောက်လိုက်တယ်။ SMT decoding လုပ်တဲ့အခါမှာ အဲဒီ dictionary ကို သုံးပြီး hybrid translation လုပ်ခဲ့တယ်။  
    
 ### Ensemble Two Models
