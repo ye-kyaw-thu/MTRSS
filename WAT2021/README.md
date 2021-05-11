@@ -91,8 +91,9 @@ Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Ta
 Shared-Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String  
 
 \[Myanmar-English\]  
-
-
+Baseline: Transformer Architecture; Source: POS ===> Target: String  
+Multi-Source: Transformer Architecture; Source-1: string, Source-2: POS ===> Target: String  
+Shared-Multi-Source: Transformer Architecture; Source-1: string, Source-2: POS ===> Target: String  
 
 
 ## System/Framework
