@@ -94,7 +94,7 @@ The followings are the brief explanation of three experiments that we implemente
 
 **System-1:** s2s; word2word  
 **System-2:** Transformer; word2word  
-**Ensemble:** s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5, --weights 06 04)  
+**Ensemble:** s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 Here, we used our in-house __*myWord*__ word segmenter for Myanmar language.  
 
 ### Multi-source Neural Machine Translation (NECTEC Team)
