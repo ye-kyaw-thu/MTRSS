@@ -147,3 +147,10 @@ NMT အတွက်က framework သုံးမျိုးလောက် test
 ## System Description Papers
 
 To Appear  
+
+## References
+
+* Hybrid Translation of Moses: [http://www.statmt.org/moses/?n=Advanced.Hybrid](http://www.statmt.org/moses/?n=Advanced.Hybrid) 
+* Marcin Junczys-Dowmunt, Roman Grundkiewicz, Log-linear Combinations of Monolingual and Bilingual Neural Machine Translation Models for Automatic Post-Editing:[https://www.aclweb.org/anthology/W16-2378/](https://www.aclweb.org/anthology/W16-2378/)  
+* Marcin Junczys-Dowmunt, Roman Grundkiewicz, An Exploration of Neural Sequence-to-Sequence Architectures for Automatic Post-Editing, [https://arxiv.org/abs/1706.04138](https://arxiv.org/abs/1706.04138)  
+* Documentation of MARIANNMT: [https://marian-nmt.github.io/docs/](https://marian-nmt.github.io/docs/)  
