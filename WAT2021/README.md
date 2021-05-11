@@ -81,16 +81,16 @@ The followings are the brief explanation of three experiments that we implemente
    
    Marian framework ရဲ့ အော်ရဂျင်နယ် multi-source ပရိုပိုဇယ် (Junczys-Dowmunt et al. 2016, Junczys-Dowmunt et al. 2017) က post editing အတွက် ရည်ရွယ်ခဲ့ပေမဲ့ WAT2021 share task အတွက် experiment လုပ်ခဲ့တာက grammar tree တို့ POS tagged တွေကနေ target language ကို တိုက်ရိုက် ဘာသာပြန်တာထက်၊ အော်ရဂျင်နယ် source language ကိုပါ နောက်ထပ် source တစ်ခုအနေနဲ့ ဖြည့်ပြီး decode လုပ်ရင် translation performance ဘယ်လောက်ထိ တက်နိုင်သလဲ ဆိုတာကို သိချင်လို့ လုပ်ခဲ့တာပါ။  
    
-\[English-Myanmar\]
-Baseline: RNN-based Architecture; Source: Tree ===> Target: String
-Multi-Source: RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String
-Shared-Multi-Source: RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String
+\[English-Myanmar\]  
+Baseline: RNN-based Architecture; Source: Tree ===> Target: String  
+Multi-Source: RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String  
+Shared-Multi-Source: RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String  
 
-Baseline: Transformer Architecture; Source: Tree ===> Target: String
-Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String
-Shared-Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String
+Baseline: Transformer Architecture; Source: Tree ===> Target: String  
+Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String  
+Shared-Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String  
 
-\[Myanmar-English\]
+\[Myanmar-English\]  
 
 
 
