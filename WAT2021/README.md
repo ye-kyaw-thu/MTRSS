@@ -7,7 +7,7 @@ NECTEC (National Electronics and Computer Technology Center, Thailand) ကို
 
 Experiment တွေကို Jan လကုန်လောက်က စတင်ပြင်ဆင်ခဲ့တယ်လို့ ထင်တယ်။ Feb လက စပြီး အင်တာနက်က ပုံမှန်သုံးလို့မရတဲ့အခက်အခဲကြောင့် မြန်မာကျောင်းသားတွေနဲ့က အဆက်အသွယ်လုပ်လို့ မရဖြစ်လာခဲ့ပါတယ်။ အဲဒါကြောင့် SMT/NMT experiment တော်တော်များများကို ကျွန်တော်ပဲဦးဆောင် run ခဲ့ရပါတယ်။ NMT ကလည်း GPU နှစ်လုံးပဲ ရှိတဲ့ HP Workstation စက်တစ်လုံးကိုပဲ သုံးပြီး လုပ်ခဲ့တာမို့ လုပ်ချင်ခဲ့တဲ့ NMT experiment တွေအားလုံးကိုတော့ စိတ်တိုင်းကျ မပြီးစီးခဲ့ပါဘူး။ တစ်ခုကောင်းတာက under-resource (both data/hardware) ဆိုတဲ့ condition မှာ run ခဲ့တာမို့ အထူးသဖြင့် GPU ကို ဖောဖောသီသီ မသုံးနိုင်ကြသေးတဲ့ မြန်မာက ကျောင်းသားတွေအတွက်တော့ refer လုပ်စရာ ဖြစ်ကောင်းဖြစ်နိုင်ပါလိမ့်မယ်။ နောက်ပြီးတော့ English-Myanmar, Myanmar-English machine translation R&D အတွက် အတိုင်းအတာတစ်ခုအထိ contribution ဖြစ်မယ်လို့ ယူဆပါတယ်။  
 
-လက်ရှိမှာ WAT2021 workshop မှာ စာတမ်း ဖတ်နိုင်ဖို့အတွက်၊ system description paper ၃စောင်ကို အမှီရေးတင်လိုက်နိုင်ဖို့ contact လုပ်လို့ communication လုပ်လို့အဆင်ပြေတဲ့ member တချို့နဲ့ပြင်ဆင်နေပါတယ်။  
+လက်ရှိမှာ [WAT2021 workshop](https://lotus.kuee.kyoto-u.ac.jp/WAT/WAT2021/index.html) မှာ စာတမ်း ဖတ်နိုင်ဖို့အတွက်၊ system description paper ၃စောင်ကို အမှီရေးတင်လိုက်နိုင်ဖို့ contact လုပ်လို့ communication လုပ်လို့အဆင်ပြေတဲ့ member တချို့နဲ့ပြင်ဆင်နေပါတယ်။  
 Running log ဖိုင်တွေက တကယ် အကြမ်းရေးထားတာမို့ SMT/NMT experiment တွေနဲ့ ပတ်သက်ပြီး သိပ်အတွေ့အကြုံမရှိရင် လိုက်ဖတ်ရတာ ခက်ခဲတဲ့ အပိုင်းတွေလည်း ရှိနိုင်ပါတယ်။ သို့သော် တစ်ယောက်ယောက်အတွက် အကျိုးရှိမယ်လို့ ယုံကြည်လို့ ရှဲပေးထားလိုက်ပါတယ်။  
 
 Thanks for visiting my GitHub!!! :)  
