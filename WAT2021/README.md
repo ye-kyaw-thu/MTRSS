@@ -64,6 +64,8 @@ The following members helped for manual word segmentation (i.e. some sentences o
 
 ## Experiments
 
+The followings are the brief explanation of three experiments that we implemented for WAT2021 en-my, my-en share task:  
+
 ### Hybrid Translation with XML Markup (YCC-MT1 Team, en-my)
    Sometimes we have external knowledge that we want to bring to the SMT decoder. We plug in XML markup based translations for transliterated words to the decoder without changing the PBSMT, HPBSMT and OSM models.  
    
@@ -75,8 +77,7 @@ The following members helped for manual word segmentation (i.e. some sentences o
    မြန်မာလို ထပ်ဖြည့်ရှင်းရရင်တော့ ensemble လုပ်တဲ့အခါ မော်ဒယ်တွေကို နှစ်ခုထက်မကလည်း လုပ်နိုင်ပါတယ်။ WAT2019 မှာ Facebook team က လုပ်ခဲ့သလိုမျိုး မော်ဒယ် ငါးခုဆောက်ပြီး အဲဒီ မော်ဒယ်ငါးခုကို ensemble လုပ်ပြီး translation လုပ်တာမျိုးပါ။ သို့သော် အဲဒီလို လုပ်ဖို့အတွက်က NMT မော်ဒယ် ငါးခုဆောက်ဖို့အတွက် GPU ကဒ် အရေအတွက်ကသိပ်မရှိရင် အချိန်အများကြီးပေးရပါတယ်။ ပြီးတော့ မော်ဒယ် ၅ခုကို တွဲပြီး run ဖို့က memory, GPU လည်း အများကြီးလိုအပ်ပါတယ်။ ဒီတစ်ခေါက် WAT2021 မှာ YCC-MT2 အဖွဲ့အနေနဲ့က under-resourced ဆိုတဲ့ condition ကိုပဲ အခြေခံပါတယ်၊ လက်တွေ့ မြန်မာနိုင်ငံက တက္ကသိုလ်တွေအနေနဲ့ကလည်း GPU အများကြီးကို သုံးပြီး run တဲ့ experiment တွေက မဖြစ်နိုင်သေးတာမို့၊ GPU နှစ်လုံးထဲကို သုံးပြီး၊ မော်ဒယ်ကိုလည်း ၂မျိုးကိုပဲ ensemble လုပ်ခဲ့ပါတယ်။  
 
 ### Multi-source Neural Machine Translation (NECTEC Team, en-my, my-en)
-
-
+   We used two encoders for multi-source neural machine translation experiments. Here, we used parsed tree and POS tagged data as one more source language together with the original string source. 
 
 ## System/Framework
 
