@@ -22,19 +22,19 @@ Thanks for visiting my GitHub!!! :)
 
 ## YCC-MT1 Team Members
 
-1. Dr. Ye Kyaw Thu (UTYCC and LST Lab., Myanmar)
+1. Dr. Ye Kyaw Thu (UTYCC and LU Lab., Myanmar)
 2. Dr. Hnin Aye Thant (UTYCC, Myanmar)
 3. Hlaing Myat Nwe (UTYCC, Myanmar)
 4. Naing Linn Phyo (UTYCC, Myanmar)
 5. Nann Hwan Khun (UTYCC, Myanmar)
 6. Khaing Zar Mon (UTYCC, Myanmar)
 7. Nang Aeindray Kyaw (UTYCC, Myanmar)
-8. Thazin Myint Oo (LST Lab., Myanmar)
+8. Thazin Myint Oo (LU Lab., Myanmar)
 
 
 ## YCC-MT2 Team Members
 
-1. Dr. Ye Kyaw Thu (UTYCC and LST Lab. Myanmar)
+1. Dr. Ye Kyaw Thu (UTYCC and LU Lab. Myanmar)
 2. Dr. Hnin Aye Thant (UTYCC, Myanmar)
 3. Eithandar Phyu (UTYCC, Myanmar)
 4. Khaing Hsu Wai (UTYCC, Myanmar)
@@ -49,7 +49,7 @@ Thanks for visiting my GitHub!!! :)
 4. Dr. Ponrudee Netisopakul (KMITL, Thailand)
 5. Dr.Sasiporn Usanavasin (SIIT, Thailand)
 6. Dr. Ye Kyaw Thu (NECTEC, Thailand)
-7. Thazin Myint Oo (LST Lab., Myanmar)
+7. Thazin Myint Oo (LU Lab., Myanmar)
 
 ## Part-Time Members of UTYCC
 
@@ -61,6 +61,16 @@ The following members helped for manual word segmentation (i.e. some sentences o
 * Aye Min Than
 * Zin Min Thaw
 * Thiha Nyein
+
+## Experiments
+
+### Hybrid Translation with XML Markup 
+   Sometimes we have external knowledge that we want to bring to the SMT decoder. We plug in XML markup based translations for transliterated words to the decoder without changing the PBSMT, HPBSMT and OSM model.  
+   WAT2021 English-Myanmar share task ရဲ့ test data ကို ကြည့်တဲ့အခါမှာ အင်္ဂလိပ်စကားလုံးတွေကို တိုက်ရိုက် ဗမာလိုအသံထွက်အတိုင်းချရေးထားတဲ့ စာလုံးတွေ (transliterated word) အများကြီးတွေ့ရလို့ corpus တစ်ခုလုံး (i.e.UCSY+ALT) ထဲက နေ transliterated word တွေကို ဆွဲထုတ်ဖို့ မလွယ်ကူပေမဲ့ ALT corpus (စာကြောင်းရေ နှစ်သောင်းကျော်) ထဲက transliterated word တွေအားလုံးကို manually ဆွဲထုတ်ပြီး dictionary ဆောက်လိုက်တယ်။ SMT decoding လုပ်တဲ့အခါမှာ အဲဒီ dictionary ကို သုံးပြီး hybrid translation လုပ်ခဲ့တယ်။  
+   
+### Ensemble Two Models
+
+### Multi-source Neural Machine Translation
 
 ## System/Framework
 
