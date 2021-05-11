@@ -78,7 +78,7 @@ The followings are the brief explanation of three experiments that we implemente
    
    စုစုပေါင်း run ခဲ့တာက အောက်ပါအတိုင်းပါ။  
    
-\[English-Myanmar\]  
+**\[English-Myanmar\]**  
 System-1: s2s or RNN-based  
 System-2: Transformer  
 Ensemble: s2s+Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
@@ -87,7 +87,7 @@ System-1: s2s or RNN-based; tree2string
 System-2: Transformer; tree2string    
 Ensemble: s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 
-\[Myanmar-English\]
+**\[Myanmar-English\]**  
 System-1: s2s; syllable  
 System-2: Transformer; syllable     
 Ensemble: s2s+Transformer; (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
@@ -104,7 +104,7 @@ Here, we used our in-house myWord word segmenter for Myanmar language.
    
    စုစုပေါင်း run ခဲ့တာက အောက်ပါအတိုင်းပါ။  
       
-\[English-Myanmar\]  
+**\[English-Myanmar\]**  
 Baseline: RNN-based Architecture; Source: Tree ===> Target: String  
 Multi-Source: RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String  
 Shared-Multi-Source: RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String  
@@ -113,7 +113,7 @@ Baseline: Transformer Architecture; Source: Tree ===> Target: String
 Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String  
 Shared-Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String  
 
-\[Myanmar-English\]  
+**\[Myanmar-English\]**  
 Baseline: RNN-based Architecture; Source: POS ===> Target: String  
 Multi-Source: RNN-based Architecture; Source-1: string, Source-2: POS ===> Target: String  
 Shared-Multi-Source: RNN-based Architecture; Source-1: string, Source-2: POS ===> Target: String  
