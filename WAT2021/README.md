@@ -79,13 +79,13 @@ The followings are the brief explanation of three experiments that we implemente
    စုစုပေါင်း run ခဲ့တာက အောက်ပါအတိုင်းပါ။  
    
 **\[English-Myanmar\]**  
-System-1: s2s or RNN-based  
-System-2: Transformer  
-Ensemble: s2s+Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**System-1:** s2s or RNN-based  
+**System-2:** Transformer  
+**Ensemble:** s2s+Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 
-System-1: s2s or RNN-based; tree2string  
-System-2: Transformer; tree2string    
-Ensemble: s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**System-1:** s2s or RNN-based; tree2string  
+**System-2:** Transformer; tree2string    
+**Ensemble:** s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 
 **\[Myanmar-English\]**  
 System-1: s2s; syllable  
