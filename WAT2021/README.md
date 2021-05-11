@@ -64,17 +64,17 @@ The following members helped for manual word segmentation (i.e. some sentences o
 
 ## Experiments
 
-### Hybrid Translation with XML Markup (en-my)
+### Hybrid Translation with XML Markup (YCC-MT1 Team, en-my)
    Sometimes we have external knowledge that we want to bring to the SMT decoder. We plug in XML markup based translations for transliterated words to the decoder without changing the PBSMT, HPBSMT and OSM models.  
    
    WAT2021 English-Myanmar share task ရဲ့ test data ကို ကြည့်တဲ့အခါမှာ အင်္ဂလိပ်စကားလုံးတွေကို တိုက်ရိုက် ဗမာလိုအသံထွက်အတိုင်းချရေးထားတဲ့ စာလုံးတွေ (transliterated word) အများကြီးတွေ့ရလို့ corpus တစ်ခုလုံး (i.e.UCSY+ALT) ထဲက နေ transliterated word တွေကို ဆွဲထုတ်ဖို့ မလွယ်ကူပေမဲ့ ALT corpus (စာကြောင်းရေ နှစ်သောင်းကျော်) ထဲက အသံထွက်အတိုင်းပဲ ချရေးပြီး ဘာသာပြန်ထားတဲ့ စာလုံးတွေအားလုံးကို manually ဆွဲထုတ်ပြီး dictionary ဆောက်လိုက်တယ်။ SMT decoding လုပ်တဲ့အခါမှာ အဲဒီ dictionary ကို သုံးပြီး hybrid translation လုပ်ခဲ့တယ်။ ဆွဲထုတ်တဲ့အခါမှာ အဓိကပါဝင်တဲ့ စာလုံးတွေက လူနာမည်တွေ၊ အဖွဲ့အစည်းနာမည်၊ နိုင်ငံနာမည် အများစုမို့ NER (Named-entity recognition) စာလုံးတွေလို့ မှတ်ယူနိုင်ပါတယ်။    
    
-### Ensemble Two Models (en-my, my-en)
+### Ensemble Two Models (YCC-MT2 Team, en-my, my-en)
    Models of different types and architectures can be ensembled as long as they use common vocabularies and we tried RNN Attention plus Transformer models for Myanmar to English and English to Myanmar translations.  
    
    မြန်မာလို ထပ်ဖြည့်ရှင်းရရင်တော့ ensemble လုပ်တဲ့အခါ မော်ဒယ်တွေကို နှစ်ခုထက်မကလည်း လုပ်နိုင်ပါတယ်။ WAT2019 မှာ Facebook team က လုပ်ခဲ့သလိုမျိုး မော်ဒယ် ငါးခုဆောက်ပြီး အဲဒီ မော်ဒယ်ငါးခုကို ensemble လုပ်ပြီး translation လုပ်တာမျိုးပါ။ သို့သော် အဲဒီလို လုပ်ဖို့အတွက်က NMT မော်ဒယ် ငါးခုဆောက်ဖို့အတွက် GPU ကဒ် အရေအတွက်ကသိပ်မရှိရင် အချိန်အများကြီးပေးရပါတယ်။ ပြီးတော့ မော်ဒယ် ၅ခုကို တွဲပြီး run ဖို့က memory, GPU လည်း အများကြီးလိုအပ်ပါတယ်။ ဒီတစ်ခေါက် WAT2021 မှာ YCC-MT2 အဖွဲ့အနေနဲ့က under-resourced ဆိုတဲ့ condition ကိုပဲ အခြေခံပါတယ်၊ လက်တွေ့ မြန်မာနိုင်ငံက တက္ကသိုလ်တွေအနေနဲ့ကလည်း GPU အများကြီးကို သုံးပြီး run တဲ့ experiment တွေက မဖြစ်နိုင်သေးတာမို့၊ GPU နှစ်လုံးထဲကို သုံးပြီး၊ မော်ဒယ်ကိုလည်း ၂မျိုးကိုပဲ ensemble လုပ်ခဲ့ပါတယ်။  
 
-### Multi-source Neural Machine Translation (en-my, my-en)
+### Multi-source Neural Machine Translation (NECTEC Team, en-my, my-en)
 
 
 
