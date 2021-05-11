@@ -88,13 +88,13 @@ The followings are the brief explanation of three experiments that we implemente
 **Ensemble:** s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 
 **\[Myanmar-English\]**  
-System-1: s2s; syllable  
-System-2: Transformer; syllable     
-Ensemble: s2s+Transformer; (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**System-1:** s2s; syllable  
+**System-2:** Transformer; syllable     
+**Ensemble:** s2s+Transformer; (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 
-System-1: s2s; word2word  
-System-2: Transformer; word2word  
-Ensemble: s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5, --weights 06 04)  
+**System-1:** s2s; word2word  
+**System-2:** Transformer; word2word  
+**Ensemble:** s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5, --weights 06 04)  
 Here, we used our in-house __*myWord*__ word segmenter for Myanmar language.  
 
 ### Multi-source Neural Machine Translation (NECTEC Team)
@@ -105,22 +105,22 @@ Here, we used our in-house __*myWord*__ word segmenter for Myanmar language.
    စုစုပေါင်း run ခဲ့တာက အောက်ပါအတိုင်းပါ။  
       
 **\[English-Myanmar\]**  
-Baseline: RNN-based Architecture; Source: Tree ===> Target: String  
-Multi-Source: RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String  
-Shared-Multi-Source: RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String  
+**Baseline:** RNN-based Architecture; Source: Tree ===> Target: String  
+**Multi-Source:** RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String  
+**Shared-Multi-Source:** RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String  
 
-Baseline: Transformer Architecture; Source: Tree ===> Target: String  
-Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String  
-Shared-Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String  
+**Baseline:** Transformer Architecture; Source: Tree ===> Target: String  
+**Multi-Source:** Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String  
+**Shared-Multi-Source:** Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String  
 
 **\[Myanmar-English\]**  
-Baseline: RNN-based Architecture; Source: POS ===> Target: String  
-Multi-Source: RNN-based Architecture; Source-1: string, Source-2: POS ===> Target: String  
-Shared-Multi-Source: RNN-based Architecture; Source-1: string, Source-2: POS ===> Target: String  
+**Baseline:** RNN-based Architecture; Source: POS ===> Target: String  
+**Multi-Source:** RNN-based Architecture; Source-1: string, Source-2: POS ===> Target: String  
+**Shared-Multi-Source:** RNN-based Architecture; Source-1: string, Source-2: POS ===> Target: String  
 
-Baseline: Transformer Architecture; Source: POS ===> Target: String  
-Multi-Source: Transformer Architecture; Source-1: string, Source-2: POS ===> Target: String  
-Shared-Multi-Source: Transformer Architecture; Source-1: string, Source-2: POS ===> Target: String  
+**Baseline:** Transformer Architecture; Source: POS ===> Target: String  
+**Multi-Source:** Transformer Architecture; Source-1: string, Source-2: POS ===> Target: String  
+**Shared-Multi-Source:** Transformer Architecture; Source-1: string, Source-2: POS ===> Target: String  
 
 ## System/Framework
 
