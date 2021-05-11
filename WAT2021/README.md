@@ -75,12 +75,35 @@ The followings are the brief explanation of three experiments that we implemente
    Models of different types and architectures can be ensembled as long as they use common vocabularies and we tried RNN Attention plus Transformer models for Myanmar to English and English to Myanmar translations.  
    
    မြန်မာလို ထပ်ဖြည့်ရှင်းရရင်တော့ ensemble လုပ်တဲ့အခါ မော်ဒယ်တွေကို နှစ်ခုထက်မကလည်း လုပ်နိုင်ပါတယ်။ WAT2019 မှာ Facebook team က လုပ်ခဲ့သလိုမျိုး မော်ဒယ် ငါးခုဆောက်ပြီး အဲဒီ မော်ဒယ်ငါးခုကို ensemble လုပ်ပြီး translation လုပ်တာမျိုးပါ။ သို့သော် အဲဒီလို လုပ်ဖို့အတွက်က NMT မော်ဒယ် ငါးခုဆောက်ဖို့အတွက် GPU ကဒ် အရေအတွက်ကသိပ်မရှိရင် အချိန်အများကြီးပေးရပါတယ်။ ပြီးတော့ မော်ဒယ် ၅ခုကို တွဲပြီး run ဖို့က memory, GPU လည်း အများကြီးလိုအပ်ပါတယ်။ ဒီတစ်ခေါက် WAT2021 မှာ YCC-MT2 အဖွဲ့အနေနဲ့က under-resourced ဆိုတဲ့ condition ကိုပဲ အခြေခံပါတယ်၊ လက်တွေ့ မြန်မာနိုင်ငံက တက္ကသိုလ်တွေအနေနဲ့ကလည်း GPU အများကြီးကို သုံးပြီး run တဲ့ experiment တွေက မဖြစ်နိုင်သေးတာမို့၊ GPU နှစ်လုံးထဲကို သုံးပြီး၊ မော်ဒယ်ကိုလည်း ၂မျိုးကိုပဲ ensemble လုပ်ခဲ့ပါတယ်။  
+   
+   စုစုပေါင်း run ခဲ့တာက အောက်ပါအတိုင်းပါ။  
+   
+\[English-Myanmar\]  
+System-1: s2s or RNN-based  
+System-2: Transformer  
+Ensemble: s2s+Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+
+System-1: s2s or RNN-based; tree2string  
+System-2: Transformer; tree2string    
+Ensemble: s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+
+\[Myanmar-English\]
+System-1: s2s; syllable  
+System-2: Transformer; syllable     
+Ensemble: s2s+Transformer; (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+
+System-1: s2s; word2word  
+System-2: Transformer; word2word  
+Ensemble: s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5, --weights 06 04)  
+Here, we used our in-house myWord word segmenter for Myanmar language.  
 
 ### Multi-source Neural Machine Translation (NECTEC Team)
    We used two encoders for multi-source neural machine translation experiments. Here, we used parsed tree and POS tagged data as one more source language together with the original string source. 
    
    Marian framework ရဲ့ အော်ရဂျင်နယ် multi-source ပရိုပိုဇယ် (Junczys-Dowmunt et al. 2016, Junczys-Dowmunt et al. 2017) က post editing အတွက် ရည်ရွယ်ခဲ့ပေမဲ့ WAT2021 share task အတွက် experiment လုပ်ခဲ့တာက grammar tree တို့ POS tagged တွေကနေ target language ကို တိုက်ရိုက် ဘာသာပြန်တာထက်၊ အော်ရဂျင်နယ် source language ကိုပါ နောက်ထပ် source တစ်ခုအနေနဲ့ ဖြည့်ပြီး decode လုပ်ရင် translation performance ဘယ်လောက်ထိ တက်နိုင်သလဲ ဆိုတာကို သိချင်လို့ လုပ်ခဲ့တာပါ။  
    
+   စုစုပေါင်း run ခဲ့တာက အောက်ပါအတိုင်းပါ။  
+      
 \[English-Myanmar\]  
 Baseline: RNN-based Architecture; Source: Tree ===> Target: String  
 Multi-Source: RNN-based Architecture; Source-1: string, Source-2: tree ===> Target: String  
@@ -91,10 +114,13 @@ Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Ta
 Shared-Multi-Source: Transformer Architecture; Source-1: string, Source-2: tree ===> Target: String  
 
 \[Myanmar-English\]  
+Baseline: RNN-based Architecture; Source: POS ===> Target: String  
+Multi-Source: RNN-based Architecture; Source-1: string, Source-2: POS ===> Target: String  
+Shared-Multi-Source: RNN-based Architecture; Source-1: string, Source-2: POS ===> Target: String  
+
 Baseline: Transformer Architecture; Source: POS ===> Target: String  
 Multi-Source: Transformer Architecture; Source-1: string, Source-2: POS ===> Target: String  
 Shared-Multi-Source: Transformer Architecture; Source-1: string, Source-2: POS ===> Target: String  
-
 
 ## System/Framework
 
