@@ -71,6 +71,14 @@ The followings are the brief explanation of three experiments that we implemente
    
    WAT2021 English-Myanmar share task ရဲ့ test data ကို ကြည့်တဲ့အခါမှာ အင်္ဂလိပ်စကားလုံးတွေကို တိုက်ရိုက် ဗမာလိုအသံထွက်အတိုင်းချရေးထားတဲ့ စာလုံးတွေ (transliterated word) အများကြီးတွေ့ရလို့ corpus တစ်ခုလုံး (i.e.[UCSY](http://lotus.kuee.kyoto-u.ac.jp/WAT/my-en-data/)+[ALT](https://www2.nict.go.jp/astrec-att/member/mutiyama/ALT/)) ထဲက နေ transliterated word တွေကို ဆွဲထုတ်ဖို့ မလွယ်ကူပေမဲ့ ALT corpus (စာကြောင်းရေ နှစ်သောင်းကျော်) ထဲက အသံထွက်အတိုင်းပဲ ချရေးပြီး ဘာသာပြန်ထားတဲ့ စာလုံးတွေအားလုံးကို manually ဆွဲထုတ်ပြီး dictionary ဆောက်လိုက်တယ်။ SMT decoding လုပ်တဲ့အခါမှာ အဲဒီ dictionary ကို သုံးပြီး hybrid translation လုပ်ခဲ့တယ်။ ဆွဲထုတ်တဲ့အခါမှာ အဓိကပါဝင်တဲ့ စာလုံးတွေက လူနာမည်တွေ၊ အဖွဲ့အစည်းနာမည်၊ နိုင်ငံနာမည် အများစုမို့ NER (Named-entity recognition) စာလုံးတွေလို့ မှတ်ယူနိုင်ပါတယ်။    
    
+   ပြင်ဆင်ထားတဲ့ transliteration dictionary ကို သုံးပြီးတော့ perl script နဲ့ source စာကြောင်းတွေကို XML markup ပုံစံအရင်ပြောင်းပြီးမှ moses decoder ကို ဘာသာပြန်ခိုင်းတာပါ။ အဲဒါကြောင့် ဥပမာ အင်္ဂလိပ်စာကြောင်းတွေကနေ ဗမာလို ဘာသာပြန်ခိုင်းမယ်ဆိုရင် source စာကြောင်းတွေက အောက်ပါ format အတိုင်းရှိနေပါလိမ့်မယ်။  
+   
+```
+Tanks of {{np translation="အောက် စီ ဂျင်" prob="0.8"}}oxygen{{/np}} , {{np translation="ဟီ လီ ရမ်" prob="0.8"}}helium{{/np}} and {{np translation="အက် ဆီ တ လင်း" prob="0.8"}}acetylene{{/np}} began to explode after a connector used to join {{np translation="အက် ဆီ တ လင်း" prob="0.8"}}acetylene{{/np}} tanks during the filling process malfunctioned .
+Human Rights {{np translation="ကော် မ ရှင်" prob="0.8"}}Commission{{/np}} of {{np translation="ပါ ကစ္စ တန်" prob="0.8"}}Pakistan{{/np}} co-chairman {{np translation="အီ ကွေ ဟေ ဒါ" prob="0.8"}}Iqbal Haider{{/np}} said that the daughter of Dr. Aafia was also in {{np translation="အာ ဖ ဂန် နစ္စ တန်" prob="0.8"}}Afghanistan{{/np}} .
+The pair , who were transferred from {{np translation="ဟော် လန်" prob="0.8"}}Holland{{/np}} , claim that {{np translation="ရိ မု တ က" prob="0.8"}}Rimutaka{{/np}} prison is run by gang members who dominate the prison guards .
+```
+   
    စုစုပေါင်း run ခဲ့တာက အောက်ပါအတိုင်းပါ။  
    
 **\[English-Myanmar\]**  
