@@ -102,6 +102,12 @@ is run by gang members who dominate the prison guards .
 **Hybrid Translation:** OSM + XML Markup; -xml-input exclusive  
 **Hybrid Translation:** OSM + XML Markup; -xml-input inclusive  
 
+Note: HPBSMT အတွက် XML markup နဲ့ decode လုပ်တဲ့အခါမှာ ``` --xml-brackets "{{ }}" ``` option ကိုပါ သုံးဖို့လိုအပ်ပါတယ်။ ဘာကြောင့်လဲ ဆိုတော့ Hiero မှာလည်း grammar tree ကို XML format ဖြစ်တဲ့ angle bracket တွေကိုသုံးပြီး ဆောက်ထားတာကြောင့်ပါ။ decode လုပ်တဲ့ command အပြည့်အစုံက အောက်ပါအတိုင်း ဥပမာအတိုင်းပါ။  
+
+```
+$~/tool/mosesbin/ubuntu-17.04/moses/bin/moses_chart -xml-input exclusive --xml-brackets "{{ }}" -i ./test.xml.en -f ../evaluation/test.filtered.ini.1 > en-my.xml.hyp1 
+```
+
 ### Exp 2: Ensemble Two Models (YCC-MT2 Team)
    Models of different types and architectures can be ensembled as long as they use common vocabularies and we tried RNN Attention plus Transformer models for Myanmar to English and English to Myanmar translations.  
    
