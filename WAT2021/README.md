@@ -74,10 +74,17 @@ The followings are the brief explanation of three experiments that we implemente
    ပြင်ဆင်ထားတဲ့ transliteration dictionary ကို သုံးပြီးတော့ perl script နဲ့ source စာကြောင်းတွေကို XML markup ပုံစံအရင်ပြောင်းပြီးမှ moses decoder ကို ဘာသာပြန်ခိုင်းတာပါ။ အဲဒါကြောင့် ဥပမာ အင်္ဂလိပ်စာကြောင်းတွေကနေ ဗမာလို ဘာသာပြန်ခိုင်းမယ်ဆိုရင် source စာကြောင်းတွေက အောက်ပါ format အတိုင်းရှိနေပါလိမ့်မယ်။  
    
 ```
-Tanks of {{np translation="အောက် စီ ဂျင်" prob="0.8"}}oxygen{{/np}} , {{np translation="ဟီ လီ ရမ်" prob="0.8"}}helium{{/np}} and  
-{{np translation="အက် ဆီ တ လင်း" prob="0.8"}}acetylene{{/np}} began to explode after a connector used to join {{np translation="အက် ဆီ တ လင်း" prob="0.8"}}acetylene{{/np}} tanks during the filling process malfunctioned .
-Human Rights {{np translation="ကော် မ ရှင်" prob="0.8"}}Commission{{/np}} of {{np translation="ပါ ကစ္စ တန်" prob="0.8"}}Pakistan{{/np}} co-chairman {{np translation="အီ ကွေ ဟေ ဒါ" prob="0.8"}}Iqbal Haider{{/np}} said that the daughter of Dr. Aafia was also in {{np translation="အာ ဖ ဂန် နစ္စ တန်" prob="0.8"}}Afghanistan{{/np}} .
-The pair , who were transferred from {{np translation="ဟော် လန်" prob="0.8"}}Holland{{/np}} , claim that {{np translation="ရိ မု တ က" prob="0.8"}}Rimutaka{{/np}} prison is run by gang members who dominate the prison guards .
+Tanks of {{np translation="အောက် စီ ဂျင်" prob="0.8"}}oxygen{{/np}} , {{np translation="ဟီ လီ ရမ်" prob="0.8"}}helium{{/np}}   
+and {{np translation="အက် ဆီ တ လင်း" prob="0.8"}}acetylene{{/np}} began to explode after  
+a connector used to join {{np translation="အက် ဆီ တ လင်း" prob="0.8"}}acetylene{{/np}}  
+tanks during the filling process malfunctioned .  
+Human Rights {{np translation="ကော် မ ရှင်" prob="0.8"}}Commission{{/np}} of   
+{{np translation="ပါ ကစ္စ တန်" prob="0.8"}}Pakistan{{/np}} co-chairman   
+{{np translation="အီ ကွေ ဟေ ဒါ" prob="0.8"}}Iqbal Haider{{/np}} said that the daughter of   
+Dr. Aafia was also in {{np translation="အာ ဖ ဂန် နစ္စ တန်" prob="0.8"}}Afghanistan{{/np}} .  
+The pair , who were transferred from {{np translation="ဟော် လန်" prob="0.8"}}Holland{{/np}} ,   
+claim that {{np translation="ရိ မု တ က" prob="0.8"}}Rimutaka{{/np}} prison   
+is run by gang members who dominate the prison guards .
 ```
    
    စုစုပေါင်း run ခဲ့တာက အောက်ပါအတိုင်းပါ။  
