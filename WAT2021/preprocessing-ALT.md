@@ -188,3 +188,18 @@ New Zealand lead the group with ten points, ahead of Scotland on points differen
 Portugal are bottom of the group with no points, behind Romania with one.
 Some personal details of 3 million British learner drivers who had applied for the &apos;theory test&apos; component of their Driving licence have been lost in Iowa, in the USA.
 ```
+
+## Change Filenames
+
+```
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/exp-syl4/data/preparation/alt$ cp alt.my.train.syl.escaped.print alt.ready.my
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/exp-syl4/data/preparation/alt$ rm alt.ready.my 
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/exp-syl4/data/preparation/alt$ cp alt.my.train.syl.escaped.print alt.train.ready.my
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/exp-syl4/data/preparation/alt$ cp alt.en.train.escape alt.train.ready.en
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/exp-syl4/data/preparation/alt$ wc alt.train.ready.{my,en}
+   18088  1038640 10110361 alt.train.ready.my
+   18088   413000  2581834 alt.train.ready.en
+   36176  1451640 12692195 total
+```
+
+အထက်က ပြင်ခဲ့တဲ့ ALT training data ကို UCSY training data နဲ့ ပေါင်းရမယ်။  
