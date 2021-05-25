@@ -310,7 +310,10 @@ very severe flu is always in Randwick by 700 horse in the contagious will guess 
 
 ## Evaluation Results with WAT2021 Standard
 
-### UCSY Corpus Only Results  
+### UCSY Corpus Only Results 
+
+Setting A or previous experiment result...  
+
 BLEU, RIBES, AMFM  
 
 en-my  
