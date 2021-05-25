@@ -113,33 +113,38 @@ BLEU = 23.45, 58.5/30.9/17.1/9.8 (BP=1.000, ratio=1.009, hyp_len=59442, ref_len=
 BLEU = 9.70, 45.1/13.8/5.7/2.5 (BP=1.000, ratio=1.037, hyp_len=28959, ref_len=27929)
 ```
 
-[en-my]
--xml-input exclusive
-Result of -xml-input exclusive:
-BLEU = 25.99, 61.0/33.5/19.4/11.5 (BP=1.000, ratio=1.020, hyp_len=60057, ref_len=58895)
+[en-my]  
+-xml-input exclusive  
+Result of -xml-input exclusive:  
+BLEU = 25.99, 61.0/33.5/19.4/11.5 (BP=1.000, ratio=1.020, hyp_len=60057, ref_len=58895)  
 
--xml-input inclusive
-Result of -xml-input inclusive:
-BLEU = 25.78, 60.5/33.3/19.2/11.4 (BP=1.000, ratio=1.039, hyp_len=61169, ref_len=58895)
+-xml-input inclusive  
+Result of -xml-input inclusive:  
+BLEU = 25.78, 60.5/33.3/19.2/11.4 (BP=1.000, ratio=1.039, hyp_len=61169, ref_len=58895)  
 
-[my-en]
+[my-en]  
 
-PBSMT တုန်းက ပြင်ထားတဲ့ test.xml.my ကိုပဲ ယူသုံးခဲ့...
+PBSMT တုန်းက ပြင်ထားတဲ့ test.xml.my ကိုပဲ ယူသုံးခဲ့...  
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/osm/osm/my-en/evaluation$ ~/tool/mosesbin/ubuntu-17.04/moses/bin/moses -xml-input exclusive -i ~/exp/smt/wat2021/exp-syl4/baseline/my-en/xml/test.xml.my -f ./test.filtered.ini.1 > en-my.xml.hyp1
 
 -xml-input exclusive
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/osm/osm/my-en/evaluation$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./test.reference.txt.1 < ./en-my.xml.hyp1
 BLEU = 10.91, 45.8/14.9/6.6/3.2 (BP=1.000, ratio=1.068, hyp_len=29823, ref_len=27929)
+```
 
--xml-input inclusive
-
-
+-xml-input inclusive  
+```
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/osm/osm/my-en/evaluation$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./test.reference.txt.1 < ./en-my.xml.hyp2
+BLEU = 11.36, 49.0/16.0/6.8/3.1 (BP=1.000, ratio=1.004, hyp_len=28052, ref_len=27929)
+```
 
 
 ## HPBSMT Training
 
 Decoding မှာ error ပေးပြီး ရပ်သွားတာကို တွေ့ရလို့...
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/hiero/hiero/en-my/evaluation$ ~/tool/mosesbin/ubuntu-17.04/moses/bin/moses_chart -i ./test.input.txt.1 -f ../evaluation/test.filtered.ini.1 > en-my.hiero.baseline1
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/hiero/hiero/en-my/evaluation$ wc ./en-my.hiero.baseline1 
@@ -151,32 +156,39 @@ BLEU = 23.85, 59.3/31.7/17.5/10.0 (BP=0.994, ratio=0.994, hyp_len=58564, ref_len
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/hiero/hiero/my-en/evaluation$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./test.reference.txt.1 < ./my-en.hiero.baseline1 
 BLEU = 10.53, 46.4/15.5/6.4/2.7 (BP=1.000, ratio=1.047, hyp_len=29231, ref_len=27929)
+```
 
-/home/ye/exp/smt/wat2021/hiero/hiero/en-my/xml
+Path info:  
+/home/ye/exp/smt/wat2021/hiero/hiero/en-my/xml  
 
-[en-my]
--xml-input exclusive
-Result of HPBSMT -xml-input exclusive:
-BLEU = 27.98, 62.5/35.6/21.2/13.0 (BP=1.000, ratio=1.017, hyp_len=59899, ref_len=58895)
+[en-my]  
+-xml-input exclusive  
+Result of HPBSMT -xml-input exclusive:  
+BLEU = 27.98, 62.5/35.6/21.2/13.0 (BP=1.000, ratio=1.017, hyp_len=59899, ref_len=58895)  
 
--xml-input inclusive
-Result of HPBSMT -xml-input inclusive:
-BLEU = 27.98, 62.5/35.6/21.2/13.0 (BP=1.000, ratio=1.017, hyp_len=59899, ref_len=58895)
+-xml-input inclusive  
+Result of HPBSMT -xml-input inclusive:  
+BLEU = 27.98, 62.5/35.6/21.2/13.0 (BP=1.000, ratio=1.017, hyp_len=59899, ref_len=58895)  
 
 
-[my-en]
--xml-input exclusive
+[my-en]  
+-xml-input exclusive  
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/hiero/hiero/my-en/xml$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./test.reference.txt.1 < ./my-en.xml.hyp1
 BLEU = 27.98, 62.5/35.6/21.2/13.0 (BP=1.000, ratio=1.017, hyp_len=59899, ref_len=58895)
+```
 
 -xml-input inclusive
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/hiero/hiero/my-en/xml$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./test.reference.txt.1 < ./my-en.xml.hyp2
 BLEU = 27.98, 62.5/35.6/21.2/13.0 (BP=1.000, ratio=1.017, hyp_len=59899, ref_len=58895)
+```
 
 ===================
 
-Data without ALT
+## Data Statistic without ALT
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/exp-syl4/data-without-alt$ wc *.my
     1000    57709   550454 dev.my
     1018    58895   561443 test.my
@@ -187,9 +199,11 @@ Data without ALT
     1018    27929   151447 test.en
   238014  3357260 17186660 train.en
   240032  3412507 17485875 total
+```
 
-Data with ALT
+## Data with ALT (i.e. UCSY+ALT)
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/exp-syl4/data$ wc *.my
     1000    57709   550454 dev.my
     1018    58895   561443 test.my
@@ -200,37 +214,46 @@ Data with ALT
     1018    27929   151447 test.en
   256102  3770260 19768494 train.en
   258120  3825507 20067709 total
+```
 
-UCSY Train (#my words: 6,285,996, #en words: 3,357,260)
-ALT Train (#my words: 1,038,640, #en words: 413000)
+UCSY Train (#my words: 6,285,996, #en words: 3,357,260)  
+ALT Train (#my words: 1,038,640, #en words: 413000)  
 
-Dev (#my words: 57,709), (#en words: 27318)
-Test (#my words: 58,895), (#en words: 27929)
+Dev (#my words: 57,709), (#en words: 27318)  
+Test (#my words: 58,895), (#en words: 27929)  
 
 ## Preparing for Uploading
 
-[PBSMT, en-my]
+[PBSMT, en-my]  
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ../../exp-syl4/baseline/en-my/evaluation/test.cleaned.1 ./pbsmt.withalt.enmy.hyp
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ../../exp-syl4/baseline/en-my/xml/en-my.xml.hyp1 ./pbsmt.withalt.enmy.xml.exclusive.hyp1
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ../../exp-syl4/baseline/en-my/xml/en-my.xml.hyp2 ./pbsmt.withalt.enmy.xml.inclusive.hyp1
+```
 
 [PBSMT, my-en]
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ../../exp-syl4/baseline/my-en/evaluation/test.cleaned.1 ./pbsmt.withalt.myen.hyp
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ../../exp-syl4/baseline/my-en/xml/my-en.xml.hyp1 ./pbsmt.withalt.myen.xml.exclusive.hyp1
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ../../exp-syl4/baseline/my-en/xml/my-en.xml.hyp2 ./pbsmt.withalt.myen.xml.inclusive.hyp2
+```
 
 [OSM, en-my]
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ~/exp/smt/wat2021/osm/osm/en-my/evaluation/test.cleaned.1 ./osm.withalt.enmy.hyp
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ~/exp/smt/wat2021/osm/osm/en-my/evaluation/xml/en-my.xml.hyp1 ./osm.withalt.enmy.xml.exclusive.hyp1
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ~/exp/smt/wat2021/osm/osm/en-my/evaluation/xml/en-my.xml.hyp2 ./osm.withalt.enmy.xml.exclusive.hyp2
-
+```
 
 [OSM, my-en]
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ~/exp/smt/wat2021/osm/osm/my-en/evaluation/test.cleaned.1 ./osm.withalt.myen.hyp
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ~/exp/smt/wat2021/osm/osm/my-en/evaluation/en-my.xml.hyp1 ./osm.withalt.myen.xml.exclusive.hyp1
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp ~/exp/smt/wat2021/osm/osm/my-en/evaluation/en-my.xml.hyp2 ./osm.withalt.myen.xml.exclusive.hyp2
+```
 
-Note: ဖိုင်နာမည် en-my.xml.hyp1 run တုန်းက နာမည်ပေး မှားသွားတာ... ပြဿနာမဟုတ်ဘူး...
+Note: ဖိုင်နာမည် en-my.xml.hyp1 run တုန်းက နာမည်ပေး မှားသွားတာ... ပြဿနာမဟုတ်ဘူး...  
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ head -n 3 ./osm.withalt.myen.xml.exclusive.hyp1
 Sydney &amp; apos ; s Randwick horse racing Queen from Myo Thant won eight horse was horse influenza infected had to confirmed . 
 Randwick were closed and 2 months long maintain hope to . 
@@ -239,18 +262,23 @@ very severe flu is always in Randwick by 700 horse in the contagious will guess 
 Sydney Randwick racetrack from Myo Thant won eight horse was horse influenza infected had to confirmed . 
 Randwick were closed and 2 months long maintain hope to . 
 very severe flu is always in Randwick by 700 horse in the contagious will guess . 
+```
 
 [HPBSMT, en-my]
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp  ~/exp/smt/wat2021/hiero/hiero/en-my/evaluation/test.output.2 ./hiero.withalt.enmy.hyp 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp  ~/exp/smt/wat2021/hiero/hiero/en-my/xml/en-my.xml.hyp1 ./hiero.withalt.enmy.xml.exclusive.hyp1
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp  ~/exp/smt/wat2021/hiero/hiero/en-my/xml/en-my.xml.hyp2 ./hiero.withalt.enmy.xml.inclusive.hyp2
-
+```
 
 [HPBSMT, my-en]
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/pbsmt$ cp  ~/exp/smt/wat2021/hiero/hiero/my-en/evaluation/test.output.2 ./hiero.withalt.myen.hyp 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/hiero$ cp /home/ye/exp/smt/wat2021/hiero/hiero/my-en/xml/my-en.xml.hyp1 ./hiero.withalt.myen.xml.exclusive.hyp1
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt/hiero$ cp /home/ye/exp/smt/wat2021/hiero/hiero/my-en/xml/my-en.xml.hyp2 ./hiero.withalt.myen.xml.inclusive.hyp2
+```
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/final-result-with-alt$ tree
 .
 ├── hiero
@@ -277,80 +305,84 @@ very severe flu is always in Randwick by 700 horse in the contagious will guess 
     └── pbsmt.withalt.myen.xml.inclusive.hyp2
 
 3 directories, 19 files
+```
 
 
-**************************************************
 ## Evaluation Results with WAT2021 Standard
-**************************************************
-*** UCSY Corpus Only Results
-BLEU, RIBES, AMFM
 
-en-my
-PBSMT baseline: 15.01, 0.519451, 0.550400
-xml-exclusive: 20.80, 0.551514, 0.653850
-xml-inclusive: 20.88, 0.553319, 0.655310
+*** UCSY Corpus Only Results  
+BLEU, RIBES, AMFM  
 
-en-my
-OSM baseline: 15.05, 0.528968, 0.557240
-xml-exclusive: 19.94, 0.540820, 0.651070
-xml-inclusive: 20.13, 0.545962, 0.654820
+en-my  
+PBSMT baseline: 15.01, 0.519451, 0.550400  
+xml-exclusive: 20.80, 0.551514, 0.653850  
+xml-inclusive: 20.88, 0.553319, 0.655310  
 
-en-my
-Hiero baseline: 14.83, 0.555290, 0.545900
-xml-exclusive: 21.02, 0.588198, 0.653840
-xml-inclusive: 21.02, 0.588198, 0.653840
+en-my  
+OSM baseline: 15.05, 0.528968, 0.557240  
+xml-exclusive: 19.94, 0.540820, 0.651070  
+xml-inclusive: 20.13, 0.545962, 0.654820  
 
-*** UCSY + ALT Results
-BLEU, RIBES, AMFM
+en-my  
+Hiero baseline: 14.83, 0.555290, 0.545900  
+xml-exclusive: 21.02, 0.588198, 0.653840  
+xml-inclusive: 21.02, 0.588198, 0.653840  
 
-en-my
-PBSMT baseline: 20.80, 0.542406, 0.617900
-xml-exclusive: 24.54, 0.563854, 0.690020
-xml-inclusive: 25.11, 0.567187, 0.689400
+*** UCSY + ALT Results  
+BLEU, RIBES, AMFM  
 
-my-en
-PBSMT baseline: 5.00, 0.519789, 0.493530
-xml-exclusive: 6.32, 0.532525, 0.492900
-xml-inclusive: 7.43, 0.542773, 0.502980
+en-my  
+PBSMT baseline: 20.80, 0.542406, 0.617900  
+xml-exclusive: 24.54, 0.563854, 0.690020  
+xml-inclusive: 25.11, 0.567187, 0.689400  
+
+my-en  
+PBSMT baseline: 5.00, 0.519789, 0.493530  
+xml-exclusive: 6.32, 0.532525, 0.492900  
+xml-inclusive: 7.43, 0.542773, 0.502980  
 ===========
-en-my
-OSM baseline: 20.33, 0.550329, 0.622350
-xml-exclusive: 23.82, 0.554226, 0.691450
-xml-inclusive: 23.73, 0.556381, 0.691910
+en-my  
+OSM baseline: 20.33, 0.550329, 0.622350  
+xml-exclusive: 23.82, 0.554226, 0.691450  
+xml-inclusive: 23.73, 0.556381, 0.691910  
 
-my-en
-OSM baseline: 5.18, 0.523378, 0.479690
-xml-exclusive: 6.58, 0.536259, 0.474910
-xml-inclusive: 6.70, 0.541372, 0.491530
-===========
-en-my
-Hiero baseline: 20.29, 0.587136, 0.612400
-xml-exclusive: 25.48, 0.607339, 0.684110
-xml-inclusive: 25.48, 0.607339, 0.684110
+my-en  
+OSM baseline: 5.18, 0.523378, 0.479690  
+xml-exclusive: 6.58, 0.536259, 0.474910  
+xml-inclusive: 6.70, 0.541372, 0.491530  
+===========  
+en-my  
+Hiero baseline: 20.29, 0.587136, 0.612400  
+xml-exclusive: 25.48, 0.607339, 0.684110  
+xml-inclusive: 25.48, 0.607339, 0.684110  
 
-my-en
-Hiero baseline: 7.36, 0.555453, 0.497490
-xml-exclusive: 
-xml-inclusive: 
+my-en  
+Hiero baseline: 7.36, 0.555453, 0.497490  
+xml-exclusive:   
+xml-inclusive:   
 
 =============
 
 Error found for XML markup hyprid translation for my-en:
 
+```
 ERROR: tag np closed, but not opened:{{np translation="{{np translation="Berlin" prob="0.8"}}Berlin{{/np}}'s Neukoellner Opera House" prob="0.8"}}{{np translation="{{np translation="Berlin" prob="0.8"}}Berlin{{/np}}" prob="0.8"}}ဘာ လင်{{/np}} ရဲ့ နီ ကို အဲလ် နာ တေး သံ စုံ ပြ ဇာတ် ရုံ{{/np}} က ၎င်း ၏ ထုတ် လုပ် {{np translation="Yass" prob="0.8"}}ရေး{{/np}} အ သစ် ဖြစ် တဲ့ အ ဝါ ရောင် မင်း သ မီး ၊ နှ င့် အ တူ လှုပ် လှုပ် ရှား ရှား ဖြစ် စေ သည် ။
 Unable to parse XML in line: {{np translation="{{np translation="Berlin" prob="0.8"}}Berlin{{/np}}'s Neukoellner Opera House" prob="0.8"}}{{np translation="{{np translation="Berlin" prob="0.8"}}Berlin{{/np}}" prob="0.8"}}ဘာ လင်{{/np}} ရဲ့ နီ ကို အဲလ် နာ တေး သံ စုံ ပြ ဇာတ် ရုံ{{/np}} က ၎င်း ၏ ထုတ် လုပ် {{np translation="Yass" prob="0.8"}}ရေး{{/np}} အ သစ် ဖြစ် တဲ့ အ ဝါ ရောင် မင်း သ မီး ၊ နှ င့် အ တူ လှုပ် လှုပ် ရှား ရှား ဖြစ် စေ သည် ။  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40 
+```
 
-{{ }} အစား { } ပြောင်းပြီး လုပ်ခဲ့လည်း error က ဆက်ရှိ အောက်ပါအတိုင်း
+{{ }} အစား { } ပြောင်းပြီး လုပ်ခဲ့လည်း error က ဆက်ရှိ အောက်ပါအတိုင်း  
 
+```
 39]=X (1) [38,40]=X (1) [39,39]=X (1) [39,40]=X (1) [40,40]=X (1) 
 
 ERROR: tag np closed, but not opened:{np translation="{np translation="Berlin" prob="0.8"}Berlin{/np}'s Neukoellner Opera House" prob="0.8"}{np translation="{np translation="Berlin" prob="0.8"}Berlin{/np}" prob="0.8"}ဘာ လင်{/np} ရဲ့ နီ ကို အဲလ် နာ တေး သံ စုံ ပြ ဇာတ် ရုံ{/np} က ၎င်း ၏ ထုတ် လုပ် {np translation="Yass" prob="0.8"}ရေး{/np} အ သစ် ဖြစ် တဲ့ အ ဝါ ရောင် မင်း သ မီး ၊ နှ င့် အ တူ လှုပ် လှုပ် ရှား ရှား ဖြစ် စေ သည် ။
 Unable to parse XML in line: {np translation="{np translation="Berlin" prob="0.8"}Berlin{/np}'s Neukoellner Opera House" prob="0.8"}{np translation="{np translation="Berlin" prob="0.8"}Berlin{/np}" prob="0.8"}ဘာ လင်{/np} ရဲ့ နီ ကို အဲလ် နာ တေး သံ စုံ ပြ ဇာတ် ရုံ{/np} က ၎င်း ၏ ထုတ် လုပ် {np translation="Yass" prob="0.8"}ရေး{/np} အ သစ် ဖြစ် တဲ့ အ ဝါ ရောင် မင်း သ မီး ၊ နှ င့် အ တူ လှုပ် လှုပ် ရှား ရှား ဖြစ် စေ သည် ။  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40 
   1  19  20  20  20  20  20   1  20  20  21  20  20  20  20  20  20  20  20  20  20  20  18  20  20  20  20  20  20  20  20  20  20  20  20  20  20  20  20  20   0 
    19 200 200 200 200 200  20  16 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200   0 
-
+```
 ==========
 
+Reference from Moses Manual:  
 % echo 'das ist <np translation="a cute place">ein kleines haus</np>' 
 
 *** add-xml-markup.pl ကို update လုပ်ဖို့ လိုအပ်တယ်။
