@@ -368,8 +368,8 @@ xml-inclusive: 25.48, 0.607339, 0.684110
 
 my-en  
 Hiero baseline: 7.36, 0.555453, 0.497490  
-xml-exclusive:   
-xml-inclusive:   
+xml-exclusive:  got Error!, I have to solve  
+xml-inclusive:  got Error!, I have to solve   
 
 =============
 
