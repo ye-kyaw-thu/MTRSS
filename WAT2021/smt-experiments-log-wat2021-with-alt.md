@@ -310,7 +310,7 @@ very severe flu is always in Randwick by 700 horse in the contagious will guess 
 
 ## Evaluation Results with WAT2021 Standard
 
-*** UCSY Corpus Only Results  
+### UCSY Corpus Only Results  
 BLEU, RIBES, AMFM  
 
 en-my  
@@ -328,7 +328,7 @@ Hiero baseline: 14.83, 0.555290, 0.545900
 xml-exclusive: 21.02, 0.588198, 0.653840  
 xml-inclusive: 21.02, 0.588198, 0.653840  
 
-*** UCSY + ALT Results  
+### UCSY + ALT Results  
 BLEU, RIBES, AMFM  
 
 en-my  
@@ -340,6 +340,7 @@ my-en
 PBSMT baseline: 5.00, 0.519789, 0.493530  
 xml-exclusive: 6.32, 0.532525, 0.492900  
 xml-inclusive: 7.43, 0.542773, 0.502980  
+
 ===========
 
 en-my  
