@@ -332,6 +332,9 @@ xml-exclusive: 21.02, 0.588198, 0.653840
 xml-inclusive: 21.02, 0.588198, 0.653840  
 
 ### UCSY + ALT Results  
+
+Experiment with Setting B result...  
+
 BLEU, RIBES, AMFM  
 
 en-my  
