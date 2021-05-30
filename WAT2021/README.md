@@ -37,10 +37,11 @@ Thanks for visiting my GitHub!!! :)
 
 1. Dr. Ye Kyaw Thu (UTYCC and LU Lab. Myanmar)
 2. Dr. Hnin Aye Thant (UTYCC, Myanmar)
-3. Eithandar Phyu (UTYCC, Myanmar)
-4. Khaing Hsu Wai (UTYCC, Myanmar)
-5. Myo Mar Thinn (UTYCC, Myanmar)
-6. Hay Man Htun (UTYCC, Myanmar)
+3. Hlaing Myat Nwe (UTYCC, Myanmar)
+4. Eithandar Phyu (UTYCC, Myanmar)
+5. Khaing Hsu Wai (UTYCC, Myanmar)
+6. Myo Mar Thinn (UTYCC, Myanmar)
+7. Hay Man Htun (UTYCC, Myanmar)
 
 ## NECTEC Team Members
 
