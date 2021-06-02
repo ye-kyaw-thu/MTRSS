@@ -6,13 +6,13 @@ Note: အကုန် မတင်ရသေးဘူး။ ကျန်တာတ
 
 ## Training Scripts
 
-- s2s.deep4.sh  (for System 1)
-- s2s.deep4.my-en.sh  (for System 5)
+- [s2s.deep4.sh](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/scripts/nmt/YCC-MT2/s2s.deep4.sh)  (for System 1)
+- [s2s.deep4.my-en.sh](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/scripts/nmt/YCC-MT2/s2s.deep4.my-en.sh)  (for System 5)
 
-- transformer.sh (for System 2)
-- transformer.my-en.sh (for System 6) 
+- [transformer.sh](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/scripts/nmt/YCC-MT2/transformer.sh) (for System 2)
+- [transformer.my-en.sh](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/scripts/nmt/YCC-MT2/transformer.my-en.sh) (for System 6) 
 
 ## Scripts for Ensemble Models
 
-- ensemble-2models.sh  
-- eval.sh  
+- [ensemble-2models.sh](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/scripts/nmt/YCC-MT2/ensemble-2models.sh)  
+- [eval.sh](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/scripts/nmt/YCC-MT2/eval.sh)  
