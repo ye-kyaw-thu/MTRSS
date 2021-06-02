@@ -1,5 +1,5 @@
 # Running Log of NMT Experiments (plus ALT Corpus)
-Last Updated: 26 May 2021
+Last Updated: 2 June 2021
 
 Exp 2: Ensemble Two Models (YCC-MT2 Team) အရင် run ခဲ့တာအားလုံးကို (UCSY+ALT training data) နဲ့  
 နောက်တစ်ခေါက် အစအဆုံး ပြန် run ခဲ့တဲ့ running log ပါ။   
@@ -8,6 +8,7 @@ Exp 2: Ensemble Two Models (YCC-MT2 Team) အရင် run ခဲ့တာအာ
 
 ## Data that I used 2nd time SMT experiment
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/exp-syl4/data$ wc *.my
     1000    57709   550454 dev.my
     1018    58895   561443 test.my
@@ -19,9 +20,11 @@ Exp 2: Ensemble Two Models (YCC-MT2 Team) အရင် run ခဲ့တာအာ
   256102  3770260 19768494 train.en
   258120  3825507 20067709 total
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/smt/wat2021/exp-syl4/data$
+```
 
 ## Copying Data
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data$ cp /home/ye/exp/smt/wat2021/exp-syl4/data/*.{my,en} .
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data$ wc *.{en,my}
     1000    27318   147768 dev.en
@@ -32,17 +35,23 @@ Exp 2: Ensemble Two Models (YCC-MT2 Team) အရင် run ခဲ့တာအာ
   256102  7324636 70957711 train.my
   516240 11266747 92137317 total
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data$ 
+```
 
 ## Copying script
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:/media/ye/SP PHD U3/backup/marian/wat2021/exp-syl4$ cp s2s.deep4.sh /home/ye/exp/nmt/plus-alt/
+```
 
 ## Check the script
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ gedit s2s.deep4.sh
+```
 
 ## Preparing Vocab Files
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data$ cat ./train.en ./dev.en > ./vocab/train-dev.en
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data$ cat ./train.my ./dev.my > ./vocab/train-dev.my
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data$ cd vocab/
@@ -65,18 +74,24 @@ real	0m1.286s
 user	0m1.274s
 sys	0m0.012s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data/vocab$
+```
 
 ## Changing dev to valid
 
-  --valid-sets data/valid.en data/valid.my \
-  
-running shell script ထဲမှာက valid ဆိုပြီး သုံးခဲ့တာမို့ dev ဖိုင်တွေကို ဖိုင်နာမည်ပြောင်းသိမ်းခဲ့...
+```
+  --valid-sets data/valid.en data/valid.my \  
+```
 
+running shell script ထဲမှာက valid ဆိုပြီး သုံးခဲ့တာမို့ dev ဖိုင်တွေကို ဖိုင်နာမည်ပြောင်းသိမ်းခဲ့...  
+
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data$ mv dev.my valid.my
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data$ mv dev.en valid.en
+```
 
 ## Script for s2s (en-my, word-syl)
 
+```bash
 mkdir model.s2s-4;
 
 marian \
@@ -101,9 +116,11 @@ marian \
   --dump-config > model.s2s-4/config.yml
   
 time marian -c model.s2s-4/config.yml  2>&1 | tee s2s.enmy.syl.log
+```
 
 ## Running Log
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ time ./s2s.deep4.sh 
 mkdir: cannot create directory ‘model.s2s-4’: File exists
 [2021-05-26 23:11:55] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
@@ -736,9 +753,11 @@ real	2554m15.995s
 user	4156m44.110s
 sys	1m49.021s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+```
 
 ## Translation
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4$ time marian-decoder -m ./model.npz -v ../data/vocab/vocab.en.yml ../data/vocab/vocab.my.yml --devices 0 1 --output hyp.model.my < ../data/test.en 
 ...
 ...
@@ -791,20 +810,25 @@ sys	1m49.021s
 real	3m27.867s
 user	6m50.738s
 sys	0m2.547s
+```
 
 ## Evaluation
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data/test.my < ./hyp.model.my  >> results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4$ cat results.txt 
 BLEU = 17.00, 55.2/30.3/18.0/11.2 (BP=0.705, ratio=0.741, hyp_len=43651, ref_len=58895)
-
+```
 
 ##  Transformer (en-my, word-syl)
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:/media/ye/SP PHD U3/backup/marian/wat2021/exp-syl4$ cp transformer.sh /home/ye/exp/nmt/plus-alt/
+```
 
 ## Script
 
+```
 #!/bin/bash
 
 #     --mini-batch-fit -w 10000 --maxi-batch 1000 \
@@ -845,9 +869,11 @@ marian \
     --dump-config > model.transformer/config.yml
     
 time marian -c model.transformer/config.yml  2>&1 | tee transformer-enmy.log
+```
 
 ## Training Log
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ time ./transformer.sh 
 [2021-05-28 19:13:27] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
 [2021-05-28 19:13:27] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 62252 with command line:
@@ -1195,19 +1221,25 @@ real	626m13.287s
 user	991m14.697s
 sys	0m48.560s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+```
 
 ## Testing
 
+```
 time marian-decoder -m ./model.npz -v ../data/vocab/vocab.en.yml ../data/vocab/vocab.my.yml --devices 0 1 --output hyp.model.my < ../data/test.en
+```
 
 ## Evaluation
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data/test.my < ./hyp.model.my  >> results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer$ cat results.txt 
 BLEU = 18.09, 59.4/33.1/19.1/11.5 (BP=0.705, ratio=0.741, hyp_len=43640, ref_len=58895)
+```
 
 ## Ensembling s2s+Transformer
 
+```
 time marian-decoder \
     --models model.s2s-4/model.npz model.transformer/model.npz \
     --weights 0.4 0.6 --max-length 200 \
@@ -1217,15 +1249,19 @@ time marian-decoder \
     --devices 0 1 < ./data/test.en
     
 perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./data/test.my < ./ensembling-results/hyp.s2s-plus-transformer.my1  > ./ensembling-results/1.s2s-plus-transformer-results.txt
+```
 
 ## Eval Result, s2s+Transformer, --weights 0.4 0.6
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./data/test.my < ./ensembling-results/hyp.s2s-plus-transformer.my1  > ./ensembling-results/1.s2s-plus-transformer-0.4-0.6.results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cat ./ensembling-results/1.s2s-plus-transformer-results.txt 
 BLEU = 19.31, 62.6/36.4/22.2/14.0 (BP=0.665, ratio=0.710, hyp_len=41844, ref_len=58895)
+```
 
 ## Eval Result, s2s+Transformer, --weights 0.5 0.5
 
+```
 time marian-decoder \
     --models model.s2s-4/model.npz model.transformer/model.npz \
     --weights 0.5 0.5 --max-length 200 \
@@ -1237,9 +1273,11 @@ time marian-decoder \
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./data/test.my < ./ensembling-results/hyp.s2s-plus-transformer.my2  > ./ensembling-results/1.s2s-plus-transformer-0.5-0.5.results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cat ./ensembling-results/1.s2s-plus-transformer-0.5-0.5.results.txt 
 BLEU = 19.55, 62.9/36.9/22.7/14.4 (BP=0.663, ratio=0.708, hyp_len=41723, ref_len=58895)
+```
 
 ## Eval Result, s2s+Transformer, --weights 0.6 0.4
 
+```
 time marian-decoder \
     --models model.s2s-4/model.npz model.transformer/model.npz \
     --weights 0.6 0.4 --max-length 200 \
@@ -1251,24 +1289,26 @@ time marian-decoder \
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./data/test.my < ./ensembling-results/hyp.s2s-plus-transformer.my3  > ./ensembling-results/1.s2s-plus-transformer-0.6-0.4.results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cat ./ensembling-results/1.s2s-plus-transformer-0.6-0.4.results.txt 
 BLEU = 19.24, 62.2/36.3/22.4/14.2 (BP=0.661, ratio=0.707, hyp_len=41666, ref_len=58895)
+```
 
 ==========================================================================
 
 ## To Do
 
-System-1: s2s or RNN-based; tree2string
-System-2: Transformer; tree2string
-Ensemble: s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)
+System-1: s2s or RNN-based; tree2string   
+System-2: Transformer; tree2string  
+Ensemble: s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 
 ==========================================================================
 
 ## Myanmar-English
 ## s2s 
 
-ပထမဆုံး run ခဲ့တဲ့ experiments ကိုပဲ Myanmar-English translation direction အနေနဲ့ experiment လုပ်ခြင်း...
+ပထမဆုံး run ခဲ့တဲ့ experiments ကိုပဲ Myanmar-English translation direction အနေနဲ့ experiment လုပ်ခြင်း...  
 
 ## Script for s2s or RNN-based Attention (my-en direction)
 
+```
 mkdir model.s2s-4.my-en;
 
 marian \
@@ -1293,9 +1333,11 @@ marian \
   --dump-config > model.s2s-4.my-en/config.yml
   
 time marian -c model.s2s-4.my-en/config.yml  2>&1 | tee s2s.myen.syl.log
+```
 
 ## Training Log
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ time ./s2s.deep4.my-en.sh 
 [2021-05-29 09:42:50] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
 [2021-05-29 09:42:50] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 79961 with command line:
@@ -1591,19 +1633,23 @@ real	97m36.195s
 user	161m48.622s
 sys	0m5.801s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+```
 
 ## Check and ReTrain
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.my-en$ ls *.npz
 model.iter5000.npz  model.npz  model.npz.optimizer.npz  model.npz.orig.npz
+```
 
-မော်ဒယ်တော့ iter5000 အတွက် ဆောက်သွားနိုင်ခဲ့...
+မော်ဒယ်တော့ iter5000 အတွက် ဆောက်သွားနိုင်ခဲ့...  
 
-စက်ကို shutdown လုပ် ၁၀မိနစ်ခဲ့ အနားပေး၊ စက်အေးအောင် ထားခဲ့။
-ဆက်တိုက် ဖွင့်ထားတာလည်း တပတ်ကျော်နေပြီမို့ ....
+စက်ကို shutdown လုပ် ၁၀မိနစ်ခဲ့ အနားပေး၊ စက်အေးအောင် ထားခဲ့။  
+ဆက်တိုက် ဖွင့်ထားတာလည်း တပတ်ကျော်နေပြီမို့ ....  
 
-ပြီးမှ စက်ပြန်ဖွင့်ပြီး retraining လုပ်ခဲ့...
+ပြီးမှ စက်ပြန်ဖွင့်ပြီး retraining လုပ်ခဲ့...  
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ time ./s2s.deep4.my-en.sh 
 ...
 ...
@@ -2002,9 +2048,11 @@ real	3229m26.133s
 user	5353m47.586s
 sys	2m59.521s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+```
 
 ## Translation
 
+```
 time marian-decoder -m ./model.npz -v ../data/vocab/vocab.my.yml ../data/vocab/vocab.en.yml --devices 0 1 --output hyp.model.en < ../data/test.my
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.my-en$ time marian-decoder -m ./model.npz -v ../data/vocab/vocab.my.yml ../data/vocab/vocab.en.yml --devices 0 1 --output hyp.model.en < ../data/test.my
@@ -2046,17 +2094,19 @@ time marian-decoder -m ./model.npz -v ../data/vocab/vocab.my.yml ../data/vocab/v
 real	4m45.351s
 user	9m26.360s
 sys	0m2.134s
-    
+```
+
 ## Evaluation
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.my-en$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data/test.en < ./hyp.model.en  >> results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.my-en$ cat ./results.txt 
 BLEU = 10.21, 43.6/18.0/8.6/4.2 (BP=0.786, ratio=0.806, hyp_len=22514, ref_len=27929)
-
-===============================================================================
+```
     
 ## Transformer Script (Myanmar-English)
 
+```
 mkdir model.transformer.my-en;
 
 marian \
@@ -2086,9 +2136,11 @@ marian \
     --dump-config > model.transformer.my-en/config.yml
     
 time marian -c model.transformer.my-en/config.yml  2>&1 | tee transformer-myen.log
+```
 
 ## Training Log
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.my-en.sh 
 [2021-06-01 01:44:26] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
 [2021-06-01 01:44:26] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 102462 with command line:
@@ -2385,9 +2437,11 @@ real	31m4.648s
 user	46m20.530s
 sys	0m10.001s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+```
 
 Restart the machine and try again...
 
+```
 [2021-06-01 03:50:08] Ep. 2 : Up. 10000 : Sen. 200,296 : Cost 4.71337128 * 353,714 @ 696 after 7,106,187 : Time 179.79s : 1967.36 words/s : L.r. 3.0000e-04
 [2021-06-01 03:50:08] Saving model weights and runtime parameters to model.transformer.my-en/model.npz.orig.npz
 [2021-06-01 03:50:09] Saving model weights and runtime parameters to model.transformer.my-en/model.iter10000.npz
@@ -2433,12 +2487,19 @@ real	34m18.015s
 user	52m29.121s
 sys	0m17.350s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
-
+```
 
 ## Update the Script and ReTrain
 
-    --mini-batch-fit -w 1000 --maxi-batch 64 \
+batch sie ကို ပြင်ခဲ့...  
 
+```
+    --mini-batch-fit -w 1000 --maxi-batch 64 \
+```
+
+Train again ...  
+
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.my-en.sh
 ...
 ...
@@ -2497,14 +2558,18 @@ real	30m18.674s
 user	44m49.157s
 sys	0m8.263s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+```
 
 ## Change Config and Train Again
 
+```
     --mini-batch-fit -w 1000 --maxi-batch 32 \
         --valid-mini-batch 32 \
+```
 
 ### The Script
 
+```
 mkdir model.transformer.my-en;
 
 marian \
@@ -2534,10 +2599,12 @@ marian \
     --dump-config > model.transformer.my-en/config.yml
     
 time marian -c model.transformer.my-en/config.yml  2>&1 | tee transformer-myen.log
+```
 
-batch size တွေကို 32 ထိ လျှော့ချပလိုက်တယ်။
-ဒီတစ်ခါတော့ အဆင်ပြေမယ်လို့ မျှော်လင့်...
+batch size တွေကို 32 ထိ လျှော့ချပလိုက်တယ်။  
+ဒီတစ်ခါတော့ အဆင်ပြေမယ်လို့ မျှော်လင့်...  
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.my-en.sh 
 mkdir: cannot create directory ‘model.transformer.my-en’: File exists
 [2021-06-01 07:21:33] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
@@ -3115,9 +3182,11 @@ real	1368m49.052s
 user	2022m47.531s
 sys	1m44.371s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+```
 
 ## Testing
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.my-en$ time marian-decoder -m ./model.npz -v ../data/vocab/vocab.my.yml ../data/vocab/vocab.en.yml --devices 0 1 --output hyp.model.en < ../data/test.my
 ...
 ...
@@ -3156,18 +3225,22 @@ sys	1m44.371s
 real	2m21.085s
 user	4m39.447s
 sys	0m1.637s
+```
 
 ## Evaluation on Transformer Model
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.my-en$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data/test.en < ./hyp.model.en  >> results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.my-en$ cat ./results.txt 
 BLEU = 8.83, 45.4/17.6/8.1/3.9 (BP=0.700, ratio=0.737, hyp_len=20595, ref_len=27929)
+```
 
 ## Model Ensembling Results
 ## Eval Result, s2s+Transformer, --weights 0.4 0.6 (for Myanmar-English pair)
 
-Ensembling အလုပ်အတွက်  shell script ရေးပြီး run ခဲ့...
+Ensembling အလုပ်အတွက်  shell script ရေးပြီး run ခဲ့...  
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.my-en/model.npz model.transformer.my-en/model.npz 0.4 0.6 ./data/vocab/vocab.my.yml ./data/vocab/vocab.en.yml ./ensembling-results/2.hyp.s2s-plus-transformer.en1 ./data/test.my
 ...
 ...
@@ -3187,14 +3260,18 @@ Ensembling အလုပ်အတွက်  shell script ရေးပြီး ru
 real	6m46.585s
 user	13m27.308s
 sys	0m2.761s
+```
 
-Evaluation:
+Evaluation:  
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./eval.sh ./data/test.en ./ensembling-results/2.hyp.s2s-plus-transformer.en1 ./ensembling-results/2.s2s-plus-transformer-0.4-0.6.myen.results.txt
 BLEU = 10.56, 47.3/19.9/9.5/4.8 (BP=0.733, ratio=0.763, hyp_len=21306, ref_len=27929)
+```
 
 ## Eval Result, s2s+Transformer, --weights 0.5 0.5
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.my-en/model.npz model.transformer.my-en/model.npz 0.5 0.6 ./data/vocab/vocab.my.yml ./data/vocab/vocab.en.yml ./ensembling-results/2.hyp.s2s-plus-transformer.en2 ./data/test.my
 ...
 ...
@@ -3215,10 +3292,11 @@ sys	0m2.744s
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./eval.sh ./data/test.en ./ensembling-results/2.hyp.s2s-plus-transformer.en2 ./ensembling-results/2.s2s-plus-transformer-0.5-0.5.myen.results.txt
 BLEU = 10.81, 47.3/20.0/9.6/4.8 (BP=0.746, ratio=0.773, hyp_len=21590, ref_len=27929)
-
+```
 
 ## Eval Result, s2s+Transformer, --weights 0.6 0.4
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.my-en/model.npz model.transformer.my-en/model.npz 0.6 0.4 ./data/vocab/vocab.my.yml ./data/vocab/vocab.en.yml ./ensembling-results/2.hyp.s2s-plus-transformer.en3 ./data/test.my
 ...
 ...
@@ -3236,30 +3314,17 @@ sys	0m2.600s
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./eval.sh ./data/test.en ./ensembling-results/2.hyp.s2s-plus-transformer.en3 ./ensembling-results/2.s2s-plus-transformer-0.6-0.4.myen.results.txt
 BLEU = 10.94, 47.0/19.9/9.7/5.0 (BP=0.752, ratio=0.778, hyp_len=21726, ref_len=27929)
+```
 
 
 =============================================================
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
-### Extra Note (Transformer+The-Sounds-of-Scilence)
+### Extra/Bonus Note (Transformer+The-Sounds-of-Scilence)
 
-တခါတလေ stress release အတွက် လုပ်ဖြစ်ခဲ့တာတွေထဲက log တစ်ခုပါ... :)  
+တခါတလေ stress release အတွက် လုပ်ဖြစ်ခဲ့တာတွေထဲက log တစ်ခုပါ... :)    
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/Videos/add-sound$ ffmpeg -i ./ music.wav
 Simon-amp-Garfunkel-The-Sounds-of-Silence.mp3
 transformer-translation-29May2021.mp4
@@ -3425,3 +3490,5 @@ video:99167kB audio:1714kB subtitle:0kB other streams:0kB global headers:0kB mux
 [libx264 @ 0x5595e450cec0] kb/s:7391.92
 [aac @ 0x5595e450e180] Qavg: 175.352
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/Videos/add-sound$ mv ./output.mp4 transformer-plus-the-sounds-of-silence.mp4
+```
+
