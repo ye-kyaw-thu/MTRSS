@@ -820,7 +820,7 @@ sys	0m2.547s
 BLEU = 17.00, 55.2/30.3/18.0/11.2 (BP=0.705, ratio=0.741, hyp_len=43651, ref_len=58895)
 ```
 
-##  Transformer (en-my, word-syl)
+## System-2: Transformer (en-my, word-syl)
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:/media/ye/SP PHD U3/backup/marian/wat2021/exp-syl4$ cp transformer.sh /home/ye/exp/nmt/plus-alt/
@@ -1237,7 +1237,7 @@ time marian-decoder -m ./model.npz -v ../data/vocab/vocab.en.yml ../data/vocab/v
 BLEU = 18.09, 59.4/33.1/19.1/11.5 (BP=0.705, ratio=0.741, hyp_len=43640, ref_len=58895)
 ```
 
-## Ensembling s2s+Transformer
+## Ensembling s2s+Transformer or System 1+2
 
 ```
 time marian-decoder \
@@ -1295,14 +1295,14 @@ BLEU = 19.24, 62.2/36.3/22.4/14.2 (BP=0.661, ratio=0.707, hyp_len=41666, ref_len
 
 ## To Do
 
-System-1: s2s or RNN-based; tree2string   
-System-2: Transformer; tree2string  
+System-3: s2s or RNN-based; tree2string   
+System-4: Transformer; tree2string  
 Ensemble: s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 
 ==========================================================================
 
 ## Myanmar-English
-## s2s 
+## System 5: s2s 
 
 ပထမဆုံး run ခဲ့တဲ့ experiments ကိုပဲ Myanmar-English translation direction အနေနဲ့ experiment လုပ်ခြင်း...  
 
@@ -2104,7 +2104,7 @@ sys	0m2.134s
 BLEU = 10.21, 43.6/18.0/8.6/4.2 (BP=0.786, ratio=0.806, hyp_len=22514, ref_len=27929)
 ```
     
-## Transformer Script (Myanmar-English)
+## System 6: Transformer Script (Myanmar-English)
 
 ```
 mkdir model.transformer.my-en;
@@ -3235,8 +3235,8 @@ sys	0m1.637s
 BLEU = 8.83, 45.4/17.6/8.1/3.9 (BP=0.700, ratio=0.737, hyp_len=20595, ref_len=27929)
 ```
 
-## Model Ensembling Results
-## Eval Result, s2s+Transformer, --weights 0.4 0.6 (for Myanmar-English pair)
+## Model Ensembling Results, System 5+6
+### Eval Result, s2s+Transformer, --weights 0.4 0.6 (for Myanmar-English pair)
 
 Ensembling အလုပ်အတွက်  shell script ရေးပြီး run ခဲ့...  
 
@@ -3269,7 +3269,7 @@ Evaluation:
 BLEU = 10.56, 47.3/19.9/9.5/4.8 (BP=0.733, ratio=0.763, hyp_len=21306, ref_len=27929)
 ```
 
-## Eval Result, s2s+Transformer, --weights 0.5 0.5
+### Eval Result, s2s+Transformer, --weights 0.5 0.5
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.my-en/model.npz model.transformer.my-en/model.npz 0.5 0.6 ./data/vocab/vocab.my.yml ./data/vocab/vocab.en.yml ./ensembling-results/2.hyp.s2s-plus-transformer.en2 ./data/test.my
@@ -3294,7 +3294,7 @@ sys	0m2.744s
 BLEU = 10.81, 47.3/20.0/9.6/4.8 (BP=0.746, ratio=0.773, hyp_len=21590, ref_len=27929)
 ```
 
-## Eval Result, s2s+Transformer, --weights 0.6 0.4
+### Eval Result, s2s+Transformer, --weights 0.6 0.4
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.my-en/model.npz model.transformer.my-en/model.npz 0.6 0.4 ./data/vocab/vocab.my.yml ./data/vocab/vocab.en.yml ./ensembling-results/2.hyp.s2s-plus-transformer.en3 ./data/test.my
