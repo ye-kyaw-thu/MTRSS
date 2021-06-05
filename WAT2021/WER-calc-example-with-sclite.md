@@ -15,36 +15,61 @@ test.my ဖိုင်က မြန်မာစာ အတွက် reference �
 
 ### s2s:
 
+s2s model နဲ့ ဘာသာပြန်ထားတဲ့ hyp ဖိုင်ပါ။  
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ cp ~/exp/nmt/plus-alt/model.s2s-4/hyp.model.my ./s2s.en-my.hyp
 ```
+
 ### transformer:
+
+Transformer model နဲ့ ဘာသာပြန်ထားတဲ့ hyp ဖိုင်ပါ။  
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ cp ~/exp/nmt/plus-alt/model.transformer/hyp.model.my ./transformer.en-my.hyp
 ```
+
 ### Ensemble, s2s+transformer:
+
+Model ensembling ကို weight သုံးမျိုးနဲ့ လုပ်ခဲ့တာကြောင့် ဖိုင်သုံးဖိုင်ရှိမှာပါ...   
+
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ cp ~/exp/nmt/plus-alt/ensembling-results/hyp.s2s-plus-transformer.my{1,2,3} .
 ```
 
+ဒီတစ်ခါတော့ မြန်မာ-အင်္ဂလိပ် NMT model အတွက် ပြင်ဆင်ပါမယ်...  
+
 ## Myanmar-English
 ### Reference File:
+
+my-en translation direction အတွက် အင်္ဂလိပ်ဘာသာ reference ဖိုင်ကို ကော်ပီကူးမယ်။  
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/my-en$ cp ~/exp/nmt/plus-alt/data/test.en .
 ```
+
 ### s2s:
+
+s2s model နဲ့ ဘာသာပြန်ထားတဲ့ hyp ဖိုင်ကို ကော်ပီကူးမယ်။  
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/my-en$ cp ~/exp/nmt/plus-alt/model.s2s-4.my-en/hyp.model.en ./s2s.my-en.hyp
 ```
+
 ### transformer:
+
+Transformer နဲ့ ဘာသာပြန်ထားတဲ့ hyp ဖိုင်ကို ကော်ပီကူးမယ်။  
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/my-en$ cp ~/exp/nmt/plus-alt/model.transformer.my-en/hyp.model.en ./transformer.my-en.hyp
 ```
+
 ### Ensemble, s2s+transformer:
+
+s2s+transformer ensembling ရလဒ်တွေကို ကော်ပီကူးမယ်...  
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/my-en$ cp ~/exp/nmt/plus-alt/ensembling-results/2.hyp.s2s-plus-transformer.en{1,2,3} .
 ```
+
 ## Folder Structure
+
+Experiment တစ်ခု (en-my နဲ့ my-en translation direction တွေအတွက်) WER မတွက်ခင်မှာ ကြိုပြင်ဆင်ထားတဲ့ ဖိုင်တွေက အောက်ပါအတိုင်းပါ...  
+
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ tree
 .
@@ -69,6 +94,12 @@ test.my ဖိုင်က မြန်မာစာ အတွက် reference �
 
 ## Prepare a Shell Script
 
+SCLITE toolkit ကို မသုံးခင်မှာ speaker-id တပ်ပေးရပါတယ်။  
+စာကြောင်းရဲ့ နောက်ဆုံးမှာ space ခြားပြီးတော့ id တစ်ခု ပြင်ဆင်ပေးရတဲ့ format ကိုမှ SCLITE tookit က လက်ခံတာမို့ပါ။  
+Speaker-id လို့ ခေါ်တာက ဒီ toolkit က automatic speech recognition (ASR) အတွက် ဒီဇိုင်းလုပ်ထားတာမို့ပါ။  
+
+WER calculation လုပ်တဲ့အခါမှာ သုံးမယ့် reference ဖိုင်တွေ၊ hypothesis ဖိုင်တွေအားလုံးကို looping ပတ်ပြီး speaker-id တပ်ဖို့အတွက်ရေးထားတဲ့ bash shell script ပါ။  
+
 ```bash
 #!/bin/bash
 
@@ -82,7 +113,36 @@ for folder in *; do
 done
 ```
 
+## Perl Script for Adding Speaker-ID
+
+အထက်က bash shell script က ခေါ်သုံးထားတဲ့ perl script; add-spu_id.pl (စာကြောင်း တစ်ကြောင်းချင်းစီအတွက် speaker-id တပ်ပေးမယ့်) ကတော့ အောက်ပါအတိုင်း ရေးထားပါတယ်။  
+
+```perl
+#!/usr/bin/perl
+#use strict;
+
+# last updated 19 Nov 2017
+# ye@OPU
+# for taging speaker ID
+
+open (iFILE, $ARGV[0]) or die "Couldn't open input file $ARGV[0]!, $!";
+
+my $sentNo=1;
+
+foreach $line(<iFILE>)
+{
+
+    chomp($line);
+    print "$line (ye_$sentNo)\n";
+    $sentNo = $sentNo+1;
+}
+
+close(iFILE);
+```
+
 ## Add Speaker ID
+
+add-id.sh ကို run ရအောင်...  
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ ./add-id.sh 
@@ -101,6 +161,8 @@ Adding speaker id to my-en/transformer.my-en.hyp
 ```
 
 ## Check Files
+
+မြန်မာစာ ဖိုင်တွေကို id တပ်ပေးသွားတာကို တွေ့ရပါလိမ့်မယ်။  
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ head -n 3 ./en-my/*.id
@@ -134,6 +196,8 @@ Adding speaker id to my-en/transformer.my-en.hyp
 ကု လား ထိုင် ခုံ သည် သော့ ပိတ် ထား ပြီး နှစ် လ အ ထိ ဆက် လက် တည် ရှိ နေ မည် ဟု မျှော် လ င့် ရ ပါ သည် ။ (ye_2)
 တုပ် ကွေး ဝေ ဒ နာ ခံ စား နေ ရ သော တုပ် ကွေး သည် ကင် ဆာ အ ခြေ အ နေ ရှိ မြင်း ၇၀၀ အ နက် အ များ စု ကို ထိ ခိုက် စေ မည် ဟု မျှော် လ င့် ပါ သည် ။ (ye_3)
 ```
+
+အင်္ဂလိပ်စာဖိုင်တွေအတွက်ကိုလည်း စစ်ကြည့်ရအောင်...  
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ head -n 3 ./my-en/*.id
@@ -170,6 +234,9 @@ It is widely predicted that most of the 700 horse ever will be infected in Las V
 ```
 
 ## Check sclite --help
+
+WER calculation လုပ်ဖို့အတွက် ကိုယ့်စက်ထဲမှာတော့ SCLITE toolkit ကိုတော့ ကြိုတင် installation လုပ်ထားရပါလိမ့်မယ်။  
+အရင်ဆုံး သေချာအောင် ကိုယ်လက်ရှိ သုံးနေတဲ့ စက်ထဲမှာ sclite --help ခေါ်ကြည့်ရအောင်...  
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ sclite --help
@@ -238,6 +305,9 @@ Illegal argument: --help
 
 ## Prepare a Shell Script for WER Calculation
 
+WER calculation လုပ်ဖို့အတွက် sclite command ကို argument pra, dtal တို့ပါ ပေးပြီး သုံးခါ run ပါမယ်။  
+အဲဒါကိုလည်း အထက်မှာ ပြင်ဆင်ထားခဲ့တဲ့ hyp ဖိုင်တွေအားလုံးအတွက် run ချင်တာမို့ bash shell script တပုဒ်ကို အောက်ပါအတိုင်း ပြင်ဆင်ခဲ့ပါတယ်။  
+
 ```
 #!/bin/bash
 
@@ -269,6 +339,8 @@ done
 ```
 
 ## WER Calculation for All Hyp
+
+Run တာက အဆင်ပြေပြေနဲ့ hyp ဖိုင် တစ်ခုချင်းစီအတွက် အလုပ်လုပ်ပေးမယ် ဆိုရင်တော့ အောက်ပါလိုမျိုး screen output ကို မြင်ရမှာ ဖြစ်ပါတယ်။   
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ ./wer-calc.sh en-my my-en
@@ -682,6 +754,10 @@ Successful Completion
  Finished WER calculations for  !!! 
 ```
 
+## Check the Output Files
+
+ဖိုလ်ဒါထဲမှာ ပြင်ထားခဲ့သမျှ hyp ဖိုင်တွေအတွက် dtl ဖိုင်၊ pra ဖိုင်တွေကို မှန်မှန်ကန်ကန် ထုတ်ပေးရဲ့လား ဆိုတာကို confirmation လုပ်ကြည့်ရအောင်...  
+
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ tree ./en-my
 ./en-my
@@ -710,6 +786,8 @@ Successful Completion
 
 0 directories, 22 files
 ```
+
+my-en translation direction အတွက်ရော ကြည့်ကြည့်ရအောင်...  
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ tree ./my-en
@@ -742,6 +820,8 @@ Successful Completion
 ```
 
 ## Let's Peek .dtl FILE
+
+.dtl ဖိုင်ထဲမှာ ဘာတွေရှိသလဲ ဆိုတာကို လေ့လာလို့ ရအောင် ဖိုင်ရဲ့ ထိပ်ဆုံးစာကြောင်း ၅၀ ကို ရိုက်ပြထားတာပါ။  
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ head -n 50 ./transformer.en-my.hyp.id.dtl 
@@ -800,6 +880,8 @@ CONFUSION PAIRS                  Total                 (15421)
 
 ## Let's Peek .pra FILE
 
+.pra ဖိုင်တစ်ဖိုင်ကိုလည်း တချက် လေ့လာကြည့်ရအောင်။  
+
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ head -n 52 ./transformer.en-my.hyp.id.pra
 
@@ -856,3 +938,6 @@ Eval:                               S                            D            D 
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$
 ```
+
+SCLITE Toolkit က WER calculation အတွက် အရမ်းအသုံးဝင်တဲ့ tool ပါ။  
+Machine translation experiment တွေရဲ့ output တွေကို reference နဲ့ နှိုင်းယှဉ်ပြီးတော့ manual error analysis လုပ်ဖို့အတွက်လည်း အသုံးပြုပါတယ်။  
