@@ -3322,13 +3322,19 @@ BLEU = 10.94, 47.0/19.9/9.7/5.0 (BP=0.752, ratio=0.778, hyp_len=21726, ref_len=2
 
 ## Prepared Word Segmented Data for Myanmar
 
+UCSY Corpus က word segmented မလုပ်ထားတာကိုပဲ ပေးတယ်။
+အဲဒါကြောင့် မြန်မာစာ ဒေတာဘက် အခြမ်းကို word segmentation ဖြတ်ပြီးတော့ MT experiment လုပ်ဖို့အတွက် in-house myWord ကို သုံးပြီး စာလုံးဖြတ်ဖို့အတွက် ပြင်ဆင်ခဲ့...  
+
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/tool/word-seg-tool/python-wordsegment/wordsegment/y-test/ref/viterbi/exp-4/wat2021-data/final$ cp valid.my.word /home/ye/exp/nmt/plus-alt/data_word/valid.my
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/tool/word-seg-tool/python-wordsegment/wordsegment/y-test/ref/viterbi/exp-4/wat2021-data/final$ cp test.my.word /home/ye/exp/nmt/plus-alt/data_word/test.my
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/tool/word-seg-tool/python-wordsegment/wordsegment/y-test/ref/viterbi/exp-4/wat2021-data/final$ cp ./ucsy-alt.train.word /home/ye/exp/nmt/plus-alt/data_word/train.my
+```
 
 ## Check parallel data
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$ wc *.en
     1018    27929   151447 test.en
   256102  3770260 19768494 train.en
@@ -3339,7 +3345,9 @@ BLEU = 10.94, 47.0/19.9/9.7/5.0 (BP=0.752, ratio=0.778, hyp_len=21726, ref_len=2
   256102  4460308 68093383 train.my
     1000    35355   528100 valid.my
   258120  4531918 69160286 total
+```
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$ head -3 *.my
 ==> test.my <==
 ဆစ်ဒနီ ကရန့်ဝစ်ခ် မြင်း ပြိုင်ကွင်း မှ မျိုး သန့် ပြိုင်မြင်း ရှစ် ကောင် ဟာ မြင်း တုတ်ကွေး ရောဂါ ကူးစက် ခံ ခဲ့ ရ တယ် ဆို တာ အတည်ပြု ခဲ့ ပါ တယ် ။
@@ -3356,10 +3364,11 @@ BLEU = 10.94, 47.0/19.9/9.7/5.0 (BP=0.752, ratio=0.778, hyp_len=21726, ref_len=2
 ပါကစ္စတန် နိုင်ငံ ၏ ဝတ် ဇီရီစ တန် မြောက်ပိုင်း ရှိ ၊ လူ က ထိန်း ရန်မလို သော စစ် လေယာဉ် မှ ပစ်ခတ် ခြင်း အနေဖြင့် ယခု သတ်မှတ်ထား သော ၊ အမေရိကန် ပြည်ထောင်စု ဒုံးကျည် ဖြင့် ၊ သူ့ ကို ထိခိုက် စေ ခဲ့ သည် ဟု ထင်ကြေးပေး ခဲ့ ပြီးနောက် နောက်ထပ် အလွန် များပြား သော စစ်သွေးကြွ များ လည်း သေဆုံးကြောင်း သတင်းပို့ ခဲ့ သည် ။
 &quot; လူ က ထိန်း ရန်မလို သော လေယာဉ် မှ ပစ်ခတ် ရန် ဒုံးကျည် ပေါ်ပေါက် ခဲ့ သည် ၊&quot; ဟု ပါကစ္စတန် သတင်း ထောက်လှမ်းရေး အရာရှိ တစ် ယောက် က ပြော ခဲ့ သည် ။
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$
-
+```
 
 ## Prepare Vocab Files (for word unit)
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$ cat ./train.my ./valid.my > ./vocab/train-dev.my
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word/vocab$ marian-vocab < ./train-dev.my > ./vocab.my.yml
@@ -3377,6 +3386,7 @@ BLEU = 10.94, 47.0/19.9/9.7/5.0 (BP=0.752, ratio=0.778, hyp_len=21726, ref_len=2
 က: 7
 ပါ: 8
 ခဲ့: 9
+```
 
 ## System 
 ## Script for s2s (word unit)
