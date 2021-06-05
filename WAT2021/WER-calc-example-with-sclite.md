@@ -941,3 +941,12 @@ Eval:                               S                            D            D 
 
 SCLITE Toolkit က WER calculation အတွက် အရမ်းအသုံးဝင်တဲ့ tool ပါ။  
 Machine translation experiment တွေရဲ့ output တွေကို reference နဲ့ နှိုင်းယှဉ်ပြီးတော့ manual error analysis လုပ်ဖို့အတွက်လည်း အသုံးပြုပါတယ်။  
+
+## Useful Links
+
+- UTYCC မှာ 2019-2020 NLP R&D Class ကို သင်တဲ့အခါမှာ ကျောင်းသားတွေကို လုပ်ခိုင်းခဲ့တဲ့ WER Calculation လေ့ကျင်ခန်း  
+[https://github.com/ye-kyaw-thu/NLP-Class/tree/master/exercise/exe-6](https://github.com/ye-kyaw-thu/NLP-Class/tree/master/exercise/exe-6)  
+
+- SCLITE Toolkit Link:  
+[https://github.com/usnistgov/SCTK](https://github.com/usnistgov/SCTK)  
+
