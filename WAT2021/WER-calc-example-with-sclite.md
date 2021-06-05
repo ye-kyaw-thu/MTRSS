@@ -1,13 +1,20 @@
 # WER Calculation for Model Ensemble Experiment
 
-Preparing files...   
+Preparing files... 
+အရင်ဆုံး ဖိုလ်ဒါအသစ် တစ်ခု ဆောက်လိုက်ပြီးတော့ အဲဒီထဲမှာ reference ဖိုင်နဲ့ model တွေက ထွက်လာတဲ့ ဘာသာပြန်ထားတဲ့ output file (i.e. hypothesis) တွေကို စုထားလိုက်ရအောင်...  
 
 ##  English-Myanmar
 ### Reference File:
+
+test.my ဖိုင်က မြန်မာစာ အတွက် reference ဖိုင်ပါ။  
+ဆိုလိုတာက en-my translation model က ထွက်လာတဲ့ hypothesis ဖိုင်တွေနဲ့ ဒီ reference ဖိုင်နဲ့ နှိုင်းယှဉ်ပြီးတော့ Edit Distance ကို အခြေခံတဲ့ WER calculation လုပ်မှာပါ။  
+
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ cp ~/exp/nmt/plus-alt/data/test.my .
 ```
+
 ### s2s:
+
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ cp ~/exp/nmt/plus-alt/model.s2s-4/hyp.model.my ./s2s.en-my.hyp
 ```
