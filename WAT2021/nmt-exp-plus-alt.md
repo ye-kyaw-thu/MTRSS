@@ -3324,6 +3324,7 @@ BLEU = 10.94, 47.0/19.9/9.7/5.0 (BP=0.752, ratio=0.778, hyp_len=21726, ref_len=2
 
 UCSY Corpus က word segmented မလုပ်ထားတာကိုပဲ ပေးတယ်။
 အဲဒါကြောင့် မြန်မာစာ ဒေတာဘက် အခြမ်းကို word segmentation ဖြတ်ပြီးတော့ MT experiment လုပ်ဖို့အတွက် in-house myWord ကို သုံးပြီး စာလုံးဖြတ်ဖို့အတွက် ပြင်ဆင်ခဲ့...  
+word segmentation လုပ်ထားတဲ့ output ကို copy ကိုယ် experiment လုပ်တဲ့အခါမှာ သုံးမယ့် data path ဖြစ်တဲ့ data_word/ အောက်ကို ကော်ပီကူးယူခဲ့...  
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/tool/word-seg-tool/python-wordsegment/wordsegment/y-test/ref/viterbi/exp-4/wat2021-data/final$ cp valid.my.word /home/ye/exp/nmt/plus-alt/data_word/valid.my
@@ -3333,6 +3334,8 @@ UCSY Corpus က word segmented မလုပ်ထားတာကိုပဲ ပ
 ```
 
 ## Check parallel data
+
+total sentence ကို wc command နဲ့ check လုပ်ပြီး parallel ဖြစ်မဖြစ် confirmation လုပ်ခဲ့...  
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$ wc *.en
@@ -3346,6 +3349,8 @@ UCSY Corpus က word segmented မလုပ်ထားတာကိုပဲ ပ
     1000    35355   528100 valid.my
   258120  4531918 69160286 total
 ```
+
+မျက်လုံးနဲ့ ဖိုင်ထဲက စာလုံး ဖြတ်ထားတာတွေကို အကြမ်းမျဉ်း confirmation လုပ်ခဲ့...  
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$ head -3 *.my
@@ -3367,6 +3372,8 @@ UCSY Corpus က word segmented မလုပ်ထားတာကိုပဲ ပ
 ```
 
 ## Prepare Vocab Files (for word unit)
+
+word ဖြတ်ထားတဲ့ မြန်မာစာ ဖိုင်တွေအတွက် Vocab ဖိုင် ပြင်ဆင်ခဲ့...  
 
 ```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$ cat ./train.my ./valid.my > ./vocab/train-dev.my
@@ -3391,6 +3398,7 @@ UCSY Corpus က word segmented မလုပ်ထားတာကိုပဲ ပ
 ## System 
 ## Script for s2s (word unit)
 
+```
 #!/bin/bash
 
 # Preparation for WAT2021 en-my, my-en share MT task by Ye, LST, NECTEC, Thailand
@@ -3421,9 +3429,11 @@ marian \
   --dump-config > model.s2s-4.word/config.yml
   
 time marian -c model.s2s-4.word/config.yml  2>&1 | tee s2s.enmy.syl.log
+```
 
 ## Training Log
 
+```
 [2021-06-02 14:32:06] [data] Shuffling data
 [2021-06-02 14:32:06] [data] Done reading 256,102 sentences
 [2021-06-02 14:32:07] [data] Done shuffling 256,102 sentences to temp files
@@ -3460,11 +3470,12 @@ real	0m34.528s
 user	0m34.291s
 sys	0m0.839s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.sh 
+```
 
+စက်ကို restart လုပ်ပြီး နောက်တစ်ခေါက် ပြန် run ခဲ့...  
 
-စက်ကို restart လုပ်ပြီး နောက်တစ်ခေါက် ပြန် run ခဲ့...
-
-base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.sh 
+```
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.sh 
 mkdir: cannot create directory ‘model.s2s-4.word’: File exists
 [2021-06-02 15:23:20] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
 [2021-06-02 15:23:20] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 3896 with command line:
@@ -4246,15 +4257,19 @@ real	2792m23.906s
 user	4421m19.381s
 sys	2m3.689s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+```
 
 ## Update Script and Train Again
 
-BLEU score နဲ့ပဲ တွက်ကြည့်ရင် stalled time က ၅ခါပဲ ရှိသေးလို့ ထပ်ကြိုးစားကြည့်။
-ဒီအတိုင်း epoch ပဲ တိုးတာမျိုးထက် dropout ကိုပါ ကစားကြည့်ခဲ့...
+BLEU score နဲ့ပဲ တွက်ကြည့်ရင် stalled time က ၅ခါပဲ ရှိသေးလို့ ထပ်ကြိုးစားကြည့်။  
+ဒီအတိုင်း epoch ပဲ တိုးတာမျိုးထက် dropout ကိုပါ ကစားကြည့်ခဲ့...  
 
+```
   --dropout-rnn 0.2 --dropout-src 0.2 --exponential-smoothing \
   --early-stopping 20 \
+```
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.sh 
 ...
 ...
@@ -4295,9 +4310,13 @@ BLEU score နဲ့ပဲ တွက်ကြည့်ရင် stalled time က
 ***
 ***
 BLEU မှာလည်း stalled time က ၁၀ခါ ကျော်သွားပြီမို့ ရပ်ပြီးတော့ Transformer ကို run ဖို့ ပြင်ခဲ့...
+```
 
 ## Translation
 
+ရလာတဲ့ မော်ဒယ်ကို test data သုံးပြီးတော့ evaluation လုပ်ခဲ့...  
+
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word$ time marian-decoder -m ./model.npz -v ../data_word/vocab/vocab.en.yml ../data_word/vocab/vocab.my.yml --devices 0 1 --output hyp.model.my < ../data_word/test.en
 ...
 ...
@@ -4341,13 +4360,15 @@ BLEU မှာလည်း stalled time က ၁၀ခါ ကျော်သွ�
 real	3m37.514s
 user	7m9.482s
 sys	0m2.578s
-
+```
 
 ## Evaluation
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.my < ./hyp.model.my  >> results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word$ cat ./results.txt 
 BLEU = 6.27, 39.8/14.2/5.4/2.1 (BP=0.704, ratio=0.740, hyp_len=26830, ref_len=36255)
+```
 
 =============================================================
 
