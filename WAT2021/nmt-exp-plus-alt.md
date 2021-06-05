@@ -1,5 +1,5 @@
 # Running Log of NMT Experiments (plus ALT Corpus)
-Last Updated: 2 June 2021
+Last Updated: 5 June 2021
 
 Exp 2: Ensemble Two Models (YCC-MT2 Team) အရင် run ခဲ့တာအားလုံးကို (UCSY+ALT training data) နဲ့  
 နောက်တစ်ခေါက် အစအဆုံး ပြန် run ခဲ့တဲ့ running log ပါ။   
