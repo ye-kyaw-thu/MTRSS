@@ -3319,6 +3319,1028 @@ BLEU = 10.94, 47.0/19.9/9.7/5.0 (BP=0.752, ratio=0.778, hyp_len=21726, ref_len=2
 
 =============================================================
 
+
+## Prepared Word Segmented Data for Myanmar
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/tool/word-seg-tool/python-wordsegment/wordsegment/y-test/ref/viterbi/exp-4/wat2021-data/final$ cp valid.my.word /home/ye/exp/nmt/plus-alt/data_word/valid.my
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/tool/word-seg-tool/python-wordsegment/wordsegment/y-test/ref/viterbi/exp-4/wat2021-data/final$ cp test.my.word /home/ye/exp/nmt/plus-alt/data_word/test.my
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/tool/word-seg-tool/python-wordsegment/wordsegment/y-test/ref/viterbi/exp-4/wat2021-data/final$ cp ./ucsy-alt.train.word /home/ye/exp/nmt/plus-alt/data_word/train.my
+
+## Check parallel data
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$ wc *.en
+    1018    27929   151447 test.en
+  256102  3770260 19768494 train.en
+    1000    27318   147768 valid.en
+  258120  3825507 20067709 total
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$ wc *.my
+    1018    36255   538803 test.my
+  256102  4460308 68093383 train.my
+    1000    35355   528100 valid.my
+  258120  4531918 69160286 total
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$ head -3 *.my
+==> test.my <==
+ဆစ်ဒနီ ကရန့်ဝစ်ခ် မြင်း ပြိုင်ကွင်း မှ မျိုး သန့် ပြိုင်မြင်း ရှစ် ကောင် ဟာ မြင်း တုတ်ကွေး ရောဂါ ကူးစက် ခံ ခဲ့ ရ တယ် ဆို တာ အတည်ပြု ခဲ့ ပါ တယ် ။
+ရန့်ဝစ်ခ် ကို ပိတ် ထား ခဲ့ ပြီး ၂လ အထိ ကြာကြာ ဆက်လက် ထိန်းသိမ်း ထားရန် မျှော်လင့် ပါ တယ် ။
+အလွန် ပြင်းထန် သော တုတ်ကွေး ဟာ ရန့်ဝစ်ခ် မှာ အမြဲ ထားသော မြင်း ၇၀၀ ထဲ က အများစု ကို ကူးစက် လိမ့် မည် လို့ ခန့်မှန်း ထား ပါ တယ် ။
+
+==> train.my <==
+ကြိမ်ချောင်း ရဲစခန်း တွင် လူသတ်မှု ဖြင့် အမှု ဖွင့် ထား ပြီး ပြီ ။
+ရဲ များ က စုံစမ်း လျက် ရှိ သည် ။
+တပ်မတော် တပ်ဖွဲ့ သည် ရှမ်းပြည်နယ် မြောက်ပိုင်း တာမိုးညဲ မြို့ ၌ မနေ့ က ရှောင်တခင် စစ်ဆေး မှု တစ်ခု ပြုလုပ် စဉ် အတွင်း ယာဉ် တစ်စီး မှ လက်နက်များ နှင့် တရားမဝင် သစ် များ ကို ဖမ်းဆီးရမိခဲ့ သည် ။
+
+==> valid.my <==
+&quot; သူ ၏ ဆုံးပါး ခြင်း အတွက် ကျွန်တော်တို့ ဝမ်းနည်း သော်လည်း ၊ လူမျိုးရေး နှင့် ဘာသာ ရေး ရန်စွယ် ကို နှိုးဆွ ပေး သော အမွေအနှစ် တစ်ခု ကို သူ ချန် ထား ခဲ့ သည် ။ &quot;
+ပါကစ္စတန် နိုင်ငံ ၏ ဝတ် ဇီရီစ တန် မြောက်ပိုင်း ရှိ ၊ လူ က ထိန်း ရန်မလို သော စစ် လေယာဉ် မှ ပစ်ခတ် ခြင်း အနေဖြင့် ယခု သတ်မှတ်ထား သော ၊ အမေရိကန် ပြည်ထောင်စု ဒုံးကျည် ဖြင့် ၊ သူ့ ကို ထိခိုက် စေ ခဲ့ သည် ဟု ထင်ကြေးပေး ခဲ့ ပြီးနောက် နောက်ထပ် အလွန် များပြား သော စစ်သွေးကြွ များ လည်း သေဆုံးကြောင်း သတင်းပို့ ခဲ့ သည် ။
+&quot; လူ က ထိန်း ရန်မလို သော လေယာဉ် မှ ပစ်ခတ် ရန် ဒုံးကျည် ပေါ်ပေါက် ခဲ့ သည် ၊&quot; ဟု ပါကစ္စတန် သတင်း ထောက်လှမ်းရေး အရာရှိ တစ် ယောက် က ပြော ခဲ့ သည် ။
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$
+
+
+## Prepare Vocab Files (for word unit)
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word$ cat ./train.my ./valid.my > ./vocab/train-dev.my
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word/vocab$ marian-vocab < ./train-dev.my > ./vocab.my.yml
+[2021-06-02 14:27:46] Creating vocabulary...
+[2021-06-02 14:27:46] [data] Creating vocabulary stdout from stdin
+[2021-06-02 14:27:48] Finished
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/data_word/vocab$ head ./vocab.my.yml 
+</s>: 0
+<unk>: 1
+။: 2
+သည်: 3
+ကို: 4
+များ: 5
+တယ်: 6
+က: 7
+ပါ: 8
+ခဲ့: 9
+
+## System 
+## Script for s2s (word unit)
+
+#!/bin/bash
+
+# Preparation for WAT2021 en-my, my-en share MT task by Ye, LST, NECTEC, Thailand
+## for Word Unit
+## Reference: https://marian-nmt.github.io/examples/mtm2017/complex/
+
+mkdir model.s2s-4.word;
+
+marian \
+  --type s2s \
+  --train-sets data_word/train.en data_word/train.my \
+  --max-length 100 \
+  --valid-sets data_word/valid.en data_word/valid.my \
+  --vocabs data_word/vocab/vocab.en.yml data_word/vocab/vocab.my.yml \
+  --model model.s2s-4.word/model.npz \
+  --workspace 500 \
+  --enc-depth 2 --enc-type alternating --enc-cell lstm --enc-cell-depth 2 \
+  --dec-depth 2 --dec-cell lstm --dec-cell-base-depth 2 --dec-cell-high-depth 2 \
+  --tied-embeddings --layer-normalization --skip \
+  --mini-batch-fit \
+  --valid-mini-batch 32 \
+  --valid-metrics cross-entropy perplexity bleu\
+  --valid-freq 5000 --save-freq 5000 --disp-freq 500 \
+  --dropout-rnn 0.3 --dropout-src 0.3 --exponential-smoothing \
+  --early-stopping 10 \
+  --log model.s2s-4.word/train.log --valid-log model.s2s-4.word/valid.log \
+  --devices 0 1 --sync-sgd --seed 1111  \
+  --dump-config > model.s2s-4.word/config.yml
+  
+time marian -c model.s2s-4.word/config.yml  2>&1 | tee s2s.enmy.syl.log
+
+## Training Log
+
+[2021-06-02 14:32:06] [data] Shuffling data
+[2021-06-02 14:32:06] [data] Done reading 256,102 sentences
+[2021-06-02 14:32:07] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-02 14:32:07] [training] Batches are processed as 1 process(es) x 2 devices/process
+[2021-06-02 14:32:07] [memory] Reserving 626 MB, device gpu1
+[2021-06-02 14:32:07] [memory] Reserving 626 MB, device gpu0
+[2021-06-02 14:32:07] [memory] Reserving 626 MB, device gpu0
+[2021-06-02 14:32:07] [memory] Reserving 626 MB, device gpu1
+[2021-06-02 14:32:07] [memory] Reserving 313 MB, device gpu0
+[2021-06-02 14:32:07] [memory] Reserving 313 MB, device gpu1
+[2021-06-02 14:32:08] [memory] Reserving 626 MB, device gpu0
+[2021-06-02 14:32:08] [memory] Reserving 626 MB, device gpu1
+[2021-06-02 14:32:08] Error: CUDA error 2 'out of memory' - /home/ye/tool/marian/src/tensors/gpu/device.cu:38: cudaMalloc(&data_, size)
+[2021-06-02 14:32:08] Error: Aborted from virtual void marian::gpu::Device::reserve(size_t) in /home/ye/tool/marian/src/tensors/gpu/device.cu:38
+
+[CALL STACK]
+[0x55f79f2a5eb3]    marian::gpu::Device::  reserve  (unsigned long)    + 0x15b3
+[0x55f79ebf62be]    marian::TensorAllocator::  reserveExact  (unsigned long) + 0x11e
+[0x55f79ee111e9]    marian::Adam::  updateImpl  (IntrusivePtr<marian::TensorBase>,  IntrusivePtr<marian::TensorBase>,  unsigned long,  unsigned long) + 0x6a9
+[0x55f79ef59a55]    marian::OptimizerBase::  update  (IntrusivePtr<marian::TensorBase>,  IntrusivePtr<marian::TensorBase>,  unsigned long) + 0xc5
+[0x55f79ef6c488]                                                       + 0x73f488
+[0x55f79eff18fa]    marian::ThreadPool::enqueue<std::function<void (unsigned long,unsigned long,unsigned long)> const&,unsigned long&,unsigned long&,unsigned long&>(std::function<void (unsigned long,unsigned long,unsigned long)> const&,unsigned long&,unsigned long&,unsigned long&)::{lambda()#1}::  operator()  () const + 0x5a
+[0x55f79eff2544]    std::_Function_handler<std::unique_ptr<std::__future_base::_Result_base,std::__future_base::_Result_base::_Deleter> (),std::__future_base::_Task_setter<std::unique_ptr<std::__future_base::_Result<void>,std::__future_base::_Result_base::_Deleter>,std::__future_base::_Task_state<marian::ThreadPool::enqueue<std::function<void (unsigned long,unsigned long,unsigned long)> const&,unsigned long&,unsigned long&,unsigned long&>(std::function<void (unsigned long,unsigned long,unsigned long)> const&,unsigned long&,unsigned long&,unsigned long&)::{lambda()#1},std::allocator<int>,void ()>::_M_run()::{lambda()#1},void>>::  _M_invoke  (std::_Any_data const&) + 0x34
+[0x55f79eb7f15d]    std::__future_base::_State_baseV2::  _M_do_set  (std::function<std::unique_ptr<std::__future_base::_Result_base,std::__future_base::_Result_base::_Deleter> ()>*,  bool*) + 0x2d
+[0x7f97867ffc0f]                                                       + 0x11c0f
+[0x55f79efd7ee1]    std::_Function_handler<void (),marian::ThreadPool::enqueue<std::function<void (unsigned long,unsigned long,unsigned long)> const&,unsigned long&,unsigned long&,unsigned long&>(std::function<void (unsigned long,unsigned long,unsigned long)> const&,unsigned long&,unsigned long&,unsigned long&)::{lambda()#3}>::  _M_invoke  (std::_Any_data const&) + 0x121
+[0x55f79eb8189a]    std::thread::_State_impl<std::thread::_Invoker<std::tuple<marian::ThreadPool::reserve(unsigned long)::{lambda()#1}>>>::  _M_run  () + 0x13a
+[0x7f97866e3d84]                                                       + 0xd6d84
+[0x7f97867f7590]                                                       + 0x9590
+[0x7f97863d2223]    clone                                              + 0x43
+
+
+real	0m34.528s
+user	0m34.291s
+sys	0m0.839s
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.sh 
+
+
+စက်ကို restart လုပ်ပြီး နောက်တစ်ခေါက် ပြန် run ခဲ့...
+
+base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.sh 
+mkdir: cannot create directory ‘model.s2s-4.word’: File exists
+[2021-06-02 15:23:20] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-02 15:23:20] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 3896 with command line:
+[2021-06-02 15:23:20] [marian] marian -c model.s2s-4.word/config.yml
+[2021-06-02 15:23:20] [config] after: 0e
+[2021-06-02 15:23:20] [config] after-batches: 0
+[2021-06-02 15:23:20] [config] after-epochs: 0
+[2021-06-02 15:23:20] [config] all-caps-every: 0
+[2021-06-02 15:23:20] [config] allow-unk: false
+[2021-06-02 15:23:20] [config] authors: false
+[2021-06-02 15:23:20] [config] beam-size: 12
+[2021-06-02 15:23:20] [config] bert-class-symbol: "[CLS]"
+[2021-06-02 15:23:20] [config] bert-mask-symbol: "[MASK]"
+[2021-06-02 15:23:20] [config] bert-masking-fraction: 0.15
+[2021-06-02 15:23:20] [config] bert-sep-symbol: "[SEP]"
+[2021-06-02 15:23:20] [config] bert-train-type-embeddings: true
+[2021-06-02 15:23:20] [config] bert-type-vocab-size: 2
+[2021-06-02 15:23:20] [config] build-info: ""
+[2021-06-02 15:23:20] [config] cite: false
+[2021-06-02 15:23:20] [config] clip-norm: 1
+[2021-06-02 15:23:20] [config] cost-scaling:
+[2021-06-02 15:23:20] [config]   []
+[2021-06-02 15:23:20] [config] cost-type: ce-sum
+[2021-06-02 15:23:20] [config] cpu-threads: 0
+[2021-06-02 15:23:20] [config] data-weighting: ""
+[2021-06-02 15:23:20] [config] data-weighting-type: sentence
+[2021-06-02 15:23:20] [config] dec-cell: lstm
+[2021-06-02 15:23:20] [config] dec-cell-base-depth: 2
+[2021-06-02 15:23:20] [config] dec-cell-high-depth: 2
+[2021-06-02 15:23:20] [config] dec-depth: 2
+[2021-06-02 15:23:20] [config] devices:
+[2021-06-02 15:23:20] [config]   - 0
+[2021-06-02 15:23:20] [config]   - 1
+[2021-06-02 15:23:20] [config] dim-emb: 512
+[2021-06-02 15:23:20] [config] dim-rnn: 1024
+[2021-06-02 15:23:20] [config] dim-vocabs:
+[2021-06-02 15:23:20] [config]   - 0
+[2021-06-02 15:23:20] [config]   - 0
+[2021-06-02 15:23:20] [config] disp-first: 0
+[2021-06-02 15:23:20] [config] disp-freq: 500
+[2021-06-02 15:23:20] [config] disp-label-counts: true
+[2021-06-02 15:23:20] [config] dropout-rnn: 0.3
+[2021-06-02 15:23:20] [config] dropout-src: 0.3
+[2021-06-02 15:23:20] [config] dropout-trg: 0
+[2021-06-02 15:23:20] [config] dump-config: ""
+[2021-06-02 15:23:20] [config] early-stopping: 10
+[2021-06-02 15:23:20] [config] embedding-fix-src: false
+[2021-06-02 15:23:20] [config] embedding-fix-trg: false
+[2021-06-02 15:23:20] [config] embedding-normalization: false
+[2021-06-02 15:23:20] [config] embedding-vectors:
+[2021-06-02 15:23:20] [config]   []
+[2021-06-02 15:23:20] [config] enc-cell: lstm
+[2021-06-02 15:23:20] [config] enc-cell-depth: 2
+[2021-06-02 15:23:20] [config] enc-depth: 2
+[2021-06-02 15:23:20] [config] enc-type: alternating
+[2021-06-02 15:23:20] [config] english-title-case-every: 0
+[2021-06-02 15:23:20] [config] exponential-smoothing: 0.0001
+[2021-06-02 15:23:20] [config] factor-weight: 1
+[2021-06-02 15:23:20] [config] grad-dropping-momentum: 0
+[2021-06-02 15:23:20] [config] grad-dropping-rate: 0
+[2021-06-02 15:23:20] [config] grad-dropping-warmup: 100
+[2021-06-02 15:23:20] [config] gradient-checkpointing: false
+[2021-06-02 15:23:20] [config] guided-alignment: none
+[2021-06-02 15:23:20] [config] guided-alignment-cost: mse
+[2021-06-02 15:23:20] [config] guided-alignment-weight: 0.1
+[2021-06-02 15:23:20] [config] ignore-model-config: false
+[2021-06-02 15:23:20] [config] input-types:
+[2021-06-02 15:23:20] [config]   []
+[2021-06-02 15:23:20] [config] interpolate-env-vars: false
+[2021-06-02 15:23:20] [config] keep-best: false
+[2021-06-02 15:23:20] [config] label-smoothing: 0
+[2021-06-02 15:23:20] [config] layer-normalization: true
+[2021-06-02 15:23:20] [config] learn-rate: 0.0001
+[2021-06-02 15:23:20] [config] lemma-dim-emb: 0
+[2021-06-02 15:23:20] [config] log: model.s2s-4.word/train.log
+[2021-06-02 15:23:20] [config] log-level: info
+[2021-06-02 15:23:20] [config] log-time-zone: ""
+[2021-06-02 15:23:20] [config] logical-epoch:
+[2021-06-02 15:23:20] [config]   - 1e
+[2021-06-02 15:23:20] [config]   - 0
+[2021-06-02 15:23:20] [config] lr-decay: 0
+[2021-06-02 15:23:20] [config] lr-decay-freq: 50000
+[2021-06-02 15:23:20] [config] lr-decay-inv-sqrt:
+[2021-06-02 15:23:20] [config]   - 0
+[2021-06-02 15:23:20] [config] lr-decay-repeat-warmup: false
+[2021-06-02 15:23:20] [config] lr-decay-reset-optimizer: false
+[2021-06-02 15:23:20] [config] lr-decay-start:
+[2021-06-02 15:23:20] [config]   - 10
+[2021-06-02 15:23:20] [config]   - 1
+[2021-06-02 15:23:20] [config] lr-decay-strategy: epoch+stalled
+[2021-06-02 15:23:20] [config] lr-report: false
+[2021-06-02 15:23:20] [config] lr-warmup: 0
+[2021-06-02 15:23:20] [config] lr-warmup-at-reload: false
+[2021-06-02 15:23:20] [config] lr-warmup-cycle: false
+[2021-06-02 15:23:20] [config] lr-warmup-start-rate: 0
+[2021-06-02 15:23:20] [config] max-length: 100
+[2021-06-02 15:23:20] [config] max-length-crop: false
+[2021-06-02 15:23:20] [config] max-length-factor: 3
+[2021-06-02 15:23:20] [config] maxi-batch: 100
+[2021-06-02 15:23:20] [config] maxi-batch-sort: trg
+[2021-06-02 15:23:20] [config] mini-batch: 64
+[2021-06-02 15:23:20] [config] mini-batch-fit: true
+[2021-06-02 15:23:20] [config] mini-batch-fit-step: 10
+[2021-06-02 15:23:20] [config] mini-batch-track-lr: false
+[2021-06-02 15:23:20] [config] mini-batch-warmup: 0
+[2021-06-02 15:23:20] [config] mini-batch-words: 0
+[2021-06-02 15:23:20] [config] mini-batch-words-ref: 0
+[2021-06-02 15:23:20] [config] model: model.s2s-4.word/model.npz
+[2021-06-02 15:23:20] [config] multi-loss-type: sum
+[2021-06-02 15:23:20] [config] multi-node: false
+[2021-06-02 15:23:20] [config] multi-node-overlap: true
+[2021-06-02 15:23:20] [config] n-best: false
+[2021-06-02 15:23:20] [config] no-nccl: false
+[2021-06-02 15:23:20] [config] no-reload: false
+[2021-06-02 15:23:20] [config] no-restore-corpus: false
+[2021-06-02 15:23:20] [config] normalize: 0
+[2021-06-02 15:23:20] [config] normalize-gradient: false
+[2021-06-02 15:23:20] [config] num-devices: 0
+[2021-06-02 15:23:20] [config] optimizer: adam
+[2021-06-02 15:23:20] [config] optimizer-delay: 1
+[2021-06-02 15:23:20] [config] optimizer-params:
+[2021-06-02 15:23:20] [config]   []
+[2021-06-02 15:23:20] [config] output-omit-bias: false
+[2021-06-02 15:23:20] [config] overwrite: false
+[2021-06-02 15:23:20] [config] precision:
+[2021-06-02 15:23:20] [config]   - float32
+[2021-06-02 15:23:20] [config]   - float32
+[2021-06-02 15:23:20] [config]   - float32
+[2021-06-02 15:23:20] [config] pretrained-model: ""
+[2021-06-02 15:23:20] [config] quantize-biases: false
+[2021-06-02 15:23:20] [config] quantize-bits: 0
+[2021-06-02 15:23:20] [config] quantize-log-based: false
+[2021-06-02 15:23:20] [config] quantize-optimization-steps: 0
+[2021-06-02 15:23:20] [config] quiet: false
+[2021-06-02 15:23:20] [config] quiet-translation: false
+[2021-06-02 15:23:20] [config] relative-paths: false
+[2021-06-02 15:23:20] [config] right-left: false
+[2021-06-02 15:23:20] [config] save-freq: 5000
+[2021-06-02 15:23:20] [config] seed: 1111
+[2021-06-02 15:23:20] [config] sentencepiece-alphas:
+[2021-06-02 15:23:20] [config]   []
+[2021-06-02 15:23:20] [config] sentencepiece-max-lines: 2000000
+[2021-06-02 15:23:20] [config] sentencepiece-options: ""
+[2021-06-02 15:23:20] [config] shuffle: data
+[2021-06-02 15:23:20] [config] shuffle-in-ram: false
+[2021-06-02 15:23:20] [config] sigterm: save-and-exit
+[2021-06-02 15:23:20] [config] skip: true
+[2021-06-02 15:23:20] [config] sqlite: ""
+[2021-06-02 15:23:20] [config] sqlite-drop: false
+[2021-06-02 15:23:20] [config] sync-sgd: true
+[2021-06-02 15:23:20] [config] tempdir: /tmp
+[2021-06-02 15:23:20] [config] tied-embeddings: true
+[2021-06-02 15:23:20] [config] tied-embeddings-all: false
+[2021-06-02 15:23:20] [config] tied-embeddings-src: false
+[2021-06-02 15:23:20] [config] train-embedder-rank:
+[2021-06-02 15:23:20] [config]   []
+[2021-06-02 15:23:20] [config] train-sets:
+[2021-06-02 15:23:20] [config]   - data_word/train.en
+[2021-06-02 15:23:20] [config]   - data_word/train.my
+[2021-06-02 15:23:20] [config] transformer-aan-activation: swish
+[2021-06-02 15:23:20] [config] transformer-aan-depth: 2
+[2021-06-02 15:23:20] [config] transformer-aan-nogate: false
+[2021-06-02 15:23:20] [config] transformer-decoder-autoreg: self-attention
+[2021-06-02 15:23:20] [config] transformer-depth-scaling: false
+[2021-06-02 15:23:20] [config] transformer-dim-aan: 2048
+[2021-06-02 15:23:20] [config] transformer-dim-ffn: 2048
+[2021-06-02 15:23:20] [config] transformer-dropout: 0
+[2021-06-02 15:23:20] [config] transformer-dropout-attention: 0
+[2021-06-02 15:23:20] [config] transformer-dropout-ffn: 0
+[2021-06-02 15:23:20] [config] transformer-ffn-activation: swish
+[2021-06-02 15:23:20] [config] transformer-ffn-depth: 2
+[2021-06-02 15:23:20] [config] transformer-guided-alignment-layer: last
+[2021-06-02 15:23:20] [config] transformer-heads: 8
+[2021-06-02 15:23:20] [config] transformer-no-projection: false
+[2021-06-02 15:23:20] [config] transformer-pool: false
+[2021-06-02 15:23:20] [config] transformer-postprocess: dan
+[2021-06-02 15:23:20] [config] transformer-postprocess-emb: d
+[2021-06-02 15:23:20] [config] transformer-postprocess-top: ""
+[2021-06-02 15:23:20] [config] transformer-preprocess: ""
+[2021-06-02 15:23:20] [config] transformer-tied-layers:
+[2021-06-02 15:23:20] [config]   []
+[2021-06-02 15:23:20] [config] transformer-train-position-embeddings: false
+[2021-06-02 15:23:20] [config] tsv: false
+[2021-06-02 15:23:20] [config] tsv-fields: 0
+[2021-06-02 15:23:20] [config] type: s2s
+[2021-06-02 15:23:20] [config] ulr: false
+[2021-06-02 15:23:20] [config] ulr-dim-emb: 0
+[2021-06-02 15:23:20] [config] ulr-dropout: 0
+[2021-06-02 15:23:20] [config] ulr-keys-vectors: ""
+[2021-06-02 15:23:20] [config] ulr-query-vectors: ""
+[2021-06-02 15:23:20] [config] ulr-softmax-temperature: 1
+[2021-06-02 15:23:20] [config] ulr-trainable-transformation: false
+[2021-06-02 15:23:20] [config] unlikelihood-loss: false
+[2021-06-02 15:23:20] [config] valid-freq: 5000
+[2021-06-02 15:23:20] [config] valid-log: model.s2s-4.word/valid.log
+[2021-06-02 15:23:20] [config] valid-max-length: 1000
+[2021-06-02 15:23:20] [config] valid-metrics:
+[2021-06-02 15:23:20] [config]   - cross-entropy
+[2021-06-02 15:23:20] [config]   - perplexity
+[2021-06-02 15:23:20] [config]   - bleu
+[2021-06-02 15:23:20] [config] valid-mini-batch: 32
+[2021-06-02 15:23:20] [config] valid-reset-stalled: false
+[2021-06-02 15:23:20] [config] valid-script-args:
+[2021-06-02 15:23:20] [config]   []
+[2021-06-02 15:23:20] [config] valid-script-path: ""
+[2021-06-02 15:23:20] [config] valid-sets:
+[2021-06-02 15:23:20] [config]   - data_word/valid.en
+[2021-06-02 15:23:20] [config]   - data_word/valid.my
+[2021-06-02 15:23:20] [config] valid-translation-output: ""
+[2021-06-02 15:23:20] [config] vocabs:
+[2021-06-02 15:23:20] [config]   - data_word/vocab/vocab.en.yml
+[2021-06-02 15:23:20] [config]   - data_word/vocab/vocab.my.yml
+[2021-06-02 15:23:20] [config] word-penalty: 0
+[2021-06-02 15:23:20] [config] word-scores: false
+[2021-06-02 15:23:20] [config] workspace: 500
+[2021-06-02 15:23:20] [config] Model is being created with Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-02 15:23:20] Using synchronous SGD
+[2021-06-02 15:23:20] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.en.yml
+[2021-06-02 15:23:20] [data] Setting vocabulary size for input 0 to 85,602
+[2021-06-02 15:23:20] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.my.yml
+[2021-06-02 15:23:21] [data] Setting vocabulary size for input 1 to 63,471
+[2021-06-02 15:23:21] [comm] Compiled without MPI support. Running as a single process on administrator-HP-Z2-Tower-G4-Workstation
+[2021-06-02 15:23:21] [batching] Collecting statistics for batch fitting with step size 10
+[2021-06-02 15:23:21] [memory] Extending reserved space to 512 MB (device gpu0)
+[2021-06-02 15:23:21] [memory] Extending reserved space to 512 MB (device gpu1)
+[2021-06-02 15:23:21] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-02 15:23:21] [comm] NCCLCommunicator constructed successfully
+[2021-06-02 15:23:21] [training] Using 2 GPUs
+[2021-06-02 15:23:21] [logits] Applying loss function for 1 factor(s)
+[2021-06-02 15:23:21] [memory] Reserving 626 MB, device gpu0
+[2021-06-02 15:23:22] [gpu] 16-bit TensorCores enabled for float32 matrix operations
+[2021-06-02 15:23:22] [memory] Reserving 626 MB, device gpu0
+[2021-06-02 15:23:53] [batching] Done. Typical MB size is 698 target words
+[2021-06-02 15:23:53] [memory] Extending reserved space to 512 MB (device gpu0)
+[2021-06-02 15:23:53] [memory] Extending reserved space to 512 MB (device gpu1)
+[2021-06-02 15:23:53] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-02 15:23:53] [comm] NCCLCommunicator constructed successfully
+[2021-06-02 15:23:53] [training] Using 2 GPUs
+[2021-06-02 15:23:53] Training started
+[2021-06-02 15:23:53] [data] Shuffling data
+[2021-06-02 15:23:53] [data] Done reading 256,102 sentences
+[2021-06-02 15:23:54] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-02 15:23:54] [training] Batches are processed as 1 process(es) x 2 devices/process
+[2021-06-02 15:23:54] [memory] Reserving 626 MB, device gpu1
+[2021-06-02 15:23:54] [memory] Reserving 626 MB, device gpu0
+[2021-06-02 15:23:54] [memory] Reserving 626 MB, device gpu0
+[2021-06-02 15:23:54] [memory] Reserving 626 MB, device gpu1
+[2021-06-02 15:23:54] [memory] Reserving 313 MB, device gpu0
+[2021-06-02 15:23:54] [memory] Reserving 313 MB, device gpu1
+[2021-06-02 15:23:55] [memory] Reserving 626 MB, device gpu0
+[2021-06-02 15:23:55] [memory] Reserving 626 MB, device gpu1
+[2021-06-02 15:33:50] Ep. 1 : Up. 500 : Sen. 13,931 : Cost 7.42477036 * 258,947 after 258,947 : Time 597.22s : 433.59 words/s
+[2021-06-02 15:43:39] Ep. 1 : Up. 1000 : Sen. 28,331 : Cost 6.11437225 * 255,570 after 514,517 : Time 589.22s : 433.74 words/s
+[2021-06-02 15:53:38] Ep. 1 : Up. 1500 : Sen. 42,588 : Cost 5.59964657 * 255,879 after 770,396 : Time 598.64s : 427.44 words/s
+[2021-06-02 16:03:26] Ep. 1 : Up. 2000 : Sen. 56,813 : Cost 5.32196188 * 257,937 after 1,028,333 : Time 588.10s : 438.59 words/s
+[2021-06-02 16:13:14] Ep. 1 : Up. 2500 : Sen. 70,744 : Cost 5.17729187 * 254,074 after 1,282,407 : Time 588.26s : 431.91 words/s
+[2021-06-02 16:22:59] Ep. 1 : Up. 3000 : Sen. 84,778 : Cost 5.05240250 * 256,204 after 1,538,611 : Time 584.91s : 438.02 words/s
+[2021-06-02 16:32:49] Ep. 1 : Up. 3500 : Sen. 98,977 : Cost 4.95569420 * 257,597 after 1,796,208 : Time 590.09s : 436.54 words/s
+[2021-06-02 16:42:37] Ep. 1 : Up. 4000 : Sen. 113,078 : Cost 4.87689066 * 257,875 after 2,054,083 : Time 587.17s : 439.18 words/s
+[2021-06-02 16:52:20] Ep. 1 : Up. 4500 : Sen. 127,275 : Cost 4.79604292 * 256,839 after 2,310,922 : Time 583.38s : 440.26 words/s
+[2021-06-02 17:02:05] Ep. 1 : Up. 5000 : Sen. 141,309 : Cost 4.72411251 * 255,799 after 2,566,721 : Time 585.32s : 437.02 words/s
+[2021-06-02 17:02:05] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-02 17:02:08] Saving model weights and runtime parameters to model.s2s-4.word/model.iter5000.npz
+[2021-06-02 17:02:09] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-02 17:02:12] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-02 17:02:26] [valid] Ep. 1 : Up. 5000 : cross-entropy : 211.724 : new best
+[2021-06-02 17:02:33] [valid] Ep. 1 : Up. 5000 : perplexity : 338.249 : new best
+[2021-06-02 17:02:33] Translating validation set...
+[2021-06-02 17:02:37] [valid] [valid] First sentence's tokens as scored:
+[2021-06-02 17:02:37] [valid] DefaultVocab keeps original segments for scoring
+[2021-06-02 17:02:37] [valid] [valid]   Hyp: ဤ ပုဒ်မ ပါ ပြဋ္ဌာန်းချက် များ နှင့် အညီ ဆောင်ရွက် ရ မည် ။
+[2021-06-02 17:02:37] [valid] [valid]   Ref: ပါကစ္စတန် နိုင်ငံ ၏ ဝတ် ဇီရီစ တန် မြောက်ပိုင်း ရှိ ၊ လူ က ထိန်း ရန်မလို သော စစ် လေယာဉ် မှ ပစ်ခတ် ခြင်း အနေဖြင့် ယခု သတ်မှတ်ထား သော ၊ အမေရိကန် ပြည်ထောင်စု ဒုံးကျည် ဖြင့် ၊ သူ့ ကို ထိခိုက် စေ ခဲ့ သည် ဟု ထင်ကြေးပေး ခဲ့ ပြီးနောက် နောက်ထပ် အလွန် များပြား သော စစ်သွေးကြွ များ လည်း သေဆုံးကြောင်း သတင်းပို့ ခဲ့ သည် ။
+[2021-06-02 17:02:44] Best translation 0 : သူ မ သည် ကျွန်ုပ် တို့ ၏ ကျန်းမာ ရေး ဆိုင်ရာ ကိစ္စရပ် များ နှင့် ပတ်သက် ၍ သူ တို့ ၏ ကျန်းမာ ရေး ဆိုင်ရာ ကိစ္စရပ် များ ကို ဆွေးနွေး ကြ သည် ။
+[2021-06-02 17:02:44] Best translation 1 : ဤ ပုဒ်မ ပါ ပြဋ္ဌာန်းချက် များ နှင့် အညီ ဆောင်ရွက် ရ မည် ။
+[2021-06-02 17:02:44] Best translation 2 : မြန်မာ နိုင်ငံ ၏ အတိုင်ပင်ခံ ပုဂ္ဂိုလ် ဒေါ်အောင်ဆန်းစုကြည် သည် ဤ ပုဒ်မ ခွဲ (က) ပါ ပြဋ္ဌာန်းချက် များ ကို ဆောင်ရွက် ရ မည် ။
+[2021-06-02 17:02:44] Best translation 3 : သူ တို့ က သူ တို့ ရဲ့ အခွင့်အရေး တွေ နဲ့ ပတ်သက် လို့ သူ တို့ က ပြော တယ် ။
+[2021-06-02 17:02:48] Best translation 4 : သူ မ သည် ကျွန်ုပ် တို့ ၏ အခန်း ထဲ သို့ သွား သည် ။
+[2021-06-02 17:02:48] Best translation 5 : သူ တို့ က သူ တို့ ကို မ သိ ဘူး ။
+[2021-06-02 17:02:48] Best translation 10 : နိုင်ငံတော် ၏ အတိုင်ပင်ခံ ပုဂ္ဂိုလ် ဒေါ်အောင်ဆန်းစုကြည် သည် ဤ ပုဒ်မ ခွဲ (က) ပါ ပြဋ္ဌာန်းချက် များ နှင့်အညီ ဆောင်ရွက် ရ မည် ။
+[2021-06-02 17:02:48] Best translation 20 : နိုင်ငံတော် ၏ အတိုင်ပင်ခံ ပုဂ္ဂိုလ် ဒေါ်အောင်ဆန်းစုကြည် သည် ဤ ပုဒ်မ ခွဲ (က) ပါ ပြဋ္ဌာန်းချက် များ နှင့်အညီ ဆောင်ရွက် ရ မည် ။
+[2021-06-02 17:02:48] Best translation 40 : သူ မ သည် သူ မ သည် ကျွန်ုပ် တို့ ၏ အခန်း ထဲ သို့ မ ဟုတ် ပါ
+[2021-06-02 17:02:48] Best translation 80 : ဤ ပုဒ်မ ပါ ပြဋ္ဌာန်းချက် များ နှင့် အညီ ဆောင်ရွက် ရ မည် ။
+[2021-06-02 17:02:48] Best translation 160 : နိုင်ငံတော် ၏ အတိုင်ပင်ခံ ပုဂ္ဂိုလ် ဒေါ်အောင်ဆန်းစုကြည် သည် နိုင်ငံတော် ၏ အတိုင်ပင်ခံ ပုဂ္ဂိုလ် ဒေါ်အောင်ဆန်းစုကြည် သည် မြန်မာ နိုင်ငံ သို့ တက်ရောက် ခဲ့ သည် ။
+[2021-06-02 17:02:51] Best translation 320 : ဒါ ကြောင့် ကျွန်တော် တို့ ပါတီ တွေ နဲ့ ပတ်သက် ပြီး သူ တို့ ရဲ့ အခွင့်အရေး တွေ နဲ့ ပတ်သက် လို့ ရ ပါ တယ် ။
+[2021-06-02 17:03:15] Best translation 640 : နိုင်ငံတော် ၏ အတိုင်ပင်ခံ ပုဂ္ဂိုလ် ဒေါ်အောင်ဆန်းစုကြည် သည် မြန်မာ နိုင်ငံ ၏ အတိုင်ပင်ခံ ပုဂ္ဂိုလ် ဒေါ်အောင်ဆန်းစုကြည် သည် မြန်မာ နိုင်ငံ သို့ တက်ရောက် ခဲ့ သည် ။
+[2021-06-02 17:03:21] Total translation time: 47.45386s
+[2021-06-02 17:03:21] [valid] Ep. 1 : Up. 5000 : bleu : 0.350518 : new best
+[2021-06-02 17:13:14] Ep. 1 : Up. 5500 : Sen. 155,223 : Cost 4.67906046 * 257,179 after 2,823,900 : Time 668.64s : 384.63 words/s
+[2021-06-02 17:22:52] Ep. 1 : Up. 6000 : Sen. 169,480 : Cost 4.63217402 * 257,901 after 3,081,801 : Time 578.23s : 446.02 words/s
+[2021-06-02 17:32:37] Ep. 1 : Up. 6500 : Sen. 183,500 : Cost 4.56614685 * 254,940 after 3,336,741 : Time 584.62s : 436.08 words/s
+[2021-06-02 17:42:22] Ep. 1 : Up. 7000 : Sen. 197,648 : Cost 4.51914597 * 258,218 after 3,594,959 : Time 585.48s : 441.04 words/s
+[2021-06-02 17:52:10] Ep. 1 : Up. 7500 : Sen. 211,656 : Cost 4.47183704 * 258,753 after 3,853,712 : Time 587.63s : 440.33 words/s
+[2021-06-02 18:01:52] Ep. 1 : Up. 8000 : Sen. 225,982 : Cost 4.43351698 * 258,553 after 4,112,265 : Time 582.09s : 444.18 words/s
+[2021-06-02 18:11:38] Ep. 1 : Up. 8500 : Sen. 239,808 : Cost 4.40746212 * 254,981 after 4,367,246 : Time 586.33s : 434.88 words/s
+[2021-06-02 18:21:19] Ep. 1 : Up. 9000 : Sen. 254,390 : Cost 4.33763647 * 258,951 after 4,626,197 : Time 580.80s : 445.86 words/s
+[2021-06-02 18:22:14] Seen 255547 samples
+[2021-06-02 18:22:14] Starting data epoch 2 in logical epoch 2
+[2021-06-02 18:22:14] [data] Shuffling data
+[2021-06-02 18:22:14] [data] Done reading 256,102 sentences
+[2021-06-02 18:22:15] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-02 18:31:09] Ep. 2 : Up. 9500 : Sen. 12,872 : Cost 4.19884396 * 257,915 after 4,884,112 : Time 589.72s : 437.35 words/s
+[2021-06-02 18:40:56] Ep. 2 : Up. 10000 : Sen. 26,924 : Cost 4.16887808 * 256,254 after 5,140,366 : Time 587.56s : 436.14 words/s
+[2021-06-02 18:40:56] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-02 18:40:59] Saving model weights and runtime parameters to model.s2s-4.word/model.iter10000.npz
+[2021-06-02 18:41:00] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-02 18:41:02] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-02 18:41:14] [valid] Ep. 2 : Up. 10000 : cross-entropy : 201.742 : new best
+[2021-06-02 18:41:21] [valid] Ep. 2 : Up. 10000 : perplexity : 257.039 : new best
+[2021-06-02 18:41:21] Translating validation set...
+[2021-06-02 18:41:31] Best translation 0 : &quot; ကျွန်တော် တို့ က သူ တို့ ရဲ့ မိသားစု တွေ နဲ့ ပတ်သက် ပြီး သူ တို့ ရဲ့ အခွင့်အရေး တွေ နဲ့ ပတ်သက် ပြီး သူ တို့ ကို ကူညီ ဖို့ လိုအပ် ပါ တယ် ။
+[2021-06-02 18:41:31] Best translation 1 : ၎င်း တို့ ၏ နိုင်ငံ ရေး ဆွေးနွေးပွဲ များ တွင် အမျိုးသမီး များ ၏ ကျန်းမာ ရေး ဆိုင်ရာ ကိစ္စရပ် များ နှင့် ပတ်သက် ၍ ဆွေးနွေး ညှိနှိုင်း မှု များ ပြုလုပ် ခဲ့ သည် ။
+[2021-06-02 18:41:33] Best translation 2 : လူ တစ် ယောက် က အမျိုးသမီး တစ် ယောက် ဖြစ် ပါ တယ် ။
+[2021-06-02 18:41:33] Best translation 3 : သူ တို့ က အမျိုးသမီး တစ် ယောက် ဖြစ် နေ ကြ တယ် ။
+[2021-06-02 18:41:35] Best translation 4 : လူ တစ် ယောက် က လူ တစ် ယောက် ဖြစ် နေ တယ် ။
+[2021-06-02 18:41:35] Best translation 5 : ဘာ ကြောင့် လဲ ဆို တော့ သူ တို့ က သူ့ ကို မ သိ ခဲ့ ပါ ဘူး ။
+[2021-06-02 18:41:35] Best translation 10 : လွန် ခဲ့ သည့် နှစ် က နှစ် ပေါင်း များစွာ ကြာ ပြီးနောက် နှစ် ပေါင်း များစွာ ကြာ ပြီ ။
+[2021-06-02 18:41:35] Best translation 20 : မန္တလေး တိုင်း ဒေသ ကြီး အစိုးရ အဖွဲ့ များ နှင့် တိုင်းရင်းသား လက်နက်ကိုင် အဖွဲ့အစည်း များ အကြား တိုက်ပွဲ များ ဖြစ်ပွား ခဲ့ သည် ။
+[2021-06-02 18:41:35] Best translation 40 : သူ မ ရဲ့ မိဘ တွေ က သူ မ ရဲ့ မိဘ တွေ နဲ့ ပတ်သက် ပြီး သူ မ ရဲ့ မိဘ တွေ က သူ မ ရဲ့ မိဘ တွေ နဲ့ ပတ်သက် ပြီး သူ မ ကို တွေ့ ရ တယ် ။
+[2021-06-02 18:41:35] Best translation 80 : မြန်မာ နိုင်ငံ တွင် အမျိုးသမီး များ ၏ ကျန်းမာ ရေး ဆိုင်ရာ ကိစ္စရပ် များ နှင့် ပတ်သက် ၍ မြန်မာ နိုင်ငံ ၏ ငြိမ်းချမ်း ရေး လုပ်ငန်းစဉ် တွင် ပါဝင် ဆောင်ရွက် လျက် ရှိ ပါ သည် ။
+[2021-06-02 18:41:35] Best translation 160 : လွန် ခဲ့ သည့် နှစ် အတွင်း က ရန်ကုန် မြို့ သို့ ရောက်ရှိ လာ ခဲ့ သည် ။
+[2021-06-02 18:41:39] Best translation 320 : &quot; ကျွန်တော် တို့ က မြန်မာ နိုင်ငံ မှာ ရှိ တဲ့ အမျိုးသမီး တစ် ယောက် ဖြစ် ပါ တယ် ။
+[2021-06-02 18:42:03] Best translation 640 : နိုင်ငံတော် ၏ အတိုင်ပင်ခံ ပုဂ္ဂိုလ် ဒေါ်အောင်ဆန်းစုကြည် သည် ယနေ့ နံနက် ၁၀ နာရီ တွင် ကျင်းပ ခဲ့ သည် ။
+[2021-06-02 18:42:08] Total translation time: 46.88902s
+[2021-06-02 18:42:08] [valid] Ep. 2 : Up. 10000 : bleu : 0.803349 : new best
+[2021-06-02 18:51:56] Ep. 2 : Up. 10500 : Sen. 41,134 : Cost 4.14340782 * 261,140 after 5,401,506 : Time 659.83s : 395.77 words/s
+[2021-06-02 19:01:36] Ep. 2 : Up. 11000 : Sen. 55,490 : Cost 4.10983086 * 255,399 after 5,656,905 : Time 579.42s : 440.78 words/s
+[2021-06-02 19:11:23] Ep. 2 : Up. 11500 : Sen. 69,640 : Cost 4.07952070 * 257,844 after 5,914,749 : Time 587.19s : 439.11 words/s
+[2021-06-02 19:21:11] Ep. 2 : Up. 12000 : Sen. 83,616 : Cost 4.06699133 * 258,177 after 6,172,926 : Time 588.39s : 438.79 words/s
+[2021-06-02 19:30:57] Ep. 2 : Up. 12500 : Sen. 97,707 : Cost 4.03612328 * 256,377 after 6,429,303 : Time 585.78s : 437.67 words/s
+[2021-06-02 19:40:37] Ep. 2 : Up. 13000 : Sen. 112,080 : Cost 3.99399233 * 256,704 after 6,686,007 : Time 579.84s : 442.71 words/s
+[2021-06-02 19:50:21] Ep. 2 : Up. 13500 : Sen. 126,265 : Cost 3.96555853 * 257,010 after 6,943,017 : Time 584.48s : 439.72 words/s
+[2021-06-02 20:00:15] Ep. 2 : Up. 14000 : Sen. 139,995 : Cost 3.96679544 * 256,257 after 7,199,274 : Time 593.82s : 431.54 words/s
+[2021-06-02 20:09:59] Ep. 2 : Up. 14500 : Sen. 154,116 : Cost 3.91159010 * 256,096 after 7,455,370 : Time 583.62s : 438.81 words/s
+[2021-06-02 20:19:43] Ep. 2 : Up. 15000 : Sen. 168,144 : Cost 3.91438770 * 256,081 after 7,711,451 : Time 583.80s : 438.64 words/s
+[2021-06-02 20:19:43] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-02 20:19:45] Saving model weights and runtime parameters to model.s2s-4.word/model.iter15000.npz
+[2021-06-02 20:19:46] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-02 20:19:49] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-02 20:20:01] [valid] Ep. 2 : Up. 15000 : cross-entropy : 196.372 : new best
+[2021-06-02 20:20:08] [valid] Ep. 2 : Up. 15000 : perplexity : 221.74 : new best
+[2021-06-02 20:20:08] Translating validation set...
+[2021-06-02 20:20:19] Best translation 0 : &quot; ကျွန်တော် တို့ က သူ တို့ ရဲ့ နိုင်ငံ ရေး ပါတီ တွေ နဲ့ ပတ်သက် လို့ သူ တို့ က ပြော တယ် ။
+[2021-06-02 20:20:19] Best translation 1 : ဥပမာ အားဖြင့် - မြန်မာ စစ်တပ် က တိုက်ခိုက် မှု များ ဖြစ်ပွား ခဲ့ သည် ။
+[2021-06-02 20:20:20] Best translation 2 : ဘာ ဖြစ် လို့ လဲ ဆို တော့ သူ က ဒီ ကိစ္စ နဲ့ ပတ်သက် လို့ သူ က ပြော တယ် ။
+[2021-06-02 20:20:20] Best translation 3 : &quot; သူ တို့ က ဒီ ကိစ္စ နဲ့ ပတ်သက် လို့ သူ တို့ က ပြော တယ် ။
+[2021-06-02 20:20:23] Best translation 4 : လူ တစ် ယောက် က ဒီ ကိစ္စ နဲ့ ပတ်သက် ပြီး အလုပ် လုပ် နေ တယ် ။
+[2021-06-02 20:20:23] Best translation 5 : ဘာ ကြောင့် လဲ ဆို တော့ သူ တို့ က ဘာ ကို မှ မ သိ ဘူး ။
+[2021-06-02 20:20:23] Best translation 10 : လွန် ခဲ့ သည့် နှစ် နာရီ ခန့် က နံနက် ၁၀ နာရီ တွင် နံနက် ၁၀ နာရီ တွင် ကျင်းပ ခဲ့ သည် ။
+[2021-06-02 20:20:23] Best translation 20 : မန္တလေး တိုင်း ဒေသ ကြီး အစိုးရ အဖွဲ့ ဝင် များ နှင့် ပူးပေါင်း ဆောင်ရွက် လျက် ရှိ ပါ သည် ။
+[2021-06-02 20:20:23] Best translation 40 : သူ မ ရဲ့ မိဘ တွေ က သူ မ ရဲ့ မိဘ တွေ က သူ မ ရဲ့ မိဘ တွေ ကို တွေ့ ခဲ့ ရ တယ် ။
+[2021-06-02 20:20:23] Best translation 80 : ဥပမာ အားဖြင့် - မြန်မာ နိုင်ငံ ၏ စီးပွား ရေး လုပ်ငန်း များ ကို ဆက်လက် ဆောင်ရွက် လျက် ရှိ ပါ သည် ။
+[2021-06-02 20:20:23] Best translation 160 : လွန် ခဲ့ သည့် နှစ် က နံနက် ၁၀ နာရီ တွင် ရန်ကုန် မြို့ သို့ ရောက်ရှိ ကြ သည် ။
+[2021-06-02 20:20:28] Best translation 320 : &quot; ကျွန်မ တို့ ရဲ့ ဘဝ က တော့ ပို ကောင်း ပါ တယ် &quot; ဟု သူ က ပြော သည် ။
+[2021-06-02 20:20:54] Best translation 640 : ပုဒ်မ ခွဲ (က) တွင် ဖော်ပြ ထား သည့် စာရင်း ရှင်းလင်း ဖျက်သိမ်းရေး အရာရှိ သည် ဤ ပုဒ်မ ပါ ပြဋ္ဌာန်းချက် များ ကို လိုက်နာ ရ မည် ။
+[2021-06-02 20:20:59] Total translation time: 50.77478s
+[2021-06-02 20:20:59] [valid] Ep. 2 : Up. 15000 : bleu : 1.04991 : new best
+[2021-06-02 20:30:48] Ep. 2 : Up. 15500 : Sen. 182,044 : Cost 3.89500093 * 256,406 after 7,967,857 : Time 665.64s : 385.20 words/s
+[2021-06-02 20:40:35] Ep. 2 : Up. 16000 : Sen. 196,429 : Cost 3.84406924 * 257,673 after 8,225,530 : Time 586.84s : 439.09 words/s
+[2021-06-02 20:50:26] Ep. 2 : Up. 16500 : Sen. 210,285 : Cost 3.85128570 * 256,588 after 8,482,118 : Time 590.66s : 434.41 words/s
+[2021-06-02 21:00:01] Ep. 2 : Up. 17000 : Sen. 224,874 : Cost 3.78193521 * 257,200 after 8,739,318 : Time 575.28s : 447.09 words/s
+[2021-06-02 21:09:46] Ep. 2 : Up. 17500 : Sen. 238,850 : Cost 3.82080460 * 257,896 after 8,997,214 : Time 585.13s : 440.75 words/s
+[2021-06-02 21:19:28] Ep. 2 : Up. 18000 : Sen. 253,361 : Cost 3.74054813 * 257,918 after 9,255,132 : Time 582.33s : 442.91 words/s
+[2021-06-02 21:21:12] Seen 255547 samples
+[2021-06-02 21:21:12] Starting data epoch 3 in logical epoch 3
+[2021-06-02 21:21:12] [data] Shuffling data
+[2021-06-02 21:21:12] [data] Done reading 256,102 sentences
+[2021-06-02 21:21:13] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-02 21:29:11] Ep. 3 : Up. 18500 : Sen. 12,012 : Cost 3.60360312 * 256,574 after 9,511,706 : Time 583.02s : 440.08 words/s
+[2021-06-02 21:39:03] Ep. 3 : Up. 19000 : Sen. 26,108 : Cost 3.58197546 * 258,652 after 9,770,358 : Time 591.52s : 437.27 words/s
+[2021-06-02 21:48:45] Ep. 3 : Up. 19500 : Sen. 40,385 : Cost 3.52370405 * 256,635 after 10,026,993 : Time 581.81s : 441.10 words/s
+[2021-06-02 21:58:31] Ep. 3 : Up. 20000 : Sen. 54,489 : Cost 3.52780843 * 257,620 after 10,284,613 : Time 585.99s : 439.63 words/s
+[2021-06-02 21:58:31] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-02 21:58:33] Saving model weights and runtime parameters to model.s2s-4.word/model.iter20000.npz
+[2021-06-02 21:58:34] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-02 21:58:37] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-02 21:58:49] [valid] Ep. 3 : Up. 20000 : cross-entropy : 190.75 : new best
+[2021-06-02 21:58:56] [valid] Ep. 3 : Up. 20000 : perplexity : 189.973 : new best
+[2021-06-02 21:58:56] Translating validation set...
+[2021-06-02 21:59:09] Best translation 0 : &quot; ကျွန်တော် တို့ ဟာ သူ တို့ ရဲ့ အောင်မြင် မှု တွေ နဲ့ ပတ်သက် လို့ သူ က ပြော တယ် ။
+[2021-06-02 21:59:09] Best translation 1 : သူ သည် လွန်ခဲ့သော နှစ် အတွင်း က လေး နှစ် ဦး သေဆုံး ခဲ့ ရ သည် ။
+[2021-06-02 21:59:10] Best translation 2 : လူ တစ် ယောက် က လူ တစ် ယောက် ကို သတ် ခဲ့ တယ် လို့ ပြော တယ် ။
+[2021-06-02 21:59:10] Best translation 3 : သူ တို့ က ဒီ ကိစ္စ နဲ့ ပတ်သက် လို့ သူ တို့ က ပြော တယ် ။
+[2021-06-02 21:59:14] Best translation 4 : ယူ ပီ ဒဗလျူ စီ ၏ အဖွဲ့ ဝင် တစ် ဦး ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-02 21:59:14] Best translation 5 : အစိုးရ က သူ့ ကို မ ပြော ရဲ ဘူး လို့ ပြော တယ် ။
+[2021-06-02 21:59:14] Best translation 10 : တစ် နေ့ မှာ လေယာဉ် ပေါ် က တစ် နာရီ လောက် ကြာ မယ် ။
+[2021-06-02 21:59:14] Best translation 20 : အက်စ် အမ် အီး အိုင်တီ အိုင် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အက်စ် အေ ၊ အက်စ် အေ ၊
+[2021-06-02 21:59:14] Best translation 40 : သူ မ ရဲ့ မိဘ တွေ က သူ မ ရဲ့ မိဘ တွေ က သူ မ ရဲ့ မိဘ တွေ က သူ မ ကို အကူအညီ ပေး ခဲ့ တယ် ။
+[2021-06-02 21:59:14] Best translation 80 : တစ် ဖက် တွင် ဖော်ပြ ထား သည့် စာရင်း ရှင်းလင်း ဖျက်သိမ်းရေး အရာရှိ တစ် ဦး ဦးစီ သည် ပြစ်ဒဏ် ပမာဏ ထက် မပိုသော ဒဏ်ငွေ ကို ပေးဆောင် ရ မည် ။
+[2021-06-02 21:59:14] Best translation 160 : ဒုတိယ သမ္မတ က ရထား ပေါ် မှာ ရှိ တဲ့ ရထား က ရထား နဲ့ သွား မယ့် လေယာဉ် တွေ က ရထား နဲ့ သွား ခဲ့ တယ် ။
+[2021-06-02 21:59:18] Best translation 320 : &quot; ကျွန်ုပ် တို့ သည် ဘဝ တစ်လျှောက်လုံး အတွက် အလွန် အရေးကြီး ပါ သည်
+[2021-06-02 21:59:46] Best translation 640 : ပုဒ်မ ခွဲ (က) တွင် ဖော်ပြ ထား သည့် စာရင်း ရှင်းလင်း ဖျက်သိမ်းရေး အရာရှိ သည် ဤ ပုဒ်မ ပါ ပြဋ္ဌာန်းချက် များ ကို လိုက်နာ ဆောင်ရွက် ရ မည် ။
+[2021-06-02 21:59:52] Total translation time: 55.48323s
+[2021-06-02 21:59:52] [valid] Ep. 3 : Up. 20000 : bleu : 1.06379 : new best
+[2021-06-02 22:09:39] Ep. 3 : Up. 20500 : Sen. 68,857 : Cost 3.50938702 * 258,933 after 10,543,546 : Time 668.22s : 387.50 words/s
+[2021-06-02 22:19:25] Ep. 3 : Up. 21000 : Sen. 82,680 : Cost 3.49788642 * 257,181 after 10,800,727 : Time 585.80s : 439.02 words/s
+[2021-06-02 22:29:09] Ep. 3 : Up. 21500 : Sen. 96,881 : Cost 3.45099044 * 257,070 after 11,057,797 : Time 584.31s : 439.95 words/s
+[2021-06-02 22:38:56] Ep. 3 : Up. 22000 : Sen. 111,158 : Cost 3.40398073 * 258,332 after 11,316,129 : Time 586.38s : 440.55 words/s
+[2021-06-02 22:48:42] Ep. 3 : Up. 22500 : Sen. 125,279 : Cost 3.41356683 * 259,450 after 11,575,579 : Time 586.66s : 442.25 words/s
+[2021-06-02 22:58:27] Ep. 3 : Up. 23000 : Sen. 139,317 : Cost 3.41165066 * 255,865 after 11,831,444 : Time 584.91s : 437.44 words/s
+[2021-06-02 23:08:15] Ep. 3 : Up. 23500 : Sen. 153,308 : Cost 3.40244102 * 257,356 after 12,088,800 : Time 588.38s : 437.39 words/s
+[2021-06-02 23:17:58] Ep. 3 : Up. 24000 : Sen. 167,555 : Cost 3.35459781 * 256,187 after 12,344,987 : Time 582.96s : 439.46 words/s
+[2021-06-02 23:27:47] Ep. 3 : Up. 24500 : Sen. 181,436 : Cost 3.34812284 * 256,787 after 12,601,774 : Time 588.41s : 436.41 words/s
+[2021-06-02 23:37:32] Ep. 3 : Up. 25000 : Sen. 195,445 : Cost 3.31147528 * 255,430 after 12,857,204 : Time 585.66s : 436.14 words/s
+[2021-06-02 23:37:32] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-02 23:37:35] Saving model weights and runtime parameters to model.s2s-4.word/model.iter25000.npz
+[2021-06-02 23:37:36] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-02 23:37:39] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-02 23:37:51] [valid] Ep. 3 : Up. 25000 : cross-entropy : 182.365 : new best
+[2021-06-02 23:37:58] [valid] Ep. 3 : Up. 25000 : perplexity : 150.842 : new best
+[2021-06-02 23:37:58] Translating validation set...
+[2021-06-02 23:38:10] Best translation 0 : &quot; သူ ဟာ သူ့ ရဲ့ အောင်မြင် မှု ကို ကျွန်တော် တို့ နားလည် ပါ တယ် ။
+[2021-06-02 23:38:10] Best translation 1 : သူ က အမေရိကန် ပြည်ထောင်စု ကြံ့ခိုင်ရေး နှင့် ဖွံ့ဖြိုးရေး ဘဏ် (အေဒီဘီ) တို့ က ၎င်း တို့ ၏ တိုက်ခိုက် မှု များ ကြောင့် သေဆုံး ခဲ့ ရ သည် ဟု ဆို သည် ။
+[2021-06-02 23:38:12] Best translation 2 : &quot; တစ် ဦး ချင်း စီ ကို ဖမ်းဆီး ခံ ရ သူ တစ် ဦး ဖြစ် သည် ဟု ပြော သည် ။
+[2021-06-02 23:38:12] Best translation 3 : သူ တို့ က ဒီ ကိစ္စ နဲ့ ပတ်သက် ပြီး အတွေ့အကြုံ ရှိ တဲ့ သူ တစ် ဦး ဖြစ် တယ် &quot; ဟု ပြော သည် ။
+[2021-06-02 23:38:14] Best translation 4 : တစ် ဦး ချင်း စီ ၏ အဖွဲ့ ဝင် တစ်ဦး ဖြစ် သည် ဟု ပြော သည် ။
+[2021-06-02 23:38:14] Best translation 5 : အစိုးရ က သူ့ ကို မ သိ ဘူး လို့ ပြော တယ် ။
+[2021-06-02 23:38:14] Best translation 10 : တနင်္လာ နေ့ မနက် ပိုင်း က တနင်္လာ နေ့ က မနက် ၉ နာရီ မှာ စတင် ခဲ့ တယ် ။
+[2021-06-02 23:38:14] Best translation 20 : အမေရိကန် - မြန်မာ အပြည်ပြည် ဆိုင်ရာ အကြံပေး ကော်မရှင် အတွင်းရေးမှူး မစ္စ တာ ငု ယင် ဖူး ကျော င့် ဦးဆောင် သည့် ကိုယ်စားလှယ် အဖွဲ့အား လက်ခံ တွေ့ဆုံ သည် ။
+[2021-06-02 23:38:14] Best translation 40 : သူ မ သည် သူ မ သည် သူ မ ကို အကူအညီ ပေး ၍ သူ မ ကို အကူအညီ ပေး ခဲ့ သည် ။
+[2021-06-02 23:38:14] Best translation 80 : သတ်မှတ် ထား သည့် အရေအတွက် ထက် မပိုသော ဒဏ်ငွေ ကို ပေးဆောင် ရ မည် ဖြစ် ပါ သည် ။
+[2021-06-02 23:38:14] Best translation 160 : ဒုတိယ အကြိမ် သည် မြန်မာ နိုင်ငံ သို့ ရောက်ရှိ နေ သည့် ရထား များ ကို ဖြတ် ၍ လမ်း များ ကို ဖြတ် ၍ ခရီးသွား ခဲ့ သည် ။
+[2021-06-02 23:38:19] Best translation 320 : &quot; ကျွန်တော် တို့ ရဲ့ အစီအစဉ် တွေ ထဲ က တစ် ခု က တစ် ခု ခု ဖြစ် ပါ တယ် ။ ဒါ ကြောင့် ကျွန်တော် တို့ ရဲ့ ဘဝ ဟာ ဘဝ တစ်လျှောက်လုံး ပါ ပဲ ။
+[2021-06-02 23:38:47] Best translation 640 : မောင်တော ဒေသ စံတော်ချိန် နံနက် ၁၀ နာရီ မှ ၁၀ နာရီ ခွဲ ခန့် တွင် သိမ်းဆည်း ခဲ့ သည် ။
+[2021-06-02 23:38:52] Total translation time: 54.51445s
+[2021-06-02 23:38:52] [valid] Ep. 3 : Up. 25000 : bleu : 2.03251 : new best
+[2021-06-02 23:48:42] Ep. 3 : Up. 25500 : Sen. 209,762 : Cost 3.28345466 * 258,405 after 13,115,609 : Time 669.87s : 385.75 words/s
+[2021-06-02 23:58:29] Ep. 3 : Up. 26000 : Sen. 223,946 : Cost 3.25267172 * 256,653 after 13,372,262 : Time 586.22s : 437.81 words/s
+[2021-06-03 00:08:14] Ep. 3 : Up. 26500 : Sen. 238,004 : Cost 3.26408887 * 254,882 after 13,627,144 : Time 585.85s : 435.07 words/s
+[2021-06-03 00:18:04] Ep. 3 : Up. 27000 : Sen. 252,182 : Cost 3.23812199 * 259,871 after 13,887,015 : Time 590.02s : 440.44 words/s
+[2021-06-03 00:20:26] Seen 255547 samples
+[2021-06-03 00:20:26] Starting data epoch 4 in logical epoch 4
+[2021-06-03 00:20:26] [data] Shuffling data
+[2021-06-03 00:20:26] [data] Done reading 256,102 sentences
+[2021-06-03 00:20:27] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-03 00:27:49] Ep. 4 : Up. 27500 : Sen. 10,871 : Cost 3.06801677 * 257,838 after 14,144,853 : Time 584.70s : 440.97 words/s
+[2021-06-03 00:37:35] Ep. 4 : Up. 28000 : Sen. 24,997 : Cost 3.06021810 * 259,641 after 14,404,494 : Time 585.57s : 443.40 words/s
+[2021-06-03 00:47:19] Ep. 4 : Up. 28500 : Sen. 39,195 : Cost 3.02174616 * 258,164 after 14,662,658 : Time 584.59s : 441.62 words/s
+[2021-06-03 00:56:58] Ep. 4 : Up. 29000 : Sen. 53,573 : Cost 2.97439027 * 254,798 after 14,917,456 : Time 578.45s : 440.49 words/s
+[2021-06-03 01:06:41] Ep. 4 : Up. 29500 : Sen. 67,792 : Cost 3.00927353 * 256,245 after 15,173,701 : Time 582.98s : 439.55 words/s
+[2021-06-03 01:16:29] Ep. 4 : Up. 30000 : Sen. 81,999 : Cost 3.01977110 * 257,383 after 15,431,084 : Time 588.66s : 437.23 words/s
+[2021-06-03 01:16:29] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-03 01:16:32] Saving model weights and runtime parameters to model.s2s-4.word/model.iter30000.npz
+[2021-06-03 01:16:33] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-03 01:16:36] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-03 01:16:47] [valid] Ep. 4 : Up. 30000 : cross-entropy : 175.234 : new best
+[2021-06-03 01:16:55] [valid] Ep. 4 : Up. 30000 : perplexity : 123.975 : new best
+[2021-06-03 01:16:55] Translating validation set...
+[2021-06-03 01:17:09] Best translation 0 : &quot; သူ ရဲ့ ဆုံးရှုံး မှု အတွက် ကျွန်တော် တို့ ဝမ်းနည်း ပါ တယ် &quot; ဟု သူ က ပြော သည် ။
+[2021-06-03 01:17:09] Best translation 1 : သူ က အမေရိကန် ပြည်ထောင်စု ကြံ့ခိုင်ရေး နှင့် ဖွံ့ဖြိုးရေး ဘဏ် (အေဒီဘီ) တို့ က ဖမ်းဆီး ခံ ရ သူ တစ် ဦး ဖြစ် သည် ဟု စွပ်စွဲ ခံ ရ သူ တစ် ဦး ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-03 01:17:09] Best translation 2 : &quot; ယာဉ် မတော်တဆ မှု တစ် ခု ဖြစ် လာ ခဲ့ တယ် လို့ ပါမောက္ခ ချဲ လင် ဂျာ ကပြော တယ် ။
+[2021-06-03 01:17:09] Best translation 3 : &quot; သူ တို့ က လည်း ဒီလို ကိစ္စ တွေ ကို ဖြေရှင်း ဖို့ တာဝန် ရှိ တယ် &quot; ဟု ပြော သည် ။
+[2021-06-03 01:17:12] Best translation 4 : အန် စီ စီတီ အဖွဲ့ ဝင် တစ်ဦး သည် အဆိုပါ အဖွဲ့ ဝင် တစ်ဦး ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-03 01:17:12] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ ၏ သေဆုံး မှု အကြောင်း ကို မ သိ ခဲ့ ပေ ။
+[2021-06-03 01:17:12] Best translation 10 : ၁၂ နာရီ ခွဲ ခန့် တွင် ယူရီ ကပြော လိုက် သည့် အတိုင်း အတာ တစ် ခု ကို စတင် ခဲ့ သည် ။
+[2021-06-03 01:17:12] Best translation 20 : အမေရိကန် နိုင်ငံခြားရေး ဝန်ကြီး ဌာန မှ အမေရိကန် ဒေါ်လာ ၃ သန်း နှင့် အင်တာနက် စာမျက်နှာ များ တွင် ဖော်ပြ ထား သည့် သတင်း အချက်အလက် များ နှင့် မှတ်တမ်း များ ကို ရှင်းလင်း တင်ပြ သည် ။
+[2021-06-03 01:17:12] Best translation 40 : အဲဒီ နောက် သူ မ ရဲ့ ဆံပင် တွေ က သူ မ ကို ကူညီ ဖို့ ကြိုးစား ခဲ့ တယ် ၊ သူ မ ရဲ့ အကူအညီ က သူ မ ကို အကူအညီ ပေး ဖို့ ကြိုးစား ခဲ့ တယ် ။
+[2021-06-03 01:17:12] Best translation 80 : ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သူ တစ် ဦး အဖြစ် ရွေးကောက် တင်မြှောက် ခံ ရ သူ တစ် ဦး မှာ ရွေးကောက် တင်မြှောက် ခံ ရ သူ တစ် ဦး ဖြစ် သည် ။
+[2021-06-03 01:17:12] Best translation 160 : ဒုတိယ အကြိမ် သည် အိန္ဒိယ သမုဒ္ဒရာ သို့ ရောက်ရှိ နေ သည့် မြန် မာ သင်္ဘော တစ်စင်း ကို ပိတ် ထား ခဲ့ သည် ။
+[2021-06-03 01:17:19] Best translation 320 : &quot; ကျွန်မ တို့ ရဲ့ ထုတ်ကုန် တွေ ထဲ က တစ် ခု က တစ် ခု ဖြစ် ပါ တယ် ။ ဒါ ကြောင့် ကျွန်တော် တို့ ရဲ့ ဈေးနှုန်း တွေ အားလုံး ဟာ ဘဝ အတွက် အကောင်းဆုံး ဖြစ် ပါ တယ် ။
+[2021-06-03 01:17:46] Best translation 640 : နံနက် ၉ နာရီ တွင် အရေးပေါ် အခြေအနေ များ ကို ရှင်းလင်း တင်ပြ သည် ။
+[2021-06-03 01:17:53] Total translation time: 57.99985s
+[2021-06-03 01:17:53] [valid] Ep. 4 : Up. 30000 : bleu : 2.91801 : new best
+[2021-06-03 01:27:47] Ep. 4 : Up. 30500 : Sen. 95,926 : Cost 3.00533438 * 258,554 after 15,689,638 : Time 677.43s : 381.67 words/s
+[2021-06-03 01:37:36] Ep. 4 : Up. 31000 : Sen. 110,049 : Cost 2.97049284 * 257,238 after 15,946,876 : Time 589.07s : 436.68 words/s
+[2021-06-03 01:47:17] Ep. 4 : Up. 31500 : Sen. 124,246 : Cost 2.95517349 * 258,003 after 16,204,879 : Time 581.33s : 443.81 words/s
+[2021-06-03 01:57:02] Ep. 4 : Up. 32000 : Sen. 138,559 : Cost 2.93555856 * 257,247 after 16,462,126 : Time 584.72s : 439.95 words/s
+[2021-06-03 02:06:49] Ep. 4 : Up. 32500 : Sen. 152,380 : Cost 2.94924760 * 254,479 after 16,716,605 : Time 586.82s : 433.66 words/s
+[2021-06-03 02:16:35] Ep. 4 : Up. 33000 : Sen. 166,448 : Cost 2.93534374 * 258,378 after 16,974,983 : Time 586.61s : 440.46 words/s
+[2021-06-03 02:26:20] Ep. 4 : Up. 33500 : Sen. 180,797 : Cost 2.89568353 * 257,722 after 17,232,705 : Time 584.46s : 440.96 words/s
+[2021-06-03 02:36:07] Ep. 4 : Up. 34000 : Sen. 194,773 : Cost 2.93213868 * 257,353 after 17,490,058 : Time 587.65s : 437.93 words/s
+[2021-06-03 02:45:48] Ep. 4 : Up. 34500 : Sen. 209,263 : Cost 2.87859893 * 259,675 after 17,749,733 : Time 580.79s : 447.10 words/s
+[2021-06-03 02:55:40] Ep. 4 : Up. 35000 : Sen. 222,919 : Cost 2.92345476 * 257,009 after 18,006,742 : Time 591.80s : 434.29 words/s
+[2021-06-03 02:55:40] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-03 02:55:43] Saving model weights and runtime parameters to model.s2s-4.word/model.iter35000.npz
+[2021-06-03 02:55:44] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-03 02:55:46] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-03 02:55:58] [valid] Ep. 4 : Up. 35000 : cross-entropy : 170.051 : new best
+[2021-06-03 02:56:05] [valid] Ep. 4 : Up. 35000 : perplexity : 107.502 : new best
+[2021-06-03 02:56:05] Translating validation set...
+[2021-06-03 02:56:18] Best translation 0 : &quot; ကျွန်တော် တို့ ဟာ သူ့ ရဲ့ ဆုံးရှုံး မှု အတွက် ဝမ်းနည်း ပါ တယ် &quot; ဟု သူ က ပြော သည် ။
+[2021-06-03 02:56:18] Best translation 1 : သူ က အမေရိကန် ပြည်ထောင်စု ကြံ့ခိုင်ရေး နှင့် ဖွံ့ဖြိုးရေး ဘဏ် (အေဒီဘီ) တို့ က ဖမ်းဆီး ခံ ထား ရ သူ တစ် ဦး ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-03 02:56:19] Best translation 2 : အမ် အန် ဒီ အေအေ အဖွဲ့ က သတင်း ထုတ်ပြန် လိုက် သည် ။
+[2021-06-03 02:56:19] Best translation 3 : &quot; သူ တို့ က လည်း ကောင်း မွန် တဲ့ ပုဂ္ဂိုလ် တစ် ဦး ဖြစ် တယ် &quot; ဟု ပြော သည် ။
+[2021-06-03 02:56:22] Best translation 4 : အန် စီ စီတီ အဖွဲ့ ဝင် တစ်ဦး အနေဖြင့် အဆိုပါ အဖွဲ့ ဝင် တစ်ဦး ဖြစ် လာ ခဲ့ သည် ဟု ဆို သည် ။
+[2021-06-03 02:56:22] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ ၏ သေဆုံး မှု အကြောင်း ကို မ သိ ခဲ့ ပေ ။
+[2021-06-03 02:56:22] Best translation 10 : ၁၂ နာရီ ခွဲ ခန့် တွင် ယူရီ သည် တစ်နာရီ အတွင်း စောစော ရောက် လာ ခဲ့ သည် ။
+[2021-06-03 02:56:22] Best translation 20 : အမေရိကန် ကုန်သွယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် အမေရိကန် ကုန်သွယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် အမေရိကန် ကုန်သွယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် အမ် အန် ဒီ အေအေ ၊ အမ် အန် ဒီ အေအေ ၊ အမ် အန် ဒီ အေအေ တို့ ပါဝင် သည် ။
+[2021-06-03 02:56:22] Best translation 40 : ထို အချိန် တွင် သူ မ သည် သူမ ၏ အကူအညီ ဖြင့် သူ မ ကို အကူအညီ ပေး ရန် ကြိုးစား ခဲ့ သည် ။
+[2021-06-03 02:56:22] Best translation 80 : ဆန္ဒမဲ ပေးပိုင် ခွင့် ရ ရှိ သူ များ သည် ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သူ တစ် ဦး အဖြစ် ရွေးကောက် တင်မြှောက် ခံပိုင် ခွင့် ရှိ သည် ။
+[2021-06-03 02:56:22] Best translation 160 : ဒုတိယ ကမ္ဘာစစ် သည် အိန္ဒိယ နိုင်ငံ အလယ်ပိုင်း ဒေသ စံတော်ချိန် နံနက် ၁၀ နာရီ ၁၅ မိနစ် တွင် အသုံးပြု ခဲ့ သည် ။
+[2021-06-03 02:56:27] Best translation 320 : &quot; ကျွန်တော် တို့ ရဲ့ ဖောက်သည် တွေ ထဲ က တစ် ခု က တစ် ခု ခု ဖြစ် ပါ တယ် ။ ကျွန်တော် တို့ ရဲ့ ပုံစံ တွေ က တစ် ခု ခု ရ ခဲ့ ပါ တယ် ။
+[2021-06-03 02:56:56] Best translation 640 : အင်းစိန် အကျဉ်းထောင် တွင် အရေးပေါ် အခြေအနေ ကို လက်ခံ ရရှိ ခဲ့ သည် ။
+[2021-06-03 02:57:04] Total translation time: 58.38464s
+[2021-06-03 02:57:04] [valid] Ep. 4 : Up. 35000 : bleu : 3.51917 : new best
+[2021-06-03 03:06:51] Ep. 4 : Up. 35500 : Sen. 237,018 : Cost 2.88610125 * 256,477 after 18,263,219 : Time 671.20s : 382.12 words/s
+[2021-06-03 03:16:33] Ep. 4 : Up. 36000 : Sen. 251,161 : Cost 2.87094998 * 256,048 after 18,519,267 : Time 581.85s : 440.06 words/s
+[2021-06-03 03:19:33] Seen 255547 samples
+[2021-06-03 03:19:33] Starting data epoch 5 in logical epoch 5
+[2021-06-03 03:19:33] [data] Shuffling data
+[2021-06-03 03:19:33] [data] Done reading 256,102 sentences
+[2021-06-03 03:19:34] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-03 03:26:11] Ep. 5 : Up. 36500 : Sen. 9,937 : Cost 2.72528529 * 256,102 after 18,775,369 : Time 577.89s : 443.17 words/s
+[2021-06-03 03:36:03] Ep. 5 : Up. 37000 : Sen. 23,825 : Cost 2.67405081 * 257,989 after 19,033,358 : Time 592.37s : 435.52 words/s
+[2021-06-03 03:45:44] Ep. 5 : Up. 37500 : Sen. 38,104 : Cost 2.64869380 * 256,023 after 19,289,381 : Time 580.28s : 441.21 words/s
+[2021-06-03 03:55:33] Ep. 5 : Up. 38000 : Sen. 51,929 : Cost 2.66107225 * 255,349 after 19,544,730 : Time 589.68s : 433.03 words/s
+[2021-06-03 04:05:13] Ep. 5 : Up. 38500 : Sen. 66,478 : Cost 2.64474273 * 258,469 after 19,803,199 : Time 580.08s : 445.57 words/s
+[2021-06-03 04:15:02] Ep. 5 : Up. 39000 : Sen. 80,592 : Cost 2.65897179 * 261,138 after 20,064,337 : Time 588.10s : 444.03 words/s
+[2021-06-03 04:24:44] Ep. 5 : Up. 39500 : Sen. 94,799 : Cost 2.63200092 * 255,053 after 20,319,390 : Time 582.85s : 437.60 words/s
+[2021-06-03 04:34:36] Ep. 5 : Up. 40000 : Sen. 108,874 : Cost 2.65264225 * 259,018 after 20,578,408 : Time 591.15s : 438.16 words/s
+[2021-06-03 04:34:36] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-03 04:34:38] Saving model weights and runtime parameters to model.s2s-4.word/model.iter40000.npz
+[2021-06-03 04:34:39] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-03 04:34:41] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-03 04:34:53] [valid] Ep. 5 : Up. 40000 : cross-entropy : 166.034 : new best
+[2021-06-03 04:35:00] [valid] Ep. 5 : Up. 40000 : perplexity : 96.2571 : new best
+[2021-06-03 04:35:00] Translating validation set...
+[2021-06-03 04:35:14] Best translation 0 : &quot; ကျွန်တော် တို့ ဟာ သူ့ ရဲ့ ဆုံးရှုံး မှု အတွက် ဝမ်းနည်း ပါ တယ် &quot; ဟု သူ က သူ့ ကို ရန်သူ ၏ ရန်သူ နှင့် ဘာသာ ရေး ကို အသိအမှတ်ပြု မည် ဟု ဆို သည် ။
+[2021-06-03 04:35:14] Best translation 1 : သူ က အမေရိကန် ပြည်ထောင်စု ကြံ့ခိုင်ရေး နှင့် ဖွံ့ဖြိုးရေး ဘဏ် မှ လွတ်မြောက် လာ သည့် အမေရိကန် လေကြောင်း လိုင်း တစ်ခု မှ လွတ်မြောက် ခဲ့ သည် ဟု ၎င်း က ဆို သည် ။
+[2021-06-03 04:35:14] Best translation 2 : အမ် အန် ဒီ အေအေ အဖွဲ့ က သတင်း ထုတ်ပြန် လိုက် သည် ။
+[2021-06-03 04:35:14] Best translation 3 : &quot; သူ တို့ က လည်း ငြိမ်းချမ်းရေး နှင့် အစားထိုး သီးနှံ စိုက်ပျိုး ရေး လုပ်ငန်း တစ် ခု ရှိ တယ် &quot; ဟု ဆို သည် ။
+[2021-06-03 04:35:18] Best translation 4 : အာ စီ အက်စ် အက်စ် အဖွဲ့ ဝင် တစ်ဦး အနေဖြင့် အဆိုပါ အဖွဲ့ ဝင် ၏ တတိယ အများဆုံး ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-03 04:35:18] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ ၏ သေဆုံး မှု အကြောင်း ကို မ သိ ခဲ့ ပေ ။
+[2021-06-03 04:35:18] Best translation 10 : ၁၂ နာရီ ခွဲ ခန့် တွင် အောင်ဝင်းခိုင် ထံမှ သေနတ် ဖြင့် ပစ်ခတ် ခဲ့ သည် ။
+[2021-06-03 04:35:18] Best translation 20 : အမေရိကန် ကုန်သွယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် အမေရိကန် ကုန်သွယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် အမေရိကန် ကုန်သွယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် အမ် အန် ဒီ အေအေ တို့ ၏ သုတေသန သုတေသန နှင့် အချက်အလက် များ ကို ပြသ ခဲ့ သည် ။
+[2021-06-03 04:35:18] Best translation 40 : အဲဒီ နောက် သူ မ ရဲ့ အကူအညီ ကြောင့် သူ မ ရဲ့ အကူအညီ က သူ မ ကို အကူအညီ ပေး ဖို့ ကြိုးစား ခဲ့ တယ် ။
+[2021-06-03 04:35:18] Best translation 80 : ဆန္ဒမဲ ပေးပိုင် ခွင့် ရ ရှိ သူ များ သည် ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သူ များ အနက် အနည်းဆုံး ၁၀ ရာခိုင်နှုန်း သာ လိုအပ် ပါ သည် ။
+[2021-06-03 04:35:18] Best translation 160 : ဒုတိယ ကမ္ဘာစစ် သည် အိန္ဒိယ သမုဒ္ဒရာ မီးရထား ဘူတာရုံ သို့ ရောက် ရှိ ခဲ့ပြီး အိန္ဒိယ သမုဒ္ဒရာ ရထား ပေါ် တွင် အသုံးပြု ခဲ့ သည် ။
+[2021-06-03 04:35:24] Best translation 320 : &quot; ကျွန်မ တို့ ရဲ့ ဖောက်သည် တွေ ထဲ က တစ် ခု က တစ် ခု ဖြစ် ပါ တယ် ။ ကျွန်တော် တို့ ရဲ့ ပုံစံ တွေ က တစ် ခု ခု ရ ခဲ့ ပါ တယ် ။ အဲဒါ က ဘဝ အတွက် အဓိက ဖြစ် ပါ တယ် ။
+[2021-06-03 04:35:51] Best translation 640 : နံနက် ၇ နာရီ ၄၅ မိနစ် မှာ အရေးပေါ် အခြေအနေ ကို လက်ခံ ရရှိ ခဲ့ ပါ တယ် ။
+[2021-06-03 04:35:59] Total translation time: 58.22516s
+[2021-06-03 04:35:59] [valid] Ep. 5 : Up. 40000 : bleu : 4.18471 : new best
+[2021-06-03 04:45:48] Ep. 5 : Up. 40500 : Sen. 123,184 : Cost 2.67034769 * 259,199 after 20,837,607 : Time 672.54s : 385.40 words/s
+[2021-06-03 04:55:38] Ep. 5 : Up. 41000 : Sen. 137,199 : Cost 2.65536928 * 258,498 after 21,096,105 : Time 589.68s : 438.37 words/s
+[2021-06-03 05:05:14] Ep. 5 : Up. 41500 : Sen. 151,506 : Cost 2.61266565 * 255,412 after 21,351,517 : Time 576.54s : 443.01 words/s
+[2021-06-03 05:15:02] Ep. 5 : Up. 42000 : Sen. 165,443 : Cost 2.65113616 * 259,012 after 21,610,529 : Time 588.20s : 440.35 words/s
+[2021-06-03 05:24:47] Ep. 5 : Up. 42500 : Sen. 179,496 : Cost 2.62463164 * 254,832 after 21,865,361 : Time 584.89s : 435.69 words/s
+[2021-06-03 05:34:32] Ep. 5 : Up. 43000 : Sen. 193,736 : Cost 2.61460638 * 257,097 after 22,122,458 : Time 584.70s : 439.71 words/s
+[2021-06-03 05:44:17] Ep. 5 : Up. 43500 : Sen. 207,791 : Cost 2.64609885 * 258,709 after 22,381,167 : Time 584.57s : 442.56 words/s
+[2021-06-03 05:54:01] Ep. 5 : Up. 44000 : Sen. 221,810 : Cost 2.60887098 * 257,424 after 22,638,591 : Time 584.26s : 440.60 words/s
+[2021-06-03 06:03:47] Ep. 5 : Up. 44500 : Sen. 236,195 : Cost 2.59936833 * 256,955 after 22,895,546 : Time 585.86s : 438.60 words/s
+[2021-06-03 06:13:35] Ep. 5 : Up. 45000 : Sen. 250,172 : Cost 2.62177777 * 256,603 after 23,152,149 : Time 588.42s : 436.09 words/s
+[2021-06-03 06:13:35] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-03 06:13:38] Saving model weights and runtime parameters to model.s2s-4.word/model.iter45000.npz
+[2021-06-03 06:13:39] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-03 06:13:41] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-03 06:13:53] [valid] Ep. 5 : Up. 45000 : cross-entropy : 162.862 : new best
+[2021-06-03 06:14:00] [valid] Ep. 5 : Up. 45000 : perplexity : 88.2132 : new best
+[2021-06-03 06:14:01] Translating validation set...
+[2021-06-03 06:14:13] Best translation 0 : &quot; ကျွန်တော် တို့ ဟာ သူ့ ရဲ့ ဆုံးရှုံး မှု အတွက် ဝမ်းနည်း ပါ တယ် &quot; ဟု သူ က ရန်သူ နှင့် ဘာသာ ရေး ကို အသိအမှတ်ပြု မည် ဟု ဆို သည် ။
+[2021-06-03 06:14:13] Best translation 1 : ၎င်း ကို အမေရိကန်ပြည်ထောင်စု က ထုတ်ပြန် ခဲ့ သည့် အမေရိကန် လေကြောင်း လိုင်း တစ်ခု မှ လွတ်မြောက် လာ သည့် အမေရိကန် လေကြောင်း လိုင်း တစ်ခု မှ လွတ်မြောက် လာ ခဲ့ သည် ဟု ၎င်း က ဆို သည် ။
+[2021-06-03 06:14:14] Best translation 2 : &quot; ယာဉ် မတော်တဆ မှု က ယာဉ် တစ်စီး နဲ့ ပစ် လိုက် ရ တယ် &quot; ဟု ပါကစ္စတန် က ပြော သည် ။
+[2021-06-03 06:14:14] Best translation 3 : &quot; သူ တို့ က လည်း ကောင်း မွန် တဲ့ အလုပ် တွေ ကို လုပ် ရ မယ့် စွမ်းရည် ရှိ တယ် &quot; ဟု ဆို သည် ။
+[2021-06-03 06:14:17] Best translation 4 : အာ စီ အက်စ် အက်စ် အဖွဲ့ ဝင် တစ်ဦး အနေဖြင့် ၎င်း ၏ တတိယ မြောက် အမြင့်ဆုံး အဆင့် ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-03 06:14:17] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ ၏ သေဆုံး မှု အကြောင်း ကို မ သိ ခဲ့ ပေ ။
+[2021-06-03 06:14:17] Best translation 10 : ၁၂ နာရီ ခွဲ ခန့် တွင် အောင်ဝင်းခိုင် ထံမှ သေနတ် ဖြင့် ပစ်ခတ် ခဲ့ သည် ။
+[2021-06-03 06:14:17] Best translation 20 : အမေရိကန် ကုန်သွယ် ရေး ဌာန တစ် ခု က ဝါရှင်တန် တွင် အခြေစိုက် သော အမေရိကန် ကူးသန်း ရောင်းဝယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် ဘေကျင်း လုပ်ငန်း ဆိုင်ရာ သုတေသန ဌာန တစ် ခု ဖြစ် သည် ။
+[2021-06-03 06:14:17] Best translation 40 : အဲဒီ နောက် သူ မ ရဲ့ အကူအညီ ကြောင့် သူ မ ရဲ့ အကူအညီ က သူ မ ကို အကူအညီ ပေး ဖို့ ကြိုးစား ခဲ့ တယ် ။
+[2021-06-03 06:14:17] Best translation 80 : ဆန္ဒမဲ ပေးပိုင် ခွင့် ရ ရှိ သူ များ သည် ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သူ များ အားလုံး သည် ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သည် ။
+[2021-06-03 06:14:17] Best translation 160 : ဒုတိယ မြောက် အရှေ့တောင် အာရှ ဒေသ စံတော်ချိန် နံနက် ၁၀ နာရီ ၁၅ မိနစ် တွင် အိန္ဒိယ လေကြောင်း လိုင်း က အသုံးပြု ခဲ့ သည် ။
+[2021-06-03 06:14:23] Best translation 320 : &quot; ကျွန်မ တို့ ရဲ့ ပုံစံ တွေ ထဲ က တစ် ခု ဖြစ် ပါ တယ် ။ ကျွန်တော် တို့ ရဲ့ ပုံစံ တွေ ထဲ က တစ် ခု က တစ် ခု ခု ဖြစ် ပါ တယ် ။
+[2021-06-03 06:14:51] Best translation 640 : ပင်လယ် ရေကြောင်း သယ်ယူ ပို့ဆောင် ရေး အဖွဲ့ က အရေးပေါ် အခြေအနေ ကို လက်ခံ ရရှိ ခဲ့ သည် ။
+[2021-06-03 06:14:57] Total translation time: 56.96962s
+[2021-06-03 06:14:57] [valid] Ep. 5 : Up. 45000 : bleu : 4.63948 : new best
+[2021-06-03 06:18:39] Seen 255547 samples
+[2021-06-03 06:18:39] Starting data epoch 6 in logical epoch 6
+[2021-06-03 06:18:39] [data] Shuffling data
+[2021-06-03 06:18:39] [data] Done reading 256,102 sentences
+[2021-06-03 06:18:39] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-03 06:24:42] Ep. 6 : Up. 45500 : Sen. 8,741 : Cost 2.46026874 * 255,662 after 23,407,811 : Time 666.51s : 383.58 words/s
+[2021-06-03 06:34:34] Ep. 6 : Up. 46000 : Sen. 22,598 : Cost 2.38570666 * 256,761 after 23,664,572 : Time 592.03s : 433.70 words/s
+[2021-06-03 06:44:17] Ep. 6 : Up. 46500 : Sen. 36,883 : Cost 2.38541722 * 255,444 after 23,920,016 : Time 583.73s : 437.60 words/s
+[2021-06-03 06:54:02] Ep. 6 : Up. 47000 : Sen. 51,066 : Cost 2.40148687 * 257,716 after 24,177,732 : Time 584.42s : 440.98 words/s
+[2021-06-03 07:03:40] Ep. 6 : Up. 47500 : Sen. 65,407 : Cost 2.37032461 * 257,377 after 24,435,109 : Time 577.72s : 445.50 words/s
+[2021-06-03 07:13:31] Ep. 6 : Up. 48000 : Sen. 79,359 : Cost 2.38755608 * 256,412 after 24,691,521 : Time 591.75s : 433.31 words/s
+[2021-06-03 07:23:13] Ep. 6 : Up. 48500 : Sen. 93,671 : Cost 2.38578987 * 256,532 after 24,948,053 : Time 581.17s : 441.41 words/s
+[2021-06-03 07:32:59] Ep. 6 : Up. 49000 : Sen. 107,748 : Cost 2.40662932 * 259,609 after 25,207,662 : Time 586.82s : 442.40 words/s
+[2021-06-03 07:42:42] Ep. 6 : Up. 49500 : Sen. 121,844 : Cost 2.39366794 * 257,149 after 25,464,811 : Time 582.89s : 441.16 words/s
+[2021-06-03 07:52:29] Ep. 6 : Up. 50000 : Sen. 135,971 : Cost 2.42277598 * 259,503 after 25,724,314 : Time 586.67s : 442.33 words/s
+[2021-06-03 07:52:29] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-03 07:52:31] Saving model weights and runtime parameters to model.s2s-4.word/model.iter50000.npz
+[2021-06-03 07:52:32] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-03 07:52:35] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-03 07:52:46] [valid] Ep. 6 : Up. 50000 : cross-entropy : 160.797 : new best
+[2021-06-03 07:52:54] [valid] Ep. 6 : Up. 50000 : perplexity : 83.3422 : new best
+[2021-06-03 07:52:54] Translating validation set...
+[2021-06-03 07:53:06] Best translation 0 : သူ့ ရဲ့ ဆုံးရှုံး မှု အတွက် ဝမ်းနည်း ပါ တယ် &quot; ဟု သူ ၏ ဆုံးရှုံး မှု များ နှင့် ဘာသာ ရေး ကို ကာကွယ် နိုင် မည် ဖြစ် သည် ။
+[2021-06-03 07:53:06] Best translation 1 : သူ သည် ပါကစ္စတန် နိုင်ငံ ၏ မြောက် ပိုင်း စစ်ဌာနချုပ် မှ ထုတ်ပယ် ခံ ရ ခြင်း ဖြစ် ပြီး ပါကစ္စတန် နိုင်ငံ ၏ မြောက် ပိုင်း စစ်ဌာနချုပ် မှ လွတ်မြောက် လာ သည့် အမေရိကန် လေကြောင်း လိုင်း တစ်ခု မှ လွတ်မြောက် ခဲ့ ခြင်း ဖြစ် သည် ။
+[2021-06-03 07:53:06] Best translation 2 : &quot; ယာဉ် မတော်တဆ မှု က ယာဉ် တစ်စီး နဲ့ ပစ် လိုက် ရ တယ် &quot; ဟု ပါကစ္စတန် လူမျိုး အရာရှိ တစ် ဦး က ပြော သည် ။
+[2021-06-03 07:53:06] Best translation 3 : &quot; သူ တို့ က လည်း ဒီလို လုပ် ရ မယ့် စွမ်းရည် ရှိ တယ် ဆို တဲ့ အရည်အချင်း ရှိ တယ် &quot; ဟု အနောက် ပိုင်း ဆိုင်ရာ သိပ္ပံ ပညာရှင် တစ် ဦး က ပြော သည် ။
+[2021-06-03 07:53:10] Best translation 4 : ဘေးလ် ဝှိုက် ရဲ့ တတိယ မြောက် အကြီးဆုံး ရာထူး ဖြစ် ပါ တယ် ။
+[2021-06-03 07:53:10] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ ၏ သေဆုံး မှု အကြောင်း ကို မ သိ ခဲ့ ပေ ။
+[2021-06-03 07:53:10] Best translation 10 : ၁၂ နာရီ ခွဲ ခန့် တွင် အောင်ဝင်းခိုင် ထံမှ သေနတ် ဖြင့် ပစ်ခတ် ခဲ့ သည် ။
+[2021-06-03 07:53:10] Best translation 20 : ဝါရှင်တန် တွင် အခြေစိုက် သော အမေရိကန် ကုန်သွယ်ရေး ဌာန တစ် ခု ဖြစ် သည့် ၂၀၀၆ ခုနှစ် ၊ ဝါရှင်တန် တွင် အခြေစိုက် သော အမေရိကန် ကူးသန်း ရောင်းဝယ်ရေး ဌာန တစ် ခု က သုတေသန နှင့် ဈေးကွက် ဆိုင်ရာ အချက်အလက် များ ကို သုတေသန ပြုလုပ် ခဲ့ သည် ။
+[2021-06-03 07:53:10] Best translation 40 : အဲဒီ နောက် သူ မ ရဲ့ အကူအညီ ကြောင့် သူ မ ရဲ့ အကူအညီ ကို ရယူ ဖို့ ကြိုးစား ခဲ့ တဲ့ လူ နှစ် ယောက် က သူ့ ကို ရိုက်နှက် ခဲ့ တယ် ။
+[2021-06-03 07:53:10] Best translation 80 : ဆန္ဒမဲ ပေးပိုင် ခွင့် ရ ရှိ သူ များ သည် ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သူ များ အား ရာထူး မှ နုတ်ထွက် ရန် တာဝန် ရှိ သည် ။
+[2021-06-03 07:53:10] Best translation 160 : ဒုတိယ မြောက် အရှေ့တောင် အာရှ ဒေသ စံတော်ချိန် နံနက် ၁၀ နာရီ ၁၅ မိနစ် တွင် အိန္ဒိယ လေကြောင်း ခရီးစဉ် ဖြင့် အသုံးပြု ခဲ့ သည် ။
+[2021-06-03 07:53:16] Best translation 320 : ကျွန်တော် တို့ ရဲ့ ပုံစံ တွေ ထဲ မှာ နမူနာ တွေ ပါ ။ ကျွန်တော် တို့ ရဲ့ ပုံစံ က ဈေးနှုန်း တွေ ပါ ။
+[2021-06-03 07:53:45] Best translation 640 : ဘူတာရုံ မှ ညနေ ၇ နာရီ တွင် အရေးပေါ် အခြေအနေ ကို လက်ခံ ရရှိ ခဲ့ ပါ သည် ။
+[2021-06-03 07:53:51] Total translation time: 57.22345s
+[2021-06-03 07:53:51] [valid] Ep. 6 : Up. 50000 : bleu : 4.92561 : new best
+[2021-06-03 08:03:32] Ep. 6 : Up. 50500 : Sen. 150,567 : Cost 2.37762213 * 258,425 after 25,982,739 : Time 662.73s : 389.94 words/s
+[2021-06-03 08:13:19] Ep. 6 : Up. 51000 : Sen. 164,814 : Cost 2.41410589 * 260,110 after 26,242,849 : Time 586.92s : 443.18 words/s
+[2021-06-03 08:23:11] Ep. 6 : Up. 51500 : Sen. 178,640 : Cost 2.40461063 * 257,033 after 26,499,882 : Time 592.52s : 433.79 words/s
+[2021-06-03 08:32:58] Ep. 6 : Up. 52000 : Sen. 192,741 : Cost 2.38806009 * 257,245 after 26,757,127 : Time 587.15s : 438.13 words/s
+[2021-06-03 08:42:38] Ep. 6 : Up. 52500 : Sen. 206,938 : Cost 2.39213943 * 256,916 after 27,014,043 : Time 580.24s : 442.77 words/s
+[2021-06-03 08:52:29] Ep. 6 : Up. 53000 : Sen. 221,153 : Cost 2.39515185 * 257,912 after 27,271,955 : Time 590.09s : 437.08 words/s
+[2021-06-03 09:02:15] Ep. 6 : Up. 53500 : Sen. 235,421 : Cost 2.38340688 * 259,057 after 27,531,012 : Time 586.17s : 441.95 words/s
+[2021-06-03 09:12:01] Ep. 6 : Up. 54000 : Sen. 249,517 : Cost 2.38813019 * 257,021 after 27,788,033 : Time 586.17s : 438.48 words/s
+[2021-06-03 09:16:12] Seen 255547 samples
+[2021-06-03 09:16:12] Starting data epoch 7 in logical epoch 7
+[2021-06-03 09:16:12] [data] Shuffling data
+[2021-06-03 09:16:12] [data] Done reading 256,102 sentences
+[2021-06-03 09:16:12] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-03 09:21:51] Ep. 7 : Up. 54500 : Sen. 7,783 : Cost 2.27497935 * 257,065 after 28,045,098 : Time 590.60s : 435.26 words/s
+[2021-06-03 09:31:37] Ep. 7 : Up. 55000 : Sen. 22,027 : Cost 2.17088056 * 256,243 after 28,301,341 : Time 585.33s : 437.77 words/s
+[2021-06-03 09:31:37] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-03 09:31:39] Saving model weights and runtime parameters to model.s2s-4.word/model.iter55000.npz
+[2021-06-03 09:31:40] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-03 09:31:43] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-03 09:31:55] [valid] Ep. 7 : Up. 55000 : cross-entropy : 159.093 : new best
+[2021-06-03 09:32:02] [valid] Ep. 7 : Up. 55000 : perplexity : 79.5272 : new best
+[2021-06-03 09:32:02] Translating validation set...
+[2021-06-03 09:32:14] Best translation 0 : &quot; သူ ဆုံးရှုံး သွား တာ ကို ကျွန်တော် တို့ ဝမ်းနည်း ပါ တယ် &quot; ဟု သူ ၏ ဆုံးရှုံး မှု များ နှင့် ဘာသာ ရေး ကို ကာကွယ် နိုင် မည် ဖြစ် သည် ။
+[2021-06-03 09:32:14] Best translation 1 : သူ သည် ပါကစ္စတန် ၏ မြောက် ပိုင်း စစ်ဌာနချုပ် မှ ထုတ်ပယ် ခံ ရ ခြင်း ဖြစ် ပြီး ပါကစ္စတန် နိုင်ငံ ၏ မြောက် ပိုင်း စစ်ဌာနချုပ် မှ ထုတ်ပယ် ခံ ရ ခြင်း ဖြစ် သည် ဟု ၎င်း က ဆို သည် ။
+[2021-06-03 09:32:15] Best translation 2 : အဆိုပါ ဒုံးပျံ သည် ယာဉ် တစ်စီး ဖြင့် ပစ်ခတ် ခံ ရ ခြင်း ဖြစ် သည် ဟု ပါကစ္စတန် အကြီးတန်း အရာရှိ တစ် ဦး က ပြော သည် ။
+[2021-06-03 09:32:15] Best translation 3 : &quot; သူ တို့ က ဒီ လူ တွေ ကို ကျွမ်းကျင် ဖို့ စွမ်းရည် ရှိ တယ် &quot; ဟု အနောက် ပိုင်း ဆိုင်ရာ သိပ္ပံ ပညာရှင် တစ် ဦး က ဆို သည် ။
+[2021-06-03 09:32:18] Best translation 4 : အယ် အေ ဒီ အက်ဖ် အဖွဲ့ ဝင် တစ် ဦး ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-03 09:32:18] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ့ သေဆုံး မှု အကြောင်း ကို မ သိ ဘူး လို့ ပါကစ္စတန် အစိုးရ က ပြော တယ် ။
+[2021-06-03 09:32:18] Best translation 10 : နောက် ၁ နာရီ ခွဲ လောက် မှာ ဝေါ လ် ပီမာဆူဒီ က ဂိုး တစ်ဝက် လောက် မှာ ပစ်ခတ် ခဲ့ တယ် ။
+[2021-06-03 09:32:18] Best translation 20 : အမေရိကန် ကူးသန်း ရောင်းဝယ်ရေး ဌာန တစ် ခု ဖြစ် သည့် ၂၀၀၆ ခုနှစ် ၊ ဝါရှင်တန် တွင် အခြေစိုက် သော အမေရိကန် ကူးသန်း ရောင်းဝယ် ရေး ဌာန တစ် ခု က သုတေသန နှင့် နည်းပညာ ဆိုင်ရာ အချက်အလက် များ ကို သုတေသန ပြုလုပ် သည် ။
+[2021-06-03 09:32:18] Best translation 40 : အဲဒီ နောက် သူ မ ရဲ့ အကူအညီ ပေး ဖို့ ကြိုးစား ခဲ့ တဲ့ သေနတ်သမား နှစ် ယောက် က သူ့ ကို ရိုက်နှက် ခဲ့ တယ် ။
+[2021-06-03 09:32:18] Best translation 80 : ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သူ များ သည် ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သူ အားလုံး၏ ထက်ဝက် ကျော် က ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သည် ။
+[2021-06-03 09:32:18] Best translation 160 : ဒုတိယ ပိုင်း တွင် အိန္ဒိယ နိုင်ငံ အရှေ့တောင် အာရှ ပစိဖိတ် ခရီးသည် မီးရထား ဖြင့် အသုံးပြု ခဲ့ သည် ။
+[2021-06-03 09:32:24] Best translation 320 : ကျွန်တော် တို့ ရဲ့ ပုံစံ တွေ ထဲ မှာ နမူနာ ပစ္စည်း တွေ ပါ ။ ကျွန်တော် တို့ ရဲ့ ပုံစံ တွေ က နမူနာ ပစ္စည်း တွေ ပါ ။
+[2021-06-03 09:32:53] Best translation 640 : ဘူတာရုံ မှ ညနေ ၇ နာရီ တွင် အရေးပေါ် အခြေအနေ ကြေညာ ချက် ကို လက်ခံ ရရှိ သည် ။
+[2021-06-03 09:32:57] Total translation time: 55.01495s
+[2021-06-03 09:32:57] [valid] Ep. 7 : Up. 55000 : bleu : 5.26761 : new best
+...
+...
+...
+[2021-06-03 12:52:31] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-03 12:52:42] [valid] Ep. 8 : Up. 65000 : cross-entropy : 157.097 : new best
+[2021-06-03 12:52:50] [valid] Ep. 8 : Up. 65000 : perplexity : 75.2782 : new best
+[2021-06-03 12:52:50] Translating validation set...
+[2021-06-03 12:53:02] Best translation 0 : &quot; သူ ဆုံးရှုံး သွား တာ ကို ကျွန်တော် တို့ ဝမ်းနည်း ပါ တယ် &quot; ဟု သူ က ရန်သူ နှင့် ဘာသာ ရေး ကို ကာကွယ် သွား မည် ဖြစ် သည် ။
+[2021-06-03 12:53:02] Best translation 1 : သူ သည် ပါကစ္စတန် ၏ ဒုံးကျည် များ မှ ထုတ်ပယ် ခံ ရ ခြင်း ဖြစ် ပြီး ပါကစ္စတန် နိုင်ငံ ၏ မြောက် ပိုင်း စစ်ဌာနချုပ် မှ စတင် ပစ်ခတ် ခြင်း ခံ ခဲ့ ရ ပြီး စစ်သွေးကြွ ၃၀ ကျော် သေဆုံး ခဲ့ ကြောင်း တွေ့ရှိ ရ ပါ သည် ။
+[2021-06-03 12:53:04] Best translation 2 : အဆိုပါ ဒုံးကျည် များ က သင်္ဘော တစ်စီး ဖြင့် ပစ်ခတ် ခံ ရ သည် ဟု ပါကစ္စတန် အကြီးတန်း အရာရှိ တစ် ဦး က ပြော သည် ။
+[2021-06-03 12:53:04] Best translation 3 : &quot; သူ တို့ က ဒီ လူ တွေ ကို ကောင်းမွန်တဲ့ အလုပ် နဲ့ အစားထိုး ဖို့ စွမ်းရည် ရှိ တယ် &quot; ဟု အနောက် ပိုင်း ဆိုင်ရာ ကျွမ်းကျင်သူ တစ်ဦး က ပြော တယ် ။
+[2021-06-03 12:53:06] Best translation 4 : အကျိုးဆောင် အဖွဲ့ ဝင် များ ၏ တတိယ မြောက် အမြင့်ဆုံး အဆင့်မြင့် ကိုယ်စားလှယ် ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-03 12:53:06] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ့ သေဆုံး မှု အကြောင်း ကို မ သိ ဘူး လို့ ပါကစ္စတန် အစိုးရ က ပြော တယ် ။
+[2021-06-03 12:53:06] Best translation 10 : ဇူလိုင် လ ၃ရက် နေ့ နံနက် စောစော ရောက် လာ သည့် ဂိုး တစ်ဂိုး ကို မှတ်တမ်းတင် ခဲ့ သည် ။
+[2021-06-03 12:53:06] Best translation 20 : အမေရိကန် အခြေစိုက် ကူးသန်း ရောင်းဝယ်ရေး ဌာန တစ် ခု ဖြစ် သည့် ဝါရှင်တန် တွင် အခြေစိုက် သော အမေရိကန် ကူးသန်း ရောင်းဝယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် အန် စီ စီတီ ကို သုတေသန နှင့် နည်းပညာ ဆိုင်ရာ အချက်အလက် များ ကို သုတေသန ပြုလုပ် သည် ။
+[2021-06-03 12:53:06] Best translation 40 : အဲဒီ နောက် သူ မ ရဲ့ အကူအညီ ကို ရ ဖို့ ကြိုးစား ခဲ့ တဲ့ သေနတ်သမား နှစ် ယောက် က သူ့ ကို ရိုက်နှက် ခဲ့ တယ် ။
+[2021-06-03 12:53:06] Best translation 80 : မဲ အရေအတွက် ၅၀ အောက် မနည်း ပါဝင် သော မဲဆန္ဒရှင် များ သည် ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သူ များ ၏ အရေအတွက် မှာ ဆန္ဒမဲ ပေးပိုင် ခွင့် ရှိ သည် ။
+[2021-06-03 12:53:06] Best translation 160 : ဒုတိယ မြောက် အရှေ့တောင် အာရှ ခရီးသည် တင် ရထား က အိန္ဒိယ ၏ ပစိဖိတ် ခရီးသည် တင် ရထား ပေါ် တွင် အသုံးပြု ခဲ့ သည် ။
+[2021-06-03 12:53:12] Best translation 320 : ကျွန်တော် တို့ ရဲ့ ပုံစံ တွေ ထဲ မှာ အဓိပ္ပာယ် မ ရှိ တာ တွေ ရှိ ပါ တယ် ။ ကျွန်တော် တို့ ရဲ့ ပုံစံ တွေ က နမူနာ ပစ္စည်း တွေ ၊ အပူပေး စက် တွေ ၊ အပူပေး စက် တွေ ပါ ။
+[2021-06-03 12:53:40] Best translation 640 : သင်္ဘောဆိပ်ကမ်း မှ ညနေ ၇ နာရီ တွင် အရေးပေါ် အခြေအနေ ကြေညာ ချက် ကို လက်ခံ ရရှိ သည် ။
+[2021-06-03 12:53:46] Total translation time: 56.30391s
+[2021-06-03 12:53:46] [valid] Ep. 8 : Up. 65000 : bleu : 5.42704 : new best
+...
+...
+...
+[2021-06-03 16:13:25] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-03 16:13:37] [valid] Ep. 9 : Up. 75000 : cross-entropy : 156.252 : new best
+[2021-06-03 16:13:45] [valid] Ep. 9 : Up. 75000 : perplexity : 73.5494 : new best
+[2021-06-03 16:13:45] Translating validation set...
+[2021-06-03 16:13:56] Best translation 0 : &quot; သူ ဆုံးရှုံး သွား တာ ကို ကျွန်တော် တို့ ဝမ်းနည်း ပါ တယ် ။ သူ က ရန်သူ နိုင်ငံ နဲ့ ဘာသာရေး ကို ဆန့်ကျင် တဲ့ အမွေအနှစ် တစ်ခု ထား ခဲ့ တယ် ။
+[2021-06-03 16:13:56] Best translation 1 : ၎င်း ကို အမေရိကန်ပြည်ထောင်စု က မတ် လ ၁၆ ရက်နေ့ က ထုတ်ပြန် ခဲ့ သည့် အမေရိကန် လေကြောင်း လိုင်း တစ်ခု မှ ထုတ်ပယ် ခံ ခဲ့ ရ ပြီး စစ်သွေးကြွ ၃၀ ကျော် သေဆုံး ခဲ့ ကြောင်း တွေ့ရှိ ရ ပါ သည် ။
+[2021-06-03 16:13:58] Best translation 2 : ဒီ ဒုံးကျည် တွေ က သင်္ဘော တစ်စီး နဲ့ ပစ် ခံ ရ တယ် &quot; ဟု ပါကစ္စတန် အကြီးတန်း အရာရှိ တစ် ဦး က ပြော တယ် ။
+[2021-06-03 16:13:58] Best translation 3 : သူ တို့ တွေ က လည်း ဒီ လူငယ် တွေ ကို အစားထိုး ပြီး အစားထိုး ဖို့ စွမ်းရည် ရှိ တယ် &quot; ဟု အနောက် ပိုင်း ဆိုင်ရာ ထောက်လှမ်း ရေး အရာရှိ တစ် ဦး က ပြော တယ် ။
+[2021-06-03 16:14:00] Best translation 4 : နှောင့်ယှက် ခံ ရ သူ ၏ တတိယ မြောက် အဆင့်မြင့် ကိုယ်စားလှယ် ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-03 16:14:00] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ ၏ သေဆုံး မှု အကြောင်း ကို သူ တို့ မ သိ ခဲ့ ပေ ။
+[2021-06-03 16:14:00] Best translation 10 : လော့စ်အိန်ဂျယ်လိစ် ကနေ စောစော ရောက် လာ တဲ့ ဂိုး တစ်ဂိုး ပါ ပဲ ။
+[2021-06-03 16:14:00] Best translation 20 : အမေရိကန် ကူးသန်း ရောင်းဝယ်ရေး ဌာန တစ် ခု ဖြစ် သည့် ဝါရှင်တန် တွင် အခြေစိုက် သော အမေရိကန် ကူးသန်း ရောင်းဝယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် ယူ အန် အို ဒီစီ တို့ က သုတေသန နှင့် နည်းပညာ ဆိုင်ရာ အချက်အလက် များ ကို သုတေသန ပြုလုပ် သည် ။
+[2021-06-03 16:14:00] Best translation 40 : အဲဒီ နောက် သူ မ ရဲ့ အကူအညီ ကို ရ ဖို့ ကြိုးစား ခဲ့ တဲ့ သေနတ်သမား က သူ့ ဆံပင် တွေ ကို ဖုံးကွယ် ခဲ့ တယ် ။
+[2021-06-03 16:14:00] Best translation 80 : မဲပေး သူ အရေအတွက် သည် ၅၀ ရာခိုင်နှုန်း အောက် မနည်း ပါဝင် ပြီး ရွေးချယ် တင်မြှောက် ခံ ရ သူ အားလုံး ၏ အနည်းဆုံး လေးပုံ ရာခိုင်နှုန်း သာ ပါဝင် ပါ သည် ။
+[2021-06-03 16:14:00] Best translation 160 : ဒုတိယ မြောက် အရှေ့တောင် အာရှ ခရီးသည် တင် ရထား က အိန္ဒိယ ၏ ပစိဖိတ် ခရီးသည် တင် ရထား ပေါ် တွင် အသုံးပြု ခဲ့ သည် ။
+[2021-06-03 16:14:05] Best translation 320 : ဘေလ် ထဲ မှာ ဆို ထား တဲ့ ပုံစံ က ကျွန်တော် တို့ ရဲ့ ပုံစံ တွေ က နမူနာ ပစ္စည်း တွေ ၊ အပူပေး စက် တွေ ၊ အပူပေး စက် တွေ ပါ ။
+[2021-06-03 16:14:34] Best translation 640 : ပင်လယ် ရေကြောင်း သယ်ယူ ပို့ဆောင် ရေး ဦးစီးဌာန မှ ညနေ ၇ နာရီ ၄၅ မိနစ် တွင် အရေးပေါ် အခြေအနေ ကြေညာ သည် ။
+[2021-06-03 16:14:39] Total translation time: 54.52233s
+[2021-06-03 16:14:39] [valid] Ep. 9 : Up. 75000 : bleu : 5.6817 : new best
+...
+...
+...
+[2021-06-03 17:54:39] Best translation 80 : မဲပေး သူ အရေအတွက် ၅၀ ရာခိုင်နှုန်း အောက် မနည်း ပါဝင် သော ကိုယ်စားလှယ်လောင်း တစ်ဦး သည် ဆန္ဒမဲ ပေးပိုင်ခွင့် ရှိ သူ အားလုံး ၏ အနည်းဆုံး ၃၃ ရာခိုင်နှုန်း ဖြစ် ပါ သည် ။
+[2021-06-03 17:54:39] Best translation 160 : ဒုတိယ မြောက် ပိုင်း တွင် အိန္ဒိယ ပစိဖိတ် ခရီးသည် တင် ရထား က နေ အိန္ဒိယ သမုဒ္ဒရာ ရထား ပေါ် တွင် အသုံးပြု ခဲ့ သည် ။
+[2021-06-03 17:54:44] Best translation 320 : ဘေလ် ထဲ မှာ ဆို ထား ပါ တယ် ။ ကျွန်တော် တို့ ရဲ့ ပုံစံ တွေ က နမူနာ ပစ္စည်း တွေ ၊ အပူပေး စက် တွေ ၊ အပူပေး စက် တွေ ပါ ။
+[2021-06-03 17:55:13] Best translation 640 : သင်္ဘော တပ်ဖွဲ့ မှ ညနေ ၇ နာရီ ခွဲ ခန့် တွင် အရေးပေါ် အခြေအနေ ကြေညာ ချက် ထုတ်ပြန် သည် ။
+[2021-06-03 17:55:19] Total translation time: 55.91576s
+[2021-06-03 17:55:19] [valid] Ep. 9 : Up. 80000 : bleu : 5.56102 : stalled 1 times (last best: 5.6817)
+...
+...
+...
+[2021-06-04 05:31:12] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-04 05:31:14] Saving model weights and runtime parameters to model.s2s-4.word/model.iter115000.npz
+[2021-06-04 05:31:15] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-04 05:31:18] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-04 05:31:29] [valid] Ep. 13 : Up. 115000 : cross-entropy : 157.836 : stalled 5 times (last best: 155.956)
+[2021-06-04 05:31:37] [valid] Ep. 13 : Up. 115000 : perplexity : 76.8234 : stalled 5 times (last best: 72.9532)
+[2021-06-04 05:31:37] Translating validation set...
+[2021-06-04 05:31:49] Best translation 0 : &quot; ဆုံးရှုံး မှု တွေ အတွက် ဝမ်းနည်း ပါ တယ် ဟု သူ က ပြောကြား သည် ။
+[2021-06-04 05:31:49] Best translation 1 : ပါကစ္စတန် ဝါ ဇီ ရစ် တန် နယ်မြေ ထဲ မှ ရေနံ တင် သင်္ဘော တစ်စီး မှ ထုတ်ပယ် ခြင်း ခံ ခဲ့ ရ ပြီး နောက်ပိုင်း တွင် စစ်သွေးကြွ များ ထပ်မံ သေဆုံး ခဲ့ ကြောင်း သိရှိ ရ ပါ သည် ။
+[2021-06-04 05:31:50] Best translation 2 : အဆိုပါ ဒုံးကျည် များ ကို မောင်းသူ မဲ့ လေယာဉ် တစ်စီး ဖြင့် ပစ် လိုက် ပြီ ဟု ပါကစ္စတန် ထောက်လှမ်း ရေး အရာရှိ တစ် ဦး က ပြော သည် ။
+[2021-06-04 05:31:50] Best translation 3 : သူ တို့ က ဒါ တွေ ကို စီမံခန့်ခွဲ ဖို့ စွမ်းရည် ရှိ တယ် &quot; လို့ အနောက်တိုင်း ထောက်လှမ်း ရေး အရာရှိ တစ် ဦး က ပြော ပါ တယ် ။
+[2021-06-04 05:31:53] Best translation 4 : ယင်း နေ ရာတွင် အယ် ကိုင် ဒါ ၏ တတိယ မြောက် အဆင့်မြင့် ကိုယ်စားလှယ် အမတ် ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-04 05:31:53] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ တို့ သေဆုံးမှု အကြောင်း ကို သူ တို့ မ သိ ဘူး လို့ ပြော တယ် ။
+[2021-06-04 05:31:53] Best translation 10 : LosAngeles ကို ပထမ ပိုင်း ရောက်ရှိ လာ တဲ့ ဂိုး တစ်ဂိုး ပါ ပဲ ။
+[2021-06-04 05:31:53] Best translation 20 : အမေရိကန် အခြေစိုက် ကူးသန်း ရောင်းဝယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် ဝါရှင်တန် အခြေစိုက် အမေရိကန် ကူးသန်း ရောင်းဝယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် အန် စီ စီတီ သည် ဒိုက် ကာ နှင့် လေထု တို့ အပေါ် သုတေသန နှင့် အတတ်ပညာ ဆိုင်ရာ အချက်အလက် များ ကို သုတေသန ပြုလုပ် ပါသည် ။
+[2021-06-04 05:31:53] Best translation 40 : အဲဒီ နောက် သေနတ်သမား က သူ့ ကို သေနတ် နဲ့ ပစ် လိုက် တဲ့ သေနတ်သမား က သူ့ ဆံပင် ကို ပစ် လိုက် တယ် အဲဒီ နောက် လူ နှစ် ယောက် က သူ့ ကို ကူညီ ဖို့ ကြိုးစား ခဲ့ တယ် ။
+[2021-06-04 05:31:53] Best translation 80 : မဲပေး သူ အရေအတွက် သည် ၅၀ ရာခိုင်နှုန်း အောက် လျော့နည်း ခဲ့ ပြီး ကိုယ်စားလှယ်လောင်း တစ်ဦး မှ အနည်းဆုံး ၃၃ ရာခိုင်နှုန်း ဆန္ဒမဲ ပေး ရန် လိုအပ် ပါ သည် ။
+[2021-06-04 05:31:53] Best translation 160 : ဒုတိယ မြောက် အရှေ့တောင် အာရှ ရထား ရထား က အိန္ဒိယ ၏ ပစိဖိတ် ခရီးသည် တင် ရထား ဖြင့် သုံး ၍ ဖြတ်သန်း ခဲ့ သည် ။
+[2021-06-04 05:31:58] Best translation 320 : ဘာ ဖြစ် လို့ လဲ ဆို တော့ ကျွန်တော် တို့ ရဲ့ ပုံစံ က ဗီတာမင် တွဲသုံး တာ ၊ အပူရှိန် ၊ အပူပေး စက် ၊ အပူပေး စက် တွေ နဲ့ သက်ရှိ တွေ အတွက် အဓိက ပါဝင် ပစ္စည်းတွေ ပါ ။
+[2021-06-04 05:32:26] Best translation 640 : သင်္ဘော လိုင်း မှ ညနေ ၇ နာရီ ၃၅ မိနစ် တွင် သင်္ဘော လိုင်း မှ အရေးပေါ် သတင်း ရရှိ သည် ။
+[2021-06-04 05:32:31] Total translation time: 53.99553s
+[2021-06-04 05:32:31] [valid] Ep. 13 : Up. 115000 : bleu : 5.81631 : new best
+...
+...
+...
+[2021-06-04 08:50:34] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-04 08:50:46] [valid] Ep. 14 : Up. 125000 : cross-entropy : 159.018 : stalled 7 times (last best: 155.956)
+[2021-06-04 08:50:53] [valid] Ep. 14 : Up. 125000 : perplexity : 79.3621 : stalled 7 times (last best: 72.9532)
+[2021-06-04 08:50:53] Translating validation set...
+[2021-06-04 08:51:06] Best translation 0 : &quot; ဆုံးရှုံး မှု တွေ အတွက် ဝမ်းနည်း ပါ တယ် ဟု သူ က ပြောကြား သည် ။
+[2021-06-04 08:51:06] Best translation 1 : သူ တို့ ကို ပါကစ္စတန် ဝါ ဇီ ရစ် တန် နယ်မြေ ထဲ က ရေနံ တင် သင်္ဘော တစ်စီး မှ ပစ် ခံခဲ့ ရ တယ် လို့ အခိုင် အမာ ပြော ခဲ့ တယ် ။
+[2021-06-04 08:51:07] Best translation 2 : ဒီ ဒုံး ကို မောင်းသူ မဲ့ လေယာဉ် တစ်စီး နဲ့ ပစ် တယ်လို့ ပြော တယ် ။
+[2021-06-04 08:51:07] Best translation 3 : သူ တို့ တွေ က ဒီ လူငယ် တွေ ကို စီမံခန့်ခွဲ ဖို့ စွမ်းရည် ရှိ တယ် &quot; လို့ အနောက်တိုင်း ထောက်လှမ်း ရေး အရာရှိ တစ် ဦး က ပြော ပါ တယ် ။
+[2021-06-04 08:51:10] Best translation 4 : ယင်း နေ ရာတွင် အယ် ကိုင် ဒါ ၏ တတိယ မြောက် အဆင့်မြင့် ကိုယ်စားလှယ် အမတ် ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-04 08:51:10] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ တို့ သေဆုံးမှု အကြောင်း ကို မ သိ ဘူး လို့ ပြော တယ် ။
+[2021-06-04 08:51:10] Best translation 10 : နောက် တစ် လ အစော ပိုင်း က ဖြစ် လာ ခဲ့ တာ ဖြစ် ပါ တယ် ။
+[2021-06-04 08:51:10] Best translation 20 : အမေရိကန် အခြေစိုက် ကူးသန်း ရောင်းဝယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် ဝါရှင်တန် အခြေစိုက် အမေရိကန် ကူးသန်း ရောင်းဝယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် အန် စီ စီတီ သည် ဒိုက် ကာ နှင့် လေထု တို့ အပေါ် သုတေသန လုပ်ငန်း များ ကို ပြုလုပ် လျက် ရှိ ပါ သည် ။
+[2021-06-04 08:51:10] Best translation 40 : အဲဒီ နောက် လူ နှစ် ယောက် က သူ့ ကို ရိုက်နှက် ဖို့ ကြိုးစား တဲ့ သေနတ်သမား နှစ် ယောက် က သူ့ ဆံပင် ကို ဆွဲထုတ် လိုက် တယ် ။
+[2021-06-04 08:51:10] Best translation 80 : မဲပေး သူ အရေအတွက် သည် ၅၀ ရာခိုင်နှုန်း အောက် လျော့နည်း ခဲ့ ပြီး ကိုယ်စားလှယ်လောင်း တစ်ဦး မှ အနည်းဆုံး ၃၃ ရာခိုင်နှုန်း ရ ရှိ ကြ ပါ သည် ။
+[2021-06-04 08:51:10] Best translation 160 : ဒုတိယ အချက်အချာကျ သော ဆစ်ဒနီ မြို့ သည် အိန္ဒိယ ပစိဖိတ် ရထား ရထား က ပါ လာ မည့် မိုင် ရှည်လျား သည့် ဆစ်ဒနီ မြို့ ကို ဖြတ် ၍ ဖြတ်သန်း ခဲ့ ပြီ ဖြစ် သည် ။
+[2021-06-04 08:51:15] Best translation 320 : အန် အမ် အီး ထဲ မှာ ဖြစ်ပေါ် နေ တဲ့ ပုံစံ ဖြစ် ပါ တယ် ။ ကျွန်တော် တို့ ရဲ့ ပုံစံ က တော့ ဟင်းခတ် အမွှေးအကြိုင် တွေ ၊ အပူပေး စက် တွေ ၊ အပူပေး စက် တွေ ပါ ။
+[2021-06-04 08:51:42] Best translation 640 : သင်္ဘော လိုင်း မှ ညနေ ၇ နာရီ ၄၅ မိနစ် တွင် သင်္ဘော လိုင်း မှ အသံလွှင့် ခြင်း ခံ ရ သည် ။
+[2021-06-04 08:51:48] Total translation time: 54.65454s
+[2021-06-04 08:51:48] [valid] Ep. 14 : Up. 125000 : bleu : 5.7596 : stalled 2 times (last best: 5.81631)
+...
+...
+...
+[2021-06-04 10:31:53] Best translation 40 : အဲဒီ နောက် သေနတ်သမား က သူ့ ကို သေနတ် နဲ့ ပစ် ပြီး သူ့ ကို ကူညီ ဖို့ ကြိုးစား ခဲ့ တဲ့ သေနတ်သမား နှစ် ယောက် က သူ့ ကို ဆွဲခေါ် သွား တယ် ။
+[2021-06-04 10:31:53] Best translation 80 : မဲပေး သူ အရေအတွက် သည် ၅၀ ရာခိုင်နှုန်း အောက် လျော့နည်း ခဲ့ ပြီး ကိုယ်စားလှယ်လောင်း တစ်ဦး မှ အနည်းဆုံး ၃၃ ရာခိုင်နှုန်း ဆန္ဒမဲ ရရှိ ရန် လိုအပ် ပါ သည် ။
+[2021-06-04 10:31:53] Best translation 160 : ဒုတိယ စင်္ကြံ တွင် အိန္ဒိယ ပစိဖိတ် ခရီးသည် တင် ရထား က ပါ သွား သော လမ်းကြောင်း ကို ပိတ် လိုက် ပြီ ဖြစ် သည် ။
+[2021-06-04 10:31:57] Best translation 320 : အန် အမ် အီး ထဲ မှာ ဖြစ်ပေါ် နေ တဲ့ ပုံစံ ဖြစ် ပါ တယ် ။ ကျွန်တော် တို့ ရဲ့ ပုံစံ က တော့ ဟင်းခတ် အမွှေးအကြိုင် တွေ ၊ အပူပေး စက် တွေ ၊ အပူပေး စက် တွေ ပါ ။
+[2021-06-04 10:32:27] Best translation 640 : သင်္ဘော လိုင်း မှ ညနေ ၇ နာရီ ၄၅ မိနစ် တွင် သင်္ဘော လိုင်း မှ အသံလွှင့် ခြင်း ကို ခံ ရ သည် ။
+[2021-06-04 10:32:31] Total translation time: 55.16228s
+[2021-06-04 10:32:31] [valid] Ep. 15 : Up. 130000 : bleu : 5.63438 : stalled 3 times (last best: 5.81631)
+...
+...
+...
+[2021-06-04 13:54:11] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-04 13:54:13] Saving model weights and runtime parameters to model.s2s-4.word/model.iter140000.npz
+[2021-06-04 13:54:15] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-04 13:54:17] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-04 13:54:29] [valid] Ep. 16 : Up. 140000 : cross-entropy : 161.408 : stalled 10 times (last best: 155.956)
+[2021-06-04 13:54:37] [valid] Ep. 16 : Up. 140000 : perplexity : 84.7553 : stalled 10 times (last best: 72.9532)
+[2021-06-04 13:54:37] Translating validation set...
+[2021-06-04 13:54:50] Best translation 0 : &quot; ဆုံးရှုံး မှု တွေ အတွက် ဝမ်းနည်း ပါ တယ် ဟု သူ က ပြောကြား သည် ။
+[2021-06-04 13:54:50] Best translation 1 : ပါကစ္စတန် ဝါ ဇီ ရစ် တန် ဝါ ဇီ ရစ် မှ စ ကာ ဟု သတ်မှတ် ဖော်ထုတ် ခဲ့ သည့် အမေရိကန်ပြည်ထောင်စု ဒုံး ကျည် တစ် စီး မှ သေနတ် ဖြင့် ပစ်ခတ် ခြင်း ခံ ခဲ့ ရ ကြောင်း တွေ့ရှိ ရ ပါ သည် ။
+[2021-06-04 13:54:50] Best translation 2 : ဒီ ဒုံးပျံ ကို မောင်းသူ မဲ့ လေယာဉ် တစ်စီး နဲ့ ပစ် တယ်လို့ ပြော တယ် ။
+[2021-06-04 13:54:50] Best translation 3 : သူ တို့ က ဒီ လူ တွေ ကို စီမံခန့်ခွဲ ဖို့ စွမ်းရည် ရှိ တယ် &quot; လို့ အနောက် ထောက်လှမ်းရေး အရာရှိ တစ် ဦး က ပြော ပါ တယ် ။
+[2021-06-04 13:54:53] Best translation 4 : ယင်း နေ ရာတွင် အယ် ကိုင် ဒါ ၏ တတိယ မြောက် အဆင့်မြင့် ကိုယ်စားလှယ် အမတ် ဖြစ် သည် ဟု ဆို တယ် ။
+[2021-06-04 13:54:53] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ သေဆုံး တာ နဲ့ ပတ်သက် ပြီး မ သိ ဘူး လို့ ပြော တယ် ။
+[2021-06-04 13:54:53] Best translation 10 : LosAngeles ကို ပထမ ပိုင်း တွင် ရောက်ရှိ လာ ခဲ့ ကြ သော လော့စ် လူ ဂျ လီး ယား ပြည်သူ များ က မှတ်တမ်းတင် ခဲ့ ကြ သည် ။
+[2021-06-04 13:54:53] Best translation 20 : အမေရိကန် အခြေစိုက် ကူးသန်း ရောင်းဝယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် ဝါရှင်တန် အခြေစိုက် အမေရိကန် ကူးသန်း ရောင်းဝယ် ရေး ဌာန တစ် ခု ဖြစ် သည့် အန် စီ စီတီ သည် ဒိုက် ကာ နှင့် လေထု တို့ အပေါ် သုတေသန လုပ်ငန်း များ ကို ပြုလုပ် လျက် ရှိ ပါ သည် ။
+[2021-06-04 13:54:53] Best translation 40 : သူ့ ကို သေနတ် နဲ့ ပစ် လိုက် တဲ့ သေနတ်သမား က သူ မ ကို သေနတ် နဲ့ ပစ် ပြီး သူ့ ကို ကူညီ ဖို့ ကြိုးစား ခဲ့ တဲ့ သေနတ်သမား က သူ့ ဆံပင် ကို ဆတ် ခနဲ ဆွဲယူ ခဲ့ တယ် ။
+[2021-06-04 13:54:53] Best translation 80 : မဲပေး သူ အရေအတွက် သည် ၅၀ ရာခိုင်နှုန်း အောက် လျော့နည်း ခဲ့ ပြီး ကိုယ်စားလှယ်လောင်း တစ်ဦး မှ အနည်းဆုံး ၃၃ ရာခိုင်နှုန်း ဆန္ဒမဲ ရရှိ ရန် လိုအပ် ပါ သည် ။
+[2021-06-04 13:54:53] Best translation 160 : ဒုတိယ အချက်အချာကျ သော ဆစ်ဒနီ မြို့ သည် ရှည်လျား သော ဆစ်ဒနီ မြို့ ရှိ အိန္ဒိယ ပစိဖိတ် ခရီးသည် တင် ရထား ကို ဖြတ် ၍ သုံး ခဲ့ ပါ သည် ။
+[2021-06-04 13:54:58] Best translation 320 : အန် အမ် အီး ထဲ မှာ ဖြစ်ပေါ် နေ တဲ့ ပုံစံ ဖြစ် ပါ တယ် ။ ကျွန်တော် တို့ ရဲ့ ပုံစံ က တော့ ဟင်းခတ် အမွှေးအကြိုင် တွေ ၊ အပူပေး စက် တွေ ၊ အပူပေး စက် တွေ ပါ ။
+[2021-06-04 13:55:25] Best translation 640 : သင်္ဘော လိုင်း မှ ညနေ ၇ နာရီ ခွဲ ခန့် တွင် သင်္ဘော လိုင်း မှ အသံလွှင့် ခြင်း ကို ခံ ရ သည် ။
+[2021-06-04 13:55:31] Total translation time: 54.07636s
+[2021-06-04 13:55:31] [valid] Ep. 16 : Up. 140000 : bleu : 5.59372 : stalled 5 times (last best: 5.81631)
+[2021-06-04 13:55:32] Training finished
+[2021-06-04 13:55:35] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-04 13:55:37] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-04 13:55:40] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+
+real	2792m23.906s
+user	4421m19.381s
+sys	2m3.689s
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+
+## Update Script and Train Again
+
+BLEU score နဲ့ပဲ တွက်ကြည့်ရင် stalled time က ၅ခါပဲ ရှိသေးလို့ ထပ်ကြိုးစားကြည့်။
+ဒီအတိုင်း epoch ပဲ တိုးတာမျိုးထက် dropout ကိုပါ ကစားကြည့်ခဲ့...
+
+  --dropout-rnn 0.2 --dropout-src 0.2 --exponential-smoothing \
+  --early-stopping 20 \
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.sh 
+...
+...
+...
+[2021-06-05 03:52:40] [valid] Ep. 19 : Up. 165000 : bleu : 5.38886 : stalled 10 times (last best: 5.81631)
+[2021-06-05 04:02:28] Ep. 19 : Up. 165500 : Sen. 80,984 : Cost 0.78812599 * 255,685 after 85,168,638 : Time 669.40s : 381.96 words/s
+[2021-06-05 04:12:17] Ep. 19 : Up. 166000 : Sen. 95,342 : Cost 0.80177510 * 260,484 after 85,429,122 : Time 589.10s : 442.18 words/s
+[2021-06-05 04:22:05] Ep. 19 : Up. 166500 : Sen. 109,448 : Cost 0.81399888 * 257,085 after 85,686,207 : Time 587.65s : 437.48 words/s
+[2021-06-05 04:31:58] Ep. 19 : Up. 167000 : Sen. 123,517 : Cost 0.82127559 * 259,535 after 85,945,742 : Time 593.30s : 437.44 words/s
+[2021-06-05 04:41:45] Ep. 19 : Up. 167500 : Sen. 137,851 : Cost 0.81652665 * 255,284 after 86,201,026 : Time 586.14s : 435.53 words/s
+[2021-06-05 04:51:40] Ep. 19 : Up. 168000 : Sen. 151,718 : Cost 0.82104951 * 255,385 after 86,456,411 : Time 595.33s : 428.98 words/s
+[2021-06-05 05:01:30] Ep. 19 : Up. 168500 : Sen. 165,752 : Cost 0.83428872 * 256,012 after 86,712,423 : Time 590.16s : 433.80 words/s
+[2021-06-05 05:11:19] Ep. 19 : Up. 169000 : Sen. 180,049 : Cost 0.84342414 * 260,188 after 86,972,611 : Time 588.70s : 441.97 words/s
+[2021-06-05 05:21:05] Ep. 19 : Up. 169500 : Sen. 194,111 : Cost 0.83802795 * 255,524 after 87,228,135 : Time 586.76s : 435.48 words/s
+[2021-06-05 05:30:50] Ep. 19 : Up. 170000 : Sen. 208,436 : Cost 0.84385109 * 256,839 after 87,484,974 : Time 584.61s : 439.33 words/s
+[2021-06-05 05:30:50] Saving model weights and runtime parameters to model.s2s-4.word/model.npz.orig.npz
+[2021-06-05 05:30:52] Saving model weights and runtime parameters to model.s2s-4.word/model.iter170000.npz
+[2021-06-05 05:30:53] Saving model weights and runtime parameters to model.s2s-4.word/model.npz
+[2021-06-05 05:30:56] Saving Adam parameters to model.s2s-4.word/model.npz.optimizer.npz
+[2021-06-05 05:31:08] [valid] Ep. 19 : Up. 170000 : cross-entropy : 169.823 : stalled 16 times (last best: 155.956)
+[2021-06-05 05:31:15] [valid] Ep. 19 : Up. 170000 : perplexity : 106.831 : stalled 16 times (last best: 72.9532)
+[2021-06-05 05:31:15] Translating validation set...
+[2021-06-05 05:31:28] Best translation 0 : &quot; ဆုံးရှုံး သွား တာ က တော့ သူ ဆုံးရှုံး ရ တဲ့ ဆုံးရှုံးမှု အတွက် ဝမ်းနည်း ပါ တယ် ။
+[2021-06-05 05:31:28] Best translation 1 : ပါကစ္စတန် ဝါ ဇီ ရစ် တန် ဝါ ဇီ ရစ် တန် ဝါ ဇီ ရစ် တန် ဝါ ဇီ ရစ် တန် ဝါ ဇီ ရစ် မှ ဒုံးကျည် များ သယ်ဆောင် လာ ကြောင်း တွေ့ရှိ ရ ပါ သည် ။
+[2021-06-05 05:31:28] Best translation 2 : ဒီ ဒုံးပျံ ကို မောင်းသူ မဲ့ လေယာဉ် တစ်စင်း ဖြင့် ပစ် ပါတယ် ဟု ပါကစ္စတန် ထောက်လှမ်း ရေး အရာရှိ တစ် ဦး က ပြော သည် ။
+[2021-06-05 05:31:28] Best translation 3 : သူ တို့ တွေ က ဒီ လူငယ် တွေ ကို စီမံခန့်ခွဲ နိုင် တဲ့ စွမ်းရည် ရှိ ပါ တယ် &quot; လို့ အနောက်ပိုင်း ထောက်လှမ်း ရေး အရာရှိ တစ် ဦး က ပြော ပါ တယ် ။
+[2021-06-05 05:31:31] Best translation 4 : ယင်း နေ ရာတွင် အယ် ကိုင် ဒါ ၏ တတိယ မြောက် အဆင့်မြင့် ကိုယ်စားလှယ် အမတ် ဖြစ် သည် ဟု ဆို သည် ။
+[2021-06-05 05:31:31] Best translation 5 : ပါကစ္စတန် အစိုးရ က သူ သေဆုံး တာ ကို သူ တို့ မ သိ ဘူး လို့ ပြော တယ် ။
+[2021-06-05 05:31:31] Best translation 10 : လော့စ်အိန်ဂျလိ စ် မှာ ပထမ ပိုင်း ရောက်ရှိ လာ တဲ့ ဂိုး တစ်ဂိုး နဲ့ တူ ပါ တယ် ။
+[2021-06-05 05:31:31] Best translation 20 : အမေရိကန် ကုန်သွယ်ရေး ဌာန အခြေစိုက် အမေရိကန် ကူးသန်း ရောင်းဝယ် ရေး အေဂျင်စီ တစ်ခု သည် ဝါရှင်တန် ၊ ဒီ စီ တွင် အခြေစိုက် ထား သည့် အမေရိကန် ကူးသန်း ရောင်းဝယ် ရေး အေဂျင်စီ တစ်ခု ဖြစ် သည့် အားလျော်စွာ စာတမ်း များ နှင့် မှတ်တမ်း များ ဆိုင်ရာ သတင်း အချက်အလက် များ ကို ဖော်ပြ သည် ။
+[2021-06-05 05:31:31] Best translation 40 : အဲဒီ နောက် သေနတ်သမား က သူ မ ကို သေနတ် နဲ့ ပစ် ပြီး သူ့ ကို ကူညီ ဖို့ ကြိုးစား တဲ့ သေနတ်သမား နှစ် ယောက် က သူ့ ဆံပင် ကို ဖမ်းကိုင် လိုက် တယ် ။
+[2021-06-05 05:31:31] Best translation 80 : မဲဆန္ဒရှင် အရေအတွက် ၅၀ ရာခိုင်နှုန်း အောက် က မဲပေး သူ အရေအတွက် သည် ဆန္ဒမဲ ပေးပိုင်ခွင့် ရှိ သူ များ ၏ အနည်းဆုံး ၃၃ ရာခိုင်နှုန်း သာ ပါဝင် ပါ သည် ။
+[2021-06-05 05:31:31] Best translation 160 : ဒုတိယ အချက်အချာကျ သော ဆစ်ဒနီ မြို့ သည် ရှည်လျား သော ဆစ်ဒနီ ရှိ အိန္ဒိယ ပစိဖိတ် ခရီးသည် တင် ရထား ကို ဖြတ် ၍ သုံး ပါ သည် ။
+[2021-06-05 05:31:36] Best translation 320 : ကျွန်တော် တို့ ရဲ့ ပုံစံ တွ ကြေား မှာ ဖြစ်ပေါ် နေ တဲ့ လက္ခဏာ တွေ က တော့ မျှတမှု အပြည့် ရှိ တာ ပဲ ဖြစ် ပါ တယ် ။ အဲဒီ ထဲ က ပုံစံ တွေ က တော့ သက်ရှိ တွေ အတွက် အဓိက ပါဝင် ပစ္စည်းတွေ ပါ ပဲ &quot;။
+[2021-06-05 05:32:05] Best translation 640 : ကမ်းခြေ လိုင်း မှ မွန်းလွဲ ၇ နာရီ ခွဲ ခန့် တွင် သင်္ဘော လိုင်း မှ စာတို အပြန်အလှန် လာရောက် ခဲ့ ပါ သည် ။
+[2021-06-05 05:32:09] Total translation time: 54.58023s
+[2021-06-05 05:32:09] [valid] Ep. 19 : Up. 170000 : bleu : 5.46387 : stalled 11 times (last best: 5.81631)
+***
+***
+BLEU မှာလည်း stalled time က ၁၀ခါ ကျော်သွားပြီမို့ ရပ်ပြီးတော့ Transformer ကို run ဖို့ ပြင်ခဲ့...
+
+## Translation
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word$ time marian-decoder -m ./model.npz -v ../data_word/vocab/vocab.en.yml ../data_word/vocab/vocab.my.yml --devices 0 1 --output hyp.model.my < ../data_word/test.en
+...
+...
+[2021-06-05 06:25:39] Best translation 983 : အိုင်ယာလန် ဟာ ရေကူးကန် ထဲ မှာ ဒုတိယ အချက် ၈ ချက် ၊ အာဂျင်တီးနား နောက်ကွယ် မှာ ရှိ တယ် ။
+[2021-06-05 06:25:39] Best translation 984 : ပြင်သစ် တို့ ဟာ တစ်ဖွဲ့ တည်း နဲ့ တတိယ အချက် က တတိယ အချက် တစ်ချက် ပါ ။
+[2021-06-05 06:25:39] Best translation 985 : ဆင် ဆင် ဆင် သည် ဇူးရစ် မြို့ ရှိအ ကျဉ်းထောင် သို့ တနင်္ဂနွေ နေ့ ည တွင် ပြန်လည် ရောက်ရှိ လာပြီး ရဲ များ က ပြန်လည် သိမ်းယူ ခဲ့ သည် ။
+[2021-06-05 06:25:40] Best translation 986 : အမည် မည်း စာရင်း ကို လည်းကောင်း ၊ ဆွစ်ဇာလန် နိုင်ငံ မှ အမည် မည်း စာရင်း လည်း ဖြစ် သည် ။
+[2021-06-05 06:25:40] Best translation 987 : သူ့ အနေနှင့် ယာဉ် ပေါ် မ လိမ်း ခင် သူမ ၏ လွတ်မြောက် မှု ကို ပြုလုပ် နိုင် ခဲ့ သည် ။
+[2021-06-05 06:25:40] Best translation 988 : ပြီး ခဲ့ သည့် ဒေသ စံတော်ချိန် ၁၇ ၃၀ ခန့် အကွာ ၌ မြို့ ပေါ် ၌ လမ်းလျှောက် ခြင်း မ ပြု မီ အချိန်တို အတွင်း ကျောက်မိုင်း လုပ်ငန်းခွင် ကို ကျော်လွန် နိုင် ခဲ့ ပါ သည် ။
+[2021-06-05 06:25:40] Best translation 989 : မြို့လယ် က အထင်ကရ လမ်း တစ်လမ်း သွား လျှောက်သွား နေ ခဲ့ တယ် လို့ ဇူးရစ် ရဲတပ်ဖွဲ့ က ပြော ပါ တယ် ။
+[2021-06-05 06:25:41] Best translation 990 : သူ မ လည်း အိမ် မှာ ရှိ တဲ့ မြို့ ရဲ့ အဓိက ရထား ဘူတာရုံ လည်း ရောက် နေ ခဲ့ပြီး အဲဒီ ထဲ မှာ တော့ အာ စီ အက်စ် အက် စ် ရဲ့ ထိန်းချုပ်မှု အောက် မှာ ရှိ တဲ့ မြေနေရာ တစ် ခု လည်း ဖြစ် ပါ တယ် ။
+[2021-06-05 06:25:41] Best translation 991 : ပြီး ခဲ့ သည့် တစ်နာရီ နီးပါး တွင် ရဲ သည် ဇူးရစ် မြို့ ရှိ ဆင် ကို ပြန်လည် သိမ်းယူ ခဲ့ စဉ် အတွင်း ၌ ဆင် တစ်ကောင် ကို သူ မ နောက်ဆုံး ပြန်လည် သိမ်းယူ ခဲ့ သည် ။
+[2021-06-05 06:25:41] Best translation 992 : ဝဲ ဘက် တာဝန်ရှိသူ များ နှင့် ရဲ များ က လည်း နောက်တစ်နေ့ တွင် ထွက်ခွာ လာ ခဲ့ သော်လည်း ပြော ရ သည် က လည်း သူ တို့ ၏ ဖုန်း ခေါ်ဆိုမှု ကို တုံ့ပြန် ခြင်း မ ရှိ ကြောင်း ပြော သည် ။
+[2021-06-05 06:25:41] Best translation 993 : ရဲ တွေ က လည်း သူ မ နဲ့ အလုပ် လုပ် ဖို့ အခက်အခဲ ရှိ နေ တယ် လို့ လည်း ပြော ကြ တယ် ။
+[2021-06-05 06:25:41] Best translation 994 : ဒေသ စံတော်ချိန် ၂၀၀၀ ခန့် တွင် ဂိုးသမား တစ် ယောက် က တိရစ္ဆာန် ကို ထိန်းချုပ် နိုင် ခဲ့ပြီး သူ မ ကို ထရပ်ကား တစ်စီး သို့ ပို့ ပေး ခဲ့ သည် ။
+[2021-06-05 06:25:41] Best translation 995 : အဆိုပါ ဖြစ်စဉ် အတွင်း ထိခိုက်ဒဏ်ရာ ရ မှု သို့မဟုတ် ထိခိုက်ဒဏ်ရာ ရရှိ မှု တစ်စုံတစ်ရာ မ ရှိ ခဲ့ ပါ ။
+[2021-06-05 06:25:42] Best translation 996 : ဇူးရစ် မြို့ အနီး တွင် တိုက်ခတ် သွား သော မုန်တိုင်း ကြောင့် ထွက်ပြေး လွတ်မြောက် လာ နိုင် ကြောင်း လည်း ဆပ်ကပ် ပြော ကြ သည် ။
+[2021-06-05 06:25:42] Best translation 997 : ဆပ်ကပ် ပွဲ ပြန် လာ ပြီးနောက် သူ မ ပင်ပန်း နေ တယ် လို့ ပြော ခဲ့ တယ် ဒါပေမဲ့ သူ ပြန် ရ လို့ ဝမ်းသာ နေ တယ် ။
+[2021-06-05 06:25:42] Best translation 998 : ဝဲ လ် နှင့် သူ ၏ ဇနီး မောင်နှံ တို့သည် အိမ် မှ အိမ် တစ်အိမ် မှ အိမ် သို့ ကားမောင်း နေ စဉ် အတွင်း ၎င်းတို့ ၏ အားလပ်ရက် အိမ် သို့ ကားမောင်း ချိန် တွင် ပါဝင် ခဲ့ ကြ သည် ။
+[2021-06-05 06:25:42] Best translation 999 : မစ္စ တာ စ ပဲ ရိုး က ချက်ချင်း ပင် ချက်ချင်း သေဆုံး သွား ခဲ့ တယ်
+[2021-06-05 06:25:42] Best translation 1000 : ထို စုံတွဲ သည် နှစ်ဖက် စလုံး က ပေး ထားသော ကဗျာ များ ကို ဖတ်ကြား ကြ သည် ။
+[2021-06-05 06:25:43] Best translation 1001 : အိမ် ထဲ မှာ နေတဲ့ ဂျူး လူမျိုး ဟာ တောင်အမေရိက က နေထိုင် တဲ့ ဂျူး လူမျိုး စာရေးဆရာ တစ်ယောက် ပါ ။
+[2021-06-05 06:25:43] Best translation 1002 : ဂျုံး ကျကျ သူ့ ဇနီး မှာ အနုပညာ ဗဟို အဖွဲ့ နှင့် စာရေးဆရာ ဖြစ် သည် ။
+[2021-06-05 06:25:43] Best translation 1003 : အိမ် ကို ကဗျာ ဆရာ နဲ့ ဆေးပညာ ဆရာဝန် တစ်ယောက် လို့ လူသိများ ကြ တယ် ။
+[2021-06-05 06:25:43] Best translation 1004 : သာမန် အားဖြင့် တော့ ဆေးခန်း မှာ နှစ် ၃၀ ကျော် ရင် ဆေးခန်း တစ် ခု ရှိ တယ် ။
+[2021-06-05 06:25:43] Best translation 1005 : ဒါပေမဲ့ ကောင်းကောင်း စာ တွေ က စာ တွေ ထဲ မှာ အကောင်းဆုံး သိ နေပြီး စာပေ ဆု တွေ လည်း အများကြီး လက်ခံ ရရှိ ခဲ့ ပါ တယ် ။
+[2021-06-05 06:25:43] Best translation 1006 : ၁၉၈၉ ခုနှစ် တွင် ဝေလ နိုင်ငံ တက္ကသိုလ် မှ ဂုဏ်ထူးဆောင် ဘွဲ့များ ပေးအပ် ချီးမြှင့် သည် ။
+[2021-06-05 06:25:43] Best translation 1007 : ဇနီးမောင်နှံ သည် ၁၉၈၀ ခုနှစ် များ တွင် စာအုပ် နှစ်အုပ် ကို အတူတကွ တည်းဖြတ် ကြ သည် ။
+[2021-06-05 06:25:43] Best translation 1008 : ဂျုံး ကို သား က သူမ ခင်ပွန်း ၊ သား နှစ် ယောက် နဲ့ သမီး နှစ် ယောက် ကျန်ရစ် တယ် ။
+[2021-06-05 06:25:44] Best translation 1009 : ဝတ်စား ဆင်ယင်ပုံ ကို လိုက် ပြီး ဗုဒ္ဓဟူး နေ့ ညနေ ပိုင်း က ရန်ကုန် တိုင်း ဒေသ ကြီး ဟင်္သာတ ခရိုင် အုပ်ချုပ်ရေးမှူးရုံး သို့ ကားမောင်း ပြီး ကားမောင်း လိုင်စင် ဖြင့် ဗုဒ္ဓဟူး နေ့ က ဖမ်းဆီးရမိခဲ့ ကြောင်း သိ ရ သည် ။
+[2021-06-05 06:25:44] Best translation 1010 : အခြား အနည်းဆုံး ၄ ဦး ကိုလည်း ရဲ များ က ဟန့်တား ထား သော်လည်း ဖမ်းဆီး ခြင်း မ ခံ ခဲ့ ရ ပါ ။
+[2021-06-05 06:25:44] Best translation 1011 : တင်ပြ ချက် များ အရ သိရှိ ရ သည် ဟု ရဲ များ က ဖြစ်စဉ် တစ်ခုလုံး ကို မျက်မြင် သက်သေ များ က မျက်မြင် သက်သေ များ အား ပြောကြား ခဲ့ ပါ သည် ။
+[2021-06-05 06:25:44] Best translation 1012 : နောက် တော့ သူ တို့ က လည်း သူ မ ကို အနီးကပ် လိုက် ကြ တယ် ။ ပြီး တော့ သူ မ နဲ့ လိုက် ပါ တယ် ။
+[2021-06-05 06:25:45] Best translation 1013 : ရဲတပ်ဖွဲ့ က ကား မောင်း နေသော သူမ ၏ ကား ကို မောင်း ပြီး လမ်း ပေါ် မှ ထွက်ပြေး ရန် ကြိုးစား ခဲ့ သည် ၊ သို့သော် ယာဉ် ပေါ် မှ ထွက် ၍ ကား ပေါ် မှ ထွက် လာ သည် ကို မ ဖော်ထုတ် နိုင် ခဲ့ ပေ ။
+[2021-06-05 06:25:45] Best translation 1014 : သူ မ ရဲ့ သက်သေခံ ကတ်ပြား ကိုအ တည်ပြု ပြီး သူ မ ကို လွှတ် လိုက် တယ်
+[2021-06-05 06:25:45] Best translation 1015 : ရဲ များ က လိုင်စင် ရရှိ မည် ဆိုပါ က ရဲ များကို စစ်ဆေး လျက် ရှိ ကြောင်း သိရှိ ရ ပါ သည် ။
+[2021-06-05 06:25:45] Best translation 1016 : ဖောက်ထွင်း ခံ ရ သူ အား မည်သည့် ပစ္စည်း ကို မှ ပေးဆောင် ရ မည် မ ဟုတ် ပါ သို့ရာတွင် လူများ အား ဖမ်းဆီး ထား ခြင်း ဖြစ် ပါ သည် ။
+[2021-06-05 06:25:45] Best translation 1017 : မီးသတ် ဌာန ဆိုတာ အဖွဲ့ ရဲ့ အစိတ်အပိုင်း ဖြစ် ပါ တယ် ။ ဒါပေမဲ့ မ မောင်း သင့် ဘူး ဟု လော့ အိန်ဂျယ် လိ စ် ရဲ ဌာန မှ ပြောရေး ဆို ခွင့်ရ အမျိုးသမီး ပြောရေးဆိုခွင့်ရှိသူ က ပြော သည် ။
+[2021-06-05 06:25:45] Total time: 214.62913s wall
+
+real	3m37.514s
+user	7m9.482s
+sys	0m2.578s
+
+
+## Evaluation
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.my < ./hyp.model.my  >> results.txt
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word$ cat ./results.txt 
+BLEU = 6.27, 39.8/14.2/5.4/2.1 (BP=0.704, ratio=0.740, hyp_len=26830, ref_len=36255)
+
+=============================================================
+
     
 ### Extra/Bonus Note (Transformer+The-Sounds-of-Scilence)
 
