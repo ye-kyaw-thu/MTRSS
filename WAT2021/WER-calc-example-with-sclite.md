@@ -4,28 +4,41 @@ Preparing files...
 
 ##  English-Myanmar
 ### Reference File:
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ cp ~/exp/nmt/plus-alt/data/test.my .
+```
 ### s2s:
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ cp ~/exp/nmt/plus-alt/model.s2s-4/hyp.model.my ./s2s.en-my.hyp
+```
 ### transformer:
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ cp ~/exp/nmt/plus-alt/model.transformer/hyp.model.my ./transformer.en-my.hyp
-
+```
 ### Ensemble, s2s+transformer:
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ cp ~/exp/nmt/plus-alt/ensembling-results/hyp.s2s-plus-transformer.my{1,2,3} .
+```
 
 ## Myanmar-English
 ### Reference File:
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/my-en$ cp ~/exp/nmt/plus-alt/data/test.en .
+```
 ### s2s:
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/my-en$ cp ~/exp/nmt/plus-alt/model.s2s-4.my-en/hyp.model.en ./s2s.my-en.hyp
-transformer:
+```
+### transformer:
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/my-en$ cp ~/exp/nmt/plus-alt/model.transformer.my-en/hyp.model.en ./transformer.my-en.hyp
-
+```
 ### Ensemble, s2s+transformer:
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/my-en$ cp ~/exp/nmt/plus-alt/ensembling-results/2.hyp.s2s-plus-transformer.en{1,2,3} .
-
+```
 ## Folder Structure
-
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ tree
 .
 ├── en-my
@@ -45,9 +58,11 @@ transformer:
 └── note.txt
 
 2 directories, 13 files
+```
 
 ## Prepare a Shell Script
 
+```bash
 #!/bin/bash
 
 for folder in *; do
@@ -58,9 +73,11 @@ for folder in *; do
      done
     fi
 done
+```
 
 ## Add Speaker ID
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ ./add-id.sh 
 Adding speaker id to en-my/hyp.s2s-plus-transformer.my1
 Adding speaker id to en-my/hyp.s2s-plus-transformer.my2
@@ -74,9 +91,11 @@ Adding speaker id to my-en/2.hyp.s2s-plus-transformer.en3
 Adding speaker id to my-en/s2s.my-en.hyp
 Adding speaker id to my-en/test.en
 Adding speaker id to my-en/transformer.my-en.hyp
+```
 
 ## Check Files
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ head -n 3 ./en-my/*.id
 ==> ./en-my/hyp.s2s-plus-transformer.my1.id <==
 ဆစ် ဒ နီ တွင် စိတ် ထက် မြက် သော မြင်း ရှစ် ကောင် သည် တုပ် ကွေး ရော ဂါ ခံ စား နေ ရ သည် ဟု အ တည် ပြု ထား ပါ သည် ။ (ye_1)
@@ -107,7 +126,9 @@ Adding speaker id to my-en/transformer.my-en.hyp
 ဆစ် ဒ နီ ရှိ မြင်း ရှစ် ကောင် သည် တုပ် ကွေး ရော ဂါ ခံ စား နေ ရ သော အ ခြေ အ နေ တွင် စိတ် ထက် မြက် သော မြင်း ရှစ် ကောင် သည် စိတ် ဝင် စား မှု ရှိ ကြောင်း အ တည် ပြု ပြော ကြား ထား ပါ သည် ။ (ye_1)
 ကု လား ထိုင် ခုံ သည် သော့ ပိတ် ထား ပြီး နှစ် လ အ ထိ ဆက် လက် တည် ရှိ နေ မည် ဟု မျှော် လ င့် ရ ပါ သည် ။ (ye_2)
 တုပ် ကွေး ဝေ ဒ နာ ခံ စား နေ ရ သော တုပ် ကွေး သည် ကင် ဆာ အ ခြေ အ နေ ရှိ မြင်း ၇၀၀ အ နက် အ များ စု ကို ထိ ခိုက် စေ မည် ဟု မျှော် လ င့် ပါ သည် ။ (ye_3)
+```
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ head -n 3 ./my-en/*.id
 ==> ./my-en/2.hyp.s2s-plus-transformer.en1.id <==
 Eight races from the Sydney Cricket court have confirmed that the horse had been infected with flu (ye_1)
@@ -139,9 +160,11 @@ Red Cross has confirmed that eight races from the Olympic Park were infected wit
 I hope to keep the cork for two months and keep it tight . (ye_2)
 It is widely predicted that most of the 700 horse ever will be infected in Las Vegas . (ye_3)
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$
+```
 
 ## Check sclite --help
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ sclite --help
 sclite: <OPTIONS>
 sclite Version: 2.10, SCTK Version: 1.3
@@ -204,9 +227,11 @@ Scoring Report Options:
                 is 'name'.'hypfile'
 Illegal argument: --help
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$
+```
 
 ## Prepare a Shell Script for WER Calculation
 
+```
 #!/bin/bash
 
 # WER calculating with sclite command
@@ -234,10 +259,11 @@ do
    done
    cd ..;
 done
-
+```
 
 ## WER Calculation for All Hyp
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ ./wer-calc.sh en-my my-en
 sclite: 2.10 TK Version 1.3
 Begin alignment of Ref File: './test.my.id' and Hyp File: './hyp.s2s-plus-transformer.my1.id'
@@ -647,8 +673,9 @@ Begin alignment of Ref File: './test.en.id' and Hyp File: './transformer.my-en.h
 
 Successful Completion
  Finished WER calculations for  !!! 
+```
 
-
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ tree ./en-my
 ./en-my
 ├── hyp.s2s-plus-transformer.my1
@@ -675,6 +702,9 @@ Successful Completion
 └── transformer.en-my.hyp.id.pra
 
 0 directories, 22 files
+```
+
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$ tree ./my-en
 ./my-en
 ├── 2.hyp.s2s-plus-transformer.en1
@@ -702,9 +732,11 @@ Successful Completion
 
 0 directories, 22 files
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl$
+```
 
 ## Let's Peek .dtl FILE
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ head -n 50 ./transformer.en-my.hyp.id.dtl 
 DETAILED OVERALL REPORT FOR THE SYSTEM: ./transformer.en-my.hyp.id
 
@@ -757,9 +789,11 @@ CONFUSION PAIRS                  Total                 (15421)
   18:   17  ->  သည် ==> အ
   19:   16  ->  ကို ==> သို့
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$
+```
 
 ## Let's Peek .pra FILE
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$ head -n 52 ./transformer.en-my.hyp.id.pra
 
 
@@ -814,4 +848,4 @@ HYP:  အ မျိုး သား ပြိုင် ပွဲ ************ **
 Eval:                               S                            D            D         D                         D         D            D            D            D                                                 D                                            D         D   D                                                       S               S                          
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/WER-calc/syl/en-my$
-
+```
