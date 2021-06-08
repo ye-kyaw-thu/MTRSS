@@ -11,7 +11,7 @@ Contributors for manual extraction of English-Myanmar transliteration dictionary
 - Khaing Zar Mon (UTYCC, Myanmar)
 - Mya Ei San (SIIT, Thailand)
 - Thazin Myint Oo (Language Understanding lab., Myanmar)
-- [Ye Kyaw Thu](https://sites.google.com/site/yekyawthunlp/) (Currently, Visiting Professor, NECTEC, Thailand)  
+- [Ye Kyaw Thu](https://sites.google.com/site/yekyawthunlp/) (Visiting Professor, NECTEC, Thailand)  
 - Zar Zar Hlaing (KMITL, Thailand)
 
 ## Citation
