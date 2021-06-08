@@ -14,6 +14,10 @@ Contributors for manual extraction of English-Myanmar transliteration dictionary
 - [Ye Kyaw Thu](https://sites.google.com/site/yekyawthunlp/) (Visiting Professor, NECTEC, Thailand)  
 - Zar Zar Hlaing (KMITL, Thailand)
 
+## License
+
+I released the English-Myanmar Transliteration Dictionary of the ALT Corpus as a [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) License.
+
 ## Citation
 
 If you would like more details about manually extracted English-Myanmar transliteration dictionary or want to cite the dictionary in your research, please reference:  
