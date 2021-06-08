@@ -1,7 +1,12 @@
 # English-Myanmar Transliteration Dictionary of ALT Courpus
 
 We manually extracted English-Myanmar transliteration word, phrases from ALT Corpus.   
+
 To Do: Update README file...
+
+## Citation
+
+- Ye Kyaw Thu, Thazin Myint Oo, Hlaing Myat Nwe, Khaing Zar Mon, Nang Aeindray Kyaw, Naing Linn Phyo, Nann Hwan Khun and Hnin Aye Thant, "Hybrid Statistical Machine Translation for English-Myanmar: UTYCC-Team1 Submission to WAT-2021", In Proceedings of the 8th Workshop on Asian Translation (WAT2021), Aug 5-6, 2021, Bangkok, Thailand, pp. xx-xx. (to appear)  
 
 ## Reference
 
