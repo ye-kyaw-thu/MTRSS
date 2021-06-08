@@ -1,4 +1,4 @@
-# English-Myanmar Transliteration Dictionary of [the ALT Corpus](https://www2.nict.go.jp/astrec-att/member/mutiyama/ALT/)
+# English-Myanmar Transliteration Dictionary of the ALT Corpus
 
 We manually extracted English-Myanmar transliteration word, phrases from ALT Corpus. The version 1.0 dictionary contained the raw extracted word or phrase pairs (i.e. original words, phrases of the ALT Corpus) and we just manually extracted and didn't change transliteration words.   
 
