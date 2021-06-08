@@ -1,6 +1,6 @@
-# English-Myanmar Transliteration Dictionary of ALT Courpus
+# English-Myanmar Transliteration Dictionary of ALT Corpus
 
-We manually extracted English-Myanmar transliteration word, phrases from ALT Corpus.   
+We manually extracted English-Myanmar transliteration word, phrases from ALT Corpus. The version 1.0 dictionary contained the raw extracted word or phrase pairs (i.e. original words, phrases of the ALT Corpus) and we just manually extracted and didn't change transliteration words.   
 
 To Do: Update README file...
 
