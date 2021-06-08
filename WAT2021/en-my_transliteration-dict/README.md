@@ -4,6 +4,16 @@ We manually extracted English-Myanmar transliteration word, phrases from ALT Cor
 
 To Do: Update README file...
 
+## Contributors
+
+Contributors for manual extraction of English-Myanmar transliteration dictionary from the ALT corpus are as follows:  
+
+- Khaing Zar Mon (UTYCC, Myanmar)
+- Mya Ei San (SIIT, Thailand)
+- Thazin Myint Oo (Language Understanding lab., Myanmar)
+- [Ye Kyaw Thu](https://sites.google.com/site/yekyawthunlp/)
+- Zar Zar Hlaing (KMITL, Thailand)
+
 ## Citation
 
 - Ye Kyaw Thu, Thazin Myint Oo, Hlaing Myat Nwe, Khaing Zar Mon, Nang Aeindray Kyaw, Naing Linn Phyo, Nann Hwan Khun and Hnin Aye Thant, "Hybrid Statistical Machine Translation for English-Myanmar: UTYCC-Team1 Submission to WAT-2021", In Proceedings of the 8th Workshop on Asian Translation (WAT2021), Aug 5-6, 2021, Bangkok, Thailand, pp. xx-xx. (to appear)  
