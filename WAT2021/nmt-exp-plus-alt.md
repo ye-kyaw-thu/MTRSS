@@ -3387,7 +3387,7 @@ word ဖြတ်ထားတဲ့ မြန်မာစာ ဖိုင်တ�
 ခဲ့: 9
 ```
 
-## System 
+## System 3
 ## Script for s2s (word unit)
 
 ```
@@ -4363,7 +4363,7 @@ BLEU = 6.27, 39.8/14.2/5.4/2.1 (BP=0.704, ratio=0.740, hyp_len=26830, ref_len=36
 ```
 
 
-## System
+## System 4
 ## Transformer, en-my (Word Unit)
 
 ## Script
@@ -5255,6 +5255,7 @@ sys	0m1.737s
 BLEU = 6.00, 44.5/16.6/6.2/2.3 (BP=0.595, ratio=0.658, hyp_len=23868, ref_len=36255)
 ```
 
+## System 3+4
 ## Model Ensembling (s2s+Transformer, word unit)
 ## Weight: 0.4 0.6
 
@@ -5325,7 +5326,7 @@ sys	0m2.264s
 BLEU = 7.09, 45.1/17.6/6.9/2.7 (BP=0.640, ratio=0.691, hyp_len=25070, ref_len=36255)
 ```
 
-## System
+## System 7
 ## s2s (my-en, word unit for Burmese)
 
 ## Script
@@ -6243,7 +6244,7 @@ sys	0m2.424s
 BLEU = 9.31, 42.4/17.3/8.0/3.7 (BP=0.765, ratio=0.789, hyp_len=22028, ref_len=27929)
 ```
 
-
+## System 8
 ## Transformer (my-en, word unit for Burmese)
 
 ```
@@ -7870,6 +7871,7 @@ sys	0m1.909s
 BLEU = 8.26, 43.5/16.5/7.3/3.5 (BP=0.710, ratio=0.745, hyp_len=20810, ref_len=27929)
 ```
 
+## System 7+8
 ## Ensemble Word Models
 ## weight 0.4 0.6
 
