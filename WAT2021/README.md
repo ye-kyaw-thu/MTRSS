@@ -43,6 +43,8 @@ Thanks for visiting my GitHub!!! :)
 6. Myo Mar Thinn (UTYCC, Myanmar)
 7. Hay Man Htun (UTYCC, Myanmar)
 
+Note: No paper submission for YCC-MT2 Team. We submitted experiment results lately because of we faced many difficulties in communicating through internet.  
+
 ## NECTEC Team Members
 
 1. Zar Zar Hlaing (KMITL, Thailand)
