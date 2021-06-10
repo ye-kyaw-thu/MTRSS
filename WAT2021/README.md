@@ -159,7 +159,7 @@ Running Log: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-exper
 
 **\[English-Myanmar\]**  
 **System-3:** s2s or RNN-based; word-to-word  
-**System-4:** Transformer, word-to-word
+**System-4:** Transformer, word-to-word  
 **Ensemble 3+4:** s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 
 **\[Myanmar-English\]**  
