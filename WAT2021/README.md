@@ -112,13 +112,18 @@ Note: HPBSMT အတွက် XML markup နဲ့ decode လုပ်တဲ့�
 $~/tool/mosesbin/ubuntu-17.04/moses/bin/moses_chart -xml-input exclusive --xml-brackets "{{ }}" -i ./test.xml.en -f ../evaluation/test.filtered.ini.1 > en-my.xml.hyp1 
 ```
 
+Running Log1: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/smt-experiments-log-wat2021.txt](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/smt-experiments-log-wat2021.txt)   
+Running Log2: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/smt-experiments-log-wat2021-with-alt.md](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/smt-experiments-log-wat2021-with-alt.md)  
+
 ### Exp 2: Ensemble Two Models (YCC-MT2 Team)
    Models of different types and architectures can be ensembled as long as they use common vocabularies and we tried RNN Attention plus Transformer models for Myanmar to English and English to Myanmar translations.  
    
    မြန်မာလို ထပ်ဖြည့်ရှင်းရရင်တော့ ensemble လုပ်တဲ့အခါ မော်ဒယ်တွေကို နှစ်ခုထက်မကလည်း လုပ်နိုင်ပါတယ်။ WAT2019 မှာ Facebook team က လုပ်ခဲ့သလိုမျိုး မော်ဒယ် ငါးခုဆောက်ပြီး အဲဒီ မော်ဒယ်ငါးခုကို ensemble လုပ်ပြီး translation လုပ်တာမျိုးပါ။ သို့သော် အဲဒီလို လုပ်ဖို့အတွက်က NMT မော်ဒယ် ငါးခုဆောက်ဖို့အတွက် GPU ကဒ် အရေအတွက်ကသိပ်မရှိရင် အချိန်အများကြီးပေးရပါတယ်။ ပြီးတော့ မော်ဒယ် ၅ခုကို တွဲပြီး run ဖို့က memory, GPU လည်း အများကြီးလိုအပ်ပါတယ်။ ဒီတစ်ခေါက် WAT2021 မှာ YCC-MT2 အဖွဲ့အနေနဲ့က under-resourced ဆိုတဲ့ condition ကိုပဲ အခြေခံပါတယ်၊ လက်တွေ့ မြန်မာနိုင်ငံက တက္ကသိုလ်တွေအနေနဲ့ကလည်း GPU အများကြီးကို သုံးပြီး run တဲ့ experiment တွေက မဖြစ်နိုင်သေးတာမို့၊ GPU နှစ်လုံးထဲကို သုံးပြီး၊ မော်ဒယ်ကိုလည်း ၂မျိုးကိုပဲ ensemble လုပ်ခဲ့ပါတယ်။  
    
    စုစုပေါင်း run ခဲ့တာက အောက်ပါအတိုင်းပါ။  
-   
+
+### Used only UCSY Corpus for Training
+
 **\[English-Myanmar\]**  
 **System-1:** s2s or RNN-based  
 **System-2:** Transformer  
@@ -137,6 +142,33 @@ $~/tool/mosesbin/ubuntu-17.04/moses/bin/moses_chart -xml-input exclusive --xml-b
 **System-8:** Transformer; word2word  
 **Ensemble 7+8:** s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 Here, we used our in-house __*myWord*__ word segmenter for Myanmar language.  
+
+Running Log: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-experiments-log-wat2021.txt](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-experiments-log-wat2021.txt)  
+
+### Used UCSY+ALT Corpus for Training
+
+**\[English-Myanmar\]**  
+**System-1:** s2s or RNN-based, word-to-syllable  
+**System-2:** Transformer, word-to-syllable  
+**Ensemble 1+2:** s2s+Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+
+**\[Myanmar-English\]**  
+**System-5:** s2s; syllable-to-word    
+**System-6:** Transformer; syllable-to-word     
+**Ensemble:** s2s+Transformer; (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+
+**\[English-Myanmar\]**  
+**System-3:** s2s or RNN-based; word-to-word  
+**System-4:** Transformer, word-to-word
+**Ensemble 3+4:** s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+
+**\[Myanmar-English\]**  
+**System-7:** s2s; word-to-word  
+**System-8:** Transformer; word-to-word  
+**Ensemble 7+8:** s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+Here, we used our in-house __*myWord*__ word segmenter for Myanmar language.  
+
+Running Log: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-exp-plus-alt.md](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-exp-plus-alt.md)  
 
 ### Exp 3: Multi-source Neural Machine Translation (NECTEC Team)
    We used two encoders for multi-source neural machine translation experiments. Here, we used parsed tree and POS tagged data as one more source language together with the original string source. 
@@ -162,6 +194,8 @@ Here, we used our in-house __*myWord*__ word segmenter for Myanmar language.
 **Baseline:** Transformer Architecture; Source: POS ===> Target: String  
 **Multi-Source:** Transformer Architecture; Source-1: string, Source-2: POS ===> Target: String  
 **Shared-Multi-Source:** Transformer Architecture; Source-1: string, Source-2: POS ===> Target: String  
+
+Running Log: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-experiments-log-wat2021.txt](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-experiments-log-wat2021.txt)  
 
 ## System/Framework
 
