@@ -4370,6 +4370,3617 @@ sys	0m2.578s
 BLEU = 6.27, 39.8/14.2/5.4/2.1 (BP=0.704, ratio=0.740, hyp_len=26830, ref_len=36255)
 ```
 
+
+## System
+## Transformer, en-my (Word Unit)
+
+## Script
+
+#!/bin/bash
+
+## Written by Ye Kyaw Thu, LST, NECTEC, Thailand
+## Experiments for WAT2021 en-my, my-en share tasks
+## Last updated: 5 June 2021
+
+#     --mini-batch-fit -w 10000 --maxi-batch 1000 \
+#    --mini-batch-fit -w 1000 --maxi-batch 100 \
+#     --tied-embeddings-all \ 
+#     --tied-embeddings \
+#     --valid-metrics cross-entropy perplexity translation bleu \
+#     --transformer-dropout 0.1 --label-smoothing 0.1 \
+#     --learn-rate 0.0003 --lr-warmup 16000 --lr-decay-inv-sqrt 16000 --lr-report \
+#     --optimizer-params 0.9 0.98 1e-09 --clip-norm 5 \
+
+mkdir model.transformer.word;
+
+marian \
+    --model model.transformer.word/model.npz --type transformer \
+    --train-sets data_word/train.en data_word/train.my \
+    --max-length 200 \
+    --vocabs data_word/vocab/vocab.en.yml data_word/vocab/vocab.my.yml \
+    --mini-batch-fit -w 1000 --maxi-batch 100 \
+    --early-stopping 10 \
+    --valid-freq 5000 --save-freq 5000 --disp-freq 500 \
+    --valid-metrics cross-entropy perplexity bleu \
+    --valid-sets data_word/valid.en data_word/valid.my \
+    --valid-translation-output model.transformer.word/valid.en-my.word.output --quiet-translation \
+    --valid-mini-batch 64 \
+    --beam-size 6 --normalize 0.6 \
+    --log model.transformer.word/train.log --valid-log model.transformer.word/valid.log \
+    --enc-depth 2 --dec-depth 2 \
+    --transformer-heads 8 \
+    --transformer-postprocess-emb d \
+    --transformer-postprocess dan \
+    --transformer-dropout 0.3 --label-smoothing 0.1 \
+    --learn-rate 0.0003 --lr-warmup 0 --lr-decay-inv-sqrt 16000 --lr-report \
+    --clip-norm 5 \
+    --tied-embeddings \
+    --devices 0 1 --sync-sgd --seed 1111 \
+    --exponential-smoothing \
+    --dump-config > model.transformer.word/config.yml
+    
+time marian -c model.transformer.word/config.yml  2>&1 | tee transformer-enmy-word.log
+
+## Training Log
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.sh 
+[2021-06-05 07:00:39] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-05 07:00:39] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 3967 with command line:
+[2021-06-05 07:00:39] [marian] marian -c model.transformer.word/config.yml
+[2021-06-05 07:00:39] [config] after: 0e
+[2021-06-05 07:00:39] [config] after-batches: 0
+[2021-06-05 07:00:39] [config] after-epochs: 0
+[2021-06-05 07:00:39] [config] all-caps-every: 0
+[2021-06-05 07:00:39] [config] allow-unk: false
+[2021-06-05 07:00:39] [config] authors: false
+[2021-06-05 07:00:39] [config] beam-size: 6
+[2021-06-05 07:00:39] [config] bert-class-symbol: "[CLS]"
+[2021-06-05 07:00:39] [config] bert-mask-symbol: "[MASK]"
+[2021-06-05 07:00:39] [config] bert-masking-fraction: 0.15
+[2021-06-05 07:00:39] [config] bert-sep-symbol: "[SEP]"
+[2021-06-05 07:00:39] [config] bert-train-type-embeddings: true
+[2021-06-05 07:00:39] [config] bert-type-vocab-size: 2
+[2021-06-05 07:00:39] [config] build-info: ""
+[2021-06-05 07:00:39] [config] cite: false
+[2021-06-05 07:00:39] [config] clip-norm: 5
+[2021-06-05 07:00:39] [config] cost-scaling:
+[2021-06-05 07:00:39] [config]   []
+[2021-06-05 07:00:39] [config] cost-type: ce-sum
+[2021-06-05 07:00:39] [config] cpu-threads: 0
+[2021-06-05 07:00:39] [config] data-weighting: ""
+[2021-06-05 07:00:39] [config] data-weighting-type: sentence
+[2021-06-05 07:00:39] [config] dec-cell: gru
+[2021-06-05 07:00:39] [config] dec-cell-base-depth: 2
+[2021-06-05 07:00:39] [config] dec-cell-high-depth: 1
+[2021-06-05 07:00:39] [config] dec-depth: 2
+[2021-06-05 07:00:39] [config] devices:
+[2021-06-05 07:00:39] [config]   - 0
+[2021-06-05 07:00:39] [config]   - 1
+[2021-06-05 07:00:39] [config] dim-emb: 512
+[2021-06-05 07:00:39] [config] dim-rnn: 1024
+[2021-06-05 07:00:39] [config] dim-vocabs:
+[2021-06-05 07:00:39] [config]   - 0
+[2021-06-05 07:00:39] [config]   - 0
+[2021-06-05 07:00:39] [config] disp-first: 0
+[2021-06-05 07:00:39] [config] disp-freq: 500
+[2021-06-05 07:00:39] [config] disp-label-counts: true
+[2021-06-05 07:00:39] [config] dropout-rnn: 0
+[2021-06-05 07:00:39] [config] dropout-src: 0
+[2021-06-05 07:00:39] [config] dropout-trg: 0
+[2021-06-05 07:00:39] [config] dump-config: ""
+[2021-06-05 07:00:39] [config] early-stopping: 10
+[2021-06-05 07:00:39] [config] embedding-fix-src: false
+[2021-06-05 07:00:39] [config] embedding-fix-trg: false
+[2021-06-05 07:00:39] [config] embedding-normalization: false
+[2021-06-05 07:00:39] [config] embedding-vectors:
+[2021-06-05 07:00:39] [config]   []
+[2021-06-05 07:00:39] [config] enc-cell: gru
+[2021-06-05 07:00:39] [config] enc-cell-depth: 1
+[2021-06-05 07:00:39] [config] enc-depth: 2
+[2021-06-05 07:00:39] [config] enc-type: bidirectional
+[2021-06-05 07:00:39] [config] english-title-case-every: 0
+[2021-06-05 07:00:39] [config] exponential-smoothing: 0.0001
+[2021-06-05 07:00:39] [config] factor-weight: 1
+[2021-06-05 07:00:39] [config] grad-dropping-momentum: 0
+[2021-06-05 07:00:39] [config] grad-dropping-rate: 0
+[2021-06-05 07:00:39] [config] grad-dropping-warmup: 100
+[2021-06-05 07:00:39] [config] gradient-checkpointing: false
+[2021-06-05 07:00:39] [config] guided-alignment: none
+[2021-06-05 07:00:39] [config] guided-alignment-cost: mse
+[2021-06-05 07:00:39] [config] guided-alignment-weight: 0.1
+[2021-06-05 07:00:39] [config] ignore-model-config: false
+[2021-06-05 07:00:39] [config] input-types:
+[2021-06-05 07:00:39] [config]   []
+[2021-06-05 07:00:39] [config] interpolate-env-vars: false
+[2021-06-05 07:00:39] [config] keep-best: false
+[2021-06-05 07:00:39] [config] label-smoothing: 0.1
+[2021-06-05 07:00:39] [config] layer-normalization: false
+[2021-06-05 07:00:39] [config] learn-rate: 0.0003
+[2021-06-05 07:00:39] [config] lemma-dim-emb: 0
+[2021-06-05 07:00:39] [config] log: model.transformer.word/train.log
+[2021-06-05 07:00:39] [config] log-level: info
+[2021-06-05 07:00:39] [config] log-time-zone: ""
+[2021-06-05 07:00:39] [config] logical-epoch:
+[2021-06-05 07:00:39] [config]   - 1e
+[2021-06-05 07:00:39] [config]   - 0
+[2021-06-05 07:00:39] [config] lr-decay: 0
+[2021-06-05 07:00:39] [config] lr-decay-freq: 50000
+[2021-06-05 07:00:39] [config] lr-decay-inv-sqrt:
+[2021-06-05 07:00:39] [config]   - 16000
+[2021-06-05 07:00:39] [config] lr-decay-repeat-warmup: false
+[2021-06-05 07:00:39] [config] lr-decay-reset-optimizer: false
+[2021-06-05 07:00:39] [config] lr-decay-start:
+[2021-06-05 07:00:39] [config]   - 10
+[2021-06-05 07:00:39] [config]   - 1
+[2021-06-05 07:00:39] [config] lr-decay-strategy: epoch+stalled
+[2021-06-05 07:00:39] [config] lr-report: true
+[2021-06-05 07:00:39] [config] lr-warmup: 0
+[2021-06-05 07:00:39] [config] lr-warmup-at-reload: false
+[2021-06-05 07:00:39] [config] lr-warmup-cycle: false
+[2021-06-05 07:00:39] [config] lr-warmup-start-rate: 0
+[2021-06-05 07:00:39] [config] max-length: 200
+[2021-06-05 07:00:39] [config] max-length-crop: false
+[2021-06-05 07:00:39] [config] max-length-factor: 3
+[2021-06-05 07:00:39] [config] maxi-batch: 100
+[2021-06-05 07:00:39] [config] maxi-batch-sort: trg
+[2021-06-05 07:00:39] [config] mini-batch: 64
+[2021-06-05 07:00:39] [config] mini-batch-fit: true
+[2021-06-05 07:00:39] [config] mini-batch-fit-step: 10
+[2021-06-05 07:00:39] [config] mini-batch-track-lr: false
+[2021-06-05 07:00:39] [config] mini-batch-warmup: 0
+[2021-06-05 07:00:39] [config] mini-batch-words: 0
+[2021-06-05 07:00:39] [config] mini-batch-words-ref: 0
+[2021-06-05 07:00:39] [config] model: model.transformer.word/model.npz
+[2021-06-05 07:00:39] [config] multi-loss-type: sum
+[2021-06-05 07:00:39] [config] multi-node: false
+[2021-06-05 07:00:39] [config] multi-node-overlap: true
+[2021-06-05 07:00:39] [config] n-best: false
+[2021-06-05 07:00:39] [config] no-nccl: false
+[2021-06-05 07:00:39] [config] no-reload: false
+[2021-06-05 07:00:39] [config] no-restore-corpus: false
+[2021-06-05 07:00:39] [config] normalize: 0.6
+[2021-06-05 07:00:39] [config] normalize-gradient: false
+[2021-06-05 07:00:39] [config] num-devices: 0
+[2021-06-05 07:00:39] [config] optimizer: adam
+[2021-06-05 07:00:39] [config] optimizer-delay: 1
+[2021-06-05 07:00:39] [config] optimizer-params:
+[2021-06-05 07:00:39] [config]   []
+[2021-06-05 07:00:39] [config] output-omit-bias: false
+[2021-06-05 07:00:39] [config] overwrite: false
+[2021-06-05 07:00:39] [config] precision:
+[2021-06-05 07:00:39] [config]   - float32
+[2021-06-05 07:00:39] [config]   - float32
+[2021-06-05 07:00:39] [config]   - float32
+[2021-06-05 07:00:39] [config] pretrained-model: ""
+[2021-06-05 07:00:39] [config] quantize-biases: false
+[2021-06-05 07:00:39] [config] quantize-bits: 0
+[2021-06-05 07:00:39] [config] quantize-log-based: false
+[2021-06-05 07:00:39] [config] quantize-optimization-steps: 0
+[2021-06-05 07:00:39] [config] quiet: false
+[2021-06-05 07:00:39] [config] quiet-translation: true
+[2021-06-05 07:00:39] [config] relative-paths: false
+[2021-06-05 07:00:39] [config] right-left: false
+[2021-06-05 07:00:39] [config] save-freq: 5000
+[2021-06-05 07:00:39] [config] seed: 1111
+[2021-06-05 07:00:39] [config] sentencepiece-alphas:
+[2021-06-05 07:00:39] [config]   []
+[2021-06-05 07:00:39] [config] sentencepiece-max-lines: 2000000
+[2021-06-05 07:00:39] [config] sentencepiece-options: ""
+[2021-06-05 07:00:39] [config] shuffle: data
+[2021-06-05 07:00:39] [config] shuffle-in-ram: false
+[2021-06-05 07:00:39] [config] sigterm: save-and-exit
+[2021-06-05 07:00:39] [config] skip: false
+[2021-06-05 07:00:39] [config] sqlite: ""
+[2021-06-05 07:00:39] [config] sqlite-drop: false
+[2021-06-05 07:00:39] [config] sync-sgd: true
+[2021-06-05 07:00:39] [config] tempdir: /tmp
+[2021-06-05 07:00:39] [config] tied-embeddings: true
+[2021-06-05 07:00:39] [config] tied-embeddings-all: false
+[2021-06-05 07:00:39] [config] tied-embeddings-src: false
+[2021-06-05 07:00:39] [config] train-embedder-rank:
+[2021-06-05 07:00:39] [config]   []
+[2021-06-05 07:00:39] [config] train-sets:
+[2021-06-05 07:00:39] [config]   - data_word/train.en
+[2021-06-05 07:00:39] [config]   - data_word/train.my
+[2021-06-05 07:00:39] [config] transformer-aan-activation: swish
+[2021-06-05 07:00:39] [config] transformer-aan-depth: 2
+[2021-06-05 07:00:39] [config] transformer-aan-nogate: false
+[2021-06-05 07:00:39] [config] transformer-decoder-autoreg: self-attention
+[2021-06-05 07:00:39] [config] transformer-depth-scaling: false
+[2021-06-05 07:00:39] [config] transformer-dim-aan: 2048
+[2021-06-05 07:00:39] [config] transformer-dim-ffn: 2048
+[2021-06-05 07:00:39] [config] transformer-dropout: 0.3
+[2021-06-05 07:00:39] [config] transformer-dropout-attention: 0
+[2021-06-05 07:00:39] [config] transformer-dropout-ffn: 0
+[2021-06-05 07:00:39] [config] transformer-ffn-activation: swish
+[2021-06-05 07:00:39] [config] transformer-ffn-depth: 2
+[2021-06-05 07:00:39] [config] transformer-guided-alignment-layer: last
+[2021-06-05 07:00:39] [config] transformer-heads: 8
+[2021-06-05 07:00:39] [config] transformer-no-projection: false
+[2021-06-05 07:00:39] [config] transformer-pool: false
+[2021-06-05 07:00:39] [config] transformer-postprocess: dan
+[2021-06-05 07:00:39] [config] transformer-postprocess-emb: d
+[2021-06-05 07:00:39] [config] transformer-postprocess-top: ""
+[2021-06-05 07:00:39] [config] transformer-preprocess: ""
+[2021-06-05 07:00:39] [config] transformer-tied-layers:
+[2021-06-05 07:00:39] [config]   []
+[2021-06-05 07:00:39] [config] transformer-train-position-embeddings: false
+[2021-06-05 07:00:39] [config] tsv: false
+[2021-06-05 07:00:39] [config] tsv-fields: 0
+[2021-06-05 07:00:39] [config] type: transformer
+[2021-06-05 07:00:39] [config] ulr: false
+[2021-06-05 07:00:39] [config] ulr-dim-emb: 0
+[2021-06-05 07:00:39] [config] ulr-dropout: 0
+[2021-06-05 07:00:39] [config] ulr-keys-vectors: ""
+[2021-06-05 07:00:39] [config] ulr-query-vectors: ""
+[2021-06-05 07:00:39] [config] ulr-softmax-temperature: 1
+[2021-06-05 07:00:39] [config] ulr-trainable-transformation: false
+[2021-06-05 07:00:39] [config] unlikelihood-loss: false
+[2021-06-05 07:00:39] [config] valid-freq: 5000
+[2021-06-05 07:00:39] [config] valid-log: model.transformer.word/valid.log
+[2021-06-05 07:00:39] [config] valid-max-length: 1000
+[2021-06-05 07:00:39] [config] valid-metrics:
+[2021-06-05 07:00:39] [config]   - cross-entropy
+[2021-06-05 07:00:39] [config]   - perplexity
+[2021-06-05 07:00:39] [config]   - bleu
+[2021-06-05 07:00:39] [config] valid-mini-batch: 64
+[2021-06-05 07:00:39] [config] valid-reset-stalled: false
+[2021-06-05 07:00:39] [config] valid-script-args:
+[2021-06-05 07:00:39] [config]   []
+[2021-06-05 07:00:39] [config] valid-script-path: ""
+[2021-06-05 07:00:39] [config] valid-sets:
+[2021-06-05 07:00:39] [config]   - data_word/valid.en
+[2021-06-05 07:00:39] [config]   - data_word/valid.my
+[2021-06-05 07:00:39] [config] valid-translation-output: model.transformer.word/valid.en-my.word.output
+[2021-06-05 07:00:39] [config] vocabs:
+[2021-06-05 07:00:39] [config]   - data_word/vocab/vocab.en.yml
+[2021-06-05 07:00:39] [config]   - data_word/vocab/vocab.my.yml
+[2021-06-05 07:00:39] [config] word-penalty: 0
+[2021-06-05 07:00:39] [config] word-scores: false
+[2021-06-05 07:00:39] [config] workspace: 1000
+[2021-06-05 07:00:39] [config] Model is being created with Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-05 07:00:39] Using synchronous SGD
+[2021-06-05 07:00:39] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.en.yml
+[2021-06-05 07:00:39] [data] Setting vocabulary size for input 0 to 85,602
+[2021-06-05 07:00:39] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.my.yml
+[2021-06-05 07:00:39] [data] Setting vocabulary size for input 1 to 63,471
+[2021-06-05 07:00:39] [comm] Compiled without MPI support. Running as a single process on administrator-HP-Z2-Tower-G4-Workstation
+[2021-06-05 07:00:39] [batching] Collecting statistics for batch fitting with step size 10
+[2021-06-05 07:00:39] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-05 07:00:40] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-05 07:00:40] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-05 07:00:40] [comm] NCCLCommunicator constructed successfully
+[2021-06-05 07:00:40] [training] Using 2 GPUs
+[2021-06-05 07:00:40] [logits] Applying loss function for 1 factor(s)
+[2021-06-05 07:00:40] [memory] Reserving 347 MB, device gpu0
+[2021-06-05 07:00:40] [gpu] 16-bit TensorCores enabled for float32 matrix operations
+[2021-06-05 07:00:40] [memory] Reserving 347 MB, device gpu0
+[2021-06-05 07:01:02] [batching] Done. Typical MB size is 2,363 target words
+[2021-06-05 07:01:02] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-05 07:01:02] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-05 07:01:02] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-05 07:01:03] [comm] NCCLCommunicator constructed successfully
+[2021-06-05 07:01:03] [training] Using 2 GPUs
+[2021-06-05 07:01:03] Training started
+[2021-06-05 07:01:03] [data] Shuffling data
+[2021-06-05 07:01:03] [data] Done reading 256,102 sentences
+[2021-06-05 07:01:03] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 07:01:03] [training] Batches are processed as 1 process(es) x 2 devices/process
+[2021-06-05 07:01:03] [memory] Reserving 347 MB, device gpu0
+[2021-06-05 07:01:03] [memory] Reserving 347 MB, device gpu1
+[2021-06-05 07:01:03] [memory] Reserving 347 MB, device gpu0
+[2021-06-05 07:01:04] [memory] Reserving 347 MB, device gpu1
+[2021-06-05 07:01:04] [memory] Reserving 173 MB, device gpu0
+[2021-06-05 07:01:04] [memory] Reserving 173 MB, device gpu1
+[2021-06-05 07:01:04] [memory] Reserving 347 MB, device gpu0
+[2021-06-05 07:01:04] [memory] Reserving 347 MB, device gpu1
+[2021-06-05 07:05:23] Ep. 1 : Up. 500 : Sen. 41,611 : Cost 6.94187021 * 764,528 @ 1,650 after 764,528 : Time 260.17s : 2938.58 words/s : L.r. 3.0000e-04
+[2021-06-05 07:09:42] Ep. 1 : Up. 1000 : Sen. 82,840 : Cost 6.08685017 * 754,957 @ 1,511 after 1,519,485 : Time 259.60s : 2908.15 words/s : L.r. 3.0000e-04
+[2021-06-05 07:14:02] Ep. 1 : Up. 1500 : Sen. 124,369 : Cost 5.77293825 * 759,681 @ 1,210 after 2,279,166 : Time 260.05s : 2921.29 words/s : L.r. 3.0000e-04
+[2021-06-05 07:18:25] Ep. 1 : Up. 2000 : Sen. 165,665 : Cost 5.56310558 * 770,092 @ 1,313 after 3,049,258 : Time 262.63s : 2932.21 words/s : L.r. 3.0000e-04
+[2021-06-05 07:22:45] Ep. 1 : Up. 2500 : Sen. 207,573 : Cost 5.37363386 * 765,206 @ 1,806 after 3,814,464 : Time 260.43s : 2938.23 words/s : L.r. 3.0000e-04
+[2021-06-05 07:27:07] Ep. 1 : Up. 3000 : Sen. 249,380 : Cost 5.25772572 * 773,298 @ 1,694 after 4,587,762 : Time 261.66s : 2955.36 words/s : L.r. 3.0000e-04
+[2021-06-05 07:27:49] Seen 256076 samples
+[2021-06-05 07:27:49] Starting data epoch 2 in logical epoch 2
+[2021-06-05 07:27:49] [data] Shuffling data
+[2021-06-05 07:27:49] [data] Done reading 256,102 sentences
+[2021-06-05 07:27:50] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 07:31:28] Ep. 2 : Up. 3500 : Sen. 34,745 : Cost 5.07939100 * 763,716 @ 1,560 after 5,351,478 : Time 261.33s : 2922.43 words/s : L.r. 3.0000e-04
+[2021-06-05 07:35:51] Ep. 2 : Up. 4000 : Sen. 76,994 : Cost 4.98439837 * 774,396 @ 1,088 after 6,125,874 : Time 263.07s : 2943.72 words/s : L.r. 3.0000e-04
+[2021-06-05 07:40:11] Ep. 2 : Up. 4500 : Sen. 118,475 : Cost 4.91286087 * 758,010 @ 1,596 after 6,883,884 : Time 259.51s : 2920.96 words/s : L.r. 3.0000e-04
+[2021-06-05 07:44:31] Ep. 2 : Up. 5000 : Sen. 159,490 : Cost 4.85010481 * 760,175 @ 1,688 after 7,644,059 : Time 260.49s : 2918.21 words/s : L.r. 3.0000e-04
+[2021-06-05 07:44:31] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 07:44:33] Saving model weights and runtime parameters to model.transformer.word/model.iter5000.npz
+[2021-06-05 07:44:34] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 07:44:35] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+tcmalloc: large alloc 1073741824 bytes == 0x556e3bb84000 @ 
+tcmalloc: large alloc 1207959552 bytes == 0x556e3bb84000 @ 
+tcmalloc: large alloc 1476395008 bytes == 0x556e3bb84000 @ 
+tcmalloc: large alloc 1610612736 bytes == 0x556e3bb84000 @ 
+tcmalloc: large alloc 1744830464 bytes == 0x556e3bb84000 @ 
+tcmalloc: large alloc 2013265920 bytes == 0x556e93b84000 @ 
+[2021-06-05 07:44:53] [valid] Ep. 2 : Up. 5000 : cross-entropy : 185.482 : new best
+[2021-06-05 07:44:55] [valid] Ep. 2 : Up. 5000 : perplexity : 164.345 : new best
+[2021-06-05 07:44:59] [valid] [valid] First sentence's tokens as scored:
+[2021-06-05 07:44:59] [valid] DefaultVocab keeps original segments for scoring
+[2021-06-05 07:44:59] [valid] [valid]   Hyp: ၂၀၁၂ ခုနှစ် စက်တင်ဘာ လ တွင် စတင် ခဲ့ သည့် ဇန်နဝါရီ လ ၁၂ ရက်နေ့ တွင် အမေရိကန် ဒေါ်လာ ၁ ၁ ဒသမ ၁ ရက်နေ့ အထိ ရောင်းချ ခဲ့ ပါ သည် ။
+[2021-06-05 07:44:59] [valid] [valid]   Ref: ယခင် ၂၀၀၆ ခုနှစ် ၊ စက်တင်ဘာ လ တွင် ၊ မိုက်ခရို ဆော့ လ် သည် ၂၀၀၆ ခုနှစ် ၊ ဇန်နဝါရီလ ၁ ရက်နေ့ မတိုင်ခင် ပြုလုပ် ခဲ့ သော အိတ် စ် ဘောက်စ် ၃၆၀ ခလုတ် စက် များ အားလုံး ကို ပြုပြင် ရန် အတွက် ကုန်ကျစရိတ် ကို လျှော့ ခဲ့ ပြီး ၊ မည် သည့် အခကြေးငွေ ကို မ ဆို ပေးပြီး သား ဖြစ် သည် ကို ပြန်လည် ပေးခဲ့ သည် ။
+[2021-06-05 07:45:24] [valid] Ep. 2 : Up. 5000 : bleu : 2.19079 : new best
+[2021-06-05 07:49:46] Ep. 2 : Up. 5500 : Sen. 201,503 : Cost 4.79392004 * 769,288 @ 1,354 after 8,413,347 : Time 314.94s : 2442.66 words/s : L.r. 3.0000e-04
+[2021-06-05 07:54:07] Ep. 2 : Up. 6000 : Sen. 242,887 : Cost 4.74369621 * 767,276 @ 1,204 after 9,180,623 : Time 260.96s : 2940.21 words/s : L.r. 3.0000e-04
+[2021-06-05 07:55:28] Seen 256076 samples
+[2021-06-05 07:55:28] Starting data epoch 3 in logical epoch 3
+[2021-06-05 07:55:28] [data] Shuffling data
+[2021-06-05 07:55:28] [data] Done reading 256,102 sentences
+[2021-06-05 07:55:29] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 07:58:30] Ep. 3 : Up. 6500 : Sen. 28,559 : Cost 4.60765934 * 769,112 @ 1,473 after 9,949,735 : Time 262.34s : 2931.73 words/s : L.r. 3.0000e-04
+[2021-06-05 08:02:50] Ep. 3 : Up. 7000 : Sen. 70,658 : Cost 4.52584743 * 762,424 @ 1,602 after 10,712,159 : Time 260.25s : 2929.57 words/s : L.r. 3.0000e-04
+[2021-06-05 08:07:16] Ep. 3 : Up. 7500 : Sen. 112,140 : Cost 4.52204466 * 778,671 @ 1,610 after 11,490,830 : Time 266.64s : 2920.28 words/s : L.r. 3.0000e-04
+[2021-06-05 08:11:39] Ep. 3 : Up. 8000 : Sen. 154,683 : Cost 4.48367739 * 772,739 @ 1,834 after 12,263,569 : Time 262.31s : 2945.91 words/s : L.r. 3.0000e-04
+[2021-06-05 08:15:59] Ep. 3 : Up. 8500 : Sen. 195,954 : Cost 4.46285915 * 762,647 @ 1,566 after 13,026,216 : Time 259.71s : 2936.52 words/s : L.r. 3.0000e-04
+[2021-06-05 08:20:19] Ep. 3 : Up. 9000 : Sen. 238,229 : Cost 4.42223358 * 772,271 @ 1,690 after 13,798,487 : Time 260.44s : 2965.28 words/s : L.r. 3.0000e-04
+[2021-06-05 08:22:12] Seen 256076 samples
+[2021-06-05 08:22:12] Starting data epoch 4 in logical epoch 4
+[2021-06-05 08:22:12] [data] Shuffling data
+[2021-06-05 08:22:12] [data] Done reading 256,102 sentences
+[2021-06-05 08:22:12] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 08:24:42] Ep. 4 : Up. 9500 : Sen. 24,505 : Cost 4.31574011 * 772,585 @ 1,020 after 14,571,072 : Time 262.84s : 2939.42 words/s : L.r. 3.0000e-04
+[2021-06-05 08:29:04] Ep. 4 : Up. 10000 : Sen. 65,990 : Cost 4.25748920 * 765,999 @ 1,462 after 15,337,071 : Time 262.58s : 2917.24 words/s : L.r. 3.0000e-04
+[2021-06-05 08:29:04] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 08:29:06] Saving model weights and runtime parameters to model.transformer.word/model.iter10000.npz
+[2021-06-05 08:29:06] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 08:29:08] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+[2021-06-05 08:29:13] [valid] Ep. 4 : Up. 10000 : cross-entropy : 172.002 : new best
+[2021-06-05 08:29:15] [valid] Ep. 4 : Up. 10000 : perplexity : 113.429 : new best
+[2021-06-05 08:29:38] [valid] Ep. 4 : Up. 10000 : bleu : 3.37567 : new best
+[2021-06-05 08:33:58] Ep. 4 : Up. 10500 : Sen. 107,728 : Cost 4.26157951 * 767,471 @ 1,685 after 16,104,542 : Time 293.84s : 2611.83 words/s : L.r. 3.0000e-04
+[2021-06-05 08:38:18] Ep. 4 : Up. 11000 : Sen. 149,200 : Cost 4.23539209 * 764,633 @ 1,508 after 16,869,175 : Time 259.70s : 2944.33 words/s : L.r. 3.0000e-04
+[2021-06-05 08:42:37] Ep. 4 : Up. 11500 : Sen. 190,831 : Cost 4.22120285 * 767,635 @ 1,088 after 17,636,810 : Time 259.26s : 2960.85 words/s : L.r. 3.0000e-04
+[2021-06-05 08:46:56] Ep. 4 : Up. 12000 : Sen. 232,136 : Cost 4.21505928 * 765,699 @ 14 after 18,402,509 : Time 258.58s : 2961.11 words/s : L.r. 3.0000e-04
+[2021-06-05 08:49:25] Seen 256076 samples
+[2021-06-05 08:49:25] Starting data epoch 5 in logical epoch 5
+[2021-06-05 08:49:25] [data] Shuffling data
+[2021-06-05 08:49:25] [data] Done reading 256,102 sentences
+[2021-06-05 08:49:26] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 08:51:16] Ep. 5 : Up. 12500 : Sen. 17,199 : Cost 4.13547754 * 758,583 @ 1,750 after 19,161,092 : Time 259.80s : 2919.85 words/s : L.r. 3.0000e-04
+[2021-06-05 08:55:36] Ep. 5 : Up. 13000 : Sen. 58,720 : Cost 4.04906559 * 764,048 @ 1,323 after 19,925,140 : Time 260.76s : 2930.11 words/s : L.r. 3.0000e-04
+[2021-06-05 08:59:59] Ep. 5 : Up. 13500 : Sen. 101,117 : Cost 4.04179096 * 771,547 @ 1,560 after 20,696,687 : Time 262.34s : 2941.04 words/s : L.r. 3.0000e-04
+[2021-06-05 09:04:21] Ep. 5 : Up. 14000 : Sen. 142,577 : Cost 4.06688356 * 767,351 @ 1,154 after 21,464,038 : Time 262.42s : 2924.11 words/s : L.r. 3.0000e-04
+[2021-06-05 09:08:44] Ep. 5 : Up. 14500 : Sen. 184,425 : Cost 4.04927874 * 770,731 @ 804 after 22,234,769 : Time 262.66s : 2934.34 words/s : L.r. 3.0000e-04
+[2021-06-05 09:13:06] Ep. 5 : Up. 15000 : Sen. 226,329 : Cost 4.04004669 * 771,520 @ 1,500 after 23,006,289 : Time 261.89s : 2945.97 words/s : L.r. 3.0000e-04
+[2021-06-05 09:13:06] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 09:13:07] Saving model weights and runtime parameters to model.transformer.word/model.iter15000.npz
+[2021-06-05 09:13:08] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 09:13:09] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+[2021-06-05 09:13:14] [valid] Ep. 5 : Up. 15000 : cross-entropy : 164.736 : new best
+[2021-06-05 09:13:16] [valid] Ep. 5 : Up. 15000 : perplexity : 92.8795 : new best
+[2021-06-05 09:13:37] [valid] Ep. 5 : Up. 15000 : bleu : 4.38457 : new best
+...
+...
+...
+[2021-06-05 09:57:19] Ep. 7 : Up. 20000 : Sen. 129,836 : Cost 3.78573537 * 756,463 @ 1,681 after 30,647,742 : Time 260.18s : 2907.51 words/s : L.r. 2.6833e-04
+[2021-06-05 09:57:19] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 09:57:21] Saving model weights and runtime parameters to model.transformer.word/model.iter20000.npz
+[2021-06-05 09:57:21] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 09:57:23] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+[2021-06-05 09:57:28] [valid] Ep. 7 : Up. 20000 : cross-entropy : 160.963 : new best
+[2021-06-05 09:57:30] [valid] Ep. 7 : Up. 20000 : perplexity : 83.7238 : new best
+[2021-06-05 09:57:51] [valid] Ep. 7 : Up. 20000 : bleu : 5.0205 : new best
+...
+...
+...
+[2021-06-05 12:10:23] [valid] Ep. 12 : Up. 35000 : cross-entropy : 158.145 : new best
+[2021-06-05 12:10:26] [valid] Ep. 12 : Up. 35000 : perplexity : 77.4807 : new best
+[2021-06-05 12:10:46] [valid] Ep. 12 : Up. 35000 : bleu : 6.15288 : new best
+[2021-06-05 12:15:06] Ep. 12 : Up. 35500 : Sen. 140,716 : Cost 3.38138103 * 766,519 @ 1,749 after 54,402,491 : Time 291.82s : 2626.68 words/s : L.r. 2.0140e-04
+[2021-06-05 12:19:25] Ep. 12 : Up. 36000 : Sen. 182,054 : Cost 3.37449408 * 759,148 @ 1,581 after 55,161,639 : Time 258.30s : 2939.06 words/s : L.r. 2.0000e-04
+[2021-06-05 12:23:44] Ep. 12 : Up. 36500 : Sen. 223,582 : Cost 3.40336466 * 768,863 @ 1,658 after 55,930,502 : Time 259.37s : 2964.31 words/s : L.r. 1.9863e-04
+[2021-06-05 12:27:05] Seen 256076 samples
+[2021-06-05 12:27:05] Starting data epoch 13 in logical epoch 13
+[2021-06-05 12:27:05] [data] Shuffling data
+[2021-06-05 12:27:05] [data] Done reading 256,102 sentences
+[2021-06-05 12:27:06] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 12:28:04] Ep. 13 : Up. 37000 : Sen. 9,322 : Cost 3.37193465 * 765,488 @ 1,408 after 56,695,990 : Time 260.04s : 2943.73 words/s : L.r. 1.9728e-04
+[2021-06-05 12:32:23] Ep. 13 : Up. 37500 : Sen. 50,401 : Cost 3.29464555 * 759,483 @ 1,379 after 57,455,473 : Time 258.70s : 2935.72 words/s : L.r. 1.9596e-04
+[2021-06-05 12:36:43] Ep. 13 : Up. 38000 : Sen. 92,738 : Cost 3.29711175 * 772,346 @ 2,076 after 58,227,819 : Time 260.39s : 2966.13 words/s : L.r. 1.9467e-04
+[2021-06-05 12:41:03] Ep. 13 : Up. 38500 : Sen. 134,466 : Cost 3.31494069 * 764,991 @ 2,012 after 58,992,810 : Time 259.65s : 2946.20 words/s : L.r. 1.9340e-04
+[2021-06-05 12:45:24] Ep. 13 : Up. 39000 : Sen. 176,543 : Cost 3.33955193 * 778,458 @ 2,096 after 59,771,268 : Time 261.71s : 2974.51 words/s : L.r. 1.9215e-04
+[2021-06-05 12:49:43] Ep. 13 : Up. 39500 : Sen. 217,920 : Cost 3.33803558 * 757,007 @ 1,886 after 60,528,275 : Time 258.39s : 2929.75 words/s : L.r. 1.9093e-04
+[2021-06-05 12:53:41] Seen 256076 samples
+[2021-06-05 12:53:41] Starting data epoch 14 in logical epoch 14
+[2021-06-05 12:53:41] [data] Shuffling data
+[2021-06-05 12:53:41] [data] Done reading 256,102 sentences
+[2021-06-05 12:53:42] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 12:54:04] Ep. 14 : Up. 40000 : Sen. 3,846 : Cost 3.34768629 * 771,776 @ 2,620 after 61,300,051 : Time 261.27s : 2953.97 words/s : L.r. 1.8974e-04
+[2021-06-05 12:54:04] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 12:54:06] Saving model weights and runtime parameters to model.transformer.word/model.iter40000.npz
+[2021-06-05 12:54:06] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 12:54:08] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+[2021-06-05 12:54:13] [valid] Ep. 14 : Up. 40000 : cross-entropy : 158.279 : stalled 1 times (last best: 158.145)
+[2021-06-05 12:54:15] [valid] Ep. 14 : Up. 40000 : perplexity : 77.7671 : stalled 1 times (last best: 77.4807)
+[2021-06-05 12:54:35] [valid] Ep. 14 : Up. 40000 : bleu : 6.13252 : stalled 1 times (last best: 6.15288)
+...
+...
+...
+[2021-06-05 15:37:33] [data] Shuffling data
+[2021-06-05 15:37:33] [data] Done reading 256,102 sentences
+[2021-06-05 15:37:34] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 15:38:29] Ep. 20 : Up. 58500 : Sen. 8,792 : Cost 3.11422276 * 765,697 @ 1,701 after 89,655,890 : Time 262.31s : 2919.09 words/s : L.r. 1.5689e-04
+[2021-06-05 15:42:49] Ep. 20 : Up. 59000 : Sen. 49,839 : Cost 3.03764486 * 759,349 @ 1,690 after 90,415,239 : Time 260.34s : 2916.72 words/s : L.r. 1.5623e-04
+[2021-06-05 15:47:12] Ep. 20 : Up. 59500 : Sen. 91,765 : Cost 3.04800487 * 771,802 @ 794 after 91,187,041 : Time 262.54s : 2939.74 words/s : L.r. 1.5557e-04
+[2021-06-05 15:51:32] Ep. 20 : Up. 60000 : Sen. 133,514 : Cost 3.05941653 * 763,196 @ 1,170 after 91,950,237 : Time 260.66s : 2927.93 words/s : L.r. 1.5492e-04
+[2021-06-05 15:51:32] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 15:51:34] Saving model weights and runtime parameters to model.transformer.word/model.iter60000.npz
+[2021-06-05 15:51:34] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 15:51:36] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+[2021-06-05 15:51:41] [valid] Ep. 20 : Up. 60000 : cross-entropy : 160.756 : stalled 5 times (last best: 158.145)
+[2021-06-05 15:51:43] [valid] Ep. 20 : Up. 60000 : perplexity : 83.2483 : stalled 5 times (last best: 77.4807)
+[2021-06-05 15:52:04] [valid] Ep. 20 : Up. 60000 : bleu : 6.1083 : stalled 2 times (last best: 6.54516)
+...
+...
+...
+[2021-06-05 17:20:24] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 17:20:25] Saving model weights and runtime parameters to model.transformer.word/model.iter70000.npz
+[2021-06-05 17:20:26] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 17:20:28] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+[2021-06-05 17:20:32] [valid] Ep. 23 : Up. 70000 : cross-entropy : 162.347 : stalled 7 times (last best: 158.145)
+[2021-06-05 17:20:35] [valid] Ep. 23 : Up. 70000 : perplexity : 86.9723 : stalled 7 times (last best: 77.4807)
+[2021-06-05 17:20:56] [valid] Ep. 23 : Up. 70000 : bleu : 6.51058 : stalled 4 times (last best: 6.54516)
+...
+...
+...
+[2021-06-05 18:48:44] Ep. 27 : Up. 80000 : Sen. 7,233 : Cost 2.94408584 * 772,111 @ 1,848 after 122,605,118 : Time 263.12s : 2934.47 words/s : L.r. 1.3416e-04
+[2021-06-05 18:48:44] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 18:48:46] Saving model weights and runtime parameters to model.transformer.word/model.iter80000.npz
+[2021-06-05 18:48:46] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 18:48:48] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+[2021-06-05 18:48:53] [valid] Ep. 27 : Up. 80000 : cross-entropy : 163.973 : stalled 9 times (last best: 158.145)
+[2021-06-05 18:48:55] [valid] Ep. 27 : Up. 80000 : perplexity : 90.9513 : stalled 9 times (last best: 77.4807)
+[2021-06-05 18:49:15] [valid] Ep. 27 : Up. 80000 : bleu : 6.65718 : new best
+[2021-06-05 18:53:35] Ep. 27 : Up. 80500 : Sen. 49,415 : Cost 2.86992383 * 763,945 @ 1,746 after 123,369,063 : Time 291.07s : 2624.60 words/s : L.r. 1.3375e-04
+[2021-06-05 18:57:56] Ep. 27 : Up. 81000 : Sen. 90,932 : Cost 2.89262366 * 766,354 @ 1,690 after 124,135,417 : Time 260.88s : 2937.54 words/s : L.r. 1.3333e-04
+[2021-06-05 19:02:17] Ep. 27 : Up. 81500 : Sen. 132,275 : Cost 2.91987681 * 766,866 @ 1,720 after 124,902,283 : Time 260.68s : 2941.84 words/s : L.r. 1.3292e-04
+[2021-06-05 19:06:37] Ep. 27 : Up. 82000 : Sen. 173,975 : Cost 2.91601205 * 766,916 @ 1,431 after 125,669,199 : Time 260.77s : 2940.91 words/s : L.r. 1.3252e-04
+[2021-06-05 19:10:59] Ep. 27 : Up. 82500 : Sen. 215,917 : Cost 2.92485714 * 766,530 @ 851 after 126,435,729 : Time 261.59s : 2930.32 words/s : L.r. 1.3212e-04
+[2021-06-05 19:15:16] Seen 256076 samples
+[2021-06-05 19:15:16] Starting data epoch 28 in logical epoch 28
+[2021-06-05 19:15:16] [data] Shuffling data
+[2021-06-05 19:15:16] [data] Done reading 256,102 sentences
+[2021-06-05 19:15:16] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 19:15:25] Ep. 28 : Up. 83000 : Sen. 911 : Cost 2.94430399 * 767,558 @ 2,218 after 127,203,287 : Time 265.97s : 2885.93 words/s : L.r. 1.3172e-04
+[2021-06-05 19:19:49] Ep. 28 : Up. 83500 : Sen. 42,991 : Cost 2.85245347 * 766,038 @ 1,866 after 127,969,325 : Time 264.13s : 2900.28 words/s : L.r. 1.3132e-04
+[2021-06-05 19:24:12] Ep. 28 : Up. 84000 : Sen. 84,562 : Cost 2.87319374 * 763,931 @ 1,118 after 128,733,256 : Time 262.53s : 2909.85 words/s : L.r. 1.3093e-04
+[2021-06-05 19:28:35] Ep. 28 : Up. 84500 : Sen. 125,738 : Cost 2.88550973 * 757,036 @ 1,663 after 129,490,292 : Time 263.21s : 2876.20 words/s : L.r. 1.3054e-04
+[2021-06-05 19:32:59] Ep. 28 : Up. 85000 : Sen. 167,633 : Cost 2.90083790 * 771,603 @ 1,440 after 130,261,895 : Time 263.82s : 2924.68 words/s : L.r. 1.3016e-04
+[2021-06-05 19:32:59] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 19:33:00] Saving model weights and runtime parameters to model.transformer.word/model.iter85000.npz
+[2021-06-05 19:33:01] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 19:33:02] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+[2021-06-05 19:33:07] [valid] Ep. 28 : Up. 85000 : cross-entropy : 164.873 : stalled 10 times (last best: 158.145)
+[2021-06-05 19:33:10] [valid] Ep. 28 : Up. 85000 : perplexity : 93.2314 : stalled 10 times (last best: 77.4807)
+[2021-06-05 19:33:30] [valid] Ep. 28 : Up. 85000 : bleu : 6.35812 : stalled 1 times (last best: 6.65718)
+[2021-06-05 19:33:30] Training finished
+[2021-06-05 19:33:32] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 19:33:33] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 19:33:35] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+
+real	752m59.060s
+user	1141m52.848s
+sys	1m3.515s
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+
+0.0003 to    --learn-rate 0.0001
+0.3 to --transformer-dropout 0.5  
+6 to   --beam-size 10
+10 to    --early-stopping 20 
+
+## Train and See the result
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.sh 
+mkdir: cannot create directory ‘model.transformer.word’: File exists
+[2021-06-05 22:25:32] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-05 22:25:32] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 33527 with command line:
+[2021-06-05 22:25:32] [marian] marian -c model.transformer.word/config.yml
+[2021-06-05 22:25:32] [config] after: 0e
+[2021-06-05 22:25:32] [config] after-batches: 0
+[2021-06-05 22:25:32] [config] after-epochs: 0
+[2021-06-05 22:25:32] [config] all-caps-every: 0
+[2021-06-05 22:25:32] [config] allow-unk: false
+[2021-06-05 22:25:32] [config] authors: false
+[2021-06-05 22:25:32] [config] beam-size: 10
+[2021-06-05 22:25:32] [config] bert-class-symbol: "[CLS]"
+[2021-06-05 22:25:32] [config] bert-mask-symbol: "[MASK]"
+[2021-06-05 22:25:32] [config] bert-masking-fraction: 0.15
+[2021-06-05 22:25:32] [config] bert-sep-symbol: "[SEP]"
+[2021-06-05 22:25:32] [config] bert-train-type-embeddings: true
+[2021-06-05 22:25:32] [config] bert-type-vocab-size: 2
+[2021-06-05 22:25:32] [config] build-info: ""
+[2021-06-05 22:25:32] [config] cite: false
+[2021-06-05 22:25:32] [config] clip-norm: 5
+[2021-06-05 22:25:32] [config] cost-scaling:
+[2021-06-05 22:25:32] [config]   []
+[2021-06-05 22:25:32] [config] cost-type: ce-sum
+[2021-06-05 22:25:32] [config] cpu-threads: 0
+[2021-06-05 22:25:32] [config] data-weighting: ""
+[2021-06-05 22:25:32] [config] data-weighting-type: sentence
+[2021-06-05 22:25:32] [config] dec-cell: gru
+[2021-06-05 22:25:32] [config] dec-cell-base-depth: 2
+[2021-06-05 22:25:32] [config] dec-cell-high-depth: 1
+[2021-06-05 22:25:32] [config] dec-depth: 2
+[2021-06-05 22:25:32] [config] devices:
+[2021-06-05 22:25:32] [config]   - 0
+[2021-06-05 22:25:32] [config]   - 1
+[2021-06-05 22:25:32] [config] dim-emb: 512
+[2021-06-05 22:25:32] [config] dim-rnn: 1024
+[2021-06-05 22:25:32] [config] dim-vocabs:
+[2021-06-05 22:25:32] [config]   - 85602
+[2021-06-05 22:25:32] [config]   - 63471
+[2021-06-05 22:25:32] [config] disp-first: 0
+[2021-06-05 22:25:32] [config] disp-freq: 500
+[2021-06-05 22:25:32] [config] disp-label-counts: true
+[2021-06-05 22:25:32] [config] dropout-rnn: 0
+[2021-06-05 22:25:32] [config] dropout-src: 0
+[2021-06-05 22:25:32] [config] dropout-trg: 0
+[2021-06-05 22:25:32] [config] dump-config: ""
+[2021-06-05 22:25:32] [config] early-stopping: 20
+[2021-06-05 22:25:32] [config] embedding-fix-src: false
+[2021-06-05 22:25:32] [config] embedding-fix-trg: false
+[2021-06-05 22:25:32] [config] embedding-normalization: false
+[2021-06-05 22:25:32] [config] embedding-vectors:
+[2021-06-05 22:25:32] [config]   []
+[2021-06-05 22:25:32] [config] enc-cell: gru
+[2021-06-05 22:25:32] [config] enc-cell-depth: 1
+[2021-06-05 22:25:32] [config] enc-depth: 2
+[2021-06-05 22:25:32] [config] enc-type: bidirectional
+[2021-06-05 22:25:32] [config] english-title-case-every: 0
+[2021-06-05 22:25:32] [config] exponential-smoothing: 0.0001
+[2021-06-05 22:25:32] [config] factor-weight: 1
+[2021-06-05 22:25:32] [config] grad-dropping-momentum: 0
+[2021-06-05 22:25:32] [config] grad-dropping-rate: 0
+[2021-06-05 22:25:32] [config] grad-dropping-warmup: 100
+[2021-06-05 22:25:32] [config] gradient-checkpointing: false
+[2021-06-05 22:25:32] [config] guided-alignment: none
+[2021-06-05 22:25:32] [config] guided-alignment-cost: mse
+[2021-06-05 22:25:32] [config] guided-alignment-weight: 0.1
+[2021-06-05 22:25:32] [config] ignore-model-config: false
+[2021-06-05 22:25:32] [config] input-types:
+[2021-06-05 22:25:32] [config]   []
+[2021-06-05 22:25:32] [config] interpolate-env-vars: false
+[2021-06-05 22:25:32] [config] keep-best: false
+[2021-06-05 22:25:32] [config] label-smoothing: 0.1
+[2021-06-05 22:25:32] [config] layer-normalization: false
+[2021-06-05 22:25:32] [config] learn-rate: 0.0001
+[2021-06-05 22:25:32] [config] lemma-dim-emb: 0
+[2021-06-05 22:25:32] [config] log: model.transformer.word/train.log
+[2021-06-05 22:25:32] [config] log-level: info
+[2021-06-05 22:25:32] [config] log-time-zone: ""
+[2021-06-05 22:25:32] [config] logical-epoch:
+[2021-06-05 22:25:32] [config]   - 1e
+[2021-06-05 22:25:32] [config]   - 0
+[2021-06-05 22:25:32] [config] lr-decay: 0
+[2021-06-05 22:25:32] [config] lr-decay-freq: 50000
+[2021-06-05 22:25:32] [config] lr-decay-inv-sqrt:
+[2021-06-05 22:25:32] [config]   - 16000
+[2021-06-05 22:25:32] [config] lr-decay-repeat-warmup: false
+[2021-06-05 22:25:32] [config] lr-decay-reset-optimizer: false
+[2021-06-05 22:25:32] [config] lr-decay-start:
+[2021-06-05 22:25:32] [config]   - 10
+[2021-06-05 22:25:32] [config]   - 1
+[2021-06-05 22:25:32] [config] lr-decay-strategy: epoch+stalled
+[2021-06-05 22:25:32] [config] lr-report: true
+[2021-06-05 22:25:32] [config] lr-warmup: 0
+[2021-06-05 22:25:32] [config] lr-warmup-at-reload: false
+[2021-06-05 22:25:32] [config] lr-warmup-cycle: false
+[2021-06-05 22:25:32] [config] lr-warmup-start-rate: 0
+[2021-06-05 22:25:32] [config] max-length: 200
+[2021-06-05 22:25:32] [config] max-length-crop: false
+[2021-06-05 22:25:32] [config] max-length-factor: 3
+[2021-06-05 22:25:32] [config] maxi-batch: 100
+[2021-06-05 22:25:32] [config] maxi-batch-sort: trg
+[2021-06-05 22:25:32] [config] mini-batch: 64
+[2021-06-05 22:25:32] [config] mini-batch-fit: true
+[2021-06-05 22:25:32] [config] mini-batch-fit-step: 10
+[2021-06-05 22:25:32] [config] mini-batch-track-lr: false
+[2021-06-05 22:25:32] [config] mini-batch-warmup: 0
+[2021-06-05 22:25:32] [config] mini-batch-words: 0
+[2021-06-05 22:25:32] [config] mini-batch-words-ref: 0
+[2021-06-05 22:25:32] [config] model: model.transformer.word/model.npz
+[2021-06-05 22:25:32] [config] multi-loss-type: sum
+[2021-06-05 22:25:32] [config] multi-node: false
+[2021-06-05 22:25:32] [config] multi-node-overlap: true
+[2021-06-05 22:25:32] [config] n-best: false
+[2021-06-05 22:25:32] [config] no-nccl: false
+[2021-06-05 22:25:32] [config] no-reload: false
+[2021-06-05 22:25:32] [config] no-restore-corpus: false
+[2021-06-05 22:25:32] [config] normalize: 0.6
+[2021-06-05 22:25:32] [config] normalize-gradient: false
+[2021-06-05 22:25:32] [config] num-devices: 0
+[2021-06-05 22:25:32] [config] optimizer: adam
+[2021-06-05 22:25:32] [config] optimizer-delay: 1
+[2021-06-05 22:25:32] [config] optimizer-params:
+[2021-06-05 22:25:32] [config]   []
+[2021-06-05 22:25:32] [config] output-omit-bias: false
+[2021-06-05 22:25:32] [config] overwrite: false
+[2021-06-05 22:25:32] [config] precision:
+[2021-06-05 22:25:32] [config]   - float32
+[2021-06-05 22:25:32] [config]   - float32
+[2021-06-05 22:25:32] [config]   - float32
+[2021-06-05 22:25:32] [config] pretrained-model: ""
+[2021-06-05 22:25:32] [config] quantize-biases: false
+[2021-06-05 22:25:32] [config] quantize-bits: 0
+[2021-06-05 22:25:32] [config] quantize-log-based: false
+[2021-06-05 22:25:32] [config] quantize-optimization-steps: 0
+[2021-06-05 22:25:32] [config] quiet: false
+[2021-06-05 22:25:32] [config] quiet-translation: true
+[2021-06-05 22:25:32] [config] relative-paths: false
+[2021-06-05 22:25:32] [config] right-left: false
+[2021-06-05 22:25:32] [config] save-freq: 5000
+[2021-06-05 22:25:32] [config] seed: 1111
+[2021-06-05 22:25:32] [config] sentencepiece-alphas:
+[2021-06-05 22:25:32] [config]   []
+[2021-06-05 22:25:32] [config] sentencepiece-max-lines: 2000000
+[2021-06-05 22:25:32] [config] sentencepiece-options: ""
+[2021-06-05 22:25:32] [config] shuffle: data
+[2021-06-05 22:25:32] [config] shuffle-in-ram: false
+[2021-06-05 22:25:32] [config] sigterm: save-and-exit
+[2021-06-05 22:25:32] [config] skip: false
+[2021-06-05 22:25:32] [config] sqlite: ""
+[2021-06-05 22:25:32] [config] sqlite-drop: false
+[2021-06-05 22:25:32] [config] sync-sgd: true
+[2021-06-05 22:25:32] [config] tempdir: /tmp
+[2021-06-05 22:25:32] [config] tied-embeddings: true
+[2021-06-05 22:25:32] [config] tied-embeddings-all: false
+[2021-06-05 22:25:32] [config] tied-embeddings-src: false
+[2021-06-05 22:25:32] [config] train-embedder-rank:
+[2021-06-05 22:25:32] [config]   []
+[2021-06-05 22:25:32] [config] train-sets:
+[2021-06-05 22:25:32] [config]   - data_word/train.en
+[2021-06-05 22:25:32] [config]   - data_word/train.my
+[2021-06-05 22:25:32] [config] transformer-aan-activation: swish
+[2021-06-05 22:25:32] [config] transformer-aan-depth: 2
+[2021-06-05 22:25:32] [config] transformer-aan-nogate: false
+[2021-06-05 22:25:32] [config] transformer-decoder-autoreg: self-attention
+[2021-06-05 22:25:32] [config] transformer-depth-scaling: false
+[2021-06-05 22:25:32] [config] transformer-dim-aan: 2048
+[2021-06-05 22:25:32] [config] transformer-dim-ffn: 2048
+[2021-06-05 22:25:32] [config] transformer-dropout: 0.5
+[2021-06-05 22:25:32] [config] transformer-dropout-attention: 0
+[2021-06-05 22:25:32] [config] transformer-dropout-ffn: 0
+[2021-06-05 22:25:32] [config] transformer-ffn-activation: swish
+[2021-06-05 22:25:32] [config] transformer-ffn-depth: 2
+[2021-06-05 22:25:32] [config] transformer-guided-alignment-layer: last
+[2021-06-05 22:25:32] [config] transformer-heads: 8
+[2021-06-05 22:25:32] [config] transformer-no-projection: false
+[2021-06-05 22:25:32] [config] transformer-pool: false
+[2021-06-05 22:25:32] [config] transformer-postprocess: dan
+[2021-06-05 22:25:32] [config] transformer-postprocess-emb: d
+[2021-06-05 22:25:32] [config] transformer-postprocess-top: ""
+[2021-06-05 22:25:32] [config] transformer-preprocess: ""
+[2021-06-05 22:25:32] [config] transformer-tied-layers:
+[2021-06-05 22:25:32] [config]   []
+[2021-06-05 22:25:32] [config] transformer-train-position-embeddings: false
+[2021-06-05 22:25:32] [config] tsv: false
+[2021-06-05 22:25:32] [config] tsv-fields: 0
+[2021-06-05 22:25:32] [config] type: transformer
+[2021-06-05 22:25:32] [config] ulr: false
+[2021-06-05 22:25:32] [config] ulr-dim-emb: 0
+[2021-06-05 22:25:32] [config] ulr-dropout: 0
+[2021-06-05 22:25:32] [config] ulr-keys-vectors: ""
+[2021-06-05 22:25:32] [config] ulr-query-vectors: ""
+[2021-06-05 22:25:32] [config] ulr-softmax-temperature: 1
+[2021-06-05 22:25:32] [config] ulr-trainable-transformation: false
+[2021-06-05 22:25:32] [config] unlikelihood-loss: false
+[2021-06-05 22:25:32] [config] valid-freq: 5000
+[2021-06-05 22:25:32] [config] valid-log: model.transformer.word/valid.log
+[2021-06-05 22:25:32] [config] valid-max-length: 1000
+[2021-06-05 22:25:32] [config] valid-metrics:
+[2021-06-05 22:25:32] [config]   - cross-entropy
+[2021-06-05 22:25:32] [config]   - perplexity
+[2021-06-05 22:25:32] [config]   - bleu
+[2021-06-05 22:25:32] [config] valid-mini-batch: 64
+[2021-06-05 22:25:32] [config] valid-reset-stalled: false
+[2021-06-05 22:25:32] [config] valid-script-args:
+[2021-06-05 22:25:32] [config]   []
+[2021-06-05 22:25:32] [config] valid-script-path: ""
+[2021-06-05 22:25:32] [config] valid-sets:
+[2021-06-05 22:25:32] [config]   - data_word/valid.en
+[2021-06-05 22:25:32] [config]   - data_word/valid.my
+[2021-06-05 22:25:32] [config] valid-translation-output: model.transformer.word/valid.en-my.word.output
+[2021-06-05 22:25:32] [config] version: v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-05 22:25:32] [config] vocabs:
+[2021-06-05 22:25:32] [config]   - data_word/vocab/vocab.en.yml
+[2021-06-05 22:25:32] [config]   - data_word/vocab/vocab.my.yml
+[2021-06-05 22:25:32] [config] word-penalty: 0
+[2021-06-05 22:25:32] [config] word-scores: false
+[2021-06-05 22:25:32] [config] workspace: 1000
+[2021-06-05 22:25:32] [config] Loaded model has been created with Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-05 22:25:32] Using synchronous SGD
+[2021-06-05 22:25:32] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.en.yml
+[2021-06-05 22:25:32] [data] Setting vocabulary size for input 0 to 85,602
+[2021-06-05 22:25:32] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.my.yml
+[2021-06-05 22:25:32] [data] Setting vocabulary size for input 1 to 63,471
+[2021-06-05 22:25:32] [comm] Compiled without MPI support. Running as a single process on administrator-HP-Z2-Tower-G4-Workstation
+[2021-06-05 22:25:32] [batching] Collecting statistics for batch fitting with step size 10
+[2021-06-05 22:25:32] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-05 22:25:32] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-05 22:25:32] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-05 22:25:32] [comm] NCCLCommunicator constructed successfully
+[2021-06-05 22:25:32] [training] Using 2 GPUs
+[2021-06-05 22:25:32] [logits] Applying loss function for 1 factor(s)
+[2021-06-05 22:25:32] [memory] Reserving 347 MB, device gpu0
+[2021-06-05 22:25:33] [gpu] 16-bit TensorCores enabled for float32 matrix operations
+[2021-06-05 22:25:33] [memory] Reserving 347 MB, device gpu0
+[2021-06-05 22:25:55] [batching] Done. Typical MB size is 2,363 target words
+[2021-06-05 22:25:55] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-05 22:25:55] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-05 22:25:55] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-05 22:25:55] [comm] NCCLCommunicator constructed successfully
+[2021-06-05 22:25:55] [training] Using 2 GPUs
+[2021-06-05 22:25:55] Loading model from model.transformer.word/model.npz.orig.npz
+[2021-06-05 22:25:56] Loading model from model.transformer.word/model.npz.orig.npz
+[2021-06-05 22:25:56] Loading Adam parameters from model.transformer.word/model.npz.optimizer.npz
+[2021-06-05 22:25:57] [memory] Reserving 347 MB, device gpu0
+[2021-06-05 22:25:57] [memory] Reserving 347 MB, device gpu1
+[2021-06-05 22:25:57] [training] Model reloaded from model.transformer.word/model.npz
+[2021-06-05 22:25:57] [data] Restoring the corpus state to epoch 28, batch 85000
+[2021-06-05 22:25:57] [data] Shuffling data
+[2021-06-05 22:25:57] [data] Done reading 256,102 sentences
+[2021-06-05 22:25:58] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 22:26:00] Training started
+[2021-06-05 22:26:00] [training] Batches are processed as 1 process(es) x 2 devices/process
+[2021-06-05 22:26:00] [memory] Reserving 347 MB, device gpu0
+[2021-06-05 22:26:00] [memory] Reserving 347 MB, device gpu1
+[2021-06-05 22:26:00] [memory] Reserving 347 MB, device gpu0
+[2021-06-05 22:26:00] [memory] Reserving 347 MB, device gpu1
+[2021-06-05 22:26:01] Loading model from model.transformer.word/model.npz
+[2021-06-05 22:26:01] [memory] Reserving 347 MB, device cpu0
+[2021-06-05 22:26:01] [memory] Reserving 173 MB, device gpu0
+[2021-06-05 22:26:01] [memory] Reserving 173 MB, device gpu1
+[2021-06-05 22:30:21] Ep. 28 : Up. 85500 : Sen. 209,432 : Cost 3.67393064 * 767,757 @ 1,673 after 131,029,652 : Time 265.24s : 2894.54 words/s : L.r. 4.3259e-05
+[2021-06-05 22:34:44] Ep. 28 : Up. 86000 : Sen. 250,685 : Cost 3.60835290 * 762,794 @ 1,378 after 131,792,446 : Time 263.00s : 2900.39 words/s : L.r. 4.3133e-05
+[2021-06-05 22:35:16] Seen 256076 samples
+[2021-06-05 22:35:16] Starting data epoch 29 in logical epoch 29
+[2021-06-05 22:35:16] [data] Shuffling data
+[2021-06-05 22:35:16] [data] Done reading 256,102 sentences
+[2021-06-05 22:35:17] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 22:39:06] Ep. 29 : Up. 86500 : Sen. 36,744 : Cost 3.51605153 * 770,513 @ 1,430 after 132,562,959 : Time 262.51s : 2935.15 words/s : L.r. 4.3008e-05
+[2021-06-05 22:43:25] Ep. 29 : Up. 87000 : Sen. 77,673 : Cost 3.51065540 * 761,016 @ 1,596 after 133,323,975 : Time 259.24s : 2935.61 words/s : L.r. 4.2885e-05
+[2021-06-05 22:47:45] Ep. 29 : Up. 87500 : Sen. 119,723 : Cost 3.48806596 * 766,216 @ 1,822 after 134,090,191 : Time 259.25s : 2955.51 words/s : L.r. 4.2762e-05
+[2021-06-05 22:52:03] Ep. 29 : Up. 88000 : Sen. 161,121 : Cost 3.48995733 * 762,230 @ 1,152 after 134,852,421 : Time 258.34s : 2950.52 words/s : L.r. 4.2640e-05
+[2021-06-05 22:56:23] Ep. 29 : Up. 88500 : Sen. 203,096 : Cost 3.47636724 * 766,923 @ 1,376 after 135,619,344 : Time 259.71s : 2952.99 words/s : L.r. 4.2520e-05
+[2021-06-05 23:00:41] Ep. 29 : Up. 89000 : Sen. 244,595 : Cost 3.47545695 * 759,377 @ 1,653 after 136,378,721 : Time 258.49s : 2937.77 words/s : L.r. 4.2400e-05
+[2021-06-05 23:01:56] Seen 256076 samples
+[2021-06-05 23:01:56] Starting data epoch 30 in logical epoch 30
+[2021-06-05 23:01:56] [data] Shuffling data
+[2021-06-05 23:01:56] [data] Done reading 256,102 sentences
+[2021-06-05 23:01:56] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-05 23:05:01] Ep. 30 : Up. 89500 : Sen. 29,567 : Cost 3.46055675 * 764,502 @ 2,620 after 137,143,223 : Time 260.02s : 2940.11 words/s : L.r. 4.2281e-05
+[2021-06-05 23:09:20] Ep. 30 : Up. 90000 : Sen. 71,387 : Cost 3.45048356 * 768,415 @ 1,636 after 137,911,638 : Time 259.35s : 2962.85 words/s : L.r. 4.2164e-05
+[2021-06-05 23:09:20] Saving model weights and runtime parameters to model.transformer.word/model.npz.orig.npz
+[2021-06-05 23:09:22] Saving model weights and runtime parameters to model.transformer.word/model.iter90000.npz
+[2021-06-05 23:09:23] Saving model weights and runtime parameters to model.transformer.word/model.npz
+[2021-06-05 23:09:24] Saving Adam parameters to model.transformer.word/model.npz.optimizer.npz
+tcmalloc: large alloc 1073741824 bytes == 0x56217bcca000 @ 
+tcmalloc: large alloc 1207959552 bytes == 0x56217bcca000 @ 
+tcmalloc: large alloc 1476395008 bytes == 0x56217bcca000 @ 
+tcmalloc: large alloc 1610612736 bytes == 0x562213cca000 @ 
+tcmalloc: large alloc 1744830464 bytes == 0x5621d3cca000 @ 
+tcmalloc: large alloc 2013265920 bytes == 0x56217bcca000 @ 
+[2021-06-05 23:09:36] Error: CUDA error 2 'out of memory' - /home/ye/tool/marian/src/tensors/gpu/device.cu:32: cudaMalloc(&data_, size)
+[2021-06-05 23:09:36] Error: Aborted from virtual void marian::gpu::Device::reserve(size_t) in /home/ye/tool/marian/src/tensors/gpu/device.cu:32
+
+[CALL STACK]
+[0x562103783880]    marian::gpu::Device::  reserve  (unsigned long)    + 0xf80
+[0x5621030b37df]    marian::TensorAllocator::  allocate  (IntrusivePtr<marian::TensorBase>&,  marian::Shape,  marian::Type) + 0x4ef
+[0x5621032bfb00]    marian::Node::  allocate  ()                       + 0x1e0
+[0x5621032b62ce]    marian::ExpressionGraph::  forward  (std::__cxx11::list<IntrusivePtr<marian::Chainable<IntrusivePtr<marian::TensorBase>>>,std::allocator<IntrusivePtr<marian::Chainable<IntrusivePtr<marian::TensorBase>>>>>&,  bool) + 0x8e
+[0x5621032b7cae]    marian::ExpressionGraph::  forwardNext  ()         + 0x24e
+[0x562103488e64]                                                       + 0x77de64
+[0x562103489694]                                                       + 0x77e694
+[0x56210305d15d]    std::__future_base::_State_baseV2::  _M_do_set  (std::function<std::unique_ptr<std::__future_base::_Result_base,std::__future_base::_Result_base::_Deleter> ()>*,  bool*) + 0x2d
+[0x7f3e5c6dac0f]                                                       + 0x11c0f
+[0x56210348018a]                                                       + 0x77518a
+[0x56210305f89a]    std::thread::_State_impl<std::thread::_Invoker<std::tuple<marian::ThreadPool::reserve(unsigned long)::{lambda()#1}>>>::  _M_run  () + 0x13a
+[0x7f3e5c5bed84]                                                       + 0xd6d84
+[0x7f3e5c6d2590]                                                       + 0x9590
+[0x7f3e5c2ad223]    clone                                              + 0x43
+
+
+real	44m4.334s
+user	66m30.742s
+sys	0m8.423s
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+
+## Reduce Beam Size and Train Again
+
+10 to     --beam-size 7 
+
+Run ကြည့်တော့ crush ဖြစ်တယ် မရဘူး။
+
+## Translation
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word$ time marian-decoder -m ./model.npz -v ../data_word/vocab/vocab.en.yml ../data_word/vocab/vocab.my.yml --devices 0 1 --output hyp.model.my < ../data/test.en
+...
+...
+...
+[2021-06-06 11:11:11] Best translation 982 : ဂျော်ဂျီယာ သည် ပြိုင်ပွဲ ၏ နောက် ပိုင်း တွင် နှစ် ကြိမ် မြောက် အိုင်ယာလန် နိုင်ငံ ၏ ဖိအားပေး မှု ကို ထိန်းသိမ်း ခဲ့ သော်လည်း အိုင်ယာလန် နှင့် အိုင်ယာလန် တို့ ၏ လမ်းကြောင်း အတိုင်း မ ဖြစ် နိုင် ပါ ။
+[2021-06-06 11:11:11] Best translation 983 : အိုင်ယာလန် ဟာ အာဂျင်တီးနား က ကိုး မှတ် အကွာ မှာ ရှိ တယ်
+[2021-06-06 11:11:12] Best translation 984 : ဂျော်ဂျီယာ မှာ သူ တို့ ရဲ့ အပေး အယူ ခံ နှစ် ခု က လွဲ လို့ ပြင်သစ် က တတိယ အချက် တစ်ချက် ပါ ။
+[2021-06-06 11:11:12] Best translation 985 : ဆပ်ကပ် အဖွဲ့ တစ်ဖွဲ့ သည် တနင်္ဂနွေ နေ့ ည ပိုင်း တွင် သူမ ၏ ဖောက်သည် ထံ မှ ထွက်ပြေး ရန် စီစဉ် ခဲ့ ပြီး ဒေသခံ ရဲ များ ၏ ပြန်လည် မ စတင် ခင် အာဖ ကန် နစ္စ တန် မြို့တော် ရှိ ဆွစ်ဇာလန် နိုင်ငံ ရဲတပ်ဖွဲ့ မှ ကာကွယ်ပေး ခဲ့ သည် ။
+[2021-06-06 11:11:12] Best translation 986 : အသက် ၂၆ နှစ် အရွယ် မြန် မာ ဆင် ဟု အမည် ရ သည့် အမျိုးသမီး တစ် ဦး ဖြစ် ပြီး ဆွစ်ဇာလန် နိုင်ငံ ၏ အသက် ကယ် လက် စ ဖြစ် သည် ။
+[2021-06-06 11:11:12] Best translation 987 : သူ သည် သူ မ ကို ခွဲစိတ် ကုသ ခန်း မ ထည့် ခင် လွတ် အောင် မ လုပ် နိုင် ခဲ့ ပါ
+[2021-06-06 11:11:12] Best translation 988 : ဇွန် လ ၃၀ ရက်နေ့ ဒေသ စံတော်ချိန် ၁၇ ရက်နေ့ ခန့် တွင် ရန်ကုန် မြို့ မှ လမ်း များ သို့ မ လျှောက် ခင် အချိန်တို အတွင်း ကြည့်ရှု ခဲ့ သည် ။
+[2021-06-06 11:11:12] Best translation 989 : ဇူးရစ် မြို့ ၏ အဓိက ဈေးဝယ် နေ သော လမ်းဘေးဈေးသည် တစ် ဦး ဖြစ် သည့် မသန်း ၏ အရှေ့မြောက် ဘက် အခြမ်း တွင် မြန်မာ နိုင်ငံ ရဲတပ်ဖွဲ့ က ပြောကြား ခဲ့ သည် ။
+[2021-06-06 11:11:12] Best translation 990 : သူ မ သည် မြန်မာ နိုင်ငံ ၏ အဓိက မီးရထား ဘူတာရုံ ဖြစ် သည့် တောင်ပြို လက်ဝဲ စခန်း ( ပုပ္ပါး တောင် ) နှင့် တောင်ပြို လက်ဝဲ ) တို့ မှ လွန်မြောက် ခဲ့ သည် ။
+[2021-06-06 11:11:12] Best translation 991 : တစ် နာရီ နီးပါး ကြာ အောင် ရဲ များ သည် သူမ ၏ နောက်ဆုံး ကယ်ဆယ် ရေး အပိုင်း တွင် တည်ငြိမ် အေးချမ်း စွာ နေထိုင် ခဲ့ သည် ။
+[2021-06-06 11:11:13] Best translation 992 : ဆပ်ကပ် အဖွဲ့ မှ တာဝန်ရှိသူများ နှင့် ရဲ အရာရှိ များ သည် သူ တို့ ၏ တောင်းဆို မှု များ ကို မ တုံ့ပြန် ခဲ့ ပါ ဟု ပြော သည် ။
+[2021-06-06 11:11:13] Best translation 993 : ဂရစ် ဖင် လည်း သူမ နှင့်အတူ ရဲ များ အခက်အခဲ ရှိ ခဲ့ သည် ဟု ဆို သည် ။
+[2021-06-06 11:11:13] Best translation 994 : ၂၀၀၀ ပြည့်နှစ် ခန့် တွင် နယ်မြေခံ ဂိုးသမား တစ် ဦး သည် သူမ ၏ တိရစ္ဆာန် များ ကို ထိန်းသိမ်း နိုင် ခဲ့ ပြီး သူမ ၏ ထရပ်ကား ပေါ် သို့ လွှဲပြောင်း ပေး နိုင် ခဲ့ သည် ။
+[2021-06-06 11:11:13] Best translation 995 : အခင်း ဖြစ်ပွား စဉ် အတွင်း ပျက်စီး ဆုံးရှုံး မှု သို့မဟုတ် ထိခိုက်ဒဏ်ရာ ရရှိ မှု များ မ ရှိ ခဲ့ သော်လည်း ရဲ များ က အနည်းဆုံး တစ်ဦး မှ ဗီဒီယို ရယူ နိုင် ခဲ့ သည် ။
+[2021-06-06 11:11:13] Best translation 996 : ဇူးရစ် မြို့ အနီး မုန်တိုင်း ကြောင့် ထိတ်လန့် ဖွယ် ဖြစ် သွား သည် ဟု ဆပ်ကပ် အဖွဲ့ က ပြော သည် ။
+[2021-06-06 11:11:13] Best translation 997 : ဆပ်ကပ် ပွဲ ပြန် လာ ပြီးနောက် သူ မ ပင်ပန်း နေ ပြီ ဟု ပြော သည် ။
+[2021-06-06 11:11:13] Best translation 998 : ဝဲ လ် မန်း နှင့် သူ ၏ ဇနီး ဖြစ်သူ မစ္စ တာ ငု ယင် ဖူး ကျော င့် တို့ သည် သူ တို့ ၏ နေအိမ် သို့ ကားမောင်း စဉ် ကား ပျက်ကျ စဉ် ကား တစ်စီး တွင် ပါဝင် ခဲ့ ကြ သည် ။
+[2021-06-06 11:11:13] Best translation 999 : မစ္စ တာ ဂရစ် ဖင် နတ် ဟာ ချက်ချင်း သေဆုံး ခဲ့ ပါ တယ် ။
+[2021-06-06 11:11:13] Best translation 1000 : စုံတွဲ ဟာ ကဗျာ ဖတ် နေ တုန်း က ပြန် လာ တာ ပါ ။
+[2021-06-06 11:11:13] Best translation 1001 : ဂရစ် ဖင် နတ် သည် တောင် ပိုင်း ဝေလ နယ် တွင် နေထိုင် သော ဂျူး စာရေးဆရာ တစ် ဦး ဖြစ် သည် ။
+[2021-06-06 11:11:13] Best translation 1002 : ဟယ်ရီ ဆန် ၊ သူ ၏ ဇနီး မှာ အနုပညာ နှင့် စာရေးဆရာ တစ် ဦး ဖြစ် သည် ။
+[2021-06-06 11:11:14] Best translation 1003 : လက် ဆာ နတ် သည် ကဗျာဆရာ တစ် ယောက် ဖြစ်ပြီး ဆေးပညာ ဆရာ တစ်ဦး အတွက် လူသိများ သည် ။
+[2021-06-06 11:11:14] Best translation 1004 : ဂရစ် ဖင် းန် သည် နှစ် ပေါင်း သုံးဆယ် ကျော် ကြာ ပြီ ။
+[2021-06-06 11:11:14] Best translation 1005 : သို့သော် ရုပ် ရှင် သည် စာ အရေးအသား များ အတွက် အကောင်းဆုံး လူသိများ ပြီး စာပေ ဆု များ ရရှိ ခဲ့ သည် ။
+[2021-06-06 11:11:14] Best translation 1006 : ၁၉၈၉ ခုနှစ် တွင် သူသည် တက္ကသိုလ် မှ ဂုဏ်ထူးဆောင် ဘွဲ့ ရရှိ ခဲ့ သည် ။
+[2021-06-06 11:11:14] Best translation 1007 : စုံတွဲ သည် ၁၉၈၀ ခုနှစ် များတွင် တည်းဖြတ် မှု နှစ်ကြိမ် ပြုလုပ် ခဲ့ သည် ။
+[2021-06-06 11:11:14] Best translation 1008 : သူ မ ရဲ့ ခင်ပွန်း ၊ သား ၊ သား နဲ့ သမီး နှစ် ယောက် ။
+[2021-06-06 11:11:14] Best translation 1009 : ထို့နောက် ဗုဒ္ဓဟူး နေ့ က ချင် နှစ်ခြင်း ခရစ်ယာန် အဖွဲ့ချုပ် မှ အမျိုးသား ၄ ယောက် အား ဖမ်းဆီး ပြီး သူမ ၏ နေအိမ် သို့ ပြန် ပို့ဆောင် ပေး ခဲ့ ပါ သည် ။
+[2021-06-06 11:11:14] Best translation 1010 : အနည်းဆုံး လေး ယောက် ကိုရဲ များ က ရပ်တန့် ပစ် ခဲ့ သော်လည်း ဖမ်းဆီး ခြင်း မ ရှိ ပေ ။
+[2021-06-06 11:11:14] Best translation 1011 : အစီရင်ခံစာ အရ ရဲ များ က အခင်း ဖြစ်ပွား ရာ ဒေသ စံတော်ချိန် ညနေ ၁၁ နာရီ မိနစ် ၂၀ ဝန်းကျင် ခန့် တွင် မော်တော်ယာဉ် တစ် စင်း ကို အောက် ဖော်ပြပါ ကြောင်း ပြောကြား သည် ။
+[2021-06-06 11:11:14] Best translation 1012 : သူ တို့ က လည်း သူ မ နဲ့ အနီးကပ် ဆက်ဆံ ပြီး သူမ နောက်လိုက် ခဲ့ တယ် လို့ ပြော ကြ တယ် ။
+[2021-06-06 11:11:15] Best translation 1013 : ရဲ များ က လည်း သူ ၏ ကား မောင်း နေ သော ကား များ အနက် အနည်းဆုံး တစ်စီး သည် လမ်း မှ ထွက်ခွာ သွား ရန် ကြိုးစား ခဲ့ သော်လည်း အဝေးပြေး လမ်းမ ပေါ် တွင် ကား သို့မဟုတ် အခြား သူ များ ကို မည်သူ မည်ဝါ ဖြစ်ကြောင်း ဆို သည် ။
+[2021-06-06 11:11:15] Best translation 1014 : သူ တို့ ကို သူ မ ရဲ့ မှတ်ပုံတင် ကတ်ပြား ကိုအ တည်ပြု ပြီး လွှတ် လိုက် တယ် ။
+[2021-06-06 11:11:15] Best translation 1015 : ငယ်စဉ် က ရဲ များ သည် သူမ ၏ လိုင်စင် သက်တမ်း တရားဝင် ဖြစ်ကြောင်း စစ်ဆေး ရန် အစီရင် ခံ ခဲ့ သည် ။
+[2021-06-06 11:11:15] Best translation 1016 : မက်စ် ခရု စ် သည် မဆင်မခြင် မောင်းနှင် သော်လည်း မည်သည့် အရာ ကိုမျှ တရားစွဲ ခြင်း မ ရှိ ပေ ။
+[2021-06-06 11:11:15] Best translation 1017 : ဤ အဖွဲ့ ၏ အစိတ်အပိုင်း မှာ တွန် ရာ ပင် ဖြစ် သော်လည်း ရဲတပ်ဖွဲ့ မှ ကား မောင်း စရာ မ လို ဟု လော့ ဒ်ရော့စတွန်က ပြော သည် ။
+[2021-06-06 11:11:15] Total time: 116.63980s wall
+
+real	1m58.744s
+user	3m53.448s
+sys	0m1.737s
+
+## Evaluation
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.my < ./hyp.model.my  >> results.txt
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word$ cat ./results.txt 
+BLEU = 6.00, 44.5/16.6/6.2/2.3 (BP=0.595, ratio=0.658, hyp_len=23868, ref_len=36255)
+
+## Model Ensembling (s2s+Transformer, word unit)
+## 0.4 0.6
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word/model.npz model.transformer.word/model.npz 0.4 0.6 ./data_word/vocab/vocab.en.yml ./data_word/vocab/vocab.my.yml ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my1 ./data_word/test.en 
+
+[2021-06-06 11:25:21] Best translation 1014 : သူ တို့ က သူ မ ရဲ့ လက္ခဏာ ကိုအ တည်ပြု ပြီး သူ မ ကို လွှတ် လိုက် တယ် ။
+[2021-06-06 11:25:21] Best translation 1015 : သူ မ ရဲ့ လိုင်စင် သက်တမ်း ရှိ တယ် ဆို ရင် ရဲ တွေ က စစ်ဆေး နေ တယ် ၊ ပြီး တော့ အဲဒါ ဟာ မှန်ကန် တယ် ။
+[2021-06-06 11:25:21] Best translation 1016 : ယာ ဟူး ဆို တာ လက်ဗလာ နဲ့ တရားစွဲ တာ မ ဟုတ် ပါ ဘူး ။
+[2021-06-06 11:25:21] Best translation 1017 : ဒါ ဟာ အုပ်စု ရဲ့ အစိတ်အပိုင်း တစ် ခု ဖြစ် ပါ တယ် ၊ ဒါပေမဲ့ မ မောင်း တတ် ဘူး ဟု လော့ ဒ်ရော့စတွန်က ပြော သည် ။
+[2021-06-06 11:25:21] Total time: 313.04586s wall
+
+real	5m16.353s
+user	10m25.098s
+sys	0m3.879s
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./data_word/test.my < ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my1  >> ./ensembling-results/3.s2s-plus-transformer-0.4-0.6.word.enmy.results.txt
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cat ./ensembling-results/3.s2s-plus-transformer-0.4-0.6.word.enmy.results.txt 
+BLEU = 7.30, 46.2/18.3/7.4/3.0 (BP=0.625, ratio=0.680, hyp_len=24665, ref_len=36255)
+
+## 0.5 0.5
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word/model.npz model.transformer.word/model.npz 0.5 0.5 ./data_word/vocab/vocab.en.yml ./data_word/vocab/vocab.my.yml ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my2 ./data_word/test.en
+...
+...
+...
+[2021-06-06 11:39:45] Best translation 1014 : သူ တို့ က သူ မ ရဲ့ သက်သေခံ ကတ်ပြား ကိုအ တည်ပြု ပြီး သူ မ ကို လွှတ် လိုက် တယ် ။
+[2021-06-06 11:39:45] Best translation 1015 : ရဲ များ သည် သူမ ၏ လိုင်စင် သက်တမ်း ရှိ ပြီ ဆို လျှင် စစ်ဆေး လျက် ရှိ ကြောင်း သတင်း ထုတ်ပြန် ချက် များ အရ သိရှိ ရ ပါ သည် ။
+[2021-06-06 11:39:45] Best translation 1016 : ဝဲ လ် မန်း ၏ မဆင်မခြင် မောင်းနှင် ခြင်း ကို ခံ ရ သည့် အတွက် မည်သည့် အရာ မျှ တရားစွဲဆို ခြင်း မ ရှိ ပါ ။
+[2021-06-06 11:39:45] Best translation 1017 : ဒါ ဟာ အဖွဲ့ ရဲ့ အစိတ်အပိုင်း တစ် ခု ဖြစ် ပါ တယ် ၊ ဒါပေမဲ့ အဲဒီ တုန်း က လော့စ်အိန်ဂျယ်လိစ် ့ ရဲ ဌာန ရဲ့ ပြောခွင့် ရ ပုဂ္ဂိုလ် ဆာ ရာ ထူး အတွက် ပြောရေးဆိုခွင့် ရသူ ပါ ပဲ ။
+[2021-06-06 11:39:45] Total time: 316.72224s wall
+
+real	5m19.790s
+user	10m34.562s
+sys	0m2.480s
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./data_word/test.my < ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my2  >> ./ensembling-results/3.s2s-plus-transformer-0.5-0.5.word.enmy.results.txt
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cat ./ensembling-results/3.s2s-plus-transformer-0.5-0.5.word.enmy.results.txt 
+BLEU = 7.32, 45.7/17.9/7.2/3.0 (BP=0.635, ratio=0.687, hyp_len=24919, ref_len=36255)
+
+## 0.6 0.4
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word/model.npz model.transformer.word/model.npz 0.6 0.4 ./data_word/vocab/vocab.en.yml ./data_word/vocab/vocab.my.yml ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my3 ./data_word/test.en
+...
+...
+[2021-06-06 11:51:55] Best translation 1014 : သူ မ ရဲ့ သက်သေခံ ကတ်ပြား ကိုအ တည်ပြု ပြီး သူ မ ကို လွှတ် လိုက် တယ်
+[2021-06-06 11:51:55] Best translation 1015 : ရဲ များ သည် သူမ ၏ လိုင်စင် သက်တမ်း ရှိ ပါ က ရဲ များကို စစ်ဆေး လျက် ရှိ ကြောင်း သိရှိ ရ ပါ သည် ။
+[2021-06-06 11:51:55] Best translation 1016 : ရက်ကန်း စက် က လည်း ဘာ မှ ငွေ မ ပေး ပါ ဘူး ။ အရာဝတ္ထု တွေ လည်း မ ရှိ ပါ ဘူး ။
+[2021-06-06 11:51:55] Best translation 1017 : အဖွဲ့ ရဲ့ အစိတ်အပိုင်း က တော့ အဲဒီ အဖွဲ့ ရဲ့ အစိတ်အပိုင်း တစ် ခု ဖြစ် ပါ တယ် ။ ဒါပေမဲ့ မ မောင်း တတ် ဘူး ဟု လော့စ်အိန်ဂျယ်လိစ် ့ ရဲ ဌာန မှ ပြောရေးဆိုခွင့်ရှိသူ ဆာ ရာ ဆာ ရာ က ပြော သည် ။
+[2021-06-06 11:51:55] Total time: 318.93648s wall
+
+real	5m21.998s
+user	10m39.354s
+sys	0m2.264s
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./data_word/test.my < ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my3  >> ./ensembling-results/3.s2s-plus-transformer-0.6-0.4.word.enmy.results.txt
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cat ./ensembling-results/3.s2s-plus-transformer-0.6-0.4.word.enmy.results.txt 
+BLEU = 7.09, 45.1/17.6/6.9/2.7 (BP=0.640, ratio=0.691, hyp_len=25070, ref_len=36255)
+
+## System
+## s2s (my-en, word unit for Burmese)
+
+## Script
+
+#!/bin/bash
+
+# Preparation for WAT2021 en-my, my-en share MT task by Ye, LST, NECTEC, Thailand
+## for Word Unit
+## Reference: https://marian-nmt.github.io/examples/mtm2017/complex/
+
+mkdir model.s2s-4.word.my-en;
+
+marian \
+  --type s2s \
+  --train-sets data_word/train.my data_word/train.en \
+  --max-length 100 \
+  --valid-sets data_word/valid.my data_word/valid.en \
+  --vocabs data_word/vocab/vocab.my.yml data_word/vocab/vocab.en.yml \
+  --model model.s2s-4.word.my-en/model.npz \
+  --workspace 500 \
+  --enc-depth 2 --enc-type alternating --enc-cell lstm --enc-cell-depth 2 \
+  --dec-depth 2 --dec-cell lstm --dec-cell-base-depth 2 --dec-cell-high-depth 2 \
+  --tied-embeddings --layer-normalization --skip \
+  --mini-batch-fit \
+  --valid-mini-batch 32 \
+  --valid-metrics cross-entropy perplexity bleu\
+  --valid-freq 5000 --save-freq 5000 --disp-freq 500 \
+  --dropout-rnn 0.3 --dropout-src 0.3 --exponential-smoothing \
+  --early-stopping 10 \
+  --log model.s2s-4.word.my-en/train.log --valid-log model.s2s-4.word.my-en/valid.log \
+  --devices 0 1 --sync-sgd --seed 1111  \
+  --dump-config > model.s2s-4.word.my-en/config.yml
+  
+time marian -c model.s2s-4.word.my-en/config.yml  2>&1 | tee s2s.word.myen.syl.log
+
+## Training Log
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.myen.sh 
+[2021-06-06 12:06:55] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-06 12:06:55] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 8100 with command line:
+[2021-06-06 12:06:55] [marian] marian -c model.s2s-4.word.my-en/config.yml
+[2021-06-06 12:06:55] [config] after: 0e
+[2021-06-06 12:06:55] [config] after-batches: 0
+[2021-06-06 12:06:55] [config] after-epochs: 0
+[2021-06-06 12:06:55] [config] all-caps-every: 0
+[2021-06-06 12:06:55] [config] allow-unk: false
+[2021-06-06 12:06:55] [config] authors: false
+[2021-06-06 12:06:55] [config] beam-size: 12
+[2021-06-06 12:06:55] [config] bert-class-symbol: "[CLS]"
+[2021-06-06 12:06:55] [config] bert-mask-symbol: "[MASK]"
+[2021-06-06 12:06:55] [config] bert-masking-fraction: 0.15
+[2021-06-06 12:06:55] [config] bert-sep-symbol: "[SEP]"
+[2021-06-06 12:06:55] [config] bert-train-type-embeddings: true
+[2021-06-06 12:06:55] [config] bert-type-vocab-size: 2
+[2021-06-06 12:06:55] [config] build-info: ""
+[2021-06-06 12:06:55] [config] cite: false
+[2021-06-06 12:06:55] [config] clip-norm: 1
+[2021-06-06 12:06:55] [config] cost-scaling:
+[2021-06-06 12:06:55] [config]   []
+[2021-06-06 12:06:55] [config] cost-type: ce-sum
+[2021-06-06 12:06:55] [config] cpu-threads: 0
+[2021-06-06 12:06:55] [config] data-weighting: ""
+[2021-06-06 12:06:55] [config] data-weighting-type: sentence
+[2021-06-06 12:06:55] [config] dec-cell: lstm
+[2021-06-06 12:06:55] [config] dec-cell-base-depth: 2
+[2021-06-06 12:06:55] [config] dec-cell-high-depth: 2
+[2021-06-06 12:06:55] [config] dec-depth: 2
+[2021-06-06 12:06:55] [config] devices:
+[2021-06-06 12:06:55] [config]   - 0
+[2021-06-06 12:06:55] [config]   - 1
+[2021-06-06 12:06:55] [config] dim-emb: 512
+[2021-06-06 12:06:55] [config] dim-rnn: 1024
+[2021-06-06 12:06:55] [config] dim-vocabs:
+[2021-06-06 12:06:55] [config]   - 0
+[2021-06-06 12:06:55] [config]   - 0
+[2021-06-06 12:06:55] [config] disp-first: 0
+[2021-06-06 12:06:55] [config] disp-freq: 500
+[2021-06-06 12:06:55] [config] disp-label-counts: true
+[2021-06-06 12:06:55] [config] dropout-rnn: 0.3
+[2021-06-06 12:06:55] [config] dropout-src: 0.3
+[2021-06-06 12:06:55] [config] dropout-trg: 0
+[2021-06-06 12:06:55] [config] dump-config: ""
+[2021-06-06 12:06:55] [config] early-stopping: 10
+[2021-06-06 12:06:55] [config] embedding-fix-src: false
+[2021-06-06 12:06:55] [config] embedding-fix-trg: false
+[2021-06-06 12:06:55] [config] embedding-normalization: false
+[2021-06-06 12:06:55] [config] embedding-vectors:
+[2021-06-06 12:06:55] [config]   []
+[2021-06-06 12:06:55] [config] enc-cell: lstm
+[2021-06-06 12:06:55] [config] enc-cell-depth: 2
+[2021-06-06 12:06:55] [config] enc-depth: 2
+[2021-06-06 12:06:55] [config] enc-type: alternating
+[2021-06-06 12:06:55] [config] english-title-case-every: 0
+[2021-06-06 12:06:55] [config] exponential-smoothing: 0.0001
+[2021-06-06 12:06:55] [config] factor-weight: 1
+[2021-06-06 12:06:55] [config] grad-dropping-momentum: 0
+[2021-06-06 12:06:55] [config] grad-dropping-rate: 0
+[2021-06-06 12:06:55] [config] grad-dropping-warmup: 100
+[2021-06-06 12:06:55] [config] gradient-checkpointing: false
+[2021-06-06 12:06:55] [config] guided-alignment: none
+[2021-06-06 12:06:55] [config] guided-alignment-cost: mse
+[2021-06-06 12:06:55] [config] guided-alignment-weight: 0.1
+[2021-06-06 12:06:55] [config] ignore-model-config: false
+[2021-06-06 12:06:55] [config] input-types:
+[2021-06-06 12:06:55] [config]   []
+[2021-06-06 12:06:55] [config] interpolate-env-vars: false
+[2021-06-06 12:06:55] [config] keep-best: false
+[2021-06-06 12:06:55] [config] label-smoothing: 0
+[2021-06-06 12:06:55] [config] layer-normalization: true
+[2021-06-06 12:06:55] [config] learn-rate: 0.0001
+[2021-06-06 12:06:55] [config] lemma-dim-emb: 0
+[2021-06-06 12:06:55] [config] log: model.s2s-4.word.my-en/train.log
+[2021-06-06 12:06:55] [config] log-level: info
+[2021-06-06 12:06:55] [config] log-time-zone: ""
+[2021-06-06 12:06:55] [config] logical-epoch:
+[2021-06-06 12:06:55] [config]   - 1e
+[2021-06-06 12:06:55] [config]   - 0
+[2021-06-06 12:06:55] [config] lr-decay: 0
+[2021-06-06 12:06:55] [config] lr-decay-freq: 50000
+[2021-06-06 12:06:55] [config] lr-decay-inv-sqrt:
+[2021-06-06 12:06:55] [config]   - 0
+[2021-06-06 12:06:55] [config] lr-decay-repeat-warmup: false
+[2021-06-06 12:06:55] [config] lr-decay-reset-optimizer: false
+[2021-06-06 12:06:55] [config] lr-decay-start:
+[2021-06-06 12:06:55] [config]   - 10
+[2021-06-06 12:06:55] [config]   - 1
+[2021-06-06 12:06:55] [config] lr-decay-strategy: epoch+stalled
+[2021-06-06 12:06:55] [config] lr-report: false
+[2021-06-06 12:06:55] [config] lr-warmup: 0
+[2021-06-06 12:06:55] [config] lr-warmup-at-reload: false
+[2021-06-06 12:06:55] [config] lr-warmup-cycle: false
+[2021-06-06 12:06:55] [config] lr-warmup-start-rate: 0
+[2021-06-06 12:06:55] [config] max-length: 100
+[2021-06-06 12:06:55] [config] max-length-crop: false
+[2021-06-06 12:06:55] [config] max-length-factor: 3
+[2021-06-06 12:06:55] [config] maxi-batch: 100
+[2021-06-06 12:06:55] [config] maxi-batch-sort: trg
+[2021-06-06 12:06:55] [config] mini-batch: 64
+[2021-06-06 12:06:55] [config] mini-batch-fit: true
+[2021-06-06 12:06:55] [config] mini-batch-fit-step: 10
+[2021-06-06 12:06:55] [config] mini-batch-track-lr: false
+[2021-06-06 12:06:55] [config] mini-batch-warmup: 0
+[2021-06-06 12:06:55] [config] mini-batch-words: 0
+[2021-06-06 12:06:55] [config] mini-batch-words-ref: 0
+[2021-06-06 12:06:55] [config] model: model.s2s-4.word.my-en/model.npz
+[2021-06-06 12:06:55] [config] multi-loss-type: sum
+[2021-06-06 12:06:55] [config] multi-node: false
+[2021-06-06 12:06:55] [config] multi-node-overlap: true
+[2021-06-06 12:06:55] [config] n-best: false
+[2021-06-06 12:06:55] [config] no-nccl: false
+[2021-06-06 12:06:55] [config] no-reload: false
+[2021-06-06 12:06:55] [config] no-restore-corpus: false
+[2021-06-06 12:06:55] [config] normalize: 0
+[2021-06-06 12:06:55] [config] normalize-gradient: false
+[2021-06-06 12:06:55] [config] num-devices: 0
+[2021-06-06 12:06:55] [config] optimizer: adam
+[2021-06-06 12:06:55] [config] optimizer-delay: 1
+[2021-06-06 12:06:55] [config] optimizer-params:
+[2021-06-06 12:06:55] [config]   []
+[2021-06-06 12:06:55] [config] output-omit-bias: false
+[2021-06-06 12:06:55] [config] overwrite: false
+[2021-06-06 12:06:55] [config] precision:
+[2021-06-06 12:06:55] [config]   - float32
+[2021-06-06 12:06:55] [config]   - float32
+[2021-06-06 12:06:55] [config]   - float32
+[2021-06-06 12:06:55] [config] pretrained-model: ""
+[2021-06-06 12:06:55] [config] quantize-biases: false
+[2021-06-06 12:06:55] [config] quantize-bits: 0
+[2021-06-06 12:06:55] [config] quantize-log-based: false
+[2021-06-06 12:06:55] [config] quantize-optimization-steps: 0
+[2021-06-06 12:06:55] [config] quiet: false
+[2021-06-06 12:06:55] [config] quiet-translation: false
+[2021-06-06 12:06:55] [config] relative-paths: false
+[2021-06-06 12:06:55] [config] right-left: false
+[2021-06-06 12:06:55] [config] save-freq: 5000
+[2021-06-06 12:06:55] [config] seed: 1111
+[2021-06-06 12:06:55] [config] sentencepiece-alphas:
+[2021-06-06 12:06:55] [config]   []
+[2021-06-06 12:06:55] [config] sentencepiece-max-lines: 2000000
+[2021-06-06 12:06:55] [config] sentencepiece-options: ""
+[2021-06-06 12:06:55] [config] shuffle: data
+[2021-06-06 12:06:55] [config] shuffle-in-ram: false
+[2021-06-06 12:06:55] [config] sigterm: save-and-exit
+[2021-06-06 12:06:55] [config] skip: true
+[2021-06-06 12:06:55] [config] sqlite: ""
+[2021-06-06 12:06:55] [config] sqlite-drop: false
+[2021-06-06 12:06:55] [config] sync-sgd: true
+[2021-06-06 12:06:55] [config] tempdir: /tmp
+[2021-06-06 12:06:55] [config] tied-embeddings: true
+[2021-06-06 12:06:55] [config] tied-embeddings-all: false
+[2021-06-06 12:06:55] [config] tied-embeddings-src: false
+[2021-06-06 12:06:55] [config] train-embedder-rank:
+[2021-06-06 12:06:55] [config]   []
+[2021-06-06 12:06:55] [config] train-sets:
+[2021-06-06 12:06:55] [config]   - data_word/train.my
+[2021-06-06 12:06:55] [config]   - data_word/train.en
+[2021-06-06 12:06:55] [config] transformer-aan-activation: swish
+[2021-06-06 12:06:55] [config] transformer-aan-depth: 2
+[2021-06-06 12:06:55] [config] transformer-aan-nogate: false
+[2021-06-06 12:06:55] [config] transformer-decoder-autoreg: self-attention
+[2021-06-06 12:06:55] [config] transformer-depth-scaling: false
+[2021-06-06 12:06:55] [config] transformer-dim-aan: 2048
+[2021-06-06 12:06:55] [config] transformer-dim-ffn: 2048
+[2021-06-06 12:06:55] [config] transformer-dropout: 0
+[2021-06-06 12:06:55] [config] transformer-dropout-attention: 0
+[2021-06-06 12:06:55] [config] transformer-dropout-ffn: 0
+[2021-06-06 12:06:55] [config] transformer-ffn-activation: swish
+[2021-06-06 12:06:55] [config] transformer-ffn-depth: 2
+[2021-06-06 12:06:55] [config] transformer-guided-alignment-layer: last
+[2021-06-06 12:06:55] [config] transformer-heads: 8
+[2021-06-06 12:06:55] [config] transformer-no-projection: false
+[2021-06-06 12:06:55] [config] transformer-pool: false
+[2021-06-06 12:06:55] [config] transformer-postprocess: dan
+[2021-06-06 12:06:55] [config] transformer-postprocess-emb: d
+[2021-06-06 12:06:55] [config] transformer-postprocess-top: ""
+[2021-06-06 12:06:55] [config] transformer-preprocess: ""
+[2021-06-06 12:06:55] [config] transformer-tied-layers:
+[2021-06-06 12:06:55] [config]   []
+[2021-06-06 12:06:55] [config] transformer-train-position-embeddings: false
+[2021-06-06 12:06:55] [config] tsv: false
+[2021-06-06 12:06:55] [config] tsv-fields: 0
+[2021-06-06 12:06:55] [config] type: s2s
+[2021-06-06 12:06:55] [config] ulr: false
+[2021-06-06 12:06:55] [config] ulr-dim-emb: 0
+[2021-06-06 12:06:55] [config] ulr-dropout: 0
+[2021-06-06 12:06:55] [config] ulr-keys-vectors: ""
+[2021-06-06 12:06:55] [config] ulr-query-vectors: ""
+[2021-06-06 12:06:55] [config] ulr-softmax-temperature: 1
+[2021-06-06 12:06:55] [config] ulr-trainable-transformation: false
+[2021-06-06 12:06:55] [config] unlikelihood-loss: false
+[2021-06-06 12:06:55] [config] valid-freq: 5000
+[2021-06-06 12:06:55] [config] valid-log: model.s2s-4.word.my-en/valid.log
+[2021-06-06 12:06:55] [config] valid-max-length: 1000
+[2021-06-06 12:06:55] [config] valid-metrics:
+[2021-06-06 12:06:55] [config]   - cross-entropy
+[2021-06-06 12:06:55] [config]   - perplexity
+[2021-06-06 12:06:55] [config]   - bleu
+[2021-06-06 12:06:55] [config] valid-mini-batch: 32
+[2021-06-06 12:06:55] [config] valid-reset-stalled: false
+[2021-06-06 12:06:55] [config] valid-script-args:
+[2021-06-06 12:06:55] [config]   []
+[2021-06-06 12:06:55] [config] valid-script-path: ""
+[2021-06-06 12:06:55] [config] valid-sets:
+[2021-06-06 12:06:55] [config]   - data_word/valid.my
+[2021-06-06 12:06:55] [config]   - data_word/valid.en
+[2021-06-06 12:06:55] [config] valid-translation-output: ""
+[2021-06-06 12:06:55] [config] vocabs:
+[2021-06-06 12:06:55] [config]   - data_word/vocab/vocab.my.yml
+[2021-06-06 12:06:55] [config]   - data_word/vocab/vocab.en.yml
+[2021-06-06 12:06:55] [config] word-penalty: 0
+[2021-06-06 12:06:55] [config] word-scores: false
+[2021-06-06 12:06:55] [config] workspace: 500
+[2021-06-06 12:06:55] [config] Model is being created with Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-06 12:06:55] Using synchronous SGD
+[2021-06-06 12:06:55] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.my.yml
+[2021-06-06 12:06:55] [data] Setting vocabulary size for input 0 to 63,471
+[2021-06-06 12:06:55] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.en.yml
+[2021-06-06 12:06:55] [data] Setting vocabulary size for input 1 to 85,602
+[2021-06-06 12:06:55] [comm] Compiled without MPI support. Running as a single process on administrator-HP-Z2-Tower-G4-Workstation
+[2021-06-06 12:06:55] [batching] Collecting statistics for batch fitting with step size 10
+[2021-06-06 12:06:55] [memory] Extending reserved space to 512 MB (device gpu0)
+[2021-06-06 12:06:55] [memory] Extending reserved space to 512 MB (device gpu1)
+[2021-06-06 12:06:55] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-06 12:06:56] [comm] NCCLCommunicator constructed successfully
+[2021-06-06 12:06:56] [training] Using 2 GPUs
+[2021-06-06 12:06:56] [logits] Applying loss function for 1 factor(s)
+[2021-06-06 12:06:56] [memory] Reserving 627 MB, device gpu0
+[2021-06-06 12:06:56] [gpu] 16-bit TensorCores enabled for float32 matrix operations
+[2021-06-06 12:06:56] [memory] Reserving 627 MB, device gpu0
+[2021-06-06 12:07:26] [batching] Done. Typical MB size is 614 target words
+[2021-06-06 12:07:26] [memory] Extending reserved space to 512 MB (device gpu0)
+[2021-06-06 12:07:26] [memory] Extending reserved space to 512 MB (device gpu1)
+[2021-06-06 12:07:26] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-06 12:07:26] [comm] NCCLCommunicator constructed successfully
+[2021-06-06 12:07:26] [training] Using 2 GPUs
+[2021-06-06 12:07:26] Training started
+[2021-06-06 12:07:26] [data] Shuffling data
+[2021-06-06 12:07:26] [data] Done reading 256,102 sentences
+[2021-06-06 12:07:27] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-06 12:07:27] [training] Batches are processed as 1 process(es) x 2 devices/process
+[2021-06-06 12:07:27] [memory] Reserving 627 MB, device gpu1
+[2021-06-06 12:07:27] [memory] Reserving 627 MB, device gpu0
+[2021-06-06 12:07:27] [memory] Reserving 627 MB, device gpu0
+[2021-06-06 12:07:27] [memory] Reserving 627 MB, device gpu1
+[2021-06-06 12:07:27] [memory] Reserving 313 MB, device gpu0
+[2021-06-06 12:07:27] [memory] Reserving 313 MB, device gpu1
+[2021-06-06 12:07:28] [memory] Reserving 627 MB, device gpu0
+[2021-06-06 12:07:28] [memory] Reserving 627 MB, device gpu1
+[2021-06-06 12:17:23] Ep. 1 : Up. 500 : Sen. 12,225 : Cost 7.04633141 * 189,628 after 189,628 : Time 597.52s : 317.36 words/s
+[2021-06-06 12:27:18] Ep. 1 : Up. 1000 : Sen. 24,280 : Cost 5.86051273 * 187,459 after 377,087 : Time 594.68s : 315.23 words/s
+[2021-06-06 12:37:11] Ep. 1 : Up. 1500 : Sen. 36,718 : Cost 5.53504562 * 191,662 after 568,749 : Time 592.91s : 323.26 words/s
+[2021-06-06 12:47:08] Ep. 1 : Up. 2000 : Sen. 48,779 : Cost 5.34173298 * 191,065 after 759,814 : Time 596.86s : 320.12 words/s
+[2021-06-06 12:57:03] Ep. 1 : Up. 2500 : Sen. 61,160 : Cost 5.16729164 * 188,540 after 948,354 : Time 595.37s : 316.68 words/s
+[2021-06-06 13:07:01] Ep. 1 : Up. 3000 : Sen. 73,525 : Cost 5.02580357 * 190,677 after 1,139,031 : Time 597.97s : 318.87 words/s
+[2021-06-06 13:17:03] Ep. 1 : Up. 3500 : Sen. 85,650 : Cost 4.96661329 * 189,674 after 1,328,705 : Time 602.32s : 314.91 words/s
+[2021-06-06 13:27:04] Ep. 1 : Up. 4000 : Sen. 97,949 : Cost 4.86593485 * 190,467 after 1,519,172 : Time 600.50s : 317.18 words/s
+[2021-06-06 13:37:02] Ep. 1 : Up. 4500 : Sen. 110,005 : Cost 4.84617233 * 186,958 after 1,706,130 : Time 598.35s : 312.46 words/s
+[2021-06-06 13:47:01] Ep. 1 : Up. 5000 : Sen. 122,237 : Cost 4.77119780 * 190,507 after 1,896,637 : Time 598.51s : 318.30 words/s
+[2021-06-06 13:47:01] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.npz.orig.npz
+[2021-06-06 13:47:04] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.iter5000.npz
+[2021-06-06 13:47:05] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.npz
+[2021-06-06 13:47:07] Saving Adam parameters to model.s2s-4.word.my-en/model.npz.optimizer.npz
+tcmalloc: large alloc 1073741824 bytes == 0x55649ab36000 @ 
+[2021-06-06 13:47:21] Error: CUDA error 2 'out of memory' - /home/ye/tool/marian/src/tensors/gpu/device.cu:32: cudaMalloc(&data_, size)
+[2021-06-06 13:47:21] Error: Aborted from virtual void marian::gpu::Device::reserve(size_t) in /home/ye/tool/marian/src/tensors/gpu/device.cu:32
+
+[CALL STACK]
+[0x5563d3a0c880]    marian::gpu::Device::  reserve  (unsigned long)    + 0xf80
+[0x5563d333c7df]    marian::TensorAllocator::  allocate  (IntrusivePtr<marian::TensorBase>&,  marian::Shape,  marian::Type) + 0x4ef
+[0x5563d3548b00]    marian::Node::  allocate  ()                       + 0x1e0
+[0x5563d353f2ce]    marian::ExpressionGraph::  forward  (std::__cxx11::list<IntrusivePtr<marian::Chainable<IntrusivePtr<marian::TensorBase>>>,std::allocator<IntrusivePtr<marian::Chainable<IntrusivePtr<marian::TensorBase>>>>>&,  bool) + 0x8e
+[0x5563d3540cae]    marian::ExpressionGraph::  forwardNext  ()         + 0x24e
+[0x5563d3711e64]                                                       + 0x77de64
+[0x5563d3712694]                                                       + 0x77e694
+[0x5563d32e615d]    std::__future_base::_State_baseV2::  _M_do_set  (std::function<std::unique_ptr<std::__future_base::_Result_base,std::__future_base::_Result_base::_Deleter> ()>*,  bool*) + 0x2d
+[0x7f6fce4d1c0f]                                                       + 0x11c0f
+[0x5563d370918a]                                                       + 0x77518a
+[0x5563d32e889a]    std::thread::_State_impl<std::thread::_Invoker<std::tuple<marian::ThreadPool::reserve(unsigned long)::{lambda()#1}>>>::  _M_run  () + 0x13a
+[0x7f6fce3b5d84]                                                       + 0xd6d84
+[0x7f6fce4c9590]                                                       + 0x9590
+[0x7f6fce0a4223]    clone                                              + 0x43
+
+
+real	100m26.304s
+user	160m24.525s
+sys	0m7.270s
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+
+## Update Script and ReTrain
+
+32 ကနေ  --valid-mini-batch 16 \ ပြောင်း ထပ် training လုပ်ခဲ့...
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.myen.sh 
+mkdir: cannot create directory ‘model.s2s-4.word.my-en’: File exists
+[2021-06-06 14:15:43] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-06 14:15:43] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 12585 with command line:
+[2021-06-06 14:15:43] [marian] marian -c model.s2s-4.word.my-en/config.yml
+[2021-06-06 14:15:43] [config] after: 0e
+[2021-06-06 14:15:43] [config] after-batches: 0
+[2021-06-06 14:15:43] [config] after-epochs: 0
+[2021-06-06 14:15:43] [config] all-caps-every: 0
+[2021-06-06 14:15:43] [config] allow-unk: false
+[2021-06-06 14:15:43] [config] authors: false
+[2021-06-06 14:15:43] [config] beam-size: 12
+[2021-06-06 14:15:43] [config] bert-class-symbol: "[CLS]"
+[2021-06-06 14:15:43] [config] bert-mask-symbol: "[MASK]"
+[2021-06-06 14:15:43] [config] bert-masking-fraction: 0.15
+[2021-06-06 14:15:43] [config] bert-sep-symbol: "[SEP]"
+[2021-06-06 14:15:43] [config] bert-train-type-embeddings: true
+[2021-06-06 14:15:43] [config] bert-type-vocab-size: 2
+[2021-06-06 14:15:43] [config] build-info: ""
+[2021-06-06 14:15:43] [config] cite: false
+[2021-06-06 14:15:43] [config] clip-norm: 1
+[2021-06-06 14:15:43] [config] cost-scaling:
+[2021-06-06 14:15:43] [config]   []
+[2021-06-06 14:15:43] [config] cost-type: ce-sum
+[2021-06-06 14:15:43] [config] cpu-threads: 0
+[2021-06-06 14:15:43] [config] data-weighting: ""
+[2021-06-06 14:15:43] [config] data-weighting-type: sentence
+[2021-06-06 14:15:43] [config] dec-cell: lstm
+[2021-06-06 14:15:43] [config] dec-cell-base-depth: 2
+[2021-06-06 14:15:43] [config] dec-cell-high-depth: 2
+[2021-06-06 14:15:43] [config] dec-depth: 2
+[2021-06-06 14:15:43] [config] devices:
+[2021-06-06 14:15:43] [config]   - 0
+[2021-06-06 14:15:43] [config]   - 1
+[2021-06-06 14:15:43] [config] dim-emb: 512
+[2021-06-06 14:15:43] [config] dim-rnn: 1024
+[2021-06-06 14:15:43] [config] dim-vocabs:
+[2021-06-06 14:15:43] [config]   - 63471
+[2021-06-06 14:15:43] [config]   - 85602
+[2021-06-06 14:15:43] [config] disp-first: 0
+[2021-06-06 14:15:43] [config] disp-freq: 500
+[2021-06-06 14:15:43] [config] disp-label-counts: true
+[2021-06-06 14:15:43] [config] dropout-rnn: 0.3
+[2021-06-06 14:15:43] [config] dropout-src: 0.3
+[2021-06-06 14:15:43] [config] dropout-trg: 0
+[2021-06-06 14:15:43] [config] dump-config: ""
+[2021-06-06 14:15:43] [config] early-stopping: 10
+[2021-06-06 14:15:43] [config] embedding-fix-src: false
+[2021-06-06 14:15:43] [config] embedding-fix-trg: false
+[2021-06-06 14:15:43] [config] embedding-normalization: false
+[2021-06-06 14:15:43] [config] embedding-vectors:
+[2021-06-06 14:15:43] [config]   []
+[2021-06-06 14:15:43] [config] enc-cell: lstm
+[2021-06-06 14:15:43] [config] enc-cell-depth: 2
+[2021-06-06 14:15:43] [config] enc-depth: 2
+[2021-06-06 14:15:43] [config] enc-type: alternating
+[2021-06-06 14:15:43] [config] english-title-case-every: 0
+[2021-06-06 14:15:43] [config] exponential-smoothing: 0.0001
+[2021-06-06 14:15:43] [config] factor-weight: 1
+[2021-06-06 14:15:43] [config] grad-dropping-momentum: 0
+[2021-06-06 14:15:43] [config] grad-dropping-rate: 0
+[2021-06-06 14:15:43] [config] grad-dropping-warmup: 100
+[2021-06-06 14:15:43] [config] gradient-checkpointing: false
+[2021-06-06 14:15:43] [config] guided-alignment: none
+[2021-06-06 14:15:43] [config] guided-alignment-cost: mse
+[2021-06-06 14:15:43] [config] guided-alignment-weight: 0.1
+[2021-06-06 14:15:43] [config] ignore-model-config: false
+[2021-06-06 14:15:43] [config] input-types:
+[2021-06-06 14:15:43] [config]   []
+[2021-06-06 14:15:43] [config] interpolate-env-vars: false
+[2021-06-06 14:15:43] [config] keep-best: false
+[2021-06-06 14:15:43] [config] label-smoothing: 0
+[2021-06-06 14:15:43] [config] layer-normalization: true
+[2021-06-06 14:15:43] [config] learn-rate: 0.0001
+[2021-06-06 14:15:43] [config] lemma-dim-emb: 0
+[2021-06-06 14:15:43] [config] log: model.s2s-4.word.my-en/train.log
+[2021-06-06 14:15:43] [config] log-level: info
+[2021-06-06 14:15:43] [config] log-time-zone: ""
+[2021-06-06 14:15:43] [config] logical-epoch:
+[2021-06-06 14:15:43] [config]   - 1e
+[2021-06-06 14:15:43] [config]   - 0
+[2021-06-06 14:15:43] [config] lr-decay: 0
+[2021-06-06 14:15:43] [config] lr-decay-freq: 50000
+[2021-06-06 14:15:43] [config] lr-decay-inv-sqrt:
+[2021-06-06 14:15:43] [config]   - 0
+[2021-06-06 14:15:43] [config] lr-decay-repeat-warmup: false
+[2021-06-06 14:15:43] [config] lr-decay-reset-optimizer: false
+[2021-06-06 14:15:43] [config] lr-decay-start:
+[2021-06-06 14:15:43] [config]   - 10
+[2021-06-06 14:15:43] [config]   - 1
+[2021-06-06 14:15:43] [config] lr-decay-strategy: epoch+stalled
+[2021-06-06 14:15:43] [config] lr-report: false
+[2021-06-06 14:15:43] [config] lr-warmup: 0
+[2021-06-06 14:15:43] [config] lr-warmup-at-reload: false
+[2021-06-06 14:15:43] [config] lr-warmup-cycle: false
+[2021-06-06 14:15:43] [config] lr-warmup-start-rate: 0
+[2021-06-06 14:15:43] [config] max-length: 100
+[2021-06-06 14:15:43] [config] max-length-crop: false
+[2021-06-06 14:15:43] [config] max-length-factor: 3
+[2021-06-06 14:15:43] [config] maxi-batch: 100
+[2021-06-06 14:15:43] [config] maxi-batch-sort: trg
+[2021-06-06 14:15:43] [config] mini-batch: 64
+[2021-06-06 14:15:43] [config] mini-batch-fit: true
+[2021-06-06 14:15:43] [config] mini-batch-fit-step: 10
+[2021-06-06 14:15:43] [config] mini-batch-track-lr: false
+[2021-06-06 14:15:43] [config] mini-batch-warmup: 0
+[2021-06-06 14:15:43] [config] mini-batch-words: 0
+[2021-06-06 14:15:43] [config] mini-batch-words-ref: 0
+[2021-06-06 14:15:43] [config] model: model.s2s-4.word.my-en/model.npz
+[2021-06-06 14:15:43] [config] multi-loss-type: sum
+[2021-06-06 14:15:43] [config] multi-node: false
+[2021-06-06 14:15:43] [config] multi-node-overlap: true
+[2021-06-06 14:15:43] [config] n-best: false
+[2021-06-06 14:15:43] [config] no-nccl: false
+[2021-06-06 14:15:43] [config] no-reload: false
+[2021-06-06 14:15:43] [config] no-restore-corpus: false
+[2021-06-06 14:15:43] [config] normalize: 0
+[2021-06-06 14:15:43] [config] normalize-gradient: false
+[2021-06-06 14:15:43] [config] num-devices: 0
+[2021-06-06 14:15:43] [config] optimizer: adam
+[2021-06-06 14:15:43] [config] optimizer-delay: 1
+[2021-06-06 14:15:43] [config] optimizer-params:
+[2021-06-06 14:15:43] [config]   []
+[2021-06-06 14:15:43] [config] output-omit-bias: false
+[2021-06-06 14:15:43] [config] overwrite: false
+[2021-06-06 14:15:43] [config] precision:
+[2021-06-06 14:15:43] [config]   - float32
+[2021-06-06 14:15:43] [config]   - float32
+[2021-06-06 14:15:43] [config]   - float32
+[2021-06-06 14:15:43] [config] pretrained-model: ""
+[2021-06-06 14:15:43] [config] quantize-biases: false
+[2021-06-06 14:15:43] [config] quantize-bits: 0
+[2021-06-06 14:15:43] [config] quantize-log-based: false
+[2021-06-06 14:15:43] [config] quantize-optimization-steps: 0
+[2021-06-06 14:15:43] [config] quiet: false
+[2021-06-06 14:15:43] [config] quiet-translation: false
+[2021-06-06 14:15:43] [config] relative-paths: false
+[2021-06-06 14:15:43] [config] right-left: false
+[2021-06-06 14:15:43] [config] save-freq: 5000
+[2021-06-06 14:15:43] [config] seed: 1111
+[2021-06-06 14:15:43] [config] sentencepiece-alphas:
+[2021-06-06 14:15:43] [config]   []
+[2021-06-06 14:15:43] [config] sentencepiece-max-lines: 2000000
+[2021-06-06 14:15:43] [config] sentencepiece-options: ""
+[2021-06-06 14:15:43] [config] shuffle: data
+[2021-06-06 14:15:43] [config] shuffle-in-ram: false
+[2021-06-06 14:15:43] [config] sigterm: save-and-exit
+[2021-06-06 14:15:43] [config] skip: true
+[2021-06-06 14:15:43] [config] sqlite: ""
+[2021-06-06 14:15:43] [config] sqlite-drop: false
+[2021-06-06 14:15:43] [config] sync-sgd: true
+[2021-06-06 14:15:43] [config] tempdir: /tmp
+[2021-06-06 14:15:43] [config] tied-embeddings: true
+[2021-06-06 14:15:43] [config] tied-embeddings-all: false
+[2021-06-06 14:15:43] [config] tied-embeddings-src: false
+[2021-06-06 14:15:43] [config] train-embedder-rank:
+[2021-06-06 14:15:43] [config]   []
+[2021-06-06 14:15:43] [config] train-sets:
+[2021-06-06 14:15:43] [config]   - data_word/train.my
+[2021-06-06 14:15:43] [config]   - data_word/train.en
+[2021-06-06 14:15:43] [config] transformer-aan-activation: swish
+[2021-06-06 14:15:43] [config] transformer-aan-depth: 2
+[2021-06-06 14:15:43] [config] transformer-aan-nogate: false
+[2021-06-06 14:15:43] [config] transformer-decoder-autoreg: self-attention
+[2021-06-06 14:15:43] [config] transformer-depth-scaling: false
+[2021-06-06 14:15:43] [config] transformer-dim-aan: 2048
+[2021-06-06 14:15:43] [config] transformer-dim-ffn: 2048
+[2021-06-06 14:15:43] [config] transformer-dropout: 0
+[2021-06-06 14:15:43] [config] transformer-dropout-attention: 0
+[2021-06-06 14:15:43] [config] transformer-dropout-ffn: 0
+[2021-06-06 14:15:43] [config] transformer-ffn-activation: swish
+[2021-06-06 14:15:43] [config] transformer-ffn-depth: 2
+[2021-06-06 14:15:43] [config] transformer-guided-alignment-layer: last
+[2021-06-06 14:15:43] [config] transformer-heads: 8
+[2021-06-06 14:15:43] [config] transformer-no-projection: false
+[2021-06-06 14:15:43] [config] transformer-pool: false
+[2021-06-06 14:15:43] [config] transformer-postprocess: dan
+[2021-06-06 14:15:43] [config] transformer-postprocess-emb: d
+[2021-06-06 14:15:43] [config] transformer-postprocess-top: ""
+[2021-06-06 14:15:43] [config] transformer-preprocess: ""
+[2021-06-06 14:15:43] [config] transformer-tied-layers:
+[2021-06-06 14:15:43] [config]   []
+[2021-06-06 14:15:43] [config] transformer-train-position-embeddings: false
+[2021-06-06 14:15:43] [config] tsv: false
+[2021-06-06 14:15:43] [config] tsv-fields: 0
+[2021-06-06 14:15:43] [config] type: s2s
+[2021-06-06 14:15:43] [config] ulr: false
+[2021-06-06 14:15:43] [config] ulr-dim-emb: 0
+[2021-06-06 14:15:43] [config] ulr-dropout: 0
+[2021-06-06 14:15:43] [config] ulr-keys-vectors: ""
+[2021-06-06 14:15:43] [config] ulr-query-vectors: ""
+[2021-06-06 14:15:43] [config] ulr-softmax-temperature: 1
+[2021-06-06 14:15:43] [config] ulr-trainable-transformation: false
+[2021-06-06 14:15:43] [config] unlikelihood-loss: false
+[2021-06-06 14:15:43] [config] valid-freq: 5000
+[2021-06-06 14:15:43] [config] valid-log: model.s2s-4.word.my-en/valid.log
+[2021-06-06 14:15:43] [config] valid-max-length: 1000
+[2021-06-06 14:15:43] [config] valid-metrics:
+[2021-06-06 14:15:43] [config]   - cross-entropy
+[2021-06-06 14:15:43] [config]   - perplexity
+[2021-06-06 14:15:43] [config]   - bleu
+[2021-06-06 14:15:43] [config] valid-mini-batch: 16
+[2021-06-06 14:15:43] [config] valid-reset-stalled: false
+[2021-06-06 14:15:43] [config] valid-script-args:
+[2021-06-06 14:15:43] [config]   []
+[2021-06-06 14:15:43] [config] valid-script-path: ""
+[2021-06-06 14:15:43] [config] valid-sets:
+[2021-06-06 14:15:43] [config]   - data_word/valid.my
+[2021-06-06 14:15:43] [config]   - data_word/valid.en
+[2021-06-06 14:15:43] [config] valid-translation-output: ""
+[2021-06-06 14:15:43] [config] version: v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-06 14:15:43] [config] vocabs:
+[2021-06-06 14:15:43] [config]   - data_word/vocab/vocab.my.yml
+[2021-06-06 14:15:43] [config]   - data_word/vocab/vocab.en.yml
+[2021-06-06 14:15:43] [config] word-penalty: 0
+[2021-06-06 14:15:43] [config] word-scores: false
+[2021-06-06 14:15:43] [config] workspace: 500
+[2021-06-06 14:15:43] [config] Loaded model has been created with Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-06 14:15:43] Using synchronous SGD
+[2021-06-06 14:15:43] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.my.yml
+[2021-06-06 14:15:43] [data] Setting vocabulary size for input 0 to 63,471
+[2021-06-06 14:15:43] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.en.yml
+[2021-06-06 14:15:43] [data] Setting vocabulary size for input 1 to 85,602
+[2021-06-06 14:15:43] [comm] Compiled without MPI support. Running as a single process on administrator-HP-Z2-Tower-G4-Workstation
+[2021-06-06 14:15:43] [batching] Collecting statistics for batch fitting with step size 10
+[2021-06-06 14:15:43] [memory] Extending reserved space to 512 MB (device gpu0)
+[2021-06-06 14:15:44] [memory] Extending reserved space to 512 MB (device gpu1)
+[2021-06-06 14:15:44] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-06 14:15:44] [comm] NCCLCommunicator constructed successfully
+[2021-06-06 14:15:44] [training] Using 2 GPUs
+[2021-06-06 14:15:44] [logits] Applying loss function for 1 factor(s)
+[2021-06-06 14:15:44] [memory] Reserving 627 MB, device gpu0
+[2021-06-06 14:15:44] [gpu] 16-bit TensorCores enabled for float32 matrix operations
+[2021-06-06 14:15:44] [memory] Reserving 627 MB, device gpu0
+[2021-06-06 14:16:13] [batching] Done. Typical MB size is 614 target words
+[2021-06-06 14:16:13] [memory] Extending reserved space to 512 MB (device gpu0)
+[2021-06-06 14:16:13] [memory] Extending reserved space to 512 MB (device gpu1)
+[2021-06-06 14:16:13] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-06 14:16:14] [comm] NCCLCommunicator constructed successfully
+[2021-06-06 14:16:14] [training] Using 2 GPUs
+[2021-06-06 14:16:14] Loading model from model.s2s-4.word.my-en/model.npz.orig.npz
+[2021-06-06 14:16:15] Loading model from model.s2s-4.word.my-en/model.npz.orig.npz
+[2021-06-06 14:16:15] Loading Adam parameters from model.s2s-4.word.my-en/model.npz.optimizer.npz
+[2021-06-06 14:16:17] [memory] Reserving 627 MB, device gpu0
+[2021-06-06 14:16:17] [memory] Reserving 627 MB, device gpu1
+[2021-06-06 14:16:17] [training] Model reloaded from model.s2s-4.word.my-en/model.npz
+[2021-06-06 14:16:17] [data] Restoring the corpus state to epoch 1, batch 5000
+[2021-06-06 14:16:17] [data] Shuffling data
+[2021-06-06 14:16:17] [data] Done reading 256,102 sentences
+[2021-06-06 14:16:18] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-06 14:16:19] Training started
+[2021-06-06 14:16:19] [training] Batches are processed as 1 process(es) x 2 devices/process
+[2021-06-06 14:16:19] [memory] Reserving 627 MB, device gpu1
+[2021-06-06 14:16:19] [memory] Reserving 627 MB, device gpu0
+[2021-06-06 14:16:20] [memory] Reserving 627 MB, device gpu0
+[2021-06-06 14:16:20] [memory] Reserving 627 MB, device gpu1
+[2021-06-06 14:16:20] Loading model from model.s2s-4.word.my-en/model.npz
+[2021-06-06 14:16:21] [memory] Reserving 627 MB, device cpu0
+[2021-06-06 14:16:21] [memory] Reserving 313 MB, device gpu0
+[2021-06-06 14:16:21] [memory] Reserving 313 MB, device gpu1
+[2021-06-06 14:26:27] Ep. 1 : Up. 5500 : Sen. 134,474 : Cost 4.69360828 * 190,647 after 2,087,284 : Time 613.92s : 310.54 words/s
+[2021-06-06 14:36:26] Ep. 1 : Up. 6000 : Sen. 146,691 : Cost 4.66303968 * 187,938 after 2,275,222 : Time 598.77s : 313.88 words/s
+[2021-06-06 14:46:30] Ep. 1 : Up. 6500 : Sen. 158,745 : Cost 4.64712191 * 189,288 after 2,464,510 : Time 604.18s : 313.30 words/s
+[2021-06-06 14:56:34] Ep. 1 : Up. 7000 : Sen. 170,689 : Cost 4.61370325 * 188,227 after 2,652,737 : Time 603.56s : 311.86 words/s
+[2021-06-06 15:06:34] Ep. 1 : Up. 7500 : Sen. 182,940 : Cost 4.50653458 * 192,263 after 2,845,000 : Time 599.72s : 320.59 words/s
+[2021-06-06 15:16:22] Ep. 1 : Up. 8000 : Sen. 195,141 : Cost 4.45115328 * 185,803 after 3,030,803 : Time 588.85s : 315.53 words/s
+[2021-06-06 15:26:21] Ep. 1 : Up. 8500 : Sen. 207,194 : Cost 4.40856791 * 190,495 after 3,221,298 : Time 599.06s : 317.99 words/s
+[2021-06-06 15:36:16] Ep. 1 : Up. 9000 : Sen. 219,507 : Cost 4.38647747 * 189,736 after 3,411,034 : Time 594.02s : 319.41 words/s
+[2021-06-06 15:46:07] Ep. 1 : Up. 9500 : Sen. 231,550 : Cost 4.35143566 * 186,334 after 3,597,368 : Time 591.65s : 314.94 words/s
+[2021-06-06 15:56:02] Ep. 1 : Up. 10000 : Sen. 243,820 : Cost 4.29847097 * 189,370 after 3,786,738 : Time 594.42s : 318.58 words/s
+[2021-06-06 15:56:02] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.npz.orig.npz
+[2021-06-06 15:56:04] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.iter10000.npz
+[2021-06-06 15:56:05] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.npz
+[2021-06-06 15:56:08] Saving Adam parameters to model.s2s-4.word.my-en/model.npz.optimizer.npz
+[2021-06-06 15:56:36] [valid] Ep. 1 : Up. 10000 : cross-entropy : 164.058 : new best
+[2021-06-06 15:56:59] [valid] Ep. 1 : Up. 10000 : perplexity : 328.132 : new best
+[2021-06-06 15:56:59] Translating validation set...
+[2021-06-06 15:57:08] [valid] [valid] First sentence's tokens as scored:
+[2021-06-06 15:57:08] [valid] DefaultVocab keeps original segments for scoring
+[2021-06-06 15:57:08] [valid] [valid]   Hyp: The president of the republic of the union of Myanmar is a member of the republic of the union of Myanmar .
+[2021-06-06 15:57:08] [valid] [valid]   Ref: The Ministry of the Interior is traditionally one of the most important positions in the cabinet , with that of Finances ; the Minister of the Interior is in charge , notably , of law enforcement and relationships with local governments .
+[2021-06-06 15:57:22] Best translation 0 : He said that he would be able to go to the end of the last year.
+[2021-06-06 15:57:22] Best translation 1 : According to the United States and the United States said that he had been killed in the United States and said that he did not have been killed in the United States.
+[2021-06-06 15:57:26] Best translation 2 : He said that the United States has said that it was the first time of the United States and said that he had been killed in the United States.
+[2021-06-06 15:57:26] Best translation 3 : &amp; quot ; We &amp; apos ; d like to have a long time , &amp; quot ; he said .
+[2021-06-06 15:57:32] Best translation 4 : He said that the government has been able to take part in the country .
+[2021-06-06 15:57:32] Best translation 5 : He said , &amp; quot ; she said .
+[2021-06-06 15:57:32] Best translation 10 : It was found that the United States of the United States and the United States has been killed in the United States of the United States.
+[2021-06-06 15:57:32] Best translation 20 : At the meeting , the vice president of the republic of the union of Myanmar &amp; apos ; s republic of the republic of the union of Myanmar &amp; apos ; s republic of the republic of the union of Myanmar .
+[2021-06-06 15:57:32] Best translation 40 : He said that he was not to be able to be able to be able to be able to be able to help her .
+[2021-06-06 15:57:32] Best translation 80 : He &amp; apos ; s need to be able to take part in the peace process .
+[2021-06-06 15:58:01] Best translation 160 : According to the United States , the vice president of the republic of the republic of the union of the union of the union of Myanmar , the State Counsellor met with the ministry of Myanmar .
+[2021-06-06 15:58:26] Best translation 320 : For example , there are many people in our country &amp; apos ; s peace process , &amp; quot ; he said .
+[2021-06-06 15:59:51] Best translation 640 : According to the United States , the vice president of the republic of the republic of the union of Myanmar &amp; apos ; s republic of the republic of the union of Myanmar .
+[2021-06-06 16:00:40] Total translation time: 221.02156s
+[2021-06-06 16:00:40] [valid] Ep. 1 : Up. 10000 : bleu : 1.27414 : new best
+...
+...
+...
+[2021-06-06 19:24:11] Saving Adam parameters to model.s2s-4.word.my-en/model.npz.optimizer.npz
+[2021-06-06 19:24:38] [valid] Ep. 2 : Up. 20000 : cross-entropy : 148.801 : new best
+[2021-06-06 19:25:01] [valid] Ep. 2 : Up. 20000 : perplexity : 191.455 : new best
+[2021-06-06 19:25:01] Translating validation set...
+[2021-06-06 19:25:13] Best translation 0 : &quot;I don &amp; apos ; t think he &amp; apos ; s sorry for his wife , but he made a nice trip to the world .
+[2021-06-06 19:25:13] Best translation 1 : According to the United States President of the United States in the United States of the United States and the United States of the United States and the United States of the United States and the United States of the United States and the United States of the United States.
+[2021-06-06 19:25:16] Best translation 2 : A spokesperson said that there was no one of the plane to go out from the plane to go out of the incident.
+[2021-06-06 19:25:16] Best translation 3 : &amp; quot ; We &amp; apos ; ll have to be responsible for these people , &amp; quot ; he said .
+[2021-06-06 19:25:21] Best translation 4 : The head of the United States has said to be a member of the United States.
+[2021-06-06 19:25:21] Best translation 5 : He said that they didn &amp; apos ; t know his death .
+[2021-06-06 19:25:21] Best translation 10 : Professor challenger had a few minutes in the next year.
+[2021-06-06 19:25:21] Best translation 20 : According to the United States President Barack Obama has been used to the United States and the United States to the United States and the United States.
+[2021-06-06 19:25:21] Best translation 40 : She was going to see her last night , and the two friends had to see her .
+[2021-06-06 19:25:21] Best translation 80 : If the members of the Pyithu Hluttaw may be necessary , all the members of the people &amp; apos ; s councils at different levels are needed .
+[2021-06-06 19:25:40] Best translation 160 : The vice president left the road to be used as a result of the hospital .
+[2021-06-06 19:25:57] Best translation 320 : &quot;We are trying to be the most important thing for some of the people in the world and we are trying to have the best way to be able to have a large number of water .
+[2021-06-06 19:26:53] Best translation 640 : The United States has been arrested by the United States at 5 : 30 p.m.
+[2021-06-06 19:27:24] Total translation time: 143.84802s
+[2021-06-06 19:27:24] [valid] Ep. 2 : Up. 20000 : bleu : 3.20727 : new best
+...
+...
+...
+[2021-06-06 21:09:09] Best translation 160 : The second half of the second team left the road that the road was used as the road that had to be used as follows .
+[2021-06-06 21:09:25] Best translation 320 : According to the time when we are in the front of the people , we &amp; apos ; re talking about a large scale of water , water , water and water .
+[2021-06-06 21:10:18] Best translation 640 : The ship was arrested by a state of emergency at 7 : 30 a.m.
+[2021-06-06 21:10:44] Total translation time: 130.93624s
+[2021-06-06 21:10:44] [valid] Ep. 3 : Up. 25000 : bleu : 4.22607 : new best
+...
+...
+...
+[2021-06-06 22:53:13] Best translation 640 : The New York Times received a state of emergency landing at 3 : 00 p.m.
+[2021-06-06 22:53:40] Total translation time: 124.43669s
+[2021-06-06 22:53:40] [valid] Ep. 3 : Up. 30000 : bleu : 5.27196 : new best
+...
+...
+...
+[2021-06-07 05:39:53] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.npz
+[2021-06-07 05:39:55] Saving Adam parameters to model.s2s-4.word.my-en/model.npz.optimizer.npz
+[2021-06-07 05:40:22] [valid] Ep. 5 : Up. 50000 : cross-entropy : 123.951 : new best
+[2021-06-07 05:40:45] [valid] Ep. 5 : Up. 50000 : perplexity : 79.6085 : new best
+[2021-06-07 05:40:45] Translating validation set...
+[2021-06-07 05:40:55] Best translation 0 : &quot;We don&apos;t feel sorry for his death but he left a heritage site where he has left the religious and religious faiths
+[2021-06-07 05:40:55] Best translation 1 : The further militants also reported that there was a large number of militants after being shot by the United States President of Pakistan in northern Pakistan on the northern part of Pakistan in northern India.
+[2021-06-07 05:40:58] Best translation 2 : &quot;The man came to fire from the plane that the man was not required by the crash.
+[2021-06-07 05:40:58] Best translation 3 : &quot;We must have the ability to replace these people and to be able to be able to be able to replace these people and to be able to be able to be able to be able to be able to replace them and have their ability to be able to be able to be replaced by a Western news agency.
+[2021-06-07 05:41:01] Best translation 4 : Ryan said the third member of the third highest member of the United States.
+[2021-06-07 05:41:01] Best translation 5 : The Pakistani government said they did not know about his death.
+[2021-06-07 05:41:01] Best translation 10 : Lord Roxton had only one goal in the early year.
+[2021-06-07 05:41:01] Best translation 20 : The research center based in Washington was carried out by the MNDAA and collected data from the ocean and the world .
+[2021-06-07 05:41:01] Best translation 40 : She looked at her hair and tried to come and help her to help her .
+[2021-06-07 05:41:01] Best translation 80 : If there is less than 100 members of the vote , a party needs to support at least some of the eligible voters .
+[2021-06-07 05:41:14] Best translation 160 : The second team closed the road that had been used as long as a long street which had been used as a long street from the United States.
+[2021-06-07 05:41:27] Best translation 320 : When it comes along with the surface , our model is showing us that all kinds of things that are the main source of life for life .
+[2021-06-07 05:42:08] Best translation 640 : The coast of the coast received a state of emergency landing at 3 : 00 p.m.
+[2021-06-07 05:42:31] Total translation time: 105.74992s
+[2021-06-07 05:42:31] [valid] Ep. 5 : Up. 50000 : bleu : 7.75036 : new best
+...
+...
+...
+[2021-06-07 12:31:18] Saving Adam parameters to model.s2s-4.word.my-en/model.npz.optimizer.npz
+[2021-06-07 12:31:45] [valid] Ep. 7 : Up. 70000 : cross-entropy : 119.47 : new best
+[2021-06-07 12:32:09] [valid] Ep. 7 : Up. 70000 : perplexity : 67.9563 : new best
+[2021-06-07 12:32:09] Translating validation set...
+[2021-06-07 12:32:17] Best translation 0 : &quot;We don&apos;t feel sorry for his death but he left a heritage that allows both racial and religious elites
+[2021-06-07 12:32:17] Best translation 1 : The further militants also reported that there was too much militants after being shot by the United States Senate in the northern part of Pakistan.
+[2021-06-07 12:32:19] Best translation 2 : A Pakistani intelligence officer said the rocket broke out to fire from the plane that would not have to be maintained .
+[2021-06-07 12:32:19] Best translation 3 : &quot;We have the ability to replace these people and have the ability to be replaced by a western intelligence officer said.
+[2021-06-07 12:32:22] Best translation 4 : Los Angeles has said the third highest member of the Third World Wide Star Count said.
+[2021-06-07 12:32:22] Best translation 5 : Pakistani government said they did not know about his death.
+[2021-06-07 12:32:22] Best translation 10 : Lord Roxton had only one goal early in the first half.
+[2021-06-07 12:32:22] Best translation 20 : The research center based in Washington was carried out by the MNDAA and collected data from the ocean and the United States.
+[2021-06-07 12:32:22] Best translation 40 : She tried to see her hair , and two men tried to come and help her .
+[2021-06-07 12:32:22] Best translation 80 : If there is less than 100 eligible voters , a party needs to support at least 60 % of voters .
+[2021-06-07 12:32:36] Best translation 160 : The second team closed the road that had been used as a long street in the Indian Pacific Ocean.
+[2021-06-07 12:32:47] Best translation 320 : The model is pointing to our model that all the key things are based on the biological species of life that are the main source of life that are key to life imprisonment.
+[2021-06-07 12:33:24] Best translation 640 : The coast of the coast received a state of emergency landing at 3 p.m.
+[2021-06-07 12:33:44] Total translation time: 95.52094s
+[2021-06-07 12:33:44] [valid] Ep. 7 : Up. 70000 : bleu : 8.17903 : stalled 1 times (last best: 8.25823)
+...
+...
+...
+[2021-06-07 15:55:53] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.npz.orig.npz
+[2021-06-07 15:55:55] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.iter80000.npz
+[2021-06-07 15:55:57] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.npz
+[2021-06-07 15:55:59] Saving Adam parameters to model.s2s-4.word.my-en/model.npz.optimizer.npz
+[2021-06-07 15:56:27] [valid] Ep. 8 : Up. 80000 : cross-entropy : 118.81 : new best
+[2021-06-07 15:56:50] [valid] Ep. 8 : Up. 80000 : perplexity : 66.3913 : new best
+[2021-06-07 15:56:50] Translating validation set...
+[2021-06-07 15:56:59] Best translation 0 : &quot;We don&apos;t feel sorry for his death but he left a heritage site where racial and religious faiths have been evacuated.
+[2021-06-07 15:56:59] Best translation 1 : The further militants also reported that there was too much militants after being shot by a United States missile that is now affected by the United States of Pakistan.
+[2021-06-07 15:57:01] Best translation 2 : A Pakistani intelligence officer said the rocket broke out to fire out of the crash.
+[2021-06-07 15:57:01] Best translation 3 : &quot;We must have the ability to replace these people and have the ability to be replaced by a western intelligence officer said.
+[2021-06-07 15:57:04] Best translation 4 : Al Gore spoke about the third highest member of the Third World Cup.
+[2021-06-07 15:57:04] Best translation 5 : Pakistani government said they did not know about his death.
+[2021-06-07 15:57:04] Best translation 10 : Lord Roxton had only one goal early in the first half.
+[2021-06-07 15:57:04] Best translation 20 : The research center based in Washington was carried out by the MNDAA in Washington and collected data from the ocean and World Cup.
+[2021-06-07 15:57:04] Best translation 40 : She said that she shot her hair , and two men tried to come and help her .
+[2021-06-07 15:57:04] Best translation 80 : If there is less than 100 eligible voters , one candidate needs at least 60 % of eligible voters .
+[2021-06-07 15:57:17] Best translation 160 : The second team closed the road that had been used as long as India Pacific Ocean on India.
+[2021-06-07 15:57:26] Best translation 320 : The model comes to our model that all the key things are based on the biological species of living beings - one of the main things that are key to living beings - one of the most important things for living beings ;
+[2021-06-07 15:58:04] Best translation 640 : The coast of the coast received a state of emergency and received the state of emergency at 3 p.m.
+[2021-06-07 15:58:23] Total translation time: 93.14154s
+[2021-06-07 15:58:23] [valid] Ep. 8 : Up. 80000 : bleu : 8.61703 : new best
+...
+...
+...
+[2021-06-07 17:38:51] Saving Adam parameters to model.s2s-4.word.my-en/model.npz.optimizer.npz
+[2021-06-07 17:39:19] [valid] Ep. 9 : Up. 85000 : cross-entropy : 118.359 : new best
+[2021-06-07 17:39:42] [valid] Ep. 9 : Up. 85000 : perplexity : 65.3411 : new best
+[2021-06-07 17:39:42] Translating validation set...
+[2021-06-07 17:39:51] Best translation 0 : &quot;If we feel sorry for his death , he left a heritage site where multi-national and religious faiths have been evacuated.
+[2021-06-07 17:39:51] Best translation 1 : The further militants also reported that there was too much militants in the United States of Pakistan after being shot by a United States missile that has caused him to control over the northern part of Pakistan.
+[2021-06-07 17:39:53] Best translation 2 : A Pakistani intelligence official said the rocket broke out to fire out of the crash.
+[2021-06-07 17:39:53] Best translation 3 : &quot;We have the ability to replace these people and have the ability to be replaced by a western intelligence officer said.
+[2021-06-07 17:39:55] Best translation 4 : Al Gore spoke about the third highest member of the Third World Cup.
+[2021-06-07 17:39:55] Best translation 5 : Pakistani government said they did not know about his death.
+[2021-06-07 17:39:55] Best translation 10 : Lord Roxton had only one goal early in the first half.
+[2021-06-07 17:39:56] Best translation 20 : The research center based in Washington was conducted by the MNDAA in Washington and collected data from the ocean and World Cup.
+[2021-06-07 17:39:56] Best translation 40 : She said that she shot her hair , and two men tried to come and help her .
+[2021-06-07 17:39:56] Best translation 80 : If there is less than 50 voters , one candidate needs at least 60 % of eligible voters .
+[2021-06-07 17:40:08] Best translation 160 : The second Group closed the road that was used as a long street in the Indian Pacific Ocean.
+[2021-06-07 17:40:17] Best translation 320 : &quot;Our model comes to our model which is based on the biodiversity of life that is essential for living beings - one of the main things that are key for living beings - one of the most important things for living beings :
+[2021-06-07 17:40:54] Best translation 640 : The coast of the coast received a state of emergency and received the state of emergency at 3 p.m.
+[2021-06-07 17:41:13] Total translation time: 91.32149s
+[2021-06-07 17:41:13] [valid] Ep. 9 : Up. 85000 : bleu : 8.78818 : new best
+...
+...
+...
+[2021-06-07 21:05:57] Best translation 80 : If the number of eligible voters is less than 50 voters , a candidate needs at least 60 % of eligible voters .
+[2021-06-07 21:06:09] Best translation 160 : The second Group closed the road that the Indian Pacific Ocean used as long as Indian Pacific Ocean.
+[2021-06-07 21:06:17] Best translation 320 : Our model points to our model that all the key things are based on the surface of living beings - one of the most important things for living beings - one of the most important things for living beings :
+[2021-06-07 21:06:56] Best translation 640 : The coast of the coast received a state of emergency in the evening at 3 p.m.
+[2021-06-07 21:07:15] Total translation time: 91.18189s
+[2021-06-07 21:07:15] [valid] Ep. 10 : Up. 95000 : bleu : 8.78025 : stalled 2 times (last best: 8.78818)
+...
+...
+...
+[2021-06-08 02:11:59] [valid] Ep. 11 : Up. 110000 : cross-entropy : 117.325 : new best
+[2021-06-08 02:12:22] [valid] Ep. 11 : Up. 110000 : perplexity : 62.999 : new best
+[2021-06-08 02:12:22] Translating validation set...
+[2021-06-08 02:12:31] Best translation 0 : &quot;We are sad for his failure but he left a legacy which allows for racial and religious celibates
+[2021-06-08 02:12:31] Best translation 1 : Other militants also reported that there were so many militants on the death of a United States missile that is now affected by the United States missile on the northern part of Pakistan.
+[2021-06-08 02:12:33] Best translation 2 : A Pakistani intelligence official said a rocket broke out to fire out of the crash.
+[2021-06-08 02:12:33] Best translation 3 : &quot;We have the ability to replace those people and be able to be replaced by a western intelligence officer said.
+[2021-06-08 02:12:36] Best translation 4 : Al Jazeera told AFP that the third highest membership position was to be appointed .
+[2021-06-08 02:12:36] Best translation 5 : Pakistani government said they did not know about his death.
+[2021-06-08 02:12:36] Best translation 10 : Los Angeles has only got a goal in half the first half.
+[2021-06-08 02:12:36] Best translation 20 : The research center based in Washington was carried out by the MNDAA and collected data from the ocean and the world&apos;s atmosphere as well.
+[2021-06-08 02:12:36] Best translation 40 : She made her hair look at her hair , and the two men tried to come and help her .
+[2021-06-08 02:12:36] Best translation 80 : If the number of eligible voters is less than 50 voters , a candidate needs at least 60 % of eligible voters .
+[2021-06-08 02:12:48] Best translation 160 : The second Group closed the road that the Indian Pacific ship was used as long as Indian Pacific Ocean.
+[2021-06-08 02:12:57] Best translation 320 : Our model points to that we have been able to get the water resources and water resources that are the principal material for living creatures all the things that are being based in the incident.
+[2021-06-08 02:13:35] Best translation 640 : The coast of the coast received the state of emergency in the evening at 3 p.m.
+[2021-06-08 02:13:55] Total translation time: 93.10692s
+[2021-06-08 02:13:55] [valid] Ep. 11 : Up. 110000 : bleu : 8.93647 : new best
+...
+...
+...
+[2021-06-08 03:54:26] Best translation 40 : She made her hair look at her hair , and two men tried to visit her .
+[2021-06-08 03:54:26] Best translation 80 : If the number of eligible voters is less than 50 voters require at least 60 percent of eligible voters .
+[2021-06-08 03:54:37] Best translation 160 : The second bombing closed the road that was used as a long street in the coast of India.
+[2021-06-08 03:54:46] Best translation 320 : Our model points to that we have been able to get the water resources and water resources that are the key material for living creatures all the key material for living beings residing in the incident.
+[2021-06-08 03:55:24] Best translation 640 : The Coast Guard received a state of emergency in the evening at 3 p.m.
+[2021-06-08 03:55:45] Total translation time: 92.29770s
+[2021-06-08 03:55:45] [valid] Ep. 11 : Up. 115000 : bleu : 8.89748 : stalled 1 times (last best: 8.93647)
+...
+...
+...
+[2021-06-08 05:36:32] Best translation 320 : Our model points to that we have received a biological source of heat and water which is mainly based on biological samples as all the key material for living beings are inside ?
+[2021-06-08 05:37:09] Best translation 640 : The Coast Guard had received an emergency warning of emergency in the evening at 3 p.m.
+[2021-06-08 05:37:31] Total translation time: 94.13993s
+[2021-06-08 05:37:31] [valid] Ep. 12 : Up. 120000 : bleu : 8.86316 : stalled 2 times (last best: 8.93647)
+...
+...
+...
+[2021-06-08 09:02:17] Best translation 320 : Our model points to the fact that all the contents that are the core material for living beings - one that is based on the biological species of living beings - is that we have been able to get the quality of heat and water which is essential for living beings .
+[2021-06-08 09:02:55] Best translation 640 : The Coast Guard received the emergency record of emergency in the evening at 7pm yesterday evening.
+[2021-06-08 09:03:15] Total translation time: 94.90873s
+[2021-06-08 09:03:15] [valid] Ep. 13 : Up. 130000 : bleu : 8.86541 : stalled 4 times (last best: 8.93647)
+...
+...
+...
+[2021-06-08 14:10:37] Saving Adam parameters to model.s2s-4.word.my-en/model.npz.optimizer.npz
+[2021-06-08 14:11:08] [valid] Ep. 14 : Up. 145000 : cross-entropy : 118.778 : stalled 5 times (last best: 116.751)
+[2021-06-08 14:11:31] [valid] Ep. 14 : Up. 145000 : perplexity : 66.3165 : stalled 5 times (last best: 61.7354)
+[2021-06-08 14:11:31] Translating validation set...
+[2021-06-08 14:11:41] Best translation 0 : &quot;We are sad for his failure but he left a legacy given to racial and religious elites
+[2021-06-08 14:11:41] Best translation 1 : Another massive militants also reported the death of several more militants after being speculated by a United States missile that has now affected him in the north of Pakistan.
+[2021-06-08 14:11:43] Best translation 2 : &quot;A Pakistani intelligence officer said the rocket broke out to fire out from an aggressive plane.
+[2021-06-08 14:11:43] Best translation 3 : &quot;They have the ability to replace those people and be able to be replaced by one western intelligence officer said.
+[2021-06-08 14:11:46] Best translation 4 : Al Jazeera was told to have the third highest member of the Third World Cup.
+[2021-06-08 14:11:46] Best translation 5 : The Pakistani government said they did not know about his death.
+[2021-06-08 14:11:46] Best translation 10 : Los Angeles.
+[2021-06-08 14:11:46] Best translation 20 : A U.S. trade agency based in Washington performed research by the MNDAA and collected data from the ocean and earth of the world.
+[2021-06-08 14:11:46] Best translation 40 : She was embarrassed when she shot her hair , and two men tried to come and help her .
+[2021-06-08 14:11:46] Best translation 80 : If the number of eligible voters is less than 50 people, a candidate needs at least 33 percent of eligible voters to vote .
+[2021-06-08 14:11:58] Best translation 160 : The second employee closed the road that the Indian Pacific ship was used as a long street train from Sydney to London.
+[2021-06-08 14:12:07] Best translation 320 : Our model points to the fact that all the contents of the living beings are based on the surface of living beings - one of the major items for living beings - one which is essential for living beings - and that we have won .
+[2021-06-08 14:12:43] Best translation 640 : The Coast Guard received the emergency condition of emergency at 7pm yesterday evening.
+[2021-06-08 14:13:03] Total translation time: 91.59879s
+[2021-06-08 14:13:03] [valid] Ep. 14 : Up. 145000 : bleu : 9.01347 : new best
+...
+...
+...
+[2021-06-08 15:53:16] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.npz.orig.npz
+[2021-06-08 15:53:19] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.iter150000.npz
+[2021-06-08 15:53:21] Saving model weights and runtime parameters to model.s2s-4.word.my-en/model.npz
+[2021-06-08 15:53:23] Saving Adam parameters to model.s2s-4.word.my-en/model.npz.optimizer.npz
+[2021-06-08 15:53:50] [valid] Ep. 15 : Up. 150000 : cross-entropy : 119.268 : stalled 6 times (last best: 116.751)
+[2021-06-08 15:54:13] [valid] Ep. 15 : Up. 150000 : perplexity : 67.4745 : stalled 6 times (last best: 61.7354)
+[2021-06-08 15:54:13] Translating validation set...
+[2021-06-08 15:54:22] Best translation 0 : &quot;We are sad for his failure but he left a legacy given to racial and religious elites
+[2021-06-08 15:54:22] Best translation 1 : Another massive militants also reported the death of several more militants after being tipped off from an aggressive military aircraft in the north of Pakistan.
+[2021-06-08 15:54:24] Best translation 2 : &quot;A Pakistani intelligence officer said the rocket broke out to fire out from a hostile plane
+[2021-06-08 15:54:24] Best translation 3 : &quot;They must have the ability to replace those people and be able to be replaced by one western intelligence officer said.
+[2021-06-08 15:54:27] Best translation 4 : Al Jazeera was told to have the third highest member of the world.
+[2021-06-08 15:54:27] Best translation 5 : The Pakistani government said they did not know about his death.
+[2021-06-08 15:54:27] Best translation 10 : Los Angeles.
+[2021-06-08 15:54:27] Best translation 20 : A U.S. trade agency based in Washington performed research by the MNDAA and collected data from the ocean and earth of the world.
+[2021-06-08 15:54:27] Best translation 40 : She was embarrassed when she shot her hair , and two men tried to visit her .
+[2021-06-08 15:54:27] Best translation 80 : If the number of eligible voters is less than 50 voters , a candidate needs at least 33 points .
+[2021-06-08 15:54:39] Best translation 160 : The second employee closed the road that the Indian Pacific ship was used as a long street train from Sydney.
+[2021-06-08 15:54:48] Best translation 320 : Our model points to what we have been able to have all the key things for living beings - one of the major items for living beings - one of the major items for living beings ; and ...
+[2021-06-08 15:55:24] Best translation 640 : The Coast Guard had received the emergency condition of emergency at 7pm yesterday evening.
+[2021-06-08 15:55:43] Total translation time: 90.43103s
+[2021-06-08 15:55:43] [valid] Ep. 15 : Up. 150000 : bleu : 8.98952 : stalled 1 times (last best: 9.01347)
+[2021-06-08 16:05:43] Ep. 15 : Up. 150500 : Sen. 93,327 : Cost 0.99837762 * 189,200 after 57,017,652 : Time 746.66s : 253.39 words/s
+[2021-06-08 16:15:43] Ep. 15 : Up. 151000 : Sen. 105,537 : Cost 1.03257883 * 188,410 after 57,206,062 : Time 600.32s : 313.85 words/s
+[2021-06-08 16:25:53] Ep. 15 : Up. 151500 : Sen. 117,611 : Cost 1.05191886 * 190,366 after 57,396,428 : Time 609.56s : 312.30 words/s
+[2021-06-08 16:35:53] Ep. 15 : Up. 152000 : Sen. 129,647 : Cost 1.06003737 * 186,344 after 57,582,772 : Time 599.92s : 310.62 words/s
+[2021-06-08 16:46:00] Ep. 15 : Up. 152500 : Sen. 141,940 : Cost 1.04140890 * 190,882 after 57,773,654 : Time 607.84s : 314.03 words/s
+
+real	3038m6.729s
+user	4880m20.200s
+sys	3m3.070s
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+  
+## Translation
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word.my-en$ time marian-decoder -m ./model.npz -v ../data_word/vocab/vocab.my.yml ../data_word/vocab/vocab.en.yml  --devices 0 1 --output hyp.model.en < ../data_word/test.my
+...
+...
+[2021-06-08 18:13:59] Best translation 996 : The circus said that there was shocked by storms near Zurich and could be released under the storm.
+[2021-06-08 18:14:00] Best translation 997 : After coming back to the circus I was pleased that he was tired but was delighted to come back …&quot;
+[2021-06-08 18:14:00] Best translation 998 : Two Canadian poems and his wife John Howard took part in a car accident when driving to their holiday home in southern Wales.
+[2021-06-08 18:14:00] Best translation 999 : Mrs. Sheehan has died on the spot and was suffering from one of the ribs
+[2021-06-08 18:14:00] Best translation 1000 : Their couple had offered both of them .
+[2021-06-08 18:14:00] Best translation 1001 : He was an experienced Jewish author in southern Wales .
+[2021-06-08 18:14:01] Best translation 1002 : John , his wife , is a fine arts and writer .
+[2021-06-08 18:14:01] Best translation 1003 : He is known as a poet and a medical doctor .
+[2021-06-08 18:14:01] Best translation 1004 : &quot;There was a specialist at a pneumonia clinic for over thirty years.
+[2021-06-08 18:14:01] Best translation 1005 : It was considered the best recognition of his writing , and received many literary awards and members of various well-known literature and members .
+[2021-06-08 18:14:01] Best translation 1006 : In 1989 he received a doctorate degree from the University of Wales .
+[2021-06-08 18:14:01] Best translation 1007 : Their couple carried two books in the 1980s .
+[2021-06-08 18:14:01] Best translation 1008 : John was left behind with her husband and two daughters .
+[2021-06-08 18:14:02] Best translation 1009 : Four members were arrested and fined the fine by four members on Wednesday for driving at her residence in California after taking back to her residence in California.
+[2021-06-08 18:14:02] Best translation 1010 : At least four other people were banned but no arrest was arrested.
+[2021-06-08 18:14:02] Best translation 1011 : According to reports, a group of journalist was followed following an early warning by the police about an accident by police.
+[2021-06-08 18:14:02] Best translation 1012 : They also said that they were very close to her and used to turn her into the dangerous path in order to follow her later .
+[2021-06-08 18:14:03] Best translation 1013 : Police also followed her car because of at least one car that drove her car from the road but she was unable to find it or the holder of it.
+[2021-06-08 18:14:03] Best translation 1014 : They reported to have reported her note down and released her.
+[2021-06-08 18:14:03] Best translation 1015 : When the police reported that if the police were there to know that she had the tenure of driving licence and were surprised because of the tenure of licence .
+[2021-06-08 18:14:03] Best translation 1016 : Blount did not want the men to arrest for anything they made and did not want people arrested
+[2021-06-08 18:14:03] Best translation 1017 : Smith was part of the organization but did not drive carefully and was told by the spokesman for the Red Cross.
+[2021-06-08 18:14:03] Total time: 241.53394s wall
+
+real	4m3.910s
+user	8m3.455s
+sys	0m2.424s
+
+## evaluation 
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word.my-en$  perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.en < ./hyp.model.en  >> results.txt
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word.my-en$ cat ./results.txt 
+BLEU = 9.31, 42.4/17.3/8.0/3.7 (BP=0.765, ratio=0.789, hyp_len=22028, ref_len=27929)
+
+================
+
+## Transformer (my-en, word unit for Burmese)
+
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.myen.sh 
+[2021-06-08 20:42:31] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-08 20:42:31] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 133320 with command line:
+[2021-06-08 20:42:31] [marian] marian -c model.transformer.word.my-en/config.yml
+[2021-06-08 20:42:31] [config] after: 0e
+[2021-06-08 20:42:31] [config] after-batches: 0
+[2021-06-08 20:42:31] [config] after-epochs: 0
+[2021-06-08 20:42:31] [config] all-caps-every: 0
+[2021-06-08 20:42:31] [config] allow-unk: false
+[2021-06-08 20:42:31] [config] authors: false
+[2021-06-08 20:42:31] [config] beam-size: 7
+[2021-06-08 20:42:31] [config] bert-class-symbol: "[CLS]"
+[2021-06-08 20:42:31] [config] bert-mask-symbol: "[MASK]"
+[2021-06-08 20:42:31] [config] bert-masking-fraction: 0.15
+[2021-06-08 20:42:31] [config] bert-sep-symbol: "[SEP]"
+[2021-06-08 20:42:31] [config] bert-train-type-embeddings: true
+[2021-06-08 20:42:31] [config] bert-type-vocab-size: 2
+[2021-06-08 20:42:31] [config] build-info: ""
+[2021-06-08 20:42:31] [config] cite: false
+[2021-06-08 20:42:31] [config] clip-norm: 5
+[2021-06-08 20:42:31] [config] cost-scaling:
+[2021-06-08 20:42:31] [config]   []
+[2021-06-08 20:42:31] [config] cost-type: ce-sum
+[2021-06-08 20:42:31] [config] cpu-threads: 0
+[2021-06-08 20:42:31] [config] data-weighting: ""
+[2021-06-08 20:42:31] [config] data-weighting-type: sentence
+[2021-06-08 20:42:31] [config] dec-cell: gru
+[2021-06-08 20:42:31] [config] dec-cell-base-depth: 2
+[2021-06-08 20:42:31] [config] dec-cell-high-depth: 1
+[2021-06-08 20:42:31] [config] dec-depth: 2
+[2021-06-08 20:42:31] [config] devices:
+[2021-06-08 20:42:31] [config]   - 0
+[2021-06-08 20:42:31] [config]   - 1
+[2021-06-08 20:42:31] [config] dim-emb: 512
+[2021-06-08 20:42:31] [config] dim-rnn: 1024
+[2021-06-08 20:42:31] [config] dim-vocabs:
+[2021-06-08 20:42:31] [config]   - 0
+[2021-06-08 20:42:31] [config]   - 0
+[2021-06-08 20:42:31] [config] disp-first: 0
+[2021-06-08 20:42:31] [config] disp-freq: 500
+[2021-06-08 20:42:31] [config] disp-label-counts: true
+[2021-06-08 20:42:31] [config] dropout-rnn: 0
+[2021-06-08 20:42:31] [config] dropout-src: 0
+[2021-06-08 20:42:31] [config] dropout-trg: 0
+[2021-06-08 20:42:31] [config] dump-config: ""
+[2021-06-08 20:42:31] [config] early-stopping: 10
+[2021-06-08 20:42:31] [config] embedding-fix-src: false
+[2021-06-08 20:42:31] [config] embedding-fix-trg: false
+[2021-06-08 20:42:31] [config] embedding-normalization: false
+[2021-06-08 20:42:31] [config] embedding-vectors:
+[2021-06-08 20:42:31] [config]   []
+[2021-06-08 20:42:31] [config] enc-cell: gru
+[2021-06-08 20:42:31] [config] enc-cell-depth: 1
+[2021-06-08 20:42:31] [config] enc-depth: 2
+[2021-06-08 20:42:31] [config] enc-type: bidirectional
+[2021-06-08 20:42:31] [config] english-title-case-every: 0
+[2021-06-08 20:42:31] [config] exponential-smoothing: 0.0001
+[2021-06-08 20:42:31] [config] factor-weight: 1
+[2021-06-08 20:42:31] [config] grad-dropping-momentum: 0
+[2021-06-08 20:42:31] [config] grad-dropping-rate: 0
+[2021-06-08 20:42:31] [config] grad-dropping-warmup: 100
+[2021-06-08 20:42:31] [config] gradient-checkpointing: false
+[2021-06-08 20:42:31] [config] guided-alignment: none
+[2021-06-08 20:42:31] [config] guided-alignment-cost: mse
+[2021-06-08 20:42:31] [config] guided-alignment-weight: 0.1
+[2021-06-08 20:42:31] [config] ignore-model-config: false
+[2021-06-08 20:42:31] [config] input-types:
+[2021-06-08 20:42:31] [config]   []
+[2021-06-08 20:42:31] [config] interpolate-env-vars: false
+[2021-06-08 20:42:31] [config] keep-best: false
+[2021-06-08 20:42:31] [config] label-smoothing: 0.1
+[2021-06-08 20:42:31] [config] layer-normalization: false
+[2021-06-08 20:42:31] [config] learn-rate: 0.0003
+[2021-06-08 20:42:31] [config] lemma-dim-emb: 0
+[2021-06-08 20:42:31] [config] log: model.transformer.word.my-en/train.log
+[2021-06-08 20:42:31] [config] log-level: info
+[2021-06-08 20:42:31] [config] log-time-zone: ""
+[2021-06-08 20:42:31] [config] logical-epoch:
+[2021-06-08 20:42:31] [config]   - 1e
+[2021-06-08 20:42:31] [config]   - 0
+[2021-06-08 20:42:31] [config] lr-decay: 0
+[2021-06-08 20:42:31] [config] lr-decay-freq: 50000
+[2021-06-08 20:42:31] [config] lr-decay-inv-sqrt:
+[2021-06-08 20:42:31] [config]   - 16000
+[2021-06-08 20:42:31] [config] lr-decay-repeat-warmup: false
+[2021-06-08 20:42:31] [config] lr-decay-reset-optimizer: false
+[2021-06-08 20:42:31] [config] lr-decay-start:
+[2021-06-08 20:42:31] [config]   - 10
+[2021-06-08 20:42:31] [config]   - 1
+[2021-06-08 20:42:31] [config] lr-decay-strategy: epoch+stalled
+[2021-06-08 20:42:31] [config] lr-report: true
+[2021-06-08 20:42:31] [config] lr-warmup: 0
+[2021-06-08 20:42:31] [config] lr-warmup-at-reload: false
+[2021-06-08 20:42:31] [config] lr-warmup-cycle: false
+[2021-06-08 20:42:31] [config] lr-warmup-start-rate: 0
+[2021-06-08 20:42:31] [config] max-length: 200
+[2021-06-08 20:42:31] [config] max-length-crop: false
+[2021-06-08 20:42:31] [config] max-length-factor: 3
+[2021-06-08 20:42:31] [config] maxi-batch: 100
+[2021-06-08 20:42:31] [config] maxi-batch-sort: trg
+[2021-06-08 20:42:31] [config] mini-batch: 64
+[2021-06-08 20:42:31] [config] mini-batch-fit: true
+[2021-06-08 20:42:31] [config] mini-batch-fit-step: 10
+[2021-06-08 20:42:31] [config] mini-batch-track-lr: false
+[2021-06-08 20:42:31] [config] mini-batch-warmup: 0
+[2021-06-08 20:42:31] [config] mini-batch-words: 0
+[2021-06-08 20:42:31] [config] mini-batch-words-ref: 0
+[2021-06-08 20:42:31] [config] model: model.transformer.word.my-en/model.npz
+[2021-06-08 20:42:31] [config] multi-loss-type: sum
+[2021-06-08 20:42:31] [config] multi-node: false
+[2021-06-08 20:42:31] [config] multi-node-overlap: true
+[2021-06-08 20:42:31] [config] n-best: false
+[2021-06-08 20:42:31] [config] no-nccl: false
+[2021-06-08 20:42:31] [config] no-reload: false
+[2021-06-08 20:42:31] [config] no-restore-corpus: false
+[2021-06-08 20:42:31] [config] normalize: 0.6
+[2021-06-08 20:42:31] [config] normalize-gradient: false
+[2021-06-08 20:42:31] [config] num-devices: 0
+[2021-06-08 20:42:31] [config] optimizer: adam
+[2021-06-08 20:42:31] [config] optimizer-delay: 1
+[2021-06-08 20:42:31] [config] optimizer-params:
+[2021-06-08 20:42:31] [config]   []
+[2021-06-08 20:42:31] [config] output-omit-bias: false
+[2021-06-08 20:42:31] [config] overwrite: false
+[2021-06-08 20:42:31] [config] precision:
+[2021-06-08 20:42:31] [config]   - float32
+[2021-06-08 20:42:31] [config]   - float32
+[2021-06-08 20:42:31] [config]   - float32
+[2021-06-08 20:42:31] [config] pretrained-model: ""
+[2021-06-08 20:42:31] [config] quantize-biases: false
+[2021-06-08 20:42:31] [config] quantize-bits: 0
+[2021-06-08 20:42:31] [config] quantize-log-based: false
+[2021-06-08 20:42:31] [config] quantize-optimization-steps: 0
+[2021-06-08 20:42:31] [config] quiet: false
+[2021-06-08 20:42:31] [config] quiet-translation: true
+[2021-06-08 20:42:31] [config] relative-paths: false
+[2021-06-08 20:42:31] [config] right-left: false
+[2021-06-08 20:42:31] [config] save-freq: 5000
+[2021-06-08 20:42:31] [config] seed: 1111
+[2021-06-08 20:42:31] [config] sentencepiece-alphas:
+[2021-06-08 20:42:31] [config]   []
+[2021-06-08 20:42:31] [config] sentencepiece-max-lines: 2000000
+[2021-06-08 20:42:31] [config] sentencepiece-options: ""
+[2021-06-08 20:42:31] [config] shuffle: data
+[2021-06-08 20:42:31] [config] shuffle-in-ram: false
+[2021-06-08 20:42:31] [config] sigterm: save-and-exit
+[2021-06-08 20:42:31] [config] skip: false
+[2021-06-08 20:42:31] [config] sqlite: ""
+[2021-06-08 20:42:31] [config] sqlite-drop: false
+[2021-06-08 20:42:31] [config] sync-sgd: true
+[2021-06-08 20:42:31] [config] tempdir: /tmp
+[2021-06-08 20:42:31] [config] tied-embeddings: true
+[2021-06-08 20:42:31] [config] tied-embeddings-all: false
+[2021-06-08 20:42:31] [config] tied-embeddings-src: false
+[2021-06-08 20:42:31] [config] train-embedder-rank:
+[2021-06-08 20:42:31] [config]   []
+[2021-06-08 20:42:31] [config] train-sets:
+[2021-06-08 20:42:31] [config]   - data_word/train.my
+[2021-06-08 20:42:31] [config]   - data_word/train.en
+[2021-06-08 20:42:31] [config] transformer-aan-activation: swish
+[2021-06-08 20:42:31] [config] transformer-aan-depth: 2
+[2021-06-08 20:42:31] [config] transformer-aan-nogate: false
+[2021-06-08 20:42:31] [config] transformer-decoder-autoreg: self-attention
+[2021-06-08 20:42:31] [config] transformer-depth-scaling: false
+[2021-06-08 20:42:31] [config] transformer-dim-aan: 2048
+[2021-06-08 20:42:31] [config] transformer-dim-ffn: 2048
+[2021-06-08 20:42:31] [config] transformer-dropout: 0.3
+[2021-06-08 20:42:31] [config] transformer-dropout-attention: 0
+[2021-06-08 20:42:31] [config] transformer-dropout-ffn: 0
+[2021-06-08 20:42:31] [config] transformer-ffn-activation: swish
+[2021-06-08 20:42:31] [config] transformer-ffn-depth: 2
+[2021-06-08 20:42:31] [config] transformer-guided-alignment-layer: last
+[2021-06-08 20:42:31] [config] transformer-heads: 8
+[2021-06-08 20:42:31] [config] transformer-no-projection: false
+[2021-06-08 20:42:31] [config] transformer-pool: false
+[2021-06-08 20:42:31] [config] transformer-postprocess: dan
+[2021-06-08 20:42:31] [config] transformer-postprocess-emb: d
+[2021-06-08 20:42:31] [config] transformer-postprocess-top: ""
+[2021-06-08 20:42:31] [config] transformer-preprocess: ""
+[2021-06-08 20:42:31] [config] transformer-tied-layers:
+[2021-06-08 20:42:31] [config]   []
+[2021-06-08 20:42:31] [config] transformer-train-position-embeddings: false
+[2021-06-08 20:42:31] [config] tsv: false
+[2021-06-08 20:42:31] [config] tsv-fields: 0
+[2021-06-08 20:42:31] [config] type: transformer
+[2021-06-08 20:42:31] [config] ulr: false
+[2021-06-08 20:42:31] [config] ulr-dim-emb: 0
+[2021-06-08 20:42:31] [config] ulr-dropout: 0
+[2021-06-08 20:42:31] [config] ulr-keys-vectors: ""
+[2021-06-08 20:42:31] [config] ulr-query-vectors: ""
+[2021-06-08 20:42:31] [config] ulr-softmax-temperature: 1
+[2021-06-08 20:42:31] [config] ulr-trainable-transformation: false
+[2021-06-08 20:42:31] [config] unlikelihood-loss: false
+[2021-06-08 20:42:31] [config] valid-freq: 5000
+[2021-06-08 20:42:31] [config] valid-log: model.transformer.word.my-en/valid.log
+[2021-06-08 20:42:31] [config] valid-max-length: 1000
+[2021-06-08 20:42:31] [config] valid-metrics:
+[2021-06-08 20:42:31] [config]   - cross-entropy
+[2021-06-08 20:42:31] [config]   - perplexity
+[2021-06-08 20:42:31] [config]   - bleu
+[2021-06-08 20:42:31] [config] valid-mini-batch: 64
+[2021-06-08 20:42:31] [config] valid-reset-stalled: false
+[2021-06-08 20:42:31] [config] valid-script-args:
+[2021-06-08 20:42:31] [config]   []
+[2021-06-08 20:42:31] [config] valid-script-path: ""
+[2021-06-08 20:42:31] [config] valid-sets:
+[2021-06-08 20:42:31] [config]   - data_word/valid.my
+[2021-06-08 20:42:31] [config]   - data_word/valid.en
+[2021-06-08 20:42:31] [config] valid-translation-output: model.transformer.word.my-en/valid.my-en.word.output
+[2021-06-08 20:42:31] [config] vocabs:
+[2021-06-08 20:42:31] [config]   - data_word/vocab/vocab.my.yml
+[2021-06-08 20:42:31] [config]   - data_word/vocab/vocab.en.yml
+[2021-06-08 20:42:31] [config] word-penalty: 0
+[2021-06-08 20:42:31] [config] word-scores: false
+[2021-06-08 20:42:31] [config] workspace: 1000
+[2021-06-08 20:42:31] [config] Model is being created with Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-08 20:42:31] Using synchronous SGD
+[2021-06-08 20:42:31] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.my.yml
+[2021-06-08 20:42:32] [data] Setting vocabulary size for input 0 to 63,471
+[2021-06-08 20:42:32] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.en.yml
+[2021-06-08 20:42:32] [data] Setting vocabulary size for input 1 to 85,602
+[2021-06-08 20:42:32] [comm] Compiled without MPI support. Running as a single process on administrator-HP-Z2-Tower-G4-Workstation
+[2021-06-08 20:42:32] [batching] Collecting statistics for batch fitting with step size 10
+[2021-06-08 20:42:32] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-08 20:42:32] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-08 20:42:32] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-08 20:42:32] [comm] NCCLCommunicator constructed successfully
+[2021-06-08 20:42:32] [training] Using 2 GPUs
+[2021-06-08 20:42:32] [logits] Applying loss function for 1 factor(s)
+[2021-06-08 20:42:32] [memory] Reserving 347 MB, device gpu0
+[2021-06-08 20:42:32] [gpu] 16-bit TensorCores enabled for float32 matrix operations
+[2021-06-08 20:42:33] [memory] Reserving 347 MB, device gpu0
+[2021-06-08 20:42:53] [batching] Done. Typical MB size is 1,943 target words
+[2021-06-08 20:42:53] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-08 20:42:53] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-08 20:42:53] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-08 20:42:53] [comm] NCCLCommunicator constructed successfully
+[2021-06-08 20:42:53] [training] Using 2 GPUs
+[2021-06-08 20:42:53] Training started
+[2021-06-08 20:42:53] [data] Shuffling data
+[2021-06-08 20:42:53] [data] Done reading 256,102 sentences
+[2021-06-08 20:42:54] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-08 20:42:54] [training] Batches are processed as 1 process(es) x 2 devices/process
+[2021-06-08 20:42:54] [memory] Reserving 347 MB, device gpu1
+[2021-06-08 20:42:54] [memory] Reserving 347 MB, device gpu0
+[2021-06-08 20:42:54] [memory] Reserving 347 MB, device gpu0
+[2021-06-08 20:42:54] [memory] Reserving 347 MB, device gpu1
+[2021-06-08 20:42:54] [memory] Reserving 173 MB, device gpu0
+[2021-06-08 20:42:54] [memory] Reserving 173 MB, device gpu1
+[2021-06-08 20:42:55] [memory] Reserving 347 MB, device gpu0
+[2021-06-08 20:42:55] [memory] Reserving 347 MB, device gpu1
+[2021-06-08 20:46:58] Ep. 1 : Up. 500 : Sen. 33,423 : Cost 6.90357590 * 525,704 @ 1,060 after 525,704 : Time 244.66s : 2148.72 words/s : L.r. 3.0000e-04
+[2021-06-08 20:51:03] Ep. 1 : Up. 1000 : Sen. 67,187 : Cost 6.06208754 * 526,151 @ 1,272 after 1,051,855 : Time 245.13s : 2146.46 words/s : L.r. 3.0000e-04
+[2021-06-08 20:55:08] Ep. 1 : Up. 1500 : Sen. 100,926 : Cost 5.78782225 * 530,994 @ 1,863 after 1,582,849 : Time 245.24s : 2165.19 words/s : L.r. 3.0000e-04
+[2021-06-08 20:59:10] Ep. 1 : Up. 2000 : Sen. 134,186 : Cost 5.59417009 * 522,074 @ 954 after 2,104,923 : Time 242.01s : 2157.21 words/s : L.r. 3.0000e-04
+[2021-06-08 21:03:13] Ep. 1 : Up. 2500 : Sen. 167,063 : Cost 5.48258781 * 521,787 @ 1,120 after 2,626,710 : Time 242.53s : 2151.47 words/s : L.r. 3.0000e-04
+[2021-06-08 21:07:16] Ep. 1 : Up. 3000 : Sen. 200,661 : Cost 5.30076456 * 523,414 @ 1,196 after 3,150,124 : Time 243.08s : 2153.29 words/s : L.r. 3.0000e-04
+[2021-06-08 21:11:19] Ep. 1 : Up. 3500 : Sen. 233,705 : Cost 5.18998337 * 518,766 @ 1,261 after 3,668,890 : Time 243.64s : 2129.26 words/s : L.r. 3.0000e-04
+[2021-06-08 21:14:04] Seen 256076 samples
+[2021-06-08 21:14:04] Starting data epoch 2 in logical epoch 2
+[2021-06-08 21:14:04] [data] Shuffling data
+[2021-06-08 21:14:04] [data] Done reading 256,102 sentences
+[2021-06-08 21:14:04] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-08 21:15:22] Ep. 2 : Up. 4000 : Sen. 10,549 : Cost 5.07589912 * 519,710 @ 840 after 4,188,600 : Time 242.76s : 2140.85 words/s : L.r. 3.0000e-04
+[2021-06-08 21:19:24] Ep. 2 : Up. 4500 : Sen. 43,866 : Cost 4.94463682 * 522,966 @ 1,092 after 4,711,566 : Time 242.35s : 2157.88 words/s : L.r. 3.0000e-04
+[2021-06-08 21:23:28] Ep. 2 : Up. 5000 : Sen. 77,519 : Cost 4.87909651 * 528,842 @ 1,185 after 5,240,408 : Time 243.67s : 2170.32 words/s : L.r. 3.0000e-04
+[2021-06-08 21:23:28] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-08 21:23:30] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter5000.npz
+[2021-06-08 21:23:30] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-08 21:23:32] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+tcmalloc: large alloc 1073741824 bytes == 0x561db6828000 @ 
+tcmalloc: large alloc 1207959552 bytes == 0x561df6828000 @ 
+tcmalloc: large alloc 1476395008 bytes == 0x561db6828000 @ 
+tcmalloc: large alloc 1610612736 bytes == 0x561db6828000 @ 
+tcmalloc: large alloc 1744830464 bytes == 0x561d9bd68000 @ 
+[2021-06-08 21:23:41] Error: CUDA error 2 'out of memory' - /home/ye/tool/marian/src/tensors/gpu/device.cu:32: cudaMalloc(&data_, size)
+[2021-06-08 21:23:41] Error: Aborted from virtual void marian::gpu::Device::reserve(size_t) in /home/ye/tool/marian/src/tensors/gpu/device.cu:32
+
+[CALL STACK]
+[0x561d5714e880]    marian::gpu::Device::  reserve  (unsigned long)    + 0xf80
+[0x561d56a7e7df]    marian::TensorAllocator::  allocate  (IntrusivePtr<marian::TensorBase>&,  marian::Shape,  marian::Type) + 0x4ef
+[0x561d56c8ab00]    marian::Node::  allocate  ()                       + 0x1e0
+[0x561d56c812ce]    marian::ExpressionGraph::  forward  (std::__cxx11::list<IntrusivePtr<marian::Chainable<IntrusivePtr<marian::TensorBase>>>,std::allocator<IntrusivePtr<marian::Chainable<IntrusivePtr<marian::TensorBase>>>>>&,  bool) + 0x8e
+[0x561d56c82cae]    marian::ExpressionGraph::  forwardNext  ()         + 0x24e
+[0x561d56e53e64]                                                       + 0x77de64
+[0x561d56e54694]                                                       + 0x77e694
+[0x561d56a2815d]    std::__future_base::_State_baseV2::  _M_do_set  (std::function<std::unique_ptr<std::__future_base::_Result_base,std::__future_base::_Result_base::_Deleter> ()>*,  bool*) + 0x2d
+[0x7f6ae3cc7c0f]                                                       + 0x11c0f
+[0x561d56e4b18a]                                                       + 0x77518a
+[0x561d56a2a89a]    std::thread::_State_impl<std::thread::_Invoker<std::tuple<marian::ThreadPool::reserve(unsigned long)::{lambda()#1}>>>::  _M_run  () + 0x13a
+[0x7f6ae3babd84]                                                       + 0xd6d84
+[0x7f6ae3cbf590]                                                       + 0x9590
+[0x7f6ae389a223]    clone                                              + 0x43
+
+
+real	41m10.043s
+user	61m24.025s
+sys	0m5.707s
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+
+## Restart the Workstation and ReTrain Again
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.myen.sh 
+mkdir: cannot create directory ‘model.transformer.word.my-en’: File exists
+[2021-06-08 22:25:38] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-08 22:25:38] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 3114 with command line:
+[2021-06-08 22:25:38] [marian] marian -c model.transformer.word.my-en/config.yml
+[2021-06-08 22:25:38] [config] after: 0e
+[2021-06-08 22:25:38] [config] after-batches: 0
+[2021-06-08 22:25:38] [config] after-epochs: 0
+[2021-06-08 22:25:38] [config] all-caps-every: 0
+[2021-06-08 22:25:38] [config] allow-unk: false
+[2021-06-08 22:25:38] [config] authors: false
+[2021-06-08 22:25:38] [config] beam-size: 7
+[2021-06-08 22:25:38] [config] bert-class-symbol: "[CLS]"
+[2021-06-08 22:25:38] [config] bert-mask-symbol: "[MASK]"
+[2021-06-08 22:25:38] [config] bert-masking-fraction: 0.15
+[2021-06-08 22:25:38] [config] bert-sep-symbol: "[SEP]"
+[2021-06-08 22:25:38] [config] bert-train-type-embeddings: true
+[2021-06-08 22:25:38] [config] bert-type-vocab-size: 2
+[2021-06-08 22:25:38] [config] build-info: ""
+[2021-06-08 22:25:38] [config] cite: false
+[2021-06-08 22:25:38] [config] clip-norm: 5
+[2021-06-08 22:25:38] [config] cost-scaling:
+[2021-06-08 22:25:38] [config]   []
+[2021-06-08 22:25:38] [config] cost-type: ce-sum
+[2021-06-08 22:25:38] [config] cpu-threads: 0
+[2021-06-08 22:25:38] [config] data-weighting: ""
+[2021-06-08 22:25:38] [config] data-weighting-type: sentence
+[2021-06-08 22:25:38] [config] dec-cell: gru
+[2021-06-08 22:25:38] [config] dec-cell-base-depth: 2
+[2021-06-08 22:25:38] [config] dec-cell-high-depth: 1
+[2021-06-08 22:25:38] [config] dec-depth: 2
+[2021-06-08 22:25:38] [config] devices:
+[2021-06-08 22:25:38] [config]   - 0
+[2021-06-08 22:25:38] [config]   - 1
+[2021-06-08 22:25:38] [config] dim-emb: 512
+[2021-06-08 22:25:38] [config] dim-rnn: 1024
+[2021-06-08 22:25:38] [config] dim-vocabs:
+[2021-06-08 22:25:38] [config]   - 63471
+[2021-06-08 22:25:38] [config]   - 85602
+[2021-06-08 22:25:38] [config] disp-first: 0
+[2021-06-08 22:25:38] [config] disp-freq: 500
+[2021-06-08 22:25:38] [config] disp-label-counts: true
+[2021-06-08 22:25:38] [config] dropout-rnn: 0
+[2021-06-08 22:25:38] [config] dropout-src: 0
+[2021-06-08 22:25:38] [config] dropout-trg: 0
+[2021-06-08 22:25:38] [config] dump-config: ""
+[2021-06-08 22:25:38] [config] early-stopping: 10
+[2021-06-08 22:25:38] [config] embedding-fix-src: false
+[2021-06-08 22:25:38] [config] embedding-fix-trg: false
+[2021-06-08 22:25:38] [config] embedding-normalization: false
+[2021-06-08 22:25:38] [config] embedding-vectors:
+[2021-06-08 22:25:38] [config]   []
+[2021-06-08 22:25:38] [config] enc-cell: gru
+[2021-06-08 22:25:38] [config] enc-cell-depth: 1
+[2021-06-08 22:25:38] [config] enc-depth: 2
+[2021-06-08 22:25:38] [config] enc-type: bidirectional
+[2021-06-08 22:25:38] [config] english-title-case-every: 0
+[2021-06-08 22:25:38] [config] exponential-smoothing: 0.0001
+[2021-06-08 22:25:38] [config] factor-weight: 1
+[2021-06-08 22:25:38] [config] grad-dropping-momentum: 0
+[2021-06-08 22:25:38] [config] grad-dropping-rate: 0
+[2021-06-08 22:25:38] [config] grad-dropping-warmup: 100
+[2021-06-08 22:25:38] [config] gradient-checkpointing: false
+[2021-06-08 22:25:38] [config] guided-alignment: none
+[2021-06-08 22:25:38] [config] guided-alignment-cost: mse
+[2021-06-08 22:25:38] [config] guided-alignment-weight: 0.1
+[2021-06-08 22:25:38] [config] ignore-model-config: false
+[2021-06-08 22:25:38] [config] input-types:
+[2021-06-08 22:25:38] [config]   []
+[2021-06-08 22:25:38] [config] interpolate-env-vars: false
+[2021-06-08 22:25:38] [config] keep-best: false
+[2021-06-08 22:25:38] [config] label-smoothing: 0.1
+[2021-06-08 22:25:38] [config] layer-normalization: false
+[2021-06-08 22:25:38] [config] learn-rate: 0.0003
+[2021-06-08 22:25:38] [config] lemma-dim-emb: 0
+[2021-06-08 22:25:38] [config] log: model.transformer.word.my-en/train.log
+[2021-06-08 22:25:38] [config] log-level: info
+[2021-06-08 22:25:38] [config] log-time-zone: ""
+[2021-06-08 22:25:38] [config] logical-epoch:
+[2021-06-08 22:25:38] [config]   - 1e
+[2021-06-08 22:25:38] [config]   - 0
+[2021-06-08 22:25:38] [config] lr-decay: 0
+[2021-06-08 22:25:38] [config] lr-decay-freq: 50000
+[2021-06-08 22:25:38] [config] lr-decay-inv-sqrt:
+[2021-06-08 22:25:38] [config]   - 16000
+[2021-06-08 22:25:38] [config] lr-decay-repeat-warmup: false
+[2021-06-08 22:25:38] [config] lr-decay-reset-optimizer: false
+[2021-06-08 22:25:38] [config] lr-decay-start:
+[2021-06-08 22:25:38] [config]   - 10
+[2021-06-08 22:25:38] [config]   - 1
+[2021-06-08 22:25:38] [config] lr-decay-strategy: epoch+stalled
+[2021-06-08 22:25:38] [config] lr-report: true
+[2021-06-08 22:25:38] [config] lr-warmup: 0
+[2021-06-08 22:25:38] [config] lr-warmup-at-reload: false
+[2021-06-08 22:25:38] [config] lr-warmup-cycle: false
+[2021-06-08 22:25:38] [config] lr-warmup-start-rate: 0
+[2021-06-08 22:25:38] [config] max-length: 200
+[2021-06-08 22:25:38] [config] max-length-crop: false
+[2021-06-08 22:25:38] [config] max-length-factor: 3
+[2021-06-08 22:25:38] [config] maxi-batch: 100
+[2021-06-08 22:25:38] [config] maxi-batch-sort: trg
+[2021-06-08 22:25:38] [config] mini-batch: 64
+[2021-06-08 22:25:38] [config] mini-batch-fit: true
+[2021-06-08 22:25:38] [config] mini-batch-fit-step: 10
+[2021-06-08 22:25:38] [config] mini-batch-track-lr: false
+[2021-06-08 22:25:38] [config] mini-batch-warmup: 0
+[2021-06-08 22:25:38] [config] mini-batch-words: 0
+[2021-06-08 22:25:38] [config] mini-batch-words-ref: 0
+[2021-06-08 22:25:38] [config] model: model.transformer.word.my-en/model.npz
+[2021-06-08 22:25:38] [config] multi-loss-type: sum
+[2021-06-08 22:25:38] [config] multi-node: false
+[2021-06-08 22:25:38] [config] multi-node-overlap: true
+[2021-06-08 22:25:38] [config] n-best: false
+[2021-06-08 22:25:38] [config] no-nccl: false
+[2021-06-08 22:25:38] [config] no-reload: false
+[2021-06-08 22:25:38] [config] no-restore-corpus: false
+[2021-06-08 22:25:38] [config] normalize: 0.6
+[2021-06-08 22:25:38] [config] normalize-gradient: false
+[2021-06-08 22:25:38] [config] num-devices: 0
+[2021-06-08 22:25:38] [config] optimizer: adam
+[2021-06-08 22:25:38] [config] optimizer-delay: 1
+[2021-06-08 22:25:38] [config] optimizer-params:
+[2021-06-08 22:25:38] [config]   []
+[2021-06-08 22:25:38] [config] output-omit-bias: false
+[2021-06-08 22:25:38] [config] overwrite: false
+[2021-06-08 22:25:38] [config] precision:
+[2021-06-08 22:25:38] [config]   - float32
+[2021-06-08 22:25:38] [config]   - float32
+[2021-06-08 22:25:38] [config]   - float32
+[2021-06-08 22:25:38] [config] pretrained-model: ""
+[2021-06-08 22:25:38] [config] quantize-biases: false
+[2021-06-08 22:25:38] [config] quantize-bits: 0
+[2021-06-08 22:25:38] [config] quantize-log-based: false
+[2021-06-08 22:25:38] [config] quantize-optimization-steps: 0
+[2021-06-08 22:25:38] [config] quiet: false
+[2021-06-08 22:25:38] [config] quiet-translation: true
+[2021-06-08 22:25:38] [config] relative-paths: false
+[2021-06-08 22:25:38] [config] right-left: false
+[2021-06-08 22:25:38] [config] save-freq: 5000
+[2021-06-08 22:25:38] [config] seed: 1111
+[2021-06-08 22:25:38] [config] sentencepiece-alphas:
+[2021-06-08 22:25:38] [config]   []
+[2021-06-08 22:25:38] [config] sentencepiece-max-lines: 2000000
+[2021-06-08 22:25:38] [config] sentencepiece-options: ""
+[2021-06-08 22:25:38] [config] shuffle: data
+[2021-06-08 22:25:38] [config] shuffle-in-ram: false
+[2021-06-08 22:25:38] [config] sigterm: save-and-exit
+[2021-06-08 22:25:38] [config] skip: false
+[2021-06-08 22:25:38] [config] sqlite: ""
+[2021-06-08 22:25:38] [config] sqlite-drop: false
+[2021-06-08 22:25:38] [config] sync-sgd: true
+[2021-06-08 22:25:38] [config] tempdir: /tmp
+[2021-06-08 22:25:38] [config] tied-embeddings: true
+[2021-06-08 22:25:38] [config] tied-embeddings-all: false
+[2021-06-08 22:25:38] [config] tied-embeddings-src: false
+[2021-06-08 22:25:38] [config] train-embedder-rank:
+[2021-06-08 22:25:38] [config]   []
+[2021-06-08 22:25:38] [config] train-sets:
+[2021-06-08 22:25:38] [config]   - data_word/train.my
+[2021-06-08 22:25:38] [config]   - data_word/train.en
+[2021-06-08 22:25:38] [config] transformer-aan-activation: swish
+[2021-06-08 22:25:38] [config] transformer-aan-depth: 2
+[2021-06-08 22:25:38] [config] transformer-aan-nogate: false
+[2021-06-08 22:25:38] [config] transformer-decoder-autoreg: self-attention
+[2021-06-08 22:25:38] [config] transformer-depth-scaling: false
+[2021-06-08 22:25:38] [config] transformer-dim-aan: 2048
+[2021-06-08 22:25:38] [config] transformer-dim-ffn: 2048
+[2021-06-08 22:25:38] [config] transformer-dropout: 0.3
+[2021-06-08 22:25:38] [config] transformer-dropout-attention: 0
+[2021-06-08 22:25:38] [config] transformer-dropout-ffn: 0
+[2021-06-08 22:25:38] [config] transformer-ffn-activation: swish
+[2021-06-08 22:25:38] [config] transformer-ffn-depth: 2
+[2021-06-08 22:25:38] [config] transformer-guided-alignment-layer: last
+[2021-06-08 22:25:38] [config] transformer-heads: 8
+[2021-06-08 22:25:38] [config] transformer-no-projection: false
+[2021-06-08 22:25:38] [config] transformer-pool: false
+[2021-06-08 22:25:38] [config] transformer-postprocess: dan
+[2021-06-08 22:25:38] [config] transformer-postprocess-emb: d
+[2021-06-08 22:25:38] [config] transformer-postprocess-top: ""
+[2021-06-08 22:25:38] [config] transformer-preprocess: ""
+[2021-06-08 22:25:38] [config] transformer-tied-layers:
+[2021-06-08 22:25:38] [config]   []
+[2021-06-08 22:25:38] [config] transformer-train-position-embeddings: false
+[2021-06-08 22:25:38] [config] tsv: false
+[2021-06-08 22:25:38] [config] tsv-fields: 0
+[2021-06-08 22:25:38] [config] type: transformer
+[2021-06-08 22:25:38] [config] ulr: false
+[2021-06-08 22:25:38] [config] ulr-dim-emb: 0
+[2021-06-08 22:25:38] [config] ulr-dropout: 0
+[2021-06-08 22:25:38] [config] ulr-keys-vectors: ""
+[2021-06-08 22:25:38] [config] ulr-query-vectors: ""
+[2021-06-08 22:25:38] [config] ulr-softmax-temperature: 1
+[2021-06-08 22:25:38] [config] ulr-trainable-transformation: false
+[2021-06-08 22:25:38] [config] unlikelihood-loss: false
+[2021-06-08 22:25:38] [config] valid-freq: 5000
+[2021-06-08 22:25:38] [config] valid-log: model.transformer.word.my-en/valid.log
+[2021-06-08 22:25:38] [config] valid-max-length: 1000
+[2021-06-08 22:25:38] [config] valid-metrics:
+[2021-06-08 22:25:38] [config]   - cross-entropy
+[2021-06-08 22:25:38] [config]   - perplexity
+[2021-06-08 22:25:38] [config]   - bleu
+[2021-06-08 22:25:38] [config] valid-mini-batch: 64
+[2021-06-08 22:25:38] [config] valid-reset-stalled: false
+[2021-06-08 22:25:38] [config] valid-script-args:
+[2021-06-08 22:25:38] [config]   []
+[2021-06-08 22:25:38] [config] valid-script-path: ""
+[2021-06-08 22:25:38] [config] valid-sets:
+[2021-06-08 22:25:38] [config]   - data_word/valid.my
+[2021-06-08 22:25:38] [config]   - data_word/valid.en
+[2021-06-08 22:25:38] [config] valid-translation-output: model.transformer.word.my-en/valid.my-en.word.output
+[2021-06-08 22:25:38] [config] version: v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-08 22:25:38] [config] vocabs:
+[2021-06-08 22:25:38] [config]   - data_word/vocab/vocab.my.yml
+[2021-06-08 22:25:38] [config]   - data_word/vocab/vocab.en.yml
+[2021-06-08 22:25:38] [config] word-penalty: 0
+[2021-06-08 22:25:38] [config] word-scores: false
+[2021-06-08 22:25:38] [config] workspace: 1000
+[2021-06-08 22:25:38] [config] Loaded model has been created with Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-08 22:25:38] Using synchronous SGD
+[2021-06-08 22:25:38] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.my.yml
+[2021-06-08 22:25:38] [data] Setting vocabulary size for input 0 to 63,471
+[2021-06-08 22:25:38] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.en.yml
+[2021-06-08 22:25:39] [data] Setting vocabulary size for input 1 to 85,602
+[2021-06-08 22:25:39] [comm] Compiled without MPI support. Running as a single process on administrator-HP-Z2-Tower-G4-Workstation
+[2021-06-08 22:25:39] [batching] Collecting statistics for batch fitting with step size 10
+[2021-06-08 22:25:39] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-08 22:25:39] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-08 22:25:39] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-08 22:25:39] [comm] NCCLCommunicator constructed successfully
+[2021-06-08 22:25:39] [training] Using 2 GPUs
+[2021-06-08 22:25:39] [logits] Applying loss function for 1 factor(s)
+[2021-06-08 22:25:39] [memory] Reserving 347 MB, device gpu0
+[2021-06-08 22:25:39] [gpu] 16-bit TensorCores enabled for float32 matrix operations
+[2021-06-08 22:25:40] [memory] Reserving 347 MB, device gpu0
+[2021-06-08 22:26:00] [batching] Done. Typical MB size is 1,943 target words
+[2021-06-08 22:26:00] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-08 22:26:00] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-08 22:26:00] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-08 22:26:00] [comm] NCCLCommunicator constructed successfully
+[2021-06-08 22:26:00] [training] Using 2 GPUs
+[2021-06-08 22:26:00] Loading model from model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-08 22:26:01] Loading model from model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-08 22:26:01] Loading Adam parameters from model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-08 22:26:03] [memory] Reserving 347 MB, device gpu0
+[2021-06-08 22:26:03] [memory] Reserving 347 MB, device gpu1
+[2021-06-08 22:26:03] [training] Model reloaded from model.transformer.word.my-en/model.npz
+[2021-06-08 22:26:03] [data] Restoring the corpus state to epoch 2, batch 5000
+[2021-06-08 22:26:03] [data] Shuffling data
+[2021-06-08 22:26:03] [data] Done reading 256,102 sentences
+[2021-06-08 22:26:03] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-08 22:26:04] Training started
+[2021-06-08 22:26:04] [training] Batches are processed as 1 process(es) x 2 devices/process
+[2021-06-08 22:26:04] [memory] Reserving 347 MB, device gpu1
+[2021-06-08 22:26:04] [memory] Reserving 347 MB, device gpu0
+[2021-06-08 22:26:05] [memory] Reserving 347 MB, device gpu0
+[2021-06-08 22:26:05] [memory] Reserving 347 MB, device gpu1
+[2021-06-08 22:26:05] Loading model from model.transformer.word.my-en/model.npz
+[2021-06-08 22:26:06] [memory] Reserving 347 MB, device cpu0
+[2021-06-08 22:26:06] [memory] Reserving 173 MB, device gpu0
+[2021-06-08 22:26:06] [memory] Reserving 173 MB, device gpu1
+[2021-06-08 22:30:08] Ep. 2 : Up. 5500 : Sen. 110,721 : Cost 4.77949572 * 521,384 @ 840 after 5,761,792 : Time 248.20s : 2100.70 words/s : L.r. 3.0000e-04
+[2021-06-08 22:34:14] Ep. 2 : Up. 6000 : Sen. 144,468 : Cost 4.74155235 * 523,038 @ 1,036 after 6,284,830 : Time 245.31s : 2132.13 words/s : L.r. 3.0000e-04
+[2021-06-08 22:38:17] Ep. 2 : Up. 6500 : Sen. 177,149 : Cost 4.72681046 * 522,763 @ 500 after 6,807,593 : Time 243.11s : 2150.28 words/s : L.r. 3.0000e-04
+[2021-06-08 22:42:21] Ep. 2 : Up. 7000 : Sen. 211,038 : Cost 4.67637634 * 528,832 @ 742 after 7,336,425 : Time 244.23s : 2165.27 words/s : L.r. 3.0000e-04
+[2021-06-08 22:46:25] Ep. 2 : Up. 7500 : Sen. 244,678 : Cost 4.65483522 * 529,715 @ 630 after 7,866,140 : Time 243.76s : 2173.09 words/s : L.r. 3.0000e-04
+[2021-06-08 22:47:48] Seen 256076 samples
+[2021-06-08 22:47:48] Starting data epoch 3 in logical epoch 3
+[2021-06-08 22:47:48] [data] Shuffling data
+[2021-06-08 22:47:48] [data] Done reading 256,102 sentences
+[2021-06-08 22:47:49] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-08 22:50:27] Ep. 3 : Up. 8000 : Sen. 21,955 : Cost 4.51026917 * 518,282 @ 624 after 8,384,422 : Time 242.61s : 2136.25 words/s : L.r. 3.0000e-04
+[2021-06-08 22:54:31] Ep. 3 : Up. 8500 : Sen. 55,564 : Cost 4.43475819 * 524,954 @ 1,258 after 8,909,376 : Time 243.22s : 2158.33 words/s : L.r. 3.0000e-04
+[2021-06-08 22:58:34] Ep. 3 : Up. 9000 : Sen. 88,736 : Cost 4.44334650 * 524,084 @ 676 after 9,433,460 : Time 243.01s : 2156.59 words/s : L.r. 3.0000e-04
+[2021-06-08 23:02:37] Ep. 3 : Up. 9500 : Sen. 122,116 : Cost 4.41883993 * 524,753 @ 1,124 after 9,958,213 : Time 243.26s : 2157.13 words/s : L.r. 3.0000e-04
+[2021-06-08 23:06:40] Ep. 3 : Up. 10000 : Sen. 155,548 : Cost 4.39529705 * 526,309 @ 1,378 after 10,484,522 : Time 243.03s : 2165.64 words/s : L.r. 3.0000e-04
+[2021-06-08 23:06:40] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-08 23:06:42] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter10000.npz
+[2021-06-08 23:06:42] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-08 23:06:44] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+tcmalloc: large alloc 1073741824 bytes == 0x5614cc0f4000 @ 
+tcmalloc: large alloc 1207959552 bytes == 0x5614508c8000 @ 
+tcmalloc: large alloc 1476395008 bytes == 0x56150dbce000 @ 
+tcmalloc: large alloc 1610612736 bytes == 0x5614a08c8000 @ 
+tcmalloc: large alloc 1744830464 bytes == 0x5614508c8000 @ 
+tcmalloc: large alloc 2013265920 bytes == 0x5614508c8000 @ 
+tcmalloc: large alloc 2281701376 bytes == 0x56150dbce000 @ 
+[2021-06-08 23:07:05] [valid] Ep. 3 : Up. 10000 : cross-entropy : 138.053 : new best
+[2021-06-08 23:07:07] [valid] Ep. 3 : Up. 10000 : perplexity : 130.987 : new best
+[2021-06-08 23:07:22] [valid] [valid] First sentence's tokens as scored:
+[2021-06-08 23:07:22] [valid] DefaultVocab keeps original segments for scoring
+[2021-06-08 23:07:22] [valid] [valid]   Hyp: A spokesperson for the Israeli government said that he was an important accident for the death of the death of the death of the incident.
+[2021-06-08 23:07:22] [valid] [valid]   Ref: A reporter for the Al Jazeera news agency remarked : &amp; quot ; Officials have been cited as saying that the incident may have been caused by pyrotechnics that caused an explosion leading to a significant loss of life . &amp; quot ;
+[2021-06-08 23:08:50] [valid] Ep. 3 : Up. 10000 : bleu : 2.97708 : new best
+[2021-06-08 23:12:54] Ep. 3 : Up. 10500 : Sen. 188,973 : Cost 4.36365271 * 522,161 @ 1,056 after 11,006,683 : Time 373.68s : 1397.34 words/s : L.r. 3.0000e-04
+[2021-06-08 23:16:57] Ep. 3 : Up. 11000 : Sen. 222,319 : Cost 4.33343744 * 523,720 @ 1,253 after 11,530,403 : Time 242.97s : 2155.48 words/s : L.r. 3.0000e-04
+[2021-06-08 23:21:00] Ep. 3 : Up. 11500 : Sen. 255,580 : Cost 4.33262491 * 526,328 @ 1,059 after 12,056,731 : Time 243.47s : 2161.74 words/s : L.r. 3.0000e-04
+[2021-06-08 23:21:04] Seen 256076 samples
+[2021-06-08 23:21:04] Starting data epoch 4 in logical epoch 4
+[2021-06-08 23:21:04] [data] Shuffling data
+[2021-06-08 23:21:04] [data] Done reading 256,102 sentences
+[2021-06-08 23:21:05] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-08 23:25:04] Ep. 4 : Up. 12000 : Sen. 33,385 : Cost 4.13735723 * 522,257 @ 1,272 after 12,578,988 : Time 243.74s : 2142.66 words/s : L.r. 3.0000e-04
+[2021-06-08 23:29:07] Ep. 4 : Up. 12500 : Sen. 66,515 : Cost 4.15200710 * 524,014 @ 1,054 after 13,103,002 : Time 242.80s : 2158.20 words/s : L.r. 3.0000e-04
+[2021-06-08 23:33:09] Ep. 4 : Up. 13000 : Sen. 99,412 : Cost 4.15445948 * 519,164 @ 1,242 after 13,622,166 : Time 242.03s : 2145.01 words/s : L.r. 3.0000e-04
+[2021-06-08 23:37:12] Ep. 4 : Up. 13500 : Sen. 132,679 : Cost 4.14459848 * 527,262 @ 864 after 14,149,428 : Time 243.73s : 2163.32 words/s : L.r. 3.0000e-04
+[2021-06-08 23:41:15] Ep. 4 : Up. 14000 : Sen. 166,051 : Cost 4.10562468 * 522,358 @ 572 after 14,671,786 : Time 242.72s : 2152.13 words/s : L.r. 3.0000e-04
+[2021-06-08 23:45:18] Ep. 4 : Up. 14500 : Sen. 199,131 : Cost 4.12284231 * 520,328 @ 1,064 after 15,192,114 : Time 242.47s : 2145.98 words/s : L.r. 3.0000e-04
+[2021-06-08 23:49:21] Ep. 4 : Up. 15000 : Sen. 233,019 : Cost 4.07717562 * 527,360 @ 1,120 after 15,719,474 : Time 243.58s : 2165.05 words/s : L.r. 3.0000e-04
+[2021-06-08 23:49:21] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-08 23:49:23] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter15000.npz
+[2021-06-08 23:49:24] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-08 23:49:25] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-08 23:49:30] [valid] Ep. 4 : Up. 15000 : cross-entropy : 130.092 : new best
+[2021-06-08 23:49:33] [valid] Ep. 4 : Up. 15000 : perplexity : 98.8878 : new best
+[2021-06-08 23:50:37] [valid] Ep. 4 : Up. 15000 : bleu : 4.44958 : new best
+[2021-06-08 23:53:30] Seen 256076 samples
+[2021-06-08 23:53:30] Starting data epoch 5 in logical epoch 5
+[2021-06-08 23:53:30] [data] Shuffling data
+[2021-06-08 23:53:30] [data] Done reading 256,102 sentences
+[2021-06-08 23:53:30] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-08 23:54:40] Ep. 5 : Up. 15500 : Sen. 9,709 : Cost 4.05636311 * 517,842 @ 1,141 after 16,237,316 : Time 319.16s : 1622.51 words/s : L.r. 3.0000e-04
+[2021-06-08 23:58:43] Ep. 5 : Up. 16000 : Sen. 42,817 : Cost 3.92412591 * 522,896 @ 1,092 after 16,760,212 : Time 242.84s : 2153.30 words/s : L.r. 3.0000e-04
+[2021-06-09 00:02:46] Ep. 5 : Up. 16500 : Sen. 76,472 : Cost 3.92751694 * 525,781 @ 1,484 after 17,285,993 : Time 243.25s : 2161.48 words/s : L.r. 2.9542e-04
+[2021-06-09 00:06:49] Ep. 5 : Up. 17000 : Sen. 109,586 : Cost 3.92206192 * 519,861 @ 675 after 17,805,854 : Time 242.55s : 2143.32 words/s : L.r. 2.9104e-04
+[2021-06-09 00:10:51] Ep. 5 : Up. 17500 : Sen. 142,517 : Cost 3.93955708 * 519,600 @ 1,296 after 18,325,454 : Time 242.16s : 2145.69 words/s : L.r. 2.8685e-04
+[2021-06-09 00:14:54] Ep. 5 : Up. 18000 : Sen. 176,499 : Cost 3.90355253 * 525,292 @ 546 after 18,850,746 : Time 243.16s : 2160.30 words/s : L.r. 2.8284e-04
+[2021-06-09 00:18:57] Ep. 5 : Up. 18500 : Sen. 209,175 : Cost 3.92594600 * 519,255 @ 993 after 19,370,001 : Time 242.43s : 2141.88 words/s : L.r. 2.7899e-04
+[2021-06-09 00:23:00] Ep. 5 : Up. 19000 : Sen. 242,656 : Cost 3.90159535 * 524,496 @ 1,272 after 19,894,497 : Time 243.00s : 2158.40 words/s : L.r. 2.7530e-04
+[2021-06-09 00:24:39] Seen 256076 samples
+[2021-06-09 00:24:39] Starting data epoch 6 in logical epoch 6
+[2021-06-09 00:24:39] [data] Shuffling data
+[2021-06-09 00:24:39] [data] Done reading 256,102 sentences
+[2021-06-09 00:24:39] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 00:27:04] Ep. 6 : Up. 19500 : Sen. 19,868 : Cost 3.79792333 * 528,223 @ 830 after 20,422,720 : Time 244.60s : 2159.55 words/s : L.r. 2.7175e-04
+[2021-06-09 00:31:07] Ep. 6 : Up. 20000 : Sen. 53,153 : Cost 3.73582935 * 523,051 @ 756 after 20,945,771 : Time 243.06s : 2151.94 words/s : L.r. 2.6833e-04
+[2021-06-09 00:31:07] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 00:31:09] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter20000.npz
+[2021-06-09 00:31:10] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 00:31:11] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 00:31:16] [valid] Ep. 6 : Up. 20000 : cross-entropy : 125.377 : new best
+[2021-06-09 00:31:18] [valid] Ep. 6 : Up. 20000 : perplexity : 83.7186 : new best
+[2021-06-09 00:32:08] [valid] Ep. 6 : Up. 20000 : bleu : 5.67991 : new best
+[2021-06-09 00:36:11] Ep. 6 : Up. 20500 : Sen. 86,559 : Cost 3.73161674 * 524,043 @ 954 after 21,469,814 : Time 304.00s : 1723.84 words/s : L.r. 2.6504e-04
+[2021-06-09 00:40:14] Ep. 6 : Up. 21000 : Sen. 119,704 : Cost 3.75442791 * 520,580 @ 1,225 after 21,990,394 : Time 242.69s : 2145.04 words/s : L.r. 2.6186e-04
+[2021-06-09 00:44:18] Ep. 6 : Up. 21500 : Sen. 153,530 : Cost 3.74211192 * 526,482 @ 848 after 22,516,876 : Time 243.70s : 2160.38 words/s : L.r. 2.5880e-04
+[2021-06-09 00:48:20] Ep. 6 : Up. 22000 : Sen. 186,514 : Cost 3.75059843 * 517,713 @ 1,166 after 23,034,589 : Time 241.95s : 2139.76 words/s : L.r. 2.5584e-04
+[2021-06-09 00:52:23] Ep. 6 : Up. 22500 : Sen. 219,722 : Cost 3.75315928 * 524,299 @ 1,156 after 23,558,888 : Time 243.38s : 2154.28 words/s : L.r. 2.5298e-04
+[2021-06-09 00:56:25] Ep. 6 : Up. 23000 : Sen. 252,875 : Cost 3.75056744 * 520,258 @ 1,296 after 24,079,146 : Time 242.23s : 2147.75 words/s : L.r. 2.5022e-04
+[2021-06-09 00:56:49] Seen 256076 samples
+[2021-06-09 00:56:49] Starting data epoch 7 in logical epoch 7
+[2021-06-09 00:56:49] [data] Shuffling data
+[2021-06-09 00:56:49] [data] Done reading 256,102 sentences
+[2021-06-09 00:56:50] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 01:00:30] Ep. 7 : Up. 23500 : Sen. 29,957 : Cost 3.59237909 * 526,612 @ 945 after 24,605,758 : Time 244.58s : 2153.11 words/s : L.r. 2.4754e-04
+[2021-06-09 01:04:34] Ep. 7 : Up. 24000 : Sen. 64,137 : Cost 3.57531166 * 527,409 @ 1,281 after 25,133,167 : Time 243.92s : 2162.26 words/s : L.r. 2.4495e-04
+[2021-06-09 01:08:36] Ep. 7 : Up. 24500 : Sen. 97,814 : Cost 3.58612490 * 521,464 @ 1,248 after 25,654,631 : Time 242.45s : 2150.85 words/s : L.r. 2.4244e-04
+[2021-06-09 01:12:40] Ep. 7 : Up. 25000 : Sen. 130,770 : Cost 3.61957002 * 527,302 @ 1,092 after 26,181,933 : Time 243.46s : 2165.84 words/s : L.r. 2.4000e-04
+[2021-06-09 01:12:40] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 01:12:41] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter25000.npz
+[2021-06-09 01:12:42] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 01:12:43] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 01:12:48] [valid] Ep. 7 : Up. 25000 : cross-entropy : 122.692 : new best
+[2021-06-09 01:12:51] [valid] Ep. 7 : Up. 25000 : perplexity : 76.1445 : new best
+[2021-06-09 01:13:27] [valid] Ep. 7 : Up. 25000 : bleu : 6.46912 : new best
+[2021-06-09 01:17:32] Ep. 7 : Up. 25500 : Sen. 164,145 : Cost 3.61853170 * 528,818 @ 1,060 after 26,710,751 : Time 292.20s : 1809.79 words/s : L.r. 2.3764e-04
+[2021-06-09 01:21:34] Ep. 7 : Up. 26000 : Sen. 197,676 : Cost 3.61144543 * 518,458 @ 1,217 after 27,229,209 : Time 241.97s : 2142.66 words/s : L.r. 2.3534e-04
+[2021-06-09 01:25:36] Ep. 7 : Up. 26500 : Sen. 230,262 : Cost 3.62988710 * 517,091 @ 1,300 after 27,746,300 : Time 241.83s : 2138.25 words/s : L.r. 2.3311e-04
+[2021-06-09 01:28:44] Seen 256076 samples
+[2021-06-09 01:28:44] Starting data epoch 8 in logical epoch 8
+[2021-06-09 01:28:44] [data] Shuffling data
+[2021-06-09 01:28:44] [data] Done reading 256,102 sentences
+[2021-06-09 01:28:44] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 01:29:39] Ep. 8 : Up. 27000 : Sen. 7,848 : Cost 3.55650067 * 521,743 @ 931 after 28,268,043 : Time 243.45s : 2143.08 words/s : L.r. 2.3094e-04
+[2021-06-09 01:33:42] Ep. 8 : Up. 27500 : Sen. 40,953 : Cost 3.46184564 * 523,326 @ 882 after 28,791,369 : Time 242.93s : 2154.21 words/s : L.r. 2.2883e-04
+[2021-06-09 01:37:46] Ep. 8 : Up. 28000 : Sen. 74,329 : Cost 3.48328590 * 527,114 @ 994 after 29,318,483 : Time 243.90s : 2161.22 words/s : L.r. 2.2678e-04
+[2021-06-09 01:41:49] Ep. 8 : Up. 28500 : Sen. 107,953 : Cost 3.47480512 * 524,026 @ 1,099 after 29,842,509 : Time 242.89s : 2157.50 words/s : L.r. 2.2478e-04
+[2021-06-09 01:45:51] Ep. 8 : Up. 29000 : Sen. 140,948 : Cost 3.49858022 * 519,873 @ 1,060 after 30,362,382 : Time 242.47s : 2144.11 words/s : L.r. 2.2283e-04
+[2021-06-09 01:49:54] Ep. 8 : Up. 29500 : Sen. 173,901 : Cost 3.50204420 * 521,037 @ 982 after 30,883,419 : Time 242.38s : 2149.67 words/s : L.r. 2.2094e-04
+[2021-06-09 01:53:57] Ep. 8 : Up. 30000 : Sen. 207,584 : Cost 3.50576568 * 523,360 @ 700 after 31,406,779 : Time 243.30s : 2151.05 words/s : L.r. 2.1909e-04
+[2021-06-09 01:53:57] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 01:53:59] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter30000.npz
+[2021-06-09 01:53:59] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 01:54:01] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 01:54:06] [valid] Ep. 8 : Up. 30000 : cross-entropy : 120.977 : new best
+[2021-06-09 01:54:08] [valid] Ep. 8 : Up. 30000 : perplexity : 71.6701 : new best
+[2021-06-09 01:54:44] [valid] Ep. 8 : Up. 30000 : bleu : 6.88149 : new best
+[2021-06-09 01:58:50] Ep. 8 : Up. 30500 : Sen. 241,533 : Cost 3.50761080 * 536,474 @ 1,272 after 31,943,253 : Time 293.18s : 1829.87 words/s : L.r. 2.1729e-04
+[2021-06-09 02:00:37] Seen 256076 samples
+[2021-06-09 02:00:37] Starting data epoch 9 in logical epoch 9
+[2021-06-09 02:00:37] [data] Shuffling data
+[2021-06-09 02:00:37] [data] Done reading 256,102 sentences
+[2021-06-09 02:00:38] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 02:02:55] Ep. 9 : Up. 31000 : Sen. 19,090 : Cost 3.41658688 * 529,050 @ 847 after 32,472,303 : Time 244.83s : 2160.92 words/s : L.r. 2.1553e-04
+[2021-06-09 02:06:58] Ep. 9 : Up. 31500 : Sen. 52,565 : Cost 3.35394740 * 522,533 @ 864 after 32,994,836 : Time 242.82s : 2151.98 words/s : L.r. 2.1381e-04
+[2021-06-09 02:11:00] Ep. 9 : Up. 32000 : Sen. 86,125 : Cost 3.37433290 * 522,648 @ 812 after 33,517,484 : Time 242.44s : 2155.77 words/s : L.r. 2.1213e-04
+[2021-06-09 02:15:03] Ep. 9 : Up. 32500 : Sen. 118,783 : Cost 3.40472627 * 523,667 @ 1,310 after 34,041,151 : Time 242.79s : 2156.85 words/s : L.r. 2.1049e-04
+[2021-06-09 02:19:07] Ep. 9 : Up. 33000 : Sen. 152,894 : Cost 3.38688350 * 527,971 @ 1,088 after 34,569,122 : Time 243.54s : 2167.91 words/s : L.r. 2.0889e-04
+[2021-06-09 02:23:09] Ep. 9 : Up. 33500 : Sen. 185,932 : Cost 3.41489983 * 521,132 @ 1,052 after 35,090,254 : Time 242.43s : 2149.62 words/s : L.r. 2.0733e-04
+[2021-06-09 02:27:12] Ep. 9 : Up. 34000 : Sen. 219,394 : Cost 3.42059326 * 524,985 @ 1,190 after 35,615,239 : Time 243.45s : 2156.47 words/s : L.r. 2.0580e-04
+[2021-06-09 02:31:15] Ep. 9 : Up. 34500 : Sen. 251,836 : Cost 3.44220877 * 519,074 @ 1,166 after 36,134,313 : Time 242.07s : 2144.31 words/s : L.r. 2.0430e-04
+[2021-06-09 02:31:43] Seen 256076 samples
+[2021-06-09 02:31:43] Starting data epoch 10 in logical epoch 10
+[2021-06-09 02:31:43] [data] Shuffling data
+[2021-06-09 02:31:43] [data] Done reading 256,102 sentences
+[2021-06-09 02:31:43] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 02:35:19] Ep. 10 : Up. 35000 : Sen. 29,648 : Cost 3.27198172 * 524,904 @ 914 after 36,659,217 : Time 244.02s : 2151.07 words/s : L.r. 2.0284e-04
+[2021-06-09 02:35:19] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 02:35:20] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter35000.npz
+[2021-06-09 02:35:21] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 02:35:22] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 02:35:27] [valid] Ep. 10 : Up. 35000 : cross-entropy : 119.978 : new best
+[2021-06-09 02:35:29] [valid] Ep. 10 : Up. 35000 : perplexity : 69.1863 : new best
+[2021-06-09 02:36:02] [valid] Ep. 10 : Up. 35000 : bleu : 7.16765 : new best
+[2021-06-09 02:40:05] Ep. 10 : Up. 35500 : Sen. 62,420 : Cost 3.30068517 * 519,644 @ 1,002 after 37,178,861 : Time 286.23s : 1815.47 words/s : L.r. 2.0140e-04
+[2021-06-09 02:44:08] Ep. 10 : Up. 36000 : Sen. 96,000 : Cost 3.30499029 * 524,567 @ 882 after 37,703,428 : Time 243.11s : 2157.71 words/s : L.r. 2.0000e-04
+[2021-06-09 02:48:12] Ep. 10 : Up. 36500 : Sen. 129,633 : Cost 3.31339622 * 528,337 @ 708 after 38,231,765 : Time 243.74s : 2167.65 words/s : L.r. 1.9863e-04
+[2021-06-09 02:52:14] Ep. 10 : Up. 37000 : Sen. 162,966 : Cost 3.31862879 * 522,210 @ 1,430 after 38,753,975 : Time 242.54s : 2153.09 words/s : L.r. 1.9728e-04
+[2021-06-09 02:56:18] Ep. 10 : Up. 37500 : Sen. 196,454 : Cost 3.33235502 * 527,402 @ 1,120 after 39,281,377 : Time 243.68s : 2164.28 words/s : L.r. 1.9596e-04
+[2021-06-09 03:00:21] Ep. 10 : Up. 38000 : Sen. 230,162 : Cost 3.32756925 * 526,096 @ 1,163 after 39,807,473 : Time 243.34s : 2161.99 words/s : L.r. 1.9467e-04
+[2021-06-09 03:03:31] Seen 256076 samples
+[2021-06-09 03:03:31] Starting data epoch 11 in logical epoch 11
+[2021-06-09 03:03:31] [data] Shuffling data
+[2021-06-09 03:03:31] [data] Done reading 256,102 sentences
+[2021-06-09 03:03:32] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 03:04:25] Ep. 11 : Up. 38500 : Sen. 7,492 : Cost 3.31964135 * 524,737 @ 1,512 after 40,332,210 : Time 243.78s : 2152.54 words/s : L.r. 1.9340e-04
+[2021-06-09 03:08:27] Ep. 11 : Up. 39000 : Sen. 40,235 : Cost 3.21944880 * 521,270 @ 1,190 after 40,853,480 : Time 242.49s : 2149.65 words/s : L.r. 1.9215e-04
+[2021-06-09 03:12:30] Ep. 11 : Up. 39500 : Sen. 73,445 : Cost 3.21693397 * 520,739 @ 615 after 41,374,219 : Time 242.26s : 2149.54 words/s : L.r. 1.9093e-04
+[2021-06-09 03:16:33] Ep. 11 : Up. 40000 : Sen. 107,265 : Cost 3.24244261 * 527,880 @ 1,400 after 41,902,099 : Time 243.71s : 2165.98 words/s : L.r. 1.8974e-04
+[2021-06-09 03:16:33] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 03:16:35] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter40000.npz
+[2021-06-09 03:16:36] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 03:16:37] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 03:16:42] [valid] Ep. 11 : Up. 40000 : cross-entropy : 119.726 : new best
+[2021-06-09 03:16:45] [valid] Ep. 11 : Up. 40000 : perplexity : 68.5729 : new best
+[2021-06-09 03:17:15] [valid] Ep. 11 : Up. 40000 : bleu : 7.19877 : new best
+[2021-06-09 03:21:18] Ep. 11 : Up. 40500 : Sen. 140,403 : Cost 3.25120926 * 523,003 @ 966 after 42,425,102 : Time 285.03s : 1834.92 words/s : L.r. 1.8856e-04
+[2021-06-09 03:25:22] Ep. 11 : Up. 41000 : Sen. 173,928 : Cost 3.24863124 * 525,418 @ 1,190 after 42,950,520 : Time 243.47s : 2158.01 words/s : L.r. 1.8741e-04
+[2021-06-09 03:29:25] Ep. 11 : Up. 41500 : Sen. 206,803 : Cost 3.26589561 * 523,415 @ 1,359 after 43,473,935 : Time 242.84s : 2155.41 words/s : L.r. 1.8628e-04
+[2021-06-09 03:33:29] Ep. 11 : Up. 42000 : Sen. 241,325 : Cost 3.25605249 * 528,092 @ 717 after 44,002,027 : Time 243.72s : 2166.76 words/s : L.r. 1.8516e-04
+[2021-06-09 03:35:19] Seen 256076 samples
+[2021-06-09 03:35:19] Starting data epoch 12 in logical epoch 12
+[2021-06-09 03:35:19] [data] Shuffling data
+[2021-06-09 03:35:19] [data] Done reading 256,102 sentences
+[2021-06-09 03:35:19] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 03:37:32] Ep. 12 : Up. 42500 : Sen. 18,410 : Cost 3.19521379 * 525,356 @ 937 after 44,527,383 : Time 243.91s : 2153.92 words/s : L.r. 1.8407e-04
+[2021-06-09 03:41:35] Ep. 12 : Up. 43000 : Sen. 51,472 : Cost 3.15509534 * 522,889 @ 1,025 after 45,050,272 : Time 242.91s : 2152.62 words/s : L.r. 1.8300e-04
+[2021-06-09 03:45:39] Ep. 12 : Up. 43500 : Sen. 85,069 : Cost 3.16799402 * 527,423 @ 1,128 after 45,577,695 : Time 243.47s : 2166.31 words/s : L.r. 1.8194e-04
+[2021-06-09 03:49:41] Ep. 12 : Up. 44000 : Sen. 118,568 : Cost 3.17607784 * 519,006 @ 1,378 after 46,096,701 : Time 242.04s : 2144.29 words/s : L.r. 1.8091e-04
+[2021-06-09 03:53:44] Ep. 12 : Up. 44500 : Sen. 152,248 : Cost 3.17566705 * 524,979 @ 708 after 46,621,680 : Time 243.38s : 2157.00 words/s : L.r. 1.7989e-04
+[2021-06-09 03:57:47] Ep. 12 : Up. 45000 : Sen. 185,292 : Cost 3.20707941 * 526,775 @ 544 after 47,148,455 : Time 243.18s : 2166.16 words/s : L.r. 1.7889e-04
+[2021-06-09 03:57:47] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 03:57:49] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter45000.npz
+[2021-06-09 03:57:50] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 03:57:51] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 03:57:57] [valid] Ep. 12 : Up. 45000 : cross-entropy : 119.663 : new best
+[2021-06-09 03:57:59] [valid] Ep. 12 : Up. 45000 : perplexity : 68.4212 : new best
+[2021-06-09 03:58:30] [valid] Ep. 12 : Up. 45000 : bleu : 7.30769 : new best
+[2021-06-09 04:02:34] Ep. 12 : Up. 45500 : Sen. 218,678 : Cost 3.21916127 * 526,415 @ 1,032 after 47,674,870 : Time 286.56s : 1836.98 words/s : L.r. 1.7790e-04
+[2021-06-09 04:06:37] Ep. 12 : Up. 46000 : Sen. 252,812 : Cost 3.20348883 * 525,566 @ 841 after 48,200,436 : Time 243.20s : 2161.07 words/s : L.r. 1.7693e-04
+[2021-06-09 04:07:06] Seen 256076 samples
+[2021-06-09 04:07:06] Starting data epoch 13 in logical epoch 13
+[2021-06-09 04:07:06] [data] Shuffling data
+[2021-06-09 04:07:06] [data] Done reading 256,102 sentences
+[2021-06-09 04:07:06] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 04:10:42] Ep. 13 : Up. 46500 : Sen. 29,668 : Cost 3.11253643 * 527,159 @ 1,120 after 48,727,595 : Time 244.67s : 2154.60 words/s : L.r. 1.7598e-04
+[2021-06-09 04:14:45] Ep. 13 : Up. 47000 : Sen. 63,031 : Cost 3.09795928 * 523,274 @ 918 after 49,250,869 : Time 243.09s : 2152.60 words/s : L.r. 1.7504e-04
+[2021-06-09 04:18:48] Ep. 13 : Up. 47500 : Sen. 96,857 : Cost 3.10924053 * 525,817 @ 832 after 49,776,686 : Time 243.28s : 2161.37 words/s : L.r. 1.7411e-04
+[2021-06-09 04:22:51] Ep. 13 : Up. 48000 : Sen. 130,387 : Cost 3.11282754 * 524,512 @ 646 after 50,301,198 : Time 242.86s : 2159.70 words/s : L.r. 1.7321e-04
+[2021-06-09 04:26:54] Ep. 13 : Up. 48500 : Sen. 163,451 : Cost 3.15554738 * 522,708 @ 1,204 after 50,823,906 : Time 242.84s : 2152.52 words/s : L.r. 1.7231e-04
+[2021-06-09 04:30:57] Ep. 13 : Up. 49000 : Sen. 197,076 : Cost 3.14387321 * 526,386 @ 1,092 after 51,350,292 : Time 243.51s : 2161.62 words/s : L.r. 1.7143e-04
+[2021-06-09 04:35:00] Ep. 13 : Up. 49500 : Sen. 230,329 : Cost 3.16055918 * 523,670 @ 636 after 51,873,962 : Time 243.08s : 2154.34 words/s : L.r. 1.7056e-04
+[2021-06-09 04:38:10] Seen 256076 samples
+[2021-06-09 04:38:10] Starting data epoch 14 in logical epoch 14
+[2021-06-09 04:38:10] [data] Shuffling data
+[2021-06-09 04:38:10] [data] Done reading 256,102 sentences
+[2021-06-09 04:38:11] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 04:39:04] Ep. 14 : Up. 50000 : Sen. 7,161 : Cost 3.15149951 * 522,621 @ 952 after 52,396,583 : Time 243.79s : 2143.74 words/s : L.r. 1.6971e-04
+[2021-06-09 04:39:04] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 04:39:06] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter50000.npz
+[2021-06-09 04:39:07] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 04:39:08] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 04:39:13] [valid] Ep. 14 : Up. 50000 : cross-entropy : 119.698 : stalled 1 times (last best: 119.663)
+[2021-06-09 04:39:15] [valid] Ep. 14 : Up. 50000 : perplexity : 68.5066 : stalled 1 times (last best: 68.4212)
+[2021-06-09 04:39:45] [valid] Ep. 14 : Up. 50000 : bleu : 7.67143 : new best
+[2021-06-09 04:43:49] Ep. 14 : Up. 50500 : Sen. 40,449 : Cost 3.03340578 * 525,317 @ 1,484 after 52,921,900 : Time 284.49s : 1846.50 words/s : L.r. 1.6886e-04
+[2021-06-09 04:47:51] Ep. 14 : Up. 51000 : Sen. 73,904 : Cost 3.05233169 * 518,274 @ 1,140 after 53,440,174 : Time 242.08s : 2140.89 words/s : L.r. 1.6803e-04
+[2021-06-09 04:51:53] Ep. 14 : Up. 51500 : Sen. 106,506 : Cost 3.08805680 * 519,250 @ 1,484 after 53,959,424 : Time 241.96s : 2146.00 words/s : L.r. 1.6722e-04
+[2021-06-09 04:55:57] Ep. 14 : Up. 52000 : Sen. 140,334 : Cost 3.08427930 * 526,939 @ 1,728 after 54,486,363 : Time 243.71s : 2162.19 words/s : L.r. 1.6641e-04
+[2021-06-09 05:00:00] Ep. 14 : Up. 52500 : Sen. 173,725 : Cost 3.09650421 * 527,095 @ 975 after 55,013,458 : Time 243.70s : 2162.86 words/s : L.r. 1.6562e-04
+[2021-06-09 05:04:03] Ep. 14 : Up. 53000 : Sen. 207,096 : Cost 3.10125327 * 523,403 @ 1,067 after 55,536,861 : Time 243.22s : 2152.00 words/s : L.r. 1.6483e-04
+[2021-06-09 05:08:06] Ep. 14 : Up. 53500 : Sen. 240,617 : Cost 3.10943866 * 524,046 @ 1,134 after 56,060,907 : Time 242.83s : 2158.10 words/s : L.r. 1.6406e-04
+[2021-06-09 05:10:00] Seen 256076 samples
+[2021-06-09 05:10:00] Starting data epoch 15 in logical epoch 15
+[2021-06-09 05:10:00] [data] Shuffling data
+[2021-06-09 05:10:00] [data] Done reading 256,102 sentences
+[2021-06-09 05:10:00] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 05:12:09] Ep. 15 : Up. 54000 : Sen. 17,763 : Cost 3.03584313 * 520,027 @ 1,149 after 56,580,934 : Time 242.94s : 2140.52 words/s : L.r. 1.6330e-04
+[2021-06-09 05:16:13] Ep. 15 : Up. 54500 : Sen. 51,107 : Cost 3.00110126 * 528,705 @ 1,060 after 57,109,639 : Time 243.90s : 2167.69 words/s : L.r. 1.6255e-04
+[2021-06-09 05:20:15] Ep. 15 : Up. 55000 : Sen. 84,348 : Cost 3.01241064 * 519,911 @ 1,210 after 57,629,550 : Time 242.13s : 2147.24 words/s : L.r. 1.6181e-04
+[2021-06-09 05:20:15] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 05:20:17] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter55000.npz
+[2021-06-09 05:20:17] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 05:20:19] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 05:20:24] [valid] Ep. 15 : Up. 55000 : cross-entropy : 119.799 : stalled 2 times (last best: 119.663)
+[2021-06-09 05:20:26] [valid] Ep. 15 : Up. 55000 : perplexity : 68.75 : stalled 2 times (last best: 68.4212)
+[2021-06-09 05:20:56] [valid] Ep. 15 : Up. 55000 : bleu : 7.77793 : new best
+[2021-06-09 05:25:01] Ep. 15 : Up. 55500 : Sen. 117,947 : Cost 3.04380322 * 529,135 @ 1,260 after 58,158,685 : Time 285.48s : 1853.52 words/s : L.r. 1.6108e-04
+[2021-06-09 05:29:03] Ep. 15 : Up. 56000 : Sen. 151,308 : Cost 3.04613543 * 522,087 @ 1,176 after 58,680,772 : Time 242.77s : 2150.52 words/s : L.r. 1.6036e-04
+[2021-06-09 05:33:06] Ep. 15 : Up. 56500 : Sen. 184,312 : Cost 3.05751753 * 518,534 @ 986 after 59,199,306 : Time 242.26s : 2140.37 words/s : L.r. 1.5965e-04
+[2021-06-09 05:37:09] Ep. 15 : Up. 57000 : Sen. 217,965 : Cost 3.06179309 * 527,954 @ 1,026 after 59,727,260 : Time 243.52s : 2168.03 words/s : L.r. 1.5894e-04
+[2021-06-09 05:41:12] Ep. 15 : Up. 57500 : Sen. 251,561 : Cost 3.07188678 * 523,130 @ 984 after 60,250,390 : Time 242.67s : 2155.73 words/s : L.r. 1.5825e-04
+[2021-06-09 05:41:47] Seen 256076 samples
+[2021-06-09 05:41:47] Starting data epoch 16 in logical epoch 16
+[2021-06-09 05:41:47] [data] Shuffling data
+[2021-06-09 05:41:47] [data] Done reading 256,102 sentences
+[2021-06-09 05:41:47] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 05:45:16] Ep. 16 : Up. 58000 : Sen. 29,135 : Cost 2.96025252 * 525,513 @ 864 after 60,775,903 : Time 243.64s : 2156.89 words/s : L.r. 1.5757e-04
+[2021-06-09 05:49:19] Ep. 16 : Up. 58500 : Sen. 61,939 : Cost 2.97771239 * 526,381 @ 929 after 61,302,284 : Time 243.50s : 2161.69 words/s : L.r. 1.5689e-04
+[2021-06-09 05:53:22] Ep. 16 : Up. 59000 : Sen. 95,420 : Cost 2.97980928 * 521,398 @ 1,378 after 61,823,682 : Time 242.58s : 2149.41 words/s : L.r. 1.5623e-04
+[2021-06-09 05:57:25] Ep. 16 : Up. 59500 : Sen. 128,839 : Cost 2.99896932 * 525,728 @ 676 after 62,349,410 : Time 243.63s : 2157.88 words/s : L.r. 1.5557e-04
+[2021-06-09 06:01:29] Ep. 16 : Up. 60000 : Sen. 162,891 : Cost 2.99113059 * 531,315 @ 1,600 after 62,880,725 : Time 243.89s : 2178.51 words/s : L.r. 1.5492e-04
+[2021-06-09 06:01:29] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 06:01:31] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter60000.npz
+[2021-06-09 06:01:31] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 06:01:33] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 06:01:38] [valid] Ep. 16 : Up. 60000 : cross-entropy : 120.044 : stalled 3 times (last best: 119.663)
+[2021-06-09 06:01:40] [valid] Ep. 16 : Up. 60000 : perplexity : 69.3494 : stalled 3 times (last best: 68.4212)
+[2021-06-09 06:02:10] [valid] Ep. 16 : Up. 60000 : bleu : 7.88137 : new best
+...
+...
+...
+[2021-06-09 08:06:12] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 08:06:14] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter75000.npz
+[2021-06-09 08:06:15] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 08:06:16] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 08:06:21] [valid] Ep. 20 : Up. 75000 : cross-entropy : 120.72 : stalled 6 times (last best: 119.663)
+[2021-06-09 08:06:24] [valid] Ep. 20 : Up. 75000 : perplexity : 71.0237 : stalled 6 times (last best: 68.4212)
+[2021-06-09 08:06:52] [valid] Ep. 20 : Up. 75000 : bleu : 8.48938 : new best
+...
+...
+...
+[2021-06-09 09:58:32] Ep. 24 : Up. 88500 : Sen. 17,077 : Cost 2.77898717 * 523,313 @ 1,092 after 92,767,934 : Time 245.80s : 2129.06 words/s : L.r. 1.2756e-04
+[2021-06-09 10:02:37] Ep. 24 : Up. 89000 : Sen. 50,837 : Cost 2.72686481 * 523,279 @ 954 after 93,291,213 : Time 244.43s : 2140.79 words/s : L.r. 1.2720e-04
+[2021-06-09 10:06:42] Ep. 24 : Up. 89500 : Sen. 83,799 : Cost 2.75222421 * 522,486 @ 929 after 93,813,699 : Time 245.16s : 2131.21 words/s : L.r. 1.2684e-04
+[2021-06-09 10:10:47] Ep. 24 : Up. 90000 : Sen. 117,284 : Cost 2.76568127 * 521,991 @ 747 after 94,335,690 : Time 244.56s : 2134.37 words/s : L.r. 1.2649e-04
+[2021-06-09 10:10:47] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 10:10:48] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter90000.npz
+[2021-06-09 10:10:49] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 10:10:51] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 10:10:56] [valid] Ep. 24 : Up. 90000 : cross-entropy : 121.775 : stalled 9 times (last best: 119.663)
+[2021-06-09 10:10:58] [valid] Ep. 24 : Up. 90000 : perplexity : 73.7198 : stalled 9 times (last best: 68.4212)
+[2021-06-09 10:11:27] [valid] Ep. 24 : Up. 90000 : bleu : 8.2164 : stalled 3 times (last best: 8.48938)
+...
+...
+...
+[2021-06-09 10:53:56] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 10:53:57] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter95000.npz
+[2021-06-09 10:53:58] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 10:54:00] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 10:54:05] [valid] Ep. 25 : Up. 95000 : cross-entropy : 122.125 : stalled 10 times (last best: 119.663)
+[2021-06-09 10:54:07] [valid] Ep. 25 : Up. 95000 : perplexity : 74.6351 : stalled 10 times (last best: 68.4212)
+[2021-06-09 10:54:35] [valid] Ep. 25 : Up. 95000 : bleu : 8.32404 : stalled 4 times (last best: 8.48938)
+[2021-06-09 10:54:36] Training finished
+[2021-06-09 10:54:37] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 10:54:39] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 10:54:40] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+
+real	749m4.758s
+user	1124m8.784s
+sys	0m57.142s
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+
+## Try BLEU score only --early-stopping 10
+
+Memory Error...
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.myen.sh 
+mkdir: cannot create directory ‘model.transformer.word.my-en’: File exists
+[2021-06-09 11:34:46] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-09 11:34:46] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 19081 with command line:
+[2021-06-09 11:34:46] [marian] marian -c model.transformer.word.my-en/config.yml
+[2021-06-09 11:34:46] [config] after: 0e
+[2021-06-09 11:34:46] [config] after-batches: 0
+[2021-06-09 11:34:46] [config] after-epochs: 0
+[2021-06-09 11:34:46] [config] all-caps-every: 0
+[2021-06-09 11:34:46] [config] allow-unk: false
+[2021-06-09 11:34:46] [config] authors: false
+[2021-06-09 11:34:46] [config] beam-size: 7
+[2021-06-09 11:34:46] [config] bert-class-symbol: "[CLS]"
+[2021-06-09 11:34:46] [config] bert-mask-symbol: "[MASK]"
+[2021-06-09 11:34:46] [config] bert-masking-fraction: 0.15
+[2021-06-09 11:34:46] [config] bert-sep-symbol: "[SEP]"
+[2021-06-09 11:34:46] [config] bert-train-type-embeddings: true
+[2021-06-09 11:34:46] [config] bert-type-vocab-size: 2
+[2021-06-09 11:34:46] [config] build-info: ""
+[2021-06-09 11:34:46] [config] cite: false
+[2021-06-09 11:34:46] [config] clip-norm: 5
+[2021-06-09 11:34:46] [config] cost-scaling:
+[2021-06-09 11:34:46] [config]   []
+[2021-06-09 11:34:46] [config] cost-type: ce-sum
+[2021-06-09 11:34:46] [config] cpu-threads: 0
+[2021-06-09 11:34:46] [config] data-weighting: ""
+[2021-06-09 11:34:46] [config] data-weighting-type: sentence
+[2021-06-09 11:34:46] [config] dec-cell: gru
+[2021-06-09 11:34:46] [config] dec-cell-base-depth: 2
+[2021-06-09 11:34:46] [config] dec-cell-high-depth: 1
+[2021-06-09 11:34:46] [config] dec-depth: 2
+[2021-06-09 11:34:46] [config] devices:
+[2021-06-09 11:34:46] [config]   - 0
+[2021-06-09 11:34:46] [config]   - 1
+[2021-06-09 11:34:46] [config] dim-emb: 512
+[2021-06-09 11:34:46] [config] dim-rnn: 1024
+[2021-06-09 11:34:46] [config] dim-vocabs:
+[2021-06-09 11:34:46] [config]   - 63471
+[2021-06-09 11:34:46] [config]   - 85602
+[2021-06-09 11:34:46] [config] disp-first: 0
+[2021-06-09 11:34:46] [config] disp-freq: 500
+[2021-06-09 11:34:46] [config] disp-label-counts: true
+[2021-06-09 11:34:46] [config] dropout-rnn: 0
+[2021-06-09 11:34:46] [config] dropout-src: 0
+[2021-06-09 11:34:46] [config] dropout-trg: 0
+[2021-06-09 11:34:46] [config] dump-config: ""
+[2021-06-09 11:34:46] [config] early-stopping: 20
+[2021-06-09 11:34:46] [config] embedding-fix-src: false
+[2021-06-09 11:34:46] [config] embedding-fix-trg: false
+[2021-06-09 11:34:46] [config] embedding-normalization: false
+[2021-06-09 11:34:46] [config] embedding-vectors:
+[2021-06-09 11:34:46] [config]   []
+[2021-06-09 11:34:46] [config] enc-cell: gru
+[2021-06-09 11:34:46] [config] enc-cell-depth: 1
+[2021-06-09 11:34:46] [config] enc-depth: 2
+[2021-06-09 11:34:46] [config] enc-type: bidirectional
+[2021-06-09 11:34:46] [config] english-title-case-every: 0
+[2021-06-09 11:34:46] [config] exponential-smoothing: 0.0001
+[2021-06-09 11:34:46] [config] factor-weight: 1
+[2021-06-09 11:34:46] [config] grad-dropping-momentum: 0
+[2021-06-09 11:34:46] [config] grad-dropping-rate: 0
+[2021-06-09 11:34:46] [config] grad-dropping-warmup: 100
+[2021-06-09 11:34:46] [config] gradient-checkpointing: false
+[2021-06-09 11:34:46] [config] guided-alignment: none
+[2021-06-09 11:34:46] [config] guided-alignment-cost: mse
+[2021-06-09 11:34:46] [config] guided-alignment-weight: 0.1
+[2021-06-09 11:34:46] [config] ignore-model-config: false
+[2021-06-09 11:34:46] [config] input-types:
+[2021-06-09 11:34:46] [config]   []
+[2021-06-09 11:34:46] [config] interpolate-env-vars: false
+[2021-06-09 11:34:46] [config] keep-best: false
+[2021-06-09 11:34:46] [config] label-smoothing: 0.1
+[2021-06-09 11:34:46] [config] layer-normalization: false
+[2021-06-09 11:34:46] [config] learn-rate: 0.0003
+[2021-06-09 11:34:46] [config] lemma-dim-emb: 0
+[2021-06-09 11:34:46] [config] log: model.transformer.word.my-en/train.log
+[2021-06-09 11:34:46] [config] log-level: info
+[2021-06-09 11:34:46] [config] log-time-zone: ""
+[2021-06-09 11:34:46] [config] logical-epoch:
+[2021-06-09 11:34:46] [config]   - 1e
+[2021-06-09 11:34:46] [config]   - 0
+[2021-06-09 11:34:46] [config] lr-decay: 0
+[2021-06-09 11:34:46] [config] lr-decay-freq: 50000
+[2021-06-09 11:34:46] [config] lr-decay-inv-sqrt:
+[2021-06-09 11:34:46] [config]   - 16000
+[2021-06-09 11:34:46] [config] lr-decay-repeat-warmup: false
+[2021-06-09 11:34:46] [config] lr-decay-reset-optimizer: false
+[2021-06-09 11:34:46] [config] lr-decay-start:
+[2021-06-09 11:34:46] [config]   - 10
+[2021-06-09 11:34:46] [config]   - 1
+[2021-06-09 11:34:46] [config] lr-decay-strategy: epoch+stalled
+[2021-06-09 11:34:46] [config] lr-report: true
+[2021-06-09 11:34:46] [config] lr-warmup: 0
+[2021-06-09 11:34:46] [config] lr-warmup-at-reload: false
+[2021-06-09 11:34:46] [config] lr-warmup-cycle: false
+[2021-06-09 11:34:46] [config] lr-warmup-start-rate: 0
+[2021-06-09 11:34:46] [config] max-length: 200
+[2021-06-09 11:34:46] [config] max-length-crop: false
+[2021-06-09 11:34:46] [config] max-length-factor: 3
+[2021-06-09 11:34:46] [config] maxi-batch: 100
+[2021-06-09 11:34:46] [config] maxi-batch-sort: trg
+[2021-06-09 11:34:46] [config] mini-batch: 64
+[2021-06-09 11:34:46] [config] mini-batch-fit: true
+[2021-06-09 11:34:46] [config] mini-batch-fit-step: 10
+[2021-06-09 11:34:46] [config] mini-batch-track-lr: false
+[2021-06-09 11:34:46] [config] mini-batch-warmup: 0
+[2021-06-09 11:34:46] [config] mini-batch-words: 0
+[2021-06-09 11:34:46] [config] mini-batch-words-ref: 0
+[2021-06-09 11:34:46] [config] model: model.transformer.word.my-en/model.npz
+[2021-06-09 11:34:46] [config] multi-loss-type: sum
+[2021-06-09 11:34:46] [config] multi-node: false
+[2021-06-09 11:34:46] [config] multi-node-overlap: true
+[2021-06-09 11:34:46] [config] n-best: false
+[2021-06-09 11:34:46] [config] no-nccl: false
+[2021-06-09 11:34:46] [config] no-reload: false
+[2021-06-09 11:34:46] [config] no-restore-corpus: false
+[2021-06-09 11:34:46] [config] normalize: 0.6
+[2021-06-09 11:34:46] [config] normalize-gradient: false
+[2021-06-09 11:34:46] [config] num-devices: 0
+[2021-06-09 11:34:46] [config] optimizer: adam
+[2021-06-09 11:34:46] [config] optimizer-delay: 1
+[2021-06-09 11:34:46] [config] optimizer-params:
+[2021-06-09 11:34:46] [config]   []
+[2021-06-09 11:34:46] [config] output-omit-bias: false
+[2021-06-09 11:34:46] [config] overwrite: false
+[2021-06-09 11:34:46] [config] precision:
+[2021-06-09 11:34:46] [config]   - float32
+[2021-06-09 11:34:46] [config]   - float32
+[2021-06-09 11:34:46] [config]   - float32
+[2021-06-09 11:34:46] [config] pretrained-model: ""
+[2021-06-09 11:34:46] [config] quantize-biases: false
+[2021-06-09 11:34:46] [config] quantize-bits: 0
+[2021-06-09 11:34:46] [config] quantize-log-based: false
+[2021-06-09 11:34:46] [config] quantize-optimization-steps: 0
+[2021-06-09 11:34:46] [config] quiet: false
+[2021-06-09 11:34:46] [config] quiet-translation: true
+[2021-06-09 11:34:46] [config] relative-paths: false
+[2021-06-09 11:34:46] [config] right-left: false
+[2021-06-09 11:34:46] [config] save-freq: 5000
+[2021-06-09 11:34:46] [config] seed: 1111
+[2021-06-09 11:34:46] [config] sentencepiece-alphas:
+[2021-06-09 11:34:46] [config]   []
+[2021-06-09 11:34:46] [config] sentencepiece-max-lines: 2000000
+[2021-06-09 11:34:46] [config] sentencepiece-options: ""
+[2021-06-09 11:34:46] [config] shuffle: data
+[2021-06-09 11:34:46] [config] shuffle-in-ram: false
+[2021-06-09 11:34:46] [config] sigterm: save-and-exit
+[2021-06-09 11:34:46] [config] skip: false
+[2021-06-09 11:34:46] [config] sqlite: ""
+[2021-06-09 11:34:46] [config] sqlite-drop: false
+[2021-06-09 11:34:46] [config] sync-sgd: true
+[2021-06-09 11:34:46] [config] tempdir: /tmp
+[2021-06-09 11:34:46] [config] tied-embeddings: true
+[2021-06-09 11:34:46] [config] tied-embeddings-all: false
+[2021-06-09 11:34:46] [config] tied-embeddings-src: false
+[2021-06-09 11:34:46] [config] train-embedder-rank:
+[2021-06-09 11:34:46] [config]   []
+[2021-06-09 11:34:46] [config] train-sets:
+[2021-06-09 11:34:46] [config]   - data_word/train.my
+[2021-06-09 11:34:46] [config]   - data_word/train.en
+[2021-06-09 11:34:46] [config] transformer-aan-activation: swish
+[2021-06-09 11:34:46] [config] transformer-aan-depth: 2
+[2021-06-09 11:34:46] [config] transformer-aan-nogate: false
+[2021-06-09 11:34:46] [config] transformer-decoder-autoreg: self-attention
+[2021-06-09 11:34:46] [config] transformer-depth-scaling: false
+[2021-06-09 11:34:46] [config] transformer-dim-aan: 2048
+[2021-06-09 11:34:46] [config] transformer-dim-ffn: 2048
+[2021-06-09 11:34:46] [config] transformer-dropout: 0.3
+[2021-06-09 11:34:46] [config] transformer-dropout-attention: 0
+[2021-06-09 11:34:46] [config] transformer-dropout-ffn: 0
+[2021-06-09 11:34:46] [config] transformer-ffn-activation: swish
+[2021-06-09 11:34:46] [config] transformer-ffn-depth: 2
+[2021-06-09 11:34:46] [config] transformer-guided-alignment-layer: last
+[2021-06-09 11:34:46] [config] transformer-heads: 8
+[2021-06-09 11:34:46] [config] transformer-no-projection: false
+[2021-06-09 11:34:46] [config] transformer-pool: false
+[2021-06-09 11:34:46] [config] transformer-postprocess: dan
+[2021-06-09 11:34:46] [config] transformer-postprocess-emb: d
+[2021-06-09 11:34:46] [config] transformer-postprocess-top: ""
+[2021-06-09 11:34:46] [config] transformer-preprocess: ""
+[2021-06-09 11:34:46] [config] transformer-tied-layers:
+[2021-06-09 11:34:46] [config]   []
+[2021-06-09 11:34:46] [config] transformer-train-position-embeddings: false
+[2021-06-09 11:34:46] [config] tsv: false
+[2021-06-09 11:34:46] [config] tsv-fields: 0
+[2021-06-09 11:34:46] [config] type: transformer
+[2021-06-09 11:34:46] [config] ulr: false
+[2021-06-09 11:34:46] [config] ulr-dim-emb: 0
+[2021-06-09 11:34:46] [config] ulr-dropout: 0
+[2021-06-09 11:34:46] [config] ulr-keys-vectors: ""
+[2021-06-09 11:34:46] [config] ulr-query-vectors: ""
+[2021-06-09 11:34:46] [config] ulr-softmax-temperature: 1
+[2021-06-09 11:34:46] [config] ulr-trainable-transformation: false
+[2021-06-09 11:34:46] [config] unlikelihood-loss: false
+[2021-06-09 11:34:46] [config] valid-freq: 5000
+[2021-06-09 11:34:46] [config] valid-log: model.transformer.word.my-en/valid.log
+[2021-06-09 11:34:46] [config] valid-max-length: 1000
+[2021-06-09 11:34:46] [config] valid-metrics:
+[2021-06-09 11:34:46] [config]   - cross-entropy
+[2021-06-09 11:34:46] [config]   - perplexity
+[2021-06-09 11:34:46] [config]   - bleu
+[2021-06-09 11:34:46] [config] valid-mini-batch: 64
+[2021-06-09 11:34:46] [config] valid-reset-stalled: false
+[2021-06-09 11:34:46] [config] valid-script-args:
+[2021-06-09 11:34:46] [config]   []
+[2021-06-09 11:34:46] [config] valid-script-path: ""
+[2021-06-09 11:34:46] [config] valid-sets:
+[2021-06-09 11:34:46] [config]   - data_word/valid.my
+[2021-06-09 11:34:46] [config]   - data_word/valid.en
+[2021-06-09 11:34:46] [config] valid-translation-output: model.transformer.word.my-en/valid.my-en.word.output
+[2021-06-09 11:34:46] [config] version: v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-09 11:34:46] [config] vocabs:
+[2021-06-09 11:34:46] [config]   - data_word/vocab/vocab.my.yml
+[2021-06-09 11:34:46] [config]   - data_word/vocab/vocab.en.yml
+[2021-06-09 11:34:46] [config] word-penalty: 0
+[2021-06-09 11:34:46] [config] word-scores: false
+[2021-06-09 11:34:46] [config] workspace: 1000
+[2021-06-09 11:34:46] [config] Loaded model has been created with Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-09 11:34:46] Using synchronous SGD
+[2021-06-09 11:34:46] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.my.yml
+[2021-06-09 11:34:46] [data] Setting vocabulary size for input 0 to 63,471
+[2021-06-09 11:34:46] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.en.yml
+[2021-06-09 11:34:47] [data] Setting vocabulary size for input 1 to 85,602
+[2021-06-09 11:34:47] [comm] Compiled without MPI support. Running as a single process on administrator-HP-Z2-Tower-G4-Workstation
+[2021-06-09 11:34:47] [batching] Collecting statistics for batch fitting with step size 10
+[2021-06-09 11:34:47] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-09 11:34:47] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-09 11:34:47] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-09 11:34:47] [comm] NCCLCommunicator constructed successfully
+[2021-06-09 11:34:47] [training] Using 2 GPUs
+[2021-06-09 11:34:47] [logits] Applying loss function for 1 factor(s)
+[2021-06-09 11:34:47] [memory] Reserving 347 MB, device gpu0
+[2021-06-09 11:34:47] [gpu] 16-bit TensorCores enabled for float32 matrix operations
+[2021-06-09 11:34:48] [memory] Reserving 347 MB, device gpu0
+[2021-06-09 11:35:08] [batching] Done. Typical MB size is 1,943 target words
+[2021-06-09 11:35:08] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-09 11:35:08] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-09 11:35:08] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-09 11:35:08] [comm] NCCLCommunicator constructed successfully
+[2021-06-09 11:35:08] [training] Using 2 GPUs
+[2021-06-09 11:35:08] Loading model from model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 11:35:09] Loading model from model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 11:35:09] Loading Adam parameters from model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 11:35:10] [memory] Reserving 347 MB, device gpu0
+[2021-06-09 11:35:10] [memory] Reserving 347 MB, device gpu1
+[2021-06-09 11:35:10] [training] Model reloaded from model.transformer.word.my-en/model.npz
+[2021-06-09 11:35:10] [data] Restoring the corpus state to epoch 25, batch 95000
+[2021-06-09 11:35:10] [data] Shuffling data
+[2021-06-09 11:35:10] [data] Done reading 256,102 sentences
+[2021-06-09 11:35:11] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 11:35:13] Training started
+[2021-06-09 11:35:13] [training] Batches are processed as 1 process(es) x 2 devices/process
+[2021-06-09 11:35:13] [memory] Reserving 347 MB, device gpu1
+[2021-06-09 11:35:13] [memory] Reserving 347 MB, device gpu0
+[2021-06-09 11:35:13] [memory] Reserving 347 MB, device gpu0
+[2021-06-09 11:35:14] [memory] Reserving 347 MB, device gpu1
+[2021-06-09 11:35:14] Loading model from model.transformer.word.my-en/model.npz
+[2021-06-09 11:35:14] [memory] Reserving 347 MB, device cpu0
+[2021-06-09 11:35:14] [memory] Reserving 173 MB, device gpu0
+[2021-06-09 11:35:14] [memory] Reserving 173 MB, device gpu1
+[2021-06-09 11:39:31] Ep. 25 : Up. 95500 : Sen. 228,747 : Cost 2.75659204 * 529,017 @ 896 after 100,111,229 : Time 262.52s : 2015.14 words/s : L.r. 1.2279e-04
+[2021-06-09 11:43:00] Seen 256076 samples
+[2021-06-09 11:43:00] Starting data epoch 26 in logical epoch 26
+[2021-06-09 11:43:00] [data] Shuffling data
+[2021-06-09 11:43:00] [data] Done reading 256,102 sentences
+[2021-06-09 11:43:01] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 11:43:44] Ep. 26 : Up. 96000 : Sen. 5,858 : Cost 2.76651955 * 524,297 @ 1,060 after 100,635,526 : Time 253.58s : 2067.59 words/s : L.r. 1.2247e-04
+[2021-06-09 11:47:50] Ep. 26 : Up. 96500 : Sen. 39,262 : Cost 2.67761779 * 523,517 @ 1,174 after 101,159,043 : Time 246.02s : 2127.95 words/s : L.r. 1.2216e-04
+[2021-06-09 11:51:57] Ep. 26 : Up. 97000 : Sen. 72,499 : Cost 2.69723535 * 520,565 @ 1,166 after 101,679,608 : Time 246.64s : 2110.63 words/s : L.r. 1.2184e-04
+[2021-06-09 11:56:06] Ep. 26 : Up. 97500 : Sen. 105,568 : Cost 2.71559119 * 524,357 @ 960 after 102,203,965 : Time 248.80s : 2107.51 words/s : L.r. 1.2153e-04
+[2021-06-09 12:00:13] Ep. 26 : Up. 98000 : Sen. 138,355 : Cost 2.73279738 * 515,802 @ 1,056 after 102,719,767 : Time 247.10s : 2087.44 words/s : L.r. 1.2122e-04
+[2021-06-09 12:04:22] Ep. 26 : Up. 98500 : Sen. 172,095 : Cost 2.73711419 * 522,735 @ 966 after 103,242,502 : Time 249.28s : 2096.96 words/s : L.r. 1.2091e-04
+[2021-06-09 12:08:49] Ep. 26 : Up. 99000 : Sen. 205,359 : Cost 2.75321746 * 523,297 @ 1,092 after 103,765,799 : Time 267.35s : 1957.36 words/s : L.r. 1.2060e-04
+[2021-06-09 12:13:04] Ep. 26 : Up. 99500 : Sen. 238,705 : Cost 2.76673484 * 524,834 @ 1,190 after 104,290,633 : Time 254.67s : 2060.82 words/s : L.r. 1.2030e-04
+[2021-06-09 12:15:17] Seen 256076 samples
+[2021-06-09 12:15:17] Starting data epoch 27 in logical epoch 27
+[2021-06-09 12:15:17] [data] Shuffling data
+[2021-06-09 12:15:17] [data] Done reading 256,102 sentences
+[2021-06-09 12:15:18] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 12:17:21] Ep. 27 : Up. 100000 : Sen. 16,161 : Cost 2.71814704 * 524,040 @ 1,944 after 104,814,673 : Time 257.38s : 2036.04 words/s : L.r. 1.2000e-04
+[2021-06-09 12:17:21] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 12:17:23] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter100000.npz
+[2021-06-09 12:17:24] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 12:17:26] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+tcmalloc: large alloc 1073741824 bytes == 0x559c2e798000 @ 
+tcmalloc: large alloc 1207959552 bytes == 0x559c2e798000 @ 
+tcmalloc: large alloc 1476395008 bytes == 0x559c2e798000 @ 
+tcmalloc: large alloc 1610612736 bytes == 0x559c2e798000 @ 
+tcmalloc: large alloc 1744830464 bytes == 0x559cfec56000 @ 
+tcmalloc: large alloc 2013265920 bytes == 0x559c2e798000 @ 
+tcmalloc: large alloc 2281701376 bytes == 0x559c2e798000 @ 
+[2021-06-09 12:17:41] Error: CUDA error 2 'out of memory' - /home/ye/tool/marian/src/tensors/gpu/device.cu:32: cudaMalloc(&data_, size)
+[2021-06-09 12:17:41] Error: Aborted from virtual void marian::gpu::Device::reserve(size_t) in /home/ye/tool/marian/src/tensors/gpu/device.cu:32
+
+[CALL STACK]
+[0x559bc662a880]    marian::gpu::Device::  reserve  (unsigned long)    + 0xf80
+[0x559bc5f5a7df]    marian::TensorAllocator::  allocate  (IntrusivePtr<marian::TensorBase>&,  marian::Shape,  marian::Type) + 0x4ef
+[0x559bc6166b00]    marian::Node::  allocate  ()                       + 0x1e0
+[0x559bc615d2ce]    marian::ExpressionGraph::  forward  (std::__cxx11::list<IntrusivePtr<marian::Chainable<IntrusivePtr<marian::TensorBase>>>,std::allocator<IntrusivePtr<marian::Chainable<IntrusivePtr<marian::TensorBase>>>>>&,  bool) + 0x8e
+[0x559bc615ecae]    marian::ExpressionGraph::  forwardNext  ()         + 0x24e
+[0x559bc632fe64]                                                       + 0x77de64
+[0x559bc6330694]                                                       + 0x77e694
+[0x559bc5f0415d]    std::__future_base::_State_baseV2::  _M_do_set  (std::function<std::unique_ptr<std::__future_base::_Result_base,std::__future_base::_Result_base::_Deleter> ()>*,  bool*) + 0x2d
+[0x7f4610df8c0f]                                                       + 0x11c0f
+[0x559bc632718a]                                                       + 0x77518a
+[0x559bc5f0689a]    std::thread::_State_impl<std::thread::_Invoker<std::tuple<marian::ThreadPool::reserve(unsigned long)::{lambda()#1}>>>::  _M_run  () + 0x13a
+[0x7f4610cdcd84]                                                       + 0xd6d84
+[0x7f4610df0590]                                                       + 0x9590
+[0x7f46109cb223]    clone                                              + 0x43
+
+
+real	42m55.681s
+user	63m10.988s
+sys	0m8.545s
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+
+## Restart and Train Again
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.myen.sh 
+mkdir: cannot create directory ‘model.transformer.word.my-en’: File exists
+[2021-06-09 13:11:21] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-09 13:11:21] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 2307 with command line:
+[2021-06-09 13:11:21] [marian] marian -c model.transformer.word.my-en/config.yml
+[2021-06-09 13:11:21] [config] after: 0e
+[2021-06-09 13:11:21] [config] after-batches: 0
+[2021-06-09 13:11:21] [config] after-epochs: 0
+[2021-06-09 13:11:21] [config] all-caps-every: 0
+[2021-06-09 13:11:21] [config] allow-unk: false
+[2021-06-09 13:11:21] [config] authors: false
+[2021-06-09 13:11:21] [config] beam-size: 7
+[2021-06-09 13:11:21] [config] bert-class-symbol: "[CLS]"
+[2021-06-09 13:11:21] [config] bert-mask-symbol: "[MASK]"
+[2021-06-09 13:11:21] [config] bert-masking-fraction: 0.15
+[2021-06-09 13:11:21] [config] bert-sep-symbol: "[SEP]"
+[2021-06-09 13:11:21] [config] bert-train-type-embeddings: true
+[2021-06-09 13:11:21] [config] bert-type-vocab-size: 2
+[2021-06-09 13:11:21] [config] build-info: ""
+[2021-06-09 13:11:21] [config] cite: false
+[2021-06-09 13:11:21] [config] clip-norm: 5
+[2021-06-09 13:11:21] [config] cost-scaling:
+[2021-06-09 13:11:21] [config]   []
+[2021-06-09 13:11:21] [config] cost-type: ce-sum
+[2021-06-09 13:11:21] [config] cpu-threads: 0
+[2021-06-09 13:11:21] [config] data-weighting: ""
+[2021-06-09 13:11:21] [config] data-weighting-type: sentence
+[2021-06-09 13:11:21] [config] dec-cell: gru
+[2021-06-09 13:11:21] [config] dec-cell-base-depth: 2
+[2021-06-09 13:11:21] [config] dec-cell-high-depth: 1
+[2021-06-09 13:11:21] [config] dec-depth: 2
+[2021-06-09 13:11:21] [config] devices:
+[2021-06-09 13:11:21] [config]   - 0
+[2021-06-09 13:11:21] [config]   - 1
+[2021-06-09 13:11:21] [config] dim-emb: 512
+[2021-06-09 13:11:21] [config] dim-rnn: 1024
+[2021-06-09 13:11:21] [config] dim-vocabs:
+[2021-06-09 13:11:21] [config]   - 63471
+[2021-06-09 13:11:21] [config]   - 85602
+[2021-06-09 13:11:21] [config] disp-first: 0
+[2021-06-09 13:11:21] [config] disp-freq: 500
+[2021-06-09 13:11:21] [config] disp-label-counts: true
+[2021-06-09 13:11:21] [config] dropout-rnn: 0
+[2021-06-09 13:11:21] [config] dropout-src: 0
+[2021-06-09 13:11:21] [config] dropout-trg: 0
+[2021-06-09 13:11:21] [config] dump-config: ""
+[2021-06-09 13:11:21] [config] early-stopping: 20
+[2021-06-09 13:11:21] [config] embedding-fix-src: false
+[2021-06-09 13:11:21] [config] embedding-fix-trg: false
+[2021-06-09 13:11:21] [config] embedding-normalization: false
+[2021-06-09 13:11:21] [config] embedding-vectors:
+[2021-06-09 13:11:21] [config]   []
+[2021-06-09 13:11:21] [config] enc-cell: gru
+[2021-06-09 13:11:21] [config] enc-cell-depth: 1
+[2021-06-09 13:11:21] [config] enc-depth: 2
+[2021-06-09 13:11:21] [config] enc-type: bidirectional
+[2021-06-09 13:11:21] [config] english-title-case-every: 0
+[2021-06-09 13:11:21] [config] exponential-smoothing: 0.0001
+[2021-06-09 13:11:21] [config] factor-weight: 1
+[2021-06-09 13:11:21] [config] grad-dropping-momentum: 0
+[2021-06-09 13:11:21] [config] grad-dropping-rate: 0
+[2021-06-09 13:11:21] [config] grad-dropping-warmup: 100
+[2021-06-09 13:11:21] [config] gradient-checkpointing: false
+[2021-06-09 13:11:21] [config] guided-alignment: none
+[2021-06-09 13:11:21] [config] guided-alignment-cost: mse
+[2021-06-09 13:11:21] [config] guided-alignment-weight: 0.1
+[2021-06-09 13:11:21] [config] ignore-model-config: false
+[2021-06-09 13:11:21] [config] input-types:
+[2021-06-09 13:11:21] [config]   []
+[2021-06-09 13:11:21] [config] interpolate-env-vars: false
+[2021-06-09 13:11:21] [config] keep-best: false
+[2021-06-09 13:11:21] [config] label-smoothing: 0.1
+[2021-06-09 13:11:21] [config] layer-normalization: false
+[2021-06-09 13:11:21] [config] learn-rate: 0.0003
+[2021-06-09 13:11:21] [config] lemma-dim-emb: 0
+[2021-06-09 13:11:21] [config] log: model.transformer.word.my-en/train.log
+[2021-06-09 13:11:21] [config] log-level: info
+[2021-06-09 13:11:21] [config] log-time-zone: ""
+[2021-06-09 13:11:21] [config] logical-epoch:
+[2021-06-09 13:11:21] [config]   - 1e
+[2021-06-09 13:11:21] [config]   - 0
+[2021-06-09 13:11:21] [config] lr-decay: 0
+[2021-06-09 13:11:21] [config] lr-decay-freq: 50000
+[2021-06-09 13:11:21] [config] lr-decay-inv-sqrt:
+[2021-06-09 13:11:21] [config]   - 16000
+[2021-06-09 13:11:21] [config] lr-decay-repeat-warmup: false
+[2021-06-09 13:11:21] [config] lr-decay-reset-optimizer: false
+[2021-06-09 13:11:21] [config] lr-decay-start:
+[2021-06-09 13:11:21] [config]   - 10
+[2021-06-09 13:11:21] [config]   - 1
+[2021-06-09 13:11:21] [config] lr-decay-strategy: epoch+stalled
+[2021-06-09 13:11:21] [config] lr-report: true
+[2021-06-09 13:11:21] [config] lr-warmup: 0
+[2021-06-09 13:11:21] [config] lr-warmup-at-reload: false
+[2021-06-09 13:11:21] [config] lr-warmup-cycle: false
+[2021-06-09 13:11:21] [config] lr-warmup-start-rate: 0
+[2021-06-09 13:11:21] [config] max-length: 200
+[2021-06-09 13:11:21] [config] max-length-crop: false
+[2021-06-09 13:11:21] [config] max-length-factor: 3
+[2021-06-09 13:11:21] [config] maxi-batch: 100
+[2021-06-09 13:11:21] [config] maxi-batch-sort: trg
+[2021-06-09 13:11:21] [config] mini-batch: 64
+[2021-06-09 13:11:21] [config] mini-batch-fit: true
+[2021-06-09 13:11:21] [config] mini-batch-fit-step: 10
+[2021-06-09 13:11:21] [config] mini-batch-track-lr: false
+[2021-06-09 13:11:21] [config] mini-batch-warmup: 0
+[2021-06-09 13:11:21] [config] mini-batch-words: 0
+[2021-06-09 13:11:21] [config] mini-batch-words-ref: 0
+[2021-06-09 13:11:21] [config] model: model.transformer.word.my-en/model.npz
+[2021-06-09 13:11:21] [config] multi-loss-type: sum
+[2021-06-09 13:11:21] [config] multi-node: false
+[2021-06-09 13:11:21] [config] multi-node-overlap: true
+[2021-06-09 13:11:21] [config] n-best: false
+[2021-06-09 13:11:21] [config] no-nccl: false
+[2021-06-09 13:11:21] [config] no-reload: false
+[2021-06-09 13:11:21] [config] no-restore-corpus: false
+[2021-06-09 13:11:21] [config] normalize: 0.6
+[2021-06-09 13:11:21] [config] normalize-gradient: false
+[2021-06-09 13:11:21] [config] num-devices: 0
+[2021-06-09 13:11:21] [config] optimizer: adam
+[2021-06-09 13:11:21] [config] optimizer-delay: 1
+[2021-06-09 13:11:21] [config] optimizer-params:
+[2021-06-09 13:11:21] [config]   []
+[2021-06-09 13:11:21] [config] output-omit-bias: false
+[2021-06-09 13:11:21] [config] overwrite: false
+[2021-06-09 13:11:21] [config] precision:
+[2021-06-09 13:11:21] [config]   - float32
+[2021-06-09 13:11:21] [config]   - float32
+[2021-06-09 13:11:21] [config]   - float32
+[2021-06-09 13:11:21] [config] pretrained-model: ""
+[2021-06-09 13:11:21] [config] quantize-biases: false
+[2021-06-09 13:11:21] [config] quantize-bits: 0
+[2021-06-09 13:11:21] [config] quantize-log-based: false
+[2021-06-09 13:11:21] [config] quantize-optimization-steps: 0
+[2021-06-09 13:11:21] [config] quiet: false
+[2021-06-09 13:11:21] [config] quiet-translation: true
+[2021-06-09 13:11:21] [config] relative-paths: false
+[2021-06-09 13:11:21] [config] right-left: false
+[2021-06-09 13:11:21] [config] save-freq: 5000
+[2021-06-09 13:11:21] [config] seed: 1111
+[2021-06-09 13:11:21] [config] sentencepiece-alphas:
+[2021-06-09 13:11:21] [config]   []
+[2021-06-09 13:11:21] [config] sentencepiece-max-lines: 2000000
+[2021-06-09 13:11:21] [config] sentencepiece-options: ""
+[2021-06-09 13:11:21] [config] shuffle: data
+[2021-06-09 13:11:21] [config] shuffle-in-ram: false
+[2021-06-09 13:11:21] [config] sigterm: save-and-exit
+[2021-06-09 13:11:21] [config] skip: false
+[2021-06-09 13:11:21] [config] sqlite: ""
+[2021-06-09 13:11:21] [config] sqlite-drop: false
+[2021-06-09 13:11:21] [config] sync-sgd: true
+[2021-06-09 13:11:21] [config] tempdir: /tmp
+[2021-06-09 13:11:21] [config] tied-embeddings: true
+[2021-06-09 13:11:21] [config] tied-embeddings-all: false
+[2021-06-09 13:11:21] [config] tied-embeddings-src: false
+[2021-06-09 13:11:21] [config] train-embedder-rank:
+[2021-06-09 13:11:21] [config]   []
+[2021-06-09 13:11:21] [config] train-sets:
+[2021-06-09 13:11:21] [config]   - data_word/train.my
+[2021-06-09 13:11:21] [config]   - data_word/train.en
+[2021-06-09 13:11:21] [config] transformer-aan-activation: swish
+[2021-06-09 13:11:21] [config] transformer-aan-depth: 2
+[2021-06-09 13:11:21] [config] transformer-aan-nogate: false
+[2021-06-09 13:11:21] [config] transformer-decoder-autoreg: self-attention
+[2021-06-09 13:11:21] [config] transformer-depth-scaling: false
+[2021-06-09 13:11:21] [config] transformer-dim-aan: 2048
+[2021-06-09 13:11:21] [config] transformer-dim-ffn: 2048
+[2021-06-09 13:11:21] [config] transformer-dropout: 0.3
+[2021-06-09 13:11:21] [config] transformer-dropout-attention: 0
+[2021-06-09 13:11:21] [config] transformer-dropout-ffn: 0
+[2021-06-09 13:11:21] [config] transformer-ffn-activation: swish
+[2021-06-09 13:11:21] [config] transformer-ffn-depth: 2
+[2021-06-09 13:11:21] [config] transformer-guided-alignment-layer: last
+[2021-06-09 13:11:21] [config] transformer-heads: 8
+[2021-06-09 13:11:21] [config] transformer-no-projection: false
+[2021-06-09 13:11:21] [config] transformer-pool: false
+[2021-06-09 13:11:21] [config] transformer-postprocess: dan
+[2021-06-09 13:11:21] [config] transformer-postprocess-emb: d
+[2021-06-09 13:11:21] [config] transformer-postprocess-top: ""
+[2021-06-09 13:11:21] [config] transformer-preprocess: ""
+[2021-06-09 13:11:21] [config] transformer-tied-layers:
+[2021-06-09 13:11:21] [config]   []
+[2021-06-09 13:11:21] [config] transformer-train-position-embeddings: false
+[2021-06-09 13:11:21] [config] tsv: false
+[2021-06-09 13:11:21] [config] tsv-fields: 0
+[2021-06-09 13:11:21] [config] type: transformer
+[2021-06-09 13:11:21] [config] ulr: false
+[2021-06-09 13:11:21] [config] ulr-dim-emb: 0
+[2021-06-09 13:11:21] [config] ulr-dropout: 0
+[2021-06-09 13:11:21] [config] ulr-keys-vectors: ""
+[2021-06-09 13:11:21] [config] ulr-query-vectors: ""
+[2021-06-09 13:11:21] [config] ulr-softmax-temperature: 1
+[2021-06-09 13:11:21] [config] ulr-trainable-transformation: false
+[2021-06-09 13:11:21] [config] unlikelihood-loss: false
+[2021-06-09 13:11:21] [config] valid-freq: 5000
+[2021-06-09 13:11:21] [config] valid-log: model.transformer.word.my-en/valid.log
+[2021-06-09 13:11:21] [config] valid-max-length: 1000
+[2021-06-09 13:11:21] [config] valid-metrics:
+[2021-06-09 13:11:21] [config]   - cross-entropy
+[2021-06-09 13:11:21] [config]   - perplexity
+[2021-06-09 13:11:21] [config]   - bleu
+[2021-06-09 13:11:21] [config] valid-mini-batch: 64
+[2021-06-09 13:11:21] [config] valid-reset-stalled: false
+[2021-06-09 13:11:21] [config] valid-script-args:
+[2021-06-09 13:11:21] [config]   []
+[2021-06-09 13:11:21] [config] valid-script-path: ""
+[2021-06-09 13:11:21] [config] valid-sets:
+[2021-06-09 13:11:21] [config]   - data_word/valid.my
+[2021-06-09 13:11:21] [config]   - data_word/valid.en
+[2021-06-09 13:11:21] [config] valid-translation-output: model.transformer.word.my-en/valid.my-en.word.output
+[2021-06-09 13:11:21] [config] version: v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-09 13:11:21] [config] vocabs:
+[2021-06-09 13:11:21] [config]   - data_word/vocab/vocab.my.yml
+[2021-06-09 13:11:21] [config]   - data_word/vocab/vocab.en.yml
+[2021-06-09 13:11:21] [config] word-penalty: 0
+[2021-06-09 13:11:21] [config] word-scores: false
+[2021-06-09 13:11:21] [config] workspace: 1000
+[2021-06-09 13:11:21] [config] Loaded model has been created with Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
+[2021-06-09 13:11:21] Using synchronous SGD
+[2021-06-09 13:11:21] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.my.yml
+[2021-06-09 13:11:21] [data] Setting vocabulary size for input 0 to 63,471
+[2021-06-09 13:11:21] [data] Loading vocabulary from JSON/Yaml file data_word/vocab/vocab.en.yml
+[2021-06-09 13:11:21] [data] Setting vocabulary size for input 1 to 85,602
+[2021-06-09 13:11:21] [comm] Compiled without MPI support. Running as a single process on administrator-HP-Z2-Tower-G4-Workstation
+[2021-06-09 13:11:21] [batching] Collecting statistics for batch fitting with step size 10
+[2021-06-09 13:11:21] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-09 13:11:21] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-09 13:11:22] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-09 13:11:22] [comm] NCCLCommunicator constructed successfully
+[2021-06-09 13:11:22] [training] Using 2 GPUs
+[2021-06-09 13:11:22] [logits] Applying loss function for 1 factor(s)
+[2021-06-09 13:11:22] [memory] Reserving 347 MB, device gpu0
+[2021-06-09 13:11:22] [gpu] 16-bit TensorCores enabled for float32 matrix operations
+[2021-06-09 13:11:22] [memory] Reserving 347 MB, device gpu0
+[2021-06-09 13:11:43] [batching] Done. Typical MB size is 1,943 target words
+[2021-06-09 13:11:43] [memory] Extending reserved space to 1024 MB (device gpu0)
+[2021-06-09 13:11:43] [memory] Extending reserved space to 1024 MB (device gpu1)
+[2021-06-09 13:11:43] [comm] Using NCCL 2.8.3 for GPU communication
+[2021-06-09 13:11:43] [comm] NCCLCommunicator constructed successfully
+[2021-06-09 13:11:43] [training] Using 2 GPUs
+[2021-06-09 13:11:43] Loading model from model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 13:11:43] Loading model from model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 13:11:44] Loading Adam parameters from model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 13:11:45] [memory] Reserving 347 MB, device gpu0
+[2021-06-09 13:11:45] [memory] Reserving 347 MB, device gpu1
+[2021-06-09 13:11:45] [training] Model reloaded from model.transformer.word.my-en/model.npz
+[2021-06-09 13:11:45] [data] Restoring the corpus state to epoch 27, batch 100000
+[2021-06-09 13:11:45] [data] Shuffling data
+[2021-06-09 13:11:45] [data] Done reading 256,102 sentences
+[2021-06-09 13:11:46] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 13:11:46] Training started
+[2021-06-09 13:11:46] [training] Batches are processed as 1 process(es) x 2 devices/process
+[2021-06-09 13:11:46] [memory] Reserving 347 MB, device gpu1
+[2021-06-09 13:11:46] [memory] Reserving 347 MB, device gpu0
+[2021-06-09 13:11:46] [memory] Reserving 347 MB, device gpu0
+[2021-06-09 13:11:47] [memory] Reserving 347 MB, device gpu1
+[2021-06-09 13:11:47] Loading model from model.transformer.word.my-en/model.npz
+[2021-06-09 13:11:47] [memory] Reserving 347 MB, device cpu0
+[2021-06-09 13:11:47] [memory] Reserving 173 MB, device gpu0
+[2021-06-09 13:11:47] [memory] Reserving 173 MB, device gpu1
+[2021-06-09 13:15:50] Ep. 27 : Up. 100500 : Sen. 49,568 : Cost 2.66255593 * 525,938 @ 560 after 105,340,611 : Time 247.58s : 2124.30 words/s : L.r. 1.1970e-04
+[2021-06-09 13:19:53] Ep. 27 : Up. 101000 : Sen. 82,651 : Cost 2.67907381 * 520,724 @ 749 after 105,861,335 : Time 242.26s : 2149.45 words/s : L.r. 1.1940e-04
+[2021-06-09 13:23:55] Ep. 27 : Up. 101500 : Sen. 115,953 : Cost 2.69941115 * 524,636 @ 1,272 after 106,385,971 : Time 242.55s : 2163.05 words/s : L.r. 1.1911e-04
+[2021-06-09 13:27:58] Ep. 27 : Up. 102000 : Sen. 149,537 : Cost 2.70849943 * 527,648 @ 1,217 after 106,913,619 : Time 243.14s : 2170.11 words/s : L.r. 1.1882e-04
+[2021-06-09 13:32:00] Ep. 27 : Up. 102500 : Sen. 182,630 : Cost 2.71581626 * 519,915 @ 780 after 107,433,534 : Time 241.99s : 2148.47 words/s : L.r. 1.1853e-04
+[2021-06-09 13:36:03] Ep. 27 : Up. 103000 : Sen. 216,364 : Cost 2.72905326 * 526,895 @ 798 after 107,960,429 : Time 242.87s : 2169.48 words/s : L.r. 1.1824e-04
+[2021-06-09 13:40:05] Ep. 27 : Up. 103500 : Sen. 249,530 : Cost 2.74190950 * 521,206 @ 1,198 after 108,481,635 : Time 242.21s : 2151.90 words/s : L.r. 1.1795e-04
+[2021-06-09 13:40:54] Seen 256076 samples
+[2021-06-09 13:40:54] Starting data epoch 28 in logical epoch 28
+[2021-06-09 13:40:54] [data] Shuffling data
+[2021-06-09 13:40:54] [data] Done reading 256,102 sentences
+[2021-06-09 13:40:54] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 13:44:09] Ep. 28 : Up. 104000 : Sen. 26,965 : Cost 2.66962028 * 524,347 @ 936 after 109,005,982 : Time 243.32s : 2154.99 words/s : L.r. 1.1767e-04
+[2021-06-09 13:48:11] Ep. 28 : Up. 104500 : Sen. 60,275 : Cost 2.66178107 * 521,647 @ 786 after 109,527,629 : Time 242.01s : 2155.51 words/s : L.r. 1.1739e-04
+[2021-06-09 13:52:14] Ep. 28 : Up. 105000 : Sen. 93,592 : Cost 2.69123483 * 529,253 @ 1,271 after 110,056,882 : Time 243.61s : 2172.58 words/s : L.r. 1.1711e-04
+[2021-06-09 13:52:14] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 13:52:16] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter105000.npz
+[2021-06-09 13:52:16] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 13:52:18] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+tcmalloc: large alloc 1073741824 bytes == 0x55ec55960000 @ 
+tcmalloc: large alloc 1207959552 bytes == 0x55ec55960000 @ 
+tcmalloc: large alloc 1476395008 bytes == 0x55ebcc4ee000 @ 
+tcmalloc: large alloc 1610612736 bytes == 0x55ebcc4ee000 @ 
+tcmalloc: large alloc 1744830464 bytes == 0x55ebcc4ee000 @ 
+tcmalloc: large alloc 2013265920 bytes == 0x55ecac7d8000 @ 
+tcmalloc: large alloc 2281701376 bytes == 0x55ebcc4ee000 @ 
+[2021-06-09 13:52:39] [valid] Ep. 28 : Up. 105000 : cross-entropy : 122.865 : stalled 11 times (last best: 119.663)
+[2021-06-09 13:52:41] [valid] Ep. 28 : Up. 105000 : perplexity : 76.6136 : stalled 11 times (last best: 68.4212)
+[2021-06-09 13:52:46] [valid] [valid] First sentence's tokens as scored:
+[2021-06-09 13:52:46] [valid] DefaultVocab keeps original segments for scoring
+[2021-06-09 13:52:46] [valid] [valid]   Hyp: A source for Al Jazeera News commented that the accident was a major setback which occurred because of the occupation caused by Werner Erhard.
+[2021-06-09 13:52:46] [valid] [valid]   Ref: A reporter for the Al Jazeera news agency remarked : &amp; quot ; Officials have been cited as saying that the incident may have been caused by pyrotechnics that caused an explosion leading to a significant loss of life . &amp; quot ;
+[2021-06-09 13:53:09] [valid] Ep. 28 : Up. 105000 : bleu : 8.53671 : new best
+...
+...
+...
+[2021-06-09 14:34:14] Ep. 29 : Up. 110000 : Sen. 171,379 : Cost 2.69193459 * 522,882 @ 1,036 after 115,297,861 : Time 246.39s : 2122.18 words/s : L.r. 1.1442e-04
+[2021-06-09 14:34:14] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 14:34:16] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter110000.npz
+[2021-06-09 14:34:17] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 14:34:18] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 14:34:24] [valid] Ep. 29 : Up. 110000 : cross-entropy : 123.228 : stalled 12 times (last best: 119.663)
+[2021-06-09 14:34:26] [valid] Ep. 29 : Up. 110000 : perplexity : 77.6018 : stalled 12 times (last best: 68.4212)
+[2021-06-09 14:34:55] [valid] Ep. 29 : Up. 110000 : bleu : 8.58263 : new best
+...
+...
+...
+[2021-06-09 15:57:23] Ep. 32 : Up. 120000 : Sen. 71,042 : Cost 2.61051011 * 524,114 @ 600 after 125,783,973 : Time 247.32s : 2119.16 words/s : L.r. 1.0954e-04
+[2021-06-09 15:57:23] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 15:57:25] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter120000.npz
+[2021-06-09 15:57:25] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 15:57:27] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 15:57:32] [valid] Ep. 32 : Up. 120000 : cross-entropy : 124.119 : stalled 14 times (last best: 119.663)
+[2021-06-09 15:57:34] [valid] Ep. 32 : Up. 120000 : perplexity : 80.08 : stalled 14 times (last best: 68.4212)
+[2021-06-09 15:58:02] [valid] Ep. 32 : Up. 120000 : bleu : 8.48171 : stalled 1 times (last best: 8.72952)
+...
+...
+...
+[2021-06-09 16:38:55] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 16:39:00] [valid] Ep. 33 : Up. 125000 : cross-entropy : 124.522 : stalled 15 times (last best: 119.663)
+[2021-06-09 16:39:03] [valid] Ep. 33 : Up. 125000 : perplexity : 81.2282 : stalled 15 times (last best: 68.4212)
+[2021-06-09 16:39:30] [valid] Ep. 33 : Up. 125000 : bleu : 8.3924 : stalled 2 times (last best: 8.72952)
+...
+...
+[2021-06-09 18:43:00] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter140000.npz
+[2021-06-09 18:43:01] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 18:43:03] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 18:43:08] [valid] Ep. 37 : Up. 140000 : cross-entropy : 125.428 : stalled 18 times (last best: 119.663)
+[2021-06-09 18:43:10] [valid] Ep. 37 : Up. 140000 : perplexity : 83.8708 : stalled 18 times (last best: 68.4212)
+[2021-06-09 18:43:39] [valid] Ep. 37 : Up. 140000 : bleu : 8.67561 : stalled 5 times (last best: 8.72952)
+...
+...
+[2021-06-09 19:32:39] Starting data epoch 39 in logical epoch 39
+[2021-06-09 19:32:39] [data] Shuffling data
+[2021-06-09 19:32:39] [data] Done reading 256,102 sentences
+[2021-06-09 19:32:39] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 19:34:08] Ep. 39 : Up. 146000 : Sen. 12,108 : Cost 2.55598783 * 519,318 @ 1,120 after 153,012,187 : Time 245.63s : 2114.20 words/s : L.r. 9.9313e-05
+[2021-06-09 19:38:12] Ep. 39 : Up. 146500 : Sen. 45,610 : Cost 2.51142311 * 520,627 @ 1,054 after 153,532,814 : Time 243.97s : 2134.00 words/s : L.r. 9.9143e-05
+[2021-06-09 19:42:18] Ep. 39 : Up. 147000 : Sen. 79,047 : Cost 2.52270389 * 523,818 @ 670 after 154,056,632 : Time 246.68s : 2123.46 words/s : L.r. 9.8974e-05
+[2021-06-09 19:46:25] Ep. 39 : Up. 147500 : Sen. 112,138 : Cost 2.55392909 * 531,035 @ 1,326 after 154,587,667 : Time 247.17s : 2148.46 words/s : L.r. 9.8806e-05
+[2021-06-09 19:50:32] Ep. 39 : Up. 148000 : Sen. 145,840 : Cost 2.54790950 * 519,834 @ 1,272 after 155,107,501 : Time 246.12s : 2112.11 words/s : L.r. 9.8639e-05
+[2021-06-09 19:54:53] Ep. 39 : Up. 148500 : Sen. 179,180 : Cost 2.57006574 * 527,236 @ 952 after 155,634,737 : Time 261.29s : 2017.85 words/s : L.r. 9.8473e-05
+[2021-06-09 19:59:03] Ep. 39 : Up. 149000 : Sen. 212,252 : Cost 2.58212399 * 526,266 @ 1,064 after 156,161,003 : Time 250.43s : 2101.49 words/s : L.r. 9.8308e-05
+[2021-06-09 20:03:10] Ep. 39 : Up. 149500 : Sen. 245,610 : Cost 2.58621645 * 521,491 @ 890 after 156,682,494 : Time 246.76s : 2113.36 words/s : L.r. 9.8143e-05
+[2021-06-09 20:04:27] Seen 256076 samples
+[2021-06-09 20:04:27] Starting data epoch 40 in logical epoch 40
+[2021-06-09 20:04:27] [data] Shuffling data
+[2021-06-09 20:04:27] [data] Done reading 256,102 sentences
+[2021-06-09 20:04:27] [data] Done shuffling 256,102 sentences to temp files
+[2021-06-09 20:07:22] Ep. 40 : Up. 150000 : Sen. 23,218 : Cost 2.52149677 * 527,358 @ 1,330 after 157,209,852 : Time 251.72s : 2095.04 words/s : L.r. 9.7980e-05
+[2021-06-09 20:07:22] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 20:07:23] Saving model weights and runtime parameters to model.transformer.word.my-en/model.iter150000.npz
+[2021-06-09 20:07:24] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 20:07:25] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+[2021-06-09 20:07:30] [valid] Ep. 40 : Up. 150000 : cross-entropy : 125.925 : stalled 20 times (last best: 119.663)
+[2021-06-09 20:07:33] [valid] Ep. 40 : Up. 150000 : perplexity : 85.3563 : stalled 20 times (last best: 68.4212)
+[2021-06-09 20:08:01] [valid] Ep. 40 : Up. 150000 : bleu : 8.77313 : new best
+[2021-06-09 20:08:02] Training finished
+[2021-06-09 20:08:03] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz.orig.npz
+[2021-06-09 20:08:05] Saving model weights and runtime parameters to model.transformer.word.my-en/model.npz
+[2021-06-09 20:08:06] Saving Adam parameters to model.transformer.word.my-en/model.npz.optimizer.npz
+
+real	416m48.163s
+user	623m59.410s
+sys	0m37.639s
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+
+## Testing
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word.my-en$ time marian-decoder -m ./model.npz -v ../data_word/vocab/vocab.my.yml ../data_word/vocab/vocab.en.yml --devices 0 1 --output hyp.model.en < ../data_word/test.my
+...
+...
+...
+[2021-06-09 20:50:20] Best translation 987 : During her release, she was able to be released before putting into a caravan
+[2021-06-09 20:50:21] Best translation 988 : On a very shortly before walking back onto the streets of the city.
+[2021-06-09 20:50:21] Best translation 989 : Police said in Zurich that Massa had been travelling along the outskirts of the city.
+[2021-06-09 20:50:21] Best translation 990 : Goody is also a major railway station and credit cards.
+[2021-06-09 20:50:21] Best translation 991 : In Zurich part of Zurich police had to search for almost an hour before he finally caught her in a peaceful finish.
+[2021-06-09 20:50:21] Best translation 992 : A spokesperson for the circus said that the police and police searched for Leicester but she did not answer their call .
+[2021-06-09 20:50:21] Best translation 993 : Police also said that she had trouble to keep her in the police.
+[2021-06-09 20:50:22] Best translation 994 : About 2000 local time a boy managed to control it from an animal where the other animals entered the museum and lifted her into a pickup truck.
+[2021-06-09 20:50:22] Best translation 995 : There were no reports for any loss or injuries, but police always managed to arrest at least one of the suspects in the act of the suspect to be caught in the act of the suspects.
+[2021-06-09 20:50:22] Best translation 996 : The circus said that after a landslide victory was shocked by storms in Zurich .
+[2021-06-09 20:50:22] Best translation 997 : After that the circus returned to her group, she was exhausted but I&apos;m pleased that she returned …&quot;
+[2021-06-09 20:50:22] Best translation 998 : Joe Clarke, the two men who had been driving a car during a drive to the home of South Wales , South Wales and his wife John Murphy in a car car.
+[2021-06-09 20:50:22] Best translation 999 : Mrs. Robinson died on the spot where Mr. Olmert had suffered a hamstring injury.
+[2021-06-09 20:50:22] Best translation 1000 : They returned from a message to both the couple offered for a message to a couple .
+[2021-06-09 20:50:22] Best translation 1001 : Sharon is a staunch Jewish author in South Wales where he plays a state.
+[2021-06-09 20:50:23] Best translation 1002 : John Campbell, his wife is a history and a writer .
+[2021-06-09 20:50:23] Best translation 1003 : Gidget was known as a poet and medical doctor .
+[2021-06-09 20:50:23] Best translation 1004 : Abdullah was a specialist at a medical clinic for more than thirty years.
+[2021-06-09 20:50:23] Best translation 1005 : However, Abu Hamza received the best criticism for his letter and received many articles and members of the press.
+[2021-06-09 20:50:23] Best translation 1006 : In 1989 he graduated from University of Wales .
+[2021-06-09 20:50:23] Best translation 1007 : They worked together during the 1980s to edit two books .
+[2021-06-09 20:50:23] Best translation 1008 : John Winehouse left her husband and two grandchildren.
+[2021-06-09 20:50:23] Best translation 1009 : Four journalists were arrested and fined her male reporters on Wednesday for driving in California, after being sent back to her residence in California.
+[2021-06-09 20:50:23] Best translation 1010 : At least four others were also banned by police.
+[2021-06-09 20:50:24] Best translation 1011 : According to reports, a group of journalists.
+[2021-06-09 20:50:24] Best translation 1012 : They also said that they approached her very close and used her way to come later .
+[2021-06-09 20:50:24] Best translation 1013 : The reason why police also told her car driver that at least one of the cars were driving but she tried to avoid them.
+[2021-06-09 20:50:24] Best translation 1014 : They have reported her number to be true and released off.
+[2021-06-09 20:50:24] Best translation 1015 : Pete was surprised because police had tested to know that she had a license when police reported that she had a license and was in surprise up.
+[2021-06-09 20:50:24] Best translation 1016 : &quot;He had no money for any dealing with Wikinews and no compensation for any dealing with the victims.
+[2021-06-09 20:50:24] Best translation 1017 : lock-up was part of the organization. but was part of the organization.
+[2021-06-09 20:50:24] Total time: 140.40799s wall
+
+real	2m22.395s
+user	4m40.899s
+sys	0m1.909s
+
+## Evaluation
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word.my-en$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.en < ./hyp.model.en  >> results.txt
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word.my-en$ cat results.txt 
+BLEU = 8.26, 43.5/16.5/7.3/3.5 (BP=0.710, ratio=0.745, hyp_len=20810, ref_len=27929)
+
+## Ensemble Word Models
+## weight 0.4 0.6
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word.my-en/model.npz model.transformer.word.my-en/model.npz 0.4 0.6 ./data_word/vocab/vocab.my.yml ./data_word/vocab/vocab.en.yml ./ensembling-results/4.hyp.s2s-plus-transformer.word.en1 ./data_word/test.my 
+...
+...
+[2021-06-10 10:43:57] Best translation 1014 : They have reported to have dated her web browser and released her.
+[2021-06-10 10:43:57] Best translation 1015 : Wygle was surprised to know that police had a license when police reported that she had a license and was in surprise .
+[2021-06-10 10:43:57] Best translation 1016 : Ballard did not want the men to be arrested for any inconvenience and no compensation for himself.
+[2021-06-10 10:43:57] Best translation 1017 : &quot;He was part of the organization but was part of the organization.
+[2021-06-10 10:43:57] Total time: 376.42358s wall
+
+real	6m20.041s
+user	12m32.255s
+sys	0m3.164s
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.en < ./4.hyp.s2s-plus-transformer.word.en1  >>  4.s2s-plus-transformer-0.4-0.6.myen.results.txt
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ cat ./4.s2s-plus-transformer-0.4-0.6.myen.results.txt 
+BLEU = 10.21, 45.8/19.3/9.2/4.7 (BP=0.731, ratio=0.761, hyp_len=21259, ref_len=27929)
+
+## weight 0.5 0.5
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word.my-en/model.npz model.transformer.word.my-en/model.npz 0.5 0.5 ./data_word/vocab/vocab.my.yml ./data_word/vocab/vocab.en.yml ./ensembling-results/4.hyp.s2s-plus-transformer.word.en2 ./data_word/test.my 
+...
+...
+[2021-06-10 10:52:16] Best translation 1012 : They also said that they were very close to her and had converted to a dangerous road in order to follow her later .
+[2021-06-10 10:52:16] Best translation 1013 : Police also reported that at least one of the vehicles driving her car was shot at least one of the vehicles but she was unable to find out whether or not it was or not.
+[2021-06-10 10:52:16] Best translation 1014 : They have reported to have confirmed her details and released her.
+[2021-06-10 10:52:16] Best translation 1015 : Wygle was surprised to know that the police had a license when police reported that she had a license and was in surprise .
+[2021-06-10 10:52:16] Best translation 1016 : Blount did not want the men to be arrested for anything that had been made and did not want the men to be arrested
+[2021-06-10 10:52:16] Best translation 1017 : &quot;He was part of the organization but did not drive properly and was told by the spokesman for the police.
+[2021-06-10 10:52:16] Total time: 380.60460s wall
+
+real	6m23.900s
+user	12m39.999s
+sys	0m2.960s
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.en < ./4.hyp.s2s-plus-transformer.word.en2  >>  4.s2s-plus-transformer-0.5-0.5.myen.results.txt
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ cat ./4.s2s-plus-transformer-0.5-0.5.myen.results.txt 
+BLEU = 10.36, 45.8/19.4/9.2/4.7 (BP=0.742, ratio=0.770, hyp_len=21508, ref_len=27929)
+
+## weight 0.6 0.4
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word.my-en/model.npz model.transformer.word.my-en/model.npz 0.6 0.4 ./data_word/vocab/vocab.my.yml ./data_word/vocab/vocab.en.yml ./ensembling-results/4.hyp.s2s-plus-transformer.word.en3 ./data_word/test.my 
+...
+...
+...
+[2021-06-10 11:10:23] Best translation 1010 : At least four others were banned by police.
+[2021-06-10 11:10:23] Best translation 1011 : According to reports, a group of journalists came after an accident at around 6:00 a.m. local time when the police asked the entire incident.
+[2021-06-10 11:10:23] Best translation 1012 : They also said that they were very close to her and had converted to a dangerous road in order to follow her later .
+[2021-06-10 11:10:23] Best translation 1013 : Police also said that at least one of the cars driving her car was shot at least one of the vehicles but she was unable to find it or the owner of the vehicle.
+[2021-06-10 11:10:23] Best translation 1014 : They have reported to have reported her address and released her.
+[2021-06-10 11:10:23] Best translation 1015 : When the police reported that if the police were aware that she had a driving license and was surprised because the licence was true.
+[2021-06-10 11:10:23] Best translation 1016 : Blount did not want the men to be arrested for anything that was done by reporters and did not want to be arrested
+[2021-06-10 11:10:23] Best translation 1017 : &quot;He was part of the organization but did not drive carefully and was told by the spokesman for the police.
+[2021-06-10 11:10:23] Total time: 377.01726s wall
+
+real	6m20.325s
+user	12m34.923s
+sys	0m2.524s
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.en < ./4.hyp.s2s-plus-transformer.word.en3  >>  4.s2s-plus-transformer-0.6-0.4.myen.results.txt
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ cat ./4.s2s-plus-transformer-0.6-0.4.myen.results.txt 
+BLEU = 10.56, 45.8/19.4/9.3/4.8 (BP=0.745, ratio=0.773, hyp_len=21588, ref_len=27929)
+
+=====================
+
+
+
+[English-Myanmar]
+s2s or RNN-based (word-syl): 17.00
+Transformer (word-syl): 18.09
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 19.31
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 19.55
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 19.24
+
+[Myanmar-English]
+s2s or RNN-based (syl-word): 10.21
+Transformer (syl-word): 8.83
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 10.56
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 10.78, 10.81 (with 0.5, 0.6)
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 10.94
+
+[English-Myanmar]
+s2s or RNN-based (word-word): 6.27
+Transformer (word-word): 6.00
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 7.30
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 7.32
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 7.09
+
+[Myanmar-English]
+s2s or RNN-based (word-word): 9.31
+Transformer (word-word): 8.26
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 10.21
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 10.36
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 10.56
+
+
+## Evaluation with WAT2021 sub-word BLEU, RIBES and AMFM
+
+single model ရလဒ်တွေကို folder အသစ်တစ်ခု ဆောက်ပြီးတော့ စုလိုက်တယ်။
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.s2s-4/hyp.model.my ./single-model-results/s2s.enmy.word-syl.my
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.transformer/hyp.model.my ./single-model-results/transformer.enmy.word-syl.my
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.s2s-4.my-en/hyp.model.en ./single-model-results/s2s.myen.syl-word.en
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.transformer.my-en/hyp.model.en ./single-model-results/transformer.myen.syl-word.en
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.s2s-4.word/hyp.model.my ./single-model-results/s2s.enmy.word-word.my
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.transformer.word/hyp.model.my ./single-model-results/transformer.enmy.word-word.my 
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.s2s-4.word.my-en/hyp.model.en ./single-model-results/s2s.myen.word-word.en
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.transformer.word.my-en/hyp.model.en ./single-model-results/transformer.myen.word-word.en 
+
+model ensembling လုပ်ပြီး ရလာတဲ့ ရလဒ်တွေကလည်း အောက်ပါအတိုင်း ရှိပြီးသား
+
+(base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ls ./ensembling-results/*.{en,my}{1,2,3}
+./ensembling-results/2.hyp.s2s-plus-transformer.en1            ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my2  ./ensembling-results/4.hyp.s2s-plus-transformer.word.en3
+./ensembling-results/2.hyp.s2s-plus-transformer.en2            ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my3  ./ensembling-results/hyp.s2s-plus-transformer.my1
+./ensembling-results/2.hyp.s2s-plus-transformer.en3            ./ensembling-results/4.hyp.s2s-plus-transformer.word.en1       ./ensembling-results/hyp.s2s-plus-transformer.my2
+./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my1  ./ensembling-results/4.hyp.s2s-plus-transformer.word.en2       ./ensembling-results/hyp.s2s-plus-transformer.my3
+
+[English-Myanmar], BLEU, RIBES, AMFM
+s2s or RNN-based (word-syl): 17.24, 0.675465, 0.674100
+Transformer (word-syl): 18.71, 0.680358, 0.678260
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 19.75, 0.698334, 0.681020
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 19.92, 0.701542, 0.688340
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 19.57, 0.702318, 0.687470
+
+[Myanmar-English]
+s2s or RNN-based (syl-word):  11.86, 0.673532, 0.430120
+Transformer (syl-word): 10.80, 0.673755, 0.462440
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 12.48, 0.692376, 0.437760
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 12.72, 0.691281, 0.438520
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 12.85, 0.689418, 0.434960
+
+[English-Myanmar]
+s2s or RNN-based (word-word): 15.38, 0.659550, 0.672950
+Transformer (word-word): 14.66, 0.674845, 0.679630
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 16.41, 0.687596, 0.688240
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 16.46, 0.685076, 0.688820
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 16.23, 0.679639, 0.681180
+
+[Myanmar-English]
+s2s or RNN-based (word-word): 11.50, 0.670478, 0.425310
+Transformer (word-word): 10.37, 0.664105, 0.461980
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 12.77, 0.685502, 0.439350
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 12.80, 0.688797, 0.437300
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 13.01, 0.686109, 0.432530
+
+
+
 =============================================================
 
     
