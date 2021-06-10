@@ -172,6 +172,7 @@ Running Log: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-exp-p
 
 ### Exp 3: Multi-source Neural Machine Translation (NECTEC Team)
    We used two encoders for multi-source neural machine translation experiments. Here, we used parsed tree and POS tagged data as one more source language together with the original string source. 
+   We used only UCSY Training Data for this experiment.  
    
    Marian framework ရဲ့ အော်ရဂျင်နယ် multi-source ပရိုပိုဇယ် (Junczys-Dowmunt et al. 2016, Junczys-Dowmunt et al. 2017) က post editing အတွက် ရည်ရွယ်ခဲ့ပေမဲ့ WAT2021 share task အတွက် experiment လုပ်ခဲ့တာက grammar tree တို့ POS tagged တွေကနေ target language ကို တိုက်ရိုက် ဘာသာပြန်တာထက်၊ အော်ရဂျင်နယ် source language ကိုပါ နောက်ထပ် source တစ်ခုအနေနဲ့ ဖြည့်ပြီး decode လုပ်ရင် translation performance ဘယ်လောက်ထိ တက်နိုင်သလဲ ဆိုတာကို သိချင်လို့ လုပ်ခဲ့တာပါ။  
    
