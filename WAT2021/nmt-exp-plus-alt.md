@@ -1,5 +1,5 @@
 # Running Log of NMT Experiments (plus ALT Corpus)
-Last Updated: 5 June 2021
+Last Updated: 10 June 2021
 
 Exp 2: Ensemble Two Models (YCC-MT2 Team) အရင် run ခဲ့တာအားလုံးကို (UCSY+ALT training data) နဲ့  
 နောက်တစ်ခေါက် အစအဆုံး ပြန် run ခဲ့တဲ့ running log ပါ။   
@@ -1290,14 +1290,6 @@ time marian-decoder \
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cat ./ensembling-results/1.s2s-plus-transformer-0.6-0.4.results.txt 
 BLEU = 19.24, 62.2/36.3/22.4/14.2 (BP=0.661, ratio=0.707, hyp_len=41666, ref_len=58895)
 ```
-
-==========================================================================
-
-## To Do
-
-System-3: s2s or RNN-based; tree2string   
-System-4: Transformer; tree2string  
-Ensemble: s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
 
 ==========================================================================
 
@@ -3322,7 +3314,7 @@ BLEU = 10.94, 47.0/19.9/9.7/5.0 (BP=0.752, ratio=0.778, hyp_len=21726, ref_len=2
 
 ## Prepared Word Segmented Data for Myanmar
 
-UCSY Corpus က word segmented မလုပ်ထားတာကိုပဲ ပေးတယ်။
+UCSY Corpus က word segmented မလုပ်ထားတာကိုပဲ ပေးတယ်။  
 အဲဒါကြောင့် မြန်မာစာ ဒေတာဘက် အခြမ်းကို word segmentation ဖြတ်ပြီးတော့ MT experiment လုပ်ဖို့အတွက် in-house myWord ကို သုံးပြီး စာလုံးဖြတ်ဖို့အတွက် ပြင်ဆင်ခဲ့...  
 word segmentation လုပ်ထားတဲ့ output ကို copy ကိုယ် experiment လုပ်တဲ့အခါမှာ သုံးမယ့် data path ဖြစ်တဲ့ data_word/ အောက်ကို ကော်ပီကူးယူခဲ့...  
 
@@ -4376,6 +4368,7 @@ BLEU = 6.27, 39.8/14.2/5.4/2.1 (BP=0.704, ratio=0.740, hyp_len=26830, ref_len=36
 
 ## Script
 
+```
 #!/bin/bash
 
 ## Written by Ye Kyaw Thu, LST, NECTEC, Thailand
@@ -4420,9 +4413,11 @@ marian \
     --dump-config > model.transformer.word/config.yml
     
 time marian -c model.transformer.word/config.yml  2>&1 | tee transformer-enmy-word.log
+```
 
 ## Training Log
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.sh 
 [2021-06-05 07:00:39] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
 [2021-06-05 07:00:39] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 3967 with command line:
@@ -4867,15 +4862,18 @@ tcmalloc: large alloc 2013265920 bytes == 0x556e93b84000 @
 real	752m59.060s
 user	1141m52.848s
 sys	1m3.515s
+```
+
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
 
-0.0003 to    --learn-rate 0.0001
+0.0003 to    --learn-rate 0.0001  
 0.3 to --transformer-dropout 0.5  
-6 to   --beam-size 10
-10 to    --early-stopping 20 
+6 to   --beam-size 10  
+10 to    --early-stopping 20   
 
 ## Train and See the result
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.sh 
 mkdir: cannot create directory ‘model.transformer.word’: File exists
 [2021-06-05 22:25:32] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
@@ -5190,15 +5188,17 @@ real	44m4.334s
 user	66m30.742s
 sys	0m8.423s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+```
 
 ## Reduce Beam Size and Train Again
 
-10 to     --beam-size 7 
+10 to     --beam-size 7  
 
-Run ကြည့်တော့ crush ဖြစ်တယ် မရဘူး။
+Run ကြည့်တော့ crush ဖြစ်တယ် မရဘူး။  
 
 ## Translation
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word$ time marian-decoder -m ./model.npz -v ../data_word/vocab/vocab.en.yml ../data_word/vocab/vocab.my.yml --devices 0 1 --output hyp.model.my < ../data/test.en
 ...
 ...
@@ -5244,16 +5244,21 @@ Run ကြည့်တော့ crush ဖြစ်တယ် မရဘူး။
 real	1m58.744s
 user	3m53.448s
 sys	0m1.737s
+```
 
 ## Evaluation
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.my < ./hyp.model.my  >> results.txt
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word$ cat ./results.txt 
 BLEU = 6.00, 44.5/16.6/6.2/2.3 (BP=0.595, ratio=0.658, hyp_len=23868, ref_len=36255)
+```
 
 ## Model Ensembling (s2s+Transformer, word unit)
-## 0.4 0.6
+## Weight: 0.4 0.6
+
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word/model.npz model.transformer.word/model.npz 0.4 0.6 ./data_word/vocab/vocab.en.yml ./data_word/vocab/vocab.my.yml ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my1 ./data_word/test.en 
 
 [2021-06-06 11:25:21] Best translation 1014 : သူ တို့ က သူ မ ရဲ့ လက္ခဏာ ကိုအ တည်ပြု ပြီး သူ မ ကို လွှတ် လိုက် တယ် ။
@@ -5265,13 +5270,17 @@ BLEU = 6.00, 44.5/16.6/6.2/2.3 (BP=0.595, ratio=0.658, hyp_len=23868, ref_len=36
 real	5m16.353s
 user	10m25.098s
 sys	0m3.879s
+```
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./data_word/test.my < ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my1  >> ./ensembling-results/3.s2s-plus-transformer-0.4-0.6.word.enmy.results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cat ./ensembling-results/3.s2s-plus-transformer-0.4-0.6.word.enmy.results.txt 
 BLEU = 7.30, 46.2/18.3/7.4/3.0 (BP=0.625, ratio=0.680, hyp_len=24665, ref_len=36255)
+```
 
-## 0.5 0.5
+## Weight: 0.5 0.5
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word/model.npz model.transformer.word/model.npz 0.5 0.5 ./data_word/vocab/vocab.en.yml ./data_word/vocab/vocab.my.yml ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my2 ./data_word/test.en
 ...
 ...
@@ -5285,13 +5294,17 @@ BLEU = 7.30, 46.2/18.3/7.4/3.0 (BP=0.625, ratio=0.680, hyp_len=24665, ref_len=36
 real	5m19.790s
 user	10m34.562s
 sys	0m2.480s
+```
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./data_word/test.my < ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my2  >> ./ensembling-results/3.s2s-plus-transformer-0.5-0.5.word.enmy.results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cat ./ensembling-results/3.s2s-plus-transformer-0.5-0.5.word.enmy.results.txt 
 BLEU = 7.32, 45.7/17.9/7.2/3.0 (BP=0.635, ratio=0.687, hyp_len=24919, ref_len=36255)
+```
 
-## 0.6 0.4
+## Weight: 0.6 0.4
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word/model.npz model.transformer.word/model.npz 0.6 0.4 ./data_word/vocab/vocab.en.yml ./data_word/vocab/vocab.my.yml ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my3 ./data_word/test.en
 ...
 ...
@@ -5304,16 +5317,20 @@ BLEU = 7.32, 45.7/17.9/7.2/3.0 (BP=0.635, ratio=0.687, hyp_len=24919, ref_len=36
 real	5m21.998s
 user	10m39.354s
 sys	0m2.264s
+```
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ./data_word/test.my < ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my3  >> ./ensembling-results/3.s2s-plus-transformer-0.6-0.4.word.enmy.results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cat ./ensembling-results/3.s2s-plus-transformer-0.6-0.4.word.enmy.results.txt 
 BLEU = 7.09, 45.1/17.6/6.9/2.7 (BP=0.640, ratio=0.691, hyp_len=25070, ref_len=36255)
+```
 
 ## System
 ## s2s (my-en, word unit for Burmese)
 
 ## Script
 
+```
 #!/bin/bash
 
 # Preparation for WAT2021 en-my, my-en share MT task by Ye, LST, NECTEC, Thailand
@@ -5344,9 +5361,11 @@ marian \
   --dump-config > model.s2s-4.word.my-en/config.yml
   
 time marian -c model.s2s-4.word.my-en/config.yml  2>&1 | tee s2s.word.myen.syl.log
+```
 
 ## Training Log
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.myen.sh 
 [2021-06-06 12:06:55] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
 [2021-06-06 12:06:55] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 8100 with command line:
@@ -5637,9 +5656,11 @@ real	100m26.304s
 user	160m24.525s
 sys	0m7.270s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+```
 
 ## Update Script and ReTrain
 
+```
 32 ကနေ  --valid-mini-batch 16 \ ပြောင်း ထပ် training လုပ်ခဲ့...
 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./s2s.deep4.word.myen.sh 
@@ -6177,9 +6198,11 @@ real	3038m6.729s
 user	4880m20.200s
 sys	3m3.070s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
-  
+```
+
 ## Translation
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word.my-en$ time marian-decoder -m ./model.npz -v ../data_word/vocab/vocab.my.yml ../data_word/vocab/vocab.en.yml  --devices 0 1 --output hyp.model.en < ../data_word/test.my
 ...
 ...
@@ -6210,18 +6233,20 @@ sys	3m3.070s
 real	4m3.910s
 user	8m3.455s
 sys	0m2.424s
+```
 
 ## evaluation 
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word.my-en$  perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.en < ./hyp.model.en  >> results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.s2s-4.word.my-en$ cat ./results.txt 
 BLEU = 9.31, 42.4/17.3/8.0/3.7 (BP=0.765, ratio=0.789, hyp_len=22028, ref_len=27929)
+```
 
-================
 
 ## Transformer (my-en, word unit for Burmese)
 
-
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.myen.sh 
 [2021-06-08 20:42:31] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
 [2021-06-08 20:42:31] [marian] Running on administrator-HP-Z2-Tower-G4-Workstation as process 133320 with command line:
@@ -6521,9 +6546,11 @@ real	41m10.043s
 user	61m24.025s
 sys	0m5.707s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+```
 
 ## Restart the Workstation and ReTrain Again
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.myen.sh 
 mkdir: cannot create directory ‘model.transformer.word.my-en’: File exists
 [2021-06-08 22:25:38] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
@@ -7095,11 +7122,13 @@ real	749m4.758s
 user	1124m8.784s
 sys	0m57.142s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$
+```
 
 ## Try BLEU score only --early-stopping 10
 
-Memory Error...
+Memory Error...  
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.myen.sh 
 mkdir: cannot create directory ‘model.transformer.word.my-en’: File exists
 [2021-06-09 11:34:46] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
@@ -7415,9 +7444,11 @@ real	42m55.681s
 user	63m10.988s
 sys	0m8.545s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+```
 
 ## Restart and Train Again
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./transformer.word.myen.sh 
 mkdir: cannot create directory ‘model.transformer.word.my-en’: File exists
 [2021-06-09 13:11:21] [marian] Marian v1.10.0 6f6d4846 2021-02-06 15:35:16 -0800
@@ -7784,9 +7815,11 @@ real	416m48.163s
 user	623m59.410s
 sys	0m37.639s
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ 
+```
 
 ## Testing
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word.my-en$ time marian-decoder -m ./model.npz -v ../data_word/vocab/vocab.my.yml ../data_word/vocab/vocab.en.yml --devices 0 1 --output hyp.model.en < ../data_word/test.my
 ...
 ...
@@ -7827,15 +7860,20 @@ sys	0m37.639s
 real	2m22.395s
 user	4m40.899s
 sys	0m1.909s
+```
 
 ## Evaluation
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word.my-en$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.en < ./hyp.model.en  >> results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/model.transformer.word.my-en$ cat results.txt 
 BLEU = 8.26, 43.5/16.5/7.3/3.5 (BP=0.710, ratio=0.745, hyp_len=20810, ref_len=27929)
+```
 
 ## Ensemble Word Models
 ## weight 0.4 0.6
+
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word.my-en/model.npz model.transformer.word.my-en/model.npz 0.4 0.6 ./data_word/vocab/vocab.my.yml ./data_word/vocab/vocab.en.yml ./ensembling-results/4.hyp.s2s-plus-transformer.word.en1 ./data_word/test.my 
 ...
 ...
@@ -7848,13 +7886,17 @@ BLEU = 8.26, 43.5/16.5/7.3/3.5 (BP=0.710, ratio=0.745, hyp_len=20810, ref_len=27
 real	6m20.041s
 user	12m32.255s
 sys	0m3.164s
+```
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.en < ./4.hyp.s2s-plus-transformer.word.en1  >>  4.s2s-plus-transformer-0.4-0.6.myen.results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ cat ./4.s2s-plus-transformer-0.4-0.6.myen.results.txt 
 BLEU = 10.21, 45.8/19.3/9.2/4.7 (BP=0.731, ratio=0.761, hyp_len=21259, ref_len=27929)
+```
 
 ## weight 0.5 0.5
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word.my-en/model.npz model.transformer.word.my-en/model.npz 0.5 0.5 ./data_word/vocab/vocab.my.yml ./data_word/vocab/vocab.en.yml ./ensembling-results/4.hyp.s2s-plus-transformer.word.en2 ./data_word/test.my 
 ...
 ...
@@ -7869,13 +7911,17 @@ BLEU = 10.21, 45.8/19.3/9.2/4.7 (BP=0.731, ratio=0.761, hyp_len=21259, ref_len=2
 real	6m23.900s
 user	12m39.999s
 sys	0m2.960s
+```
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.en < ./4.hyp.s2s-plus-transformer.word.en2  >>  4.s2s-plus-transformer-0.5-0.5.myen.results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ cat ./4.s2s-plus-transformer-0.5-0.5.myen.results.txt 
 BLEU = 10.36, 45.8/19.4/9.2/4.7 (BP=0.742, ratio=0.770, hyp_len=21508, ref_len=27929)
+```
 
 ## weight 0.6 0.4
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ./ensemble-2models.sh model.s2s-4.word.my-en/model.npz model.transformer.word.my-en/model.npz 0.6 0.4 ./data_word/vocab/vocab.my.yml ./data_word/vocab/vocab.en.yml ./ensembling-results/4.hyp.s2s-plus-transformer.word.en3 ./data_word/test.my 
 ...
 ...
@@ -7893,47 +7939,51 @@ BLEU = 10.36, 45.8/19.4/9.2/4.7 (BP=0.742, ratio=0.770, hyp_len=21508, ref_len=2
 real	6m20.325s
 user	12m34.923s
 sys	0m2.524s
+```
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ perl ~/tool/mosesbin/ubuntu-17.04/moses/scripts/generic/multi-bleu.perl ../data_word/test.en < ./4.hyp.s2s-plus-transformer.word.en3  >>  4.s2s-plus-transformer-0.6-0.4.myen.results.txt
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt/ensembling-results$ cat ./4.s2s-plus-transformer-0.6-0.4.myen.results.txt 
 BLEU = 10.56, 45.8/19.4/9.3/4.8 (BP=0.745, ratio=0.773, hyp_len=21588, ref_len=27929)
+```
 
 =====================
 
+## Evaluation with De Facto BLEU 
 
+### [English-Myanmar]
+s2s or RNN-based (word-syl): 17.00  
+Transformer (word-syl): 18.09  
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 19.31  
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 19.55  
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 19.24  
 
-[English-Myanmar]
-s2s or RNN-based (word-syl): 17.00
-Transformer (word-syl): 18.09
-Eval Result, s2s+Transformer, --weights 0.4 0.6 : 19.31
-Eval Result, s2s+Transformer, --weights 0.5 0.5 : 19.55
-Eval Result, s2s+Transformer, --weights 0.6 0.4 : 19.24
+### [Myanmar-English]
+s2s or RNN-based (syl-word): 10.21  
+Transformer (syl-word): 8.83  
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 10.56  
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 10.78, 10.81 (with 0.5, 0.6)  
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 10.94  
 
-[Myanmar-English]
-s2s or RNN-based (syl-word): 10.21
-Transformer (syl-word): 8.83
-Eval Result, s2s+Transformer, --weights 0.4 0.6 : 10.56
-Eval Result, s2s+Transformer, --weights 0.5 0.5 : 10.78, 10.81 (with 0.5, 0.6)
-Eval Result, s2s+Transformer, --weights 0.6 0.4 : 10.94
+### [English-Myanmar]
+s2s or RNN-based (word-word): 6.27  
+Transformer (word-word): 6.00  
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 7.30  
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 7.32  
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 7.09  
 
-[English-Myanmar]
-s2s or RNN-based (word-word): 6.27
-Transformer (word-word): 6.00
-Eval Result, s2s+Transformer, --weights 0.4 0.6 : 7.30
-Eval Result, s2s+Transformer, --weights 0.5 0.5 : 7.32
-Eval Result, s2s+Transformer, --weights 0.6 0.4 : 7.09
-
-[Myanmar-English]
-s2s or RNN-based (word-word): 9.31
-Transformer (word-word): 8.26
-Eval Result, s2s+Transformer, --weights 0.4 0.6 : 10.21
-Eval Result, s2s+Transformer, --weights 0.5 0.5 : 10.36
-Eval Result, s2s+Transformer, --weights 0.6 0.4 : 10.56
+### [Myanmar-English]
+s2s or RNN-based (word-word): 9.31  
+Transformer (word-word): 8.26  
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 10.21  
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 10.36  
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 10.56  
 
 
 ## Evaluation with WAT2021 sub-word BLEU, RIBES and AMFM
 
-single model ရလဒ်တွေကို folder အသစ်တစ်ခု ဆောက်ပြီးတော့ စုလိုက်တယ်။
+single model ရလဒ်တွေကို folder အသစ်တစ်ခု ဆောက်ပြီးတော့ စုလိုက်တယ်။  
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.s2s-4/hyp.model.my ./single-model-results/s2s.enmy.word-syl.my
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.transformer/hyp.model.my ./single-model-results/transformer.enmy.word-syl.my
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.s2s-4.my-en/hyp.model.en ./single-model-results/s2s.myen.syl-word.en
@@ -7942,43 +7992,48 @@ single model ရလဒ်တွေကို folder အသစ်တစ်ခု �
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.transformer.word/hyp.model.my ./single-model-results/transformer.enmy.word-word.my 
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.s2s-4.word.my-en/hyp.model.en ./single-model-results/s2s.myen.word-word.en
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ cp ./model.transformer.word.my-en/hyp.model.en ./single-model-results/transformer.myen.word-word.en 
+```
 
-model ensembling လုပ်ပြီး ရလာတဲ့ ရလဒ်တွေကလည်း အောက်ပါအတိုင်း ရှိပြီးသား
+model ensembling လုပ်ပြီး ရလာတဲ့ ရလဒ်တွေကလည်း အောက်ပါအတိုင်း ရှိပြီးသား  
 
+```
 (base) ye@administrator-HP-Z2-Tower-G4-Workstation:~/exp/nmt/plus-alt$ ls ./ensembling-results/*.{en,my}{1,2,3}
 ./ensembling-results/2.hyp.s2s-plus-transformer.en1            ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my2  ./ensembling-results/4.hyp.s2s-plus-transformer.word.en3
 ./ensembling-results/2.hyp.s2s-plus-transformer.en2            ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my3  ./ensembling-results/hyp.s2s-plus-transformer.my1
 ./ensembling-results/2.hyp.s2s-plus-transformer.en3            ./ensembling-results/4.hyp.s2s-plus-transformer.word.en1       ./ensembling-results/hyp.s2s-plus-transformer.my2
 ./ensembling-results/3.hyp.s2s-plus-transformer.word.enmy.my1  ./ensembling-results/4.hyp.s2s-plus-transformer.word.en2       ./ensembling-results/hyp.s2s-plus-transformer.my3
+```
 
-[English-Myanmar], BLEU, RIBES, AMFM
-s2s or RNN-based (word-syl): 17.24, 0.675465, 0.674100
-Transformer (word-syl): 18.71, 0.680358, 0.678260
-Eval Result, s2s+Transformer, --weights 0.4 0.6 : 19.75, 0.698334, 0.681020
-Eval Result, s2s+Transformer, --weights 0.5 0.5 : 19.92, 0.701542, 0.688340
-Eval Result, s2s+Transformer, --weights 0.6 0.4 : 19.57, 0.702318, 0.687470
+## Official Evaluation with BLEU, RIBES and AMFM (by using WAT2021 Evaluation System)
 
-[Myanmar-English]
-s2s or RNN-based (syl-word):  11.86, 0.673532, 0.430120
-Transformer (syl-word): 10.80, 0.673755, 0.462440
-Eval Result, s2s+Transformer, --weights 0.4 0.6 : 12.48, 0.692376, 0.437760
-Eval Result, s2s+Transformer, --weights 0.5 0.5 : 12.72, 0.691281, 0.438520
-Eval Result, s2s+Transformer, --weights 0.6 0.4 : 12.85, 0.689418, 0.434960
+### [English-Myanmar]
+Score order: BLEU, RIBES, AMFM  
+s2s or RNN-based (word-syl): 17.24, 0.675465, 0.674100  
+Transformer (word-syl): 18.71, 0.680358, 0.678260  
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 19.75, 0.698334, 0.681020  
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 19.92, 0.701542, 0.688340  
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 19.57, 0.702318, 0.687470  
 
-[English-Myanmar]
-s2s or RNN-based (word-word): 15.38, 0.659550, 0.672950
-Transformer (word-word): 14.66, 0.674845, 0.679630
-Eval Result, s2s+Transformer, --weights 0.4 0.6 : 16.41, 0.687596, 0.688240
-Eval Result, s2s+Transformer, --weights 0.5 0.5 : 16.46, 0.685076, 0.688820
-Eval Result, s2s+Transformer, --weights 0.6 0.4 : 16.23, 0.679639, 0.681180
+###[Myanmar-English]
+s2s or RNN-based (syl-word):  11.86, 0.673532, 0.430120  
+Transformer (syl-word): 10.80, 0.673755, 0.462440  
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 12.48, 0.692376, 0.437760  
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 12.72, 0.691281, 0.438520  
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 12.85, 0.689418, 0.434960  
 
-[Myanmar-English]
-s2s or RNN-based (word-word): 11.50, 0.670478, 0.425310
-Transformer (word-word): 10.37, 0.664105, 0.461980
-Eval Result, s2s+Transformer, --weights 0.4 0.6 : 12.77, 0.685502, 0.439350
-Eval Result, s2s+Transformer, --weights 0.5 0.5 : 12.80, 0.688797, 0.437300
-Eval Result, s2s+Transformer, --weights 0.6 0.4 : 13.01, 0.686109, 0.432530
+###[English-Myanmar]
+s2s or RNN-based (word-word): 15.38, 0.659550, 0.672950  
+Transformer (word-word): 14.66, 0.674845, 0.679630  
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 16.41, 0.687596, 0.688240  
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 16.46, 0.685076, 0.688820  
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 16.23, 0.679639, 0.681180  
 
+###[Myanmar-English]
+s2s or RNN-based (word-word): 11.50, 0.670478, 0.425310  
+Transformer (word-word): 10.37, 0.664105, 0.461980  
+Eval Result, s2s+Transformer, --weights 0.4 0.6 : 12.77, 0.685502, 0.439350  
+Eval Result, s2s+Transformer, --weights 0.5 0.5 : 12.80, 0.688797, 0.437300  
+Eval Result, s2s+Transformer, --weights 0.6 0.4 : 13.01, 0.686109, 0.432530  
 
 
 =============================================================
