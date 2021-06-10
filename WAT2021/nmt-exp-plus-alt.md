@@ -8016,21 +8016,21 @@ Eval Result, s2s+Transformer, --weights 0.4 0.6 : 19.75, 0.698334, 0.681020
 Eval Result, s2s+Transformer, --weights 0.5 0.5 : 19.92, 0.701542, 0.688340  
 Eval Result, s2s+Transformer, --weights 0.6 0.4 : 19.57, 0.702318, 0.687470  
 
-###[Myanmar-English]
+### [Myanmar-English]
 s2s or RNN-based (syl-word):  11.86, 0.673532, 0.430120  
 Transformer (syl-word): 10.80, 0.673755, 0.462440  
 Eval Result, s2s+Transformer, --weights 0.4 0.6 : 12.48, 0.692376, 0.437760  
 Eval Result, s2s+Transformer, --weights 0.5 0.5 : 12.72, 0.691281, 0.438520  
 Eval Result, s2s+Transformer, --weights 0.6 0.4 : 12.85, 0.689418, 0.434960  
 
-###[English-Myanmar]
+### [English-Myanmar]
 s2s or RNN-based (word-word): 15.38, 0.659550, 0.672950  
 Transformer (word-word): 14.66, 0.674845, 0.679630  
 Eval Result, s2s+Transformer, --weights 0.4 0.6 : 16.41, 0.687596, 0.688240  
 Eval Result, s2s+Transformer, --weights 0.5 0.5 : 16.46, 0.685076, 0.688820  
 Eval Result, s2s+Transformer, --weights 0.6 0.4 : 16.23, 0.679639, 0.681180  
 
-###[Myanmar-English]
+### [Myanmar-English]
 s2s or RNN-based (word-word): 11.50, 0.670478, 0.425310  
 Transformer (word-word): 10.37, 0.664105, 0.461980  
 Eval Result, s2s+Transformer, --weights 0.4 0.6 : 12.77, 0.685502, 0.439350  
