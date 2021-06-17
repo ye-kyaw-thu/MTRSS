@@ -11,4 +11,7 @@ From the "pbsmt/" folder you can get the small Myanmar-Rakhine corpus and necess
 
 ## Neural Machine Translation (NMT)
 
-See WAT2021/ repository, two teams (YCC-MT2 and NECTEC) prepared Neural Machine Translation systems for English-to-Myanmar and Myanmar-to-English machine translation share tasks of the 8th Workshop on Asian Translation workshop (WAT2021), Thailand. It might be a good starting point for your practical running of NMT.  
+See WAT2021/ repository, two teams (YCC-MT2 and NECTEC) prepared Neural Machine Translation systems for English-to-Myanmar and Myanmar-to-English machine translation share tasks of the 8th Workshop on Asian Translation workshop (WAT2021), Thailand. It might be a good starting point for your practical running of NMT.
+ 
+FYI: I added this WAT20221/ repository on 7 May 2021.  
+
