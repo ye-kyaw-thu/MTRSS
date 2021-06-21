@@ -128,20 +128,20 @@ Running Log2: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/smt-expe
 **\[English-Myanmar\]**  
 **System-1:** s2s or RNN-based  
 **System-2:** Transformer  
-**Ensemble 1+2:** s2s+Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**Ensemble 1+2:** s2s+Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 0.6 0.4)  
 
 **System-3:** s2s or RNN-based; tree2string  
 **System-4:** Transformer; tree2string    
-**Ensemble 3+4:** s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**Ensemble 3+4:** s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 0.6 0.4)  
 
 **\[Myanmar-English\]**  
 **System-5:** s2s; syllable  
 **System-6:** Transformer; syllable     
-**Ensemble:** s2s+Transformer; (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**Ensemble:** s2s+Transformer; (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 0.6 0.4)  
 
 **System-7:** s2s; word2word  
 **System-8:** Transformer; word2word  
-**Ensemble 7+8:** s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**Ensemble 7+8:** s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 0.6 0.4)  
 Here, we used our in-house __*myWord*__ word segmenter for Myanmar language.  
 
 Running Log: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-experiments-log-wat2021.txt](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-experiments-log-wat2021.txt)  
@@ -151,22 +151,22 @@ Running Log: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-exper
 **\[English-Myanmar\]**  
 **System-1:** s2s or RNN-based, word-to-syllable  
 **System-2:** Transformer, word-to-syllable  
-**Ensemble 1+2:** s2s+Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**Ensemble 1+2:** s2s+Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 0.6 0.4)  
 
 **\[Myanmar-English\]**  
 **System-5:** s2s; syllable-to-word    
 **System-6:** Transformer; syllable-to-word     
-**Ensemble:** s2s+Transformer; (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**Ensemble:** s2s+Transformer; (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 0.6 0.4)  
 
 **\[English-Myanmar\]**  
 **System-3:** s2s or RNN-based; word-to-word  
 **System-4:** Transformer, word-to-word  
-**Ensemble 3+4:** s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**Ensemble 3+4:** s2s (t2s) + Transformer (t2s); (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 0.6 0.4)  
 
 **\[Myanmar-English\]**  
 **System-7:** s2s; word-to-word  
 **System-8:** Transformer; word-to-word  
-**Ensemble 7+8:** s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 06 04)  
+**Ensemble 7+8:** s2s + Transformer (Run with --weights 0.4 0.6, --weights 0.5 0.5 and --weights 0.6 0.4)  
 Here, we used our in-house __*myWord*__ word segmenter for Myanmar language.  
 
 Running Log: [https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-exp-plus-alt.md](https://github.com/ye-kyaw-thu/MTRSS/blob/master/WAT2021/nmt-exp-plus-alt.md)  
