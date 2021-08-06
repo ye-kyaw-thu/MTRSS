@@ -210,10 +210,10 @@ NMT အတွက်က framework သုံးမျိုးလောက် test
 ## System Description Papers
 
 ### For YCC-MT1 Team  
-- Ye Kyaw Thu, Thazin Myint Oo, Hlaing Myat Nwe, Khaing Zar Mon, Nang Aeindray Kyaw, Naing Linn Phyo, Nann Hwan Khun and Hnin Aye Thant, "Hybrid Statistical Machine Translation for English-Myanmar: UTYCC Submission to WAT-2021", In Proceedings of the 8th Workshop on Asian Translation (WAT2021), Aug 5-6, 2021, Bangkok, Thailand, pp. 83-89. [Paper](https://aclanthology.org/2021.wat-1.7.pdf)  
+- Ye Kyaw Thu, Thazin Myint Oo, Hlaing Myat Nwe, Khaing Zar Mon, Nang Aeindray Kyaw, Naing Linn Phyo, Nann Hwan Khun and Hnin Aye Thant, "Hybrid Statistical Machine Translation for English-Myanmar: UTYCC Submission to WAT-2021", In Proceedings of the 8th Workshop on Asian Translation (WAT2021), Aug 5-6, 2021, Bangkok, Thailand, pp. 83-89. [[Paper]](https://aclanthology.org/2021.wat-1.7.pdf)  
 
 ### For NECTEC Team
-- Zar Zar Hlaing, Ye Kyaw Thu, Thazin Myint Oo, Mya Ei San, Sasiporn Usanavasin, Ponrudee Netisopakul and Thepchai Supnithi, "NECTEC’s Participation in WAT-2021", In Proceedings of the 8th Workshop on Asian Translation (WAT2021), Aug 5-6, 2021, Bangkok, Thailand, pp. 74–82. [Paper](https://aclanthology.org/2021.wat-1.6.pdf)  
+- Zar Zar Hlaing, Ye Kyaw Thu, Thazin Myint Oo, Mya Ei San, Sasiporn Usanavasin, Ponrudee Netisopakul and Thepchai Supnithi, "NECTEC’s Participation in WAT-2021", In Proceedings of the 8th Workshop on Asian Translation (WAT2021), Aug 5-6, 2021, Bangkok, Thailand, pp. 74–82. [[Paper]](https://aclanthology.org/2021.wat-1.6.pdf)  
 
 ## References
 
