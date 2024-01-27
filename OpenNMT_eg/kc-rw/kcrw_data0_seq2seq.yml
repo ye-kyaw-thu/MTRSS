@@ -1,0 +1,36 @@
+# Vocab Building
+## Where the samples will be written
+save_data: /home/ye/exp/opennmt/data/kcrw/data0/
+## Where the vocab(s) will be written
+src_vocab: /home/ye/exp/opennmt/data/kcrw/data0/kcrw.vocab.src
+tgt_vocab: /home/ye/exp/opennmt/data/kcrw/data0/kcrw.vocab.tgt
+# Prevent overwriting existing files in the folder
+overwrite: False
+
+# Corpus opts:
+data:
+    corpus_1:
+        path_src: /home/ye/exp/opennmt/data/kcrw/data0/train.kc
+        path_tgt: /home/ye/exp/opennmt/data/kcrw/data0/train.rw
+    valid:
+        path_src: /home/ye/exp/opennmt/data/kcrw/data0/dev.kc
+        path_tgt: /home/ye/exp/opennmt/data/kcrw/data0/dev.rw
+
+# Training
+
+save_model: /home/ye/exp/opennmt/exp/kcrw/model.data0.kc-rw
+
+log_file: /home/ye/exp/opennmt/exp/kcrw/train_data0.log
+
+# Stop training if it does not imporve after n validations
+early_stopping: 10
+
+# Default: 5000 - Save a model checkpoint for each n
+# save_checkpoint_steps: 1000
+
+# To save space, limit checkpoints to last n
+keep_checkpoint: 5
+
+# Train on a single GPU
+world_size: 1
+gpu_ranks: [0]
